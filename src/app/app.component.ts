@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: "app-root",
+	templateUrl: "./app.component.html",
+	styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = 'ARAG-Web';
+	title = "ARAG-Web";
+	faCoffee = faCoffee;
+
+	getMethod() {}
 }

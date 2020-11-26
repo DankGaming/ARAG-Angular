@@ -1,1 +1,90 @@
-/* You can add global styles to this file, and also import other style files */
+@import "/src/app/shared/variables";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+
+* {
+	padding: 0;
+	margin: 0;
+	// box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+	// -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+body {
+	font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: $color-black;
+	background-color: rgb(252, 252, 252);
+	overflow-x: hidden;
+	height: 100%;
+	font-weight: normal;
+}
+
+ul {
+	list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: $color-black;
+	display: inline-block;
+}
+
+h1 {
+	font-size: 1.6rem;
+}
+
+a,
+p,
+li {
+	font-size: 15px;
+	text-decoration: none;
+	color: $color-black;
+	font-weight: 100;
+}
+
+hr {
+	opacity: 0.2;
+}
+
+.container {
+	position: relative;
+	margin: 0 auto;
+	max-width: 1000px;
+	height: auto;
+	padding: 0 20px;
+	overflow: visible;
+}
+
+.button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: .3s;
+
+    &:hover {
+        filter: brightness(93%);
+    }
+
+    &.primary {
+        background-color: $color-primary;
+    }
+
+    &.danger {
+        background-color: $color-red-600;
+        color: $color-white;
+    }
+
+    &.warning {
+        background-color: $color-orange-500;
+        color: $color-white;
+    }
+}
