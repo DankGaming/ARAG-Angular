@@ -1,0 +1,45 @@
+@import "/src/app/shared/variables";
+
+main {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+
+    .login-container {
+        padding: 30px;
+        background-color: $color-white;
+        border-radius: $border-radius;
+        box-shadow: $shadow;
+        min-width: 400px;
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            .form-group {
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    font-weight: bold;
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    margin-bottom: 5px;
+                    color: $color-gray-600;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    main {
+        .login-container {
+            min-width: 100%;
+        }
+    }
+}

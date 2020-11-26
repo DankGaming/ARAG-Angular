@@ -3,13 +3,12 @@
 
 * {
 	padding: 0;
-	margin: 0;
-	// box-sizing: border-box;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 html {
 	height: 100%;
-	// -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 body {
@@ -69,6 +68,7 @@ hr {
     border-radius: $border-radius;
     cursor: pointer;
     transition: .3s;
+    max-width: max-content;
 
     &:hover {
         filter: brightness(93%);
@@ -87,4 +87,11 @@ hr {
         background-color: $color-orange-500;
         color: $color-white;
     }
+}
+
+input {
+    padding: 10px 15px;
+    border-radius: $border-radius;
+    border: 1px solid $color-gray-200;
+    background-color: $color-gray-100;
 }
