@@ -6,6 +6,7 @@ import {
 	RouterStateSnapshot,
 	UrlTree,
 } from "@angular/router";
+import { AuthGuard } from './auth.guard';
 import { AuthService } from "./auth.service";
 
 @Injectable({ providedIn: "root" })
@@ -16,10 +17,9 @@ export class IsNotAuthenticatedGuard implements CanActivate {
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot
 	): boolean | UrlTree {
-		const isLoggedIn = this.authService.isLoggedIn();
-
-		if (!isLoggedIn) return true;
-
-		return this.router.createUrlTree(["/"]);
+		const authGuard = new AuthGuard(this.authService, this.router);
+		const canActivate = authGuard.canActivate(route, state) !== true
+		if (!canActivate) return this.router.createUrlTree(["/"]);
+		return true;
 	}
 }

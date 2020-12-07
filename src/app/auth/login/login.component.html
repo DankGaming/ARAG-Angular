@@ -3,6 +3,8 @@
     <div class="login-container">
         <h1>Inloggen</h1>
 
+        <app-error-box *ngIf="error" [message]="error"></app-error-box>
+
         <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
             <div class="form-group">
                 <label for="email">E-mailadres</label>

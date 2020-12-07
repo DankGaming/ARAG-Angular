@@ -6,7 +6,7 @@ import { TreesComponent } from "./trees/trees.component";
 const routes: Routes = [
 	{
 		path: "trees",
-		component: TreesComponent,
+		component: TreesComponent
 	},
 ];
 
