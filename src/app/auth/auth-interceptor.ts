@@ -5,6 +5,7 @@ import {
 	HttpHandler,
 	HttpRequest,
 	HttpParams,
+	HttpHeaders,
 } from "@angular/common/http";
 import { Observable, ObservableInput } from "rxjs";
 import { exhaustMap, map, take } from "rxjs/operators";
@@ -24,11 +25,11 @@ export class AuthInterceptorService implements HttpInterceptor {
 				if (!loginInfo?.jwt) return next.handle(req);
 
 				const modifiedReq = req.clone({
-					params: new HttpParams().set(
-						"Authorization",
-						`Bearer ${loginInfo.jwt}`
-					),
+					setHeaders: {
+						Authorization: `Bearer ${loginInfo.jwt}`,
+					},
 				});
+
 				return next.handle(modifiedReq);
 			})
 		);

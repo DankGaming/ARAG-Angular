@@ -30,4 +30,6 @@ import { APIInterceptor } from "./shared/api.interceptor";
 	],
 	bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+	constructor() {}
+}

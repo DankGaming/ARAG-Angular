@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { map, tap } from "rxjs/operators";
+import { map, take, tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { LoginDTO } from "./dto/login.dto";
 import { LoginInfo } from "./login-info.model";
@@ -42,7 +42,14 @@ export class AuthService {
 		localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
 	}
 
-	isLoggedIn() {
-		return !!this.loginInfo;
+	isLoggedIn(): boolean {
+		console.log("Is logged in: " + !!this.loginInfo.getValue());
+		return !!this.loginInfo.getValue();
+	}
+
+	autoLogin(): void {
+		let loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
+		if (!loginInfo) return;
+		this.loginInfo.next(loginInfo);
 	}
 }
