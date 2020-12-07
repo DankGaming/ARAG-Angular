@@ -1,0 +1,17 @@
+@import "/src/app/shared/variables";
+
+.error-container {
+    padding: 8px 0px;
+    display: flex;
+    align-items: center;
+
+    fa-icon {
+        margin-right: 10px;
+        font-size: 15px;
+        color: $color-red-600;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
