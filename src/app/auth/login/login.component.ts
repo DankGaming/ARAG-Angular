@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { Employee } from "src/app/employee/employee.model";
 import { AuthService } from "../auth.service";
 import { LoginInfo } from "../login-info.model";
 
@@ -23,8 +24,8 @@ export class LoginComponent implements OnInit {
 				email: values.email,
 				password: values.password,
 			})
-			.subscribe((loginInfo: LoginInfo) => {
-				console.log(loginInfo);
+			.subscribe((employee: Employee) => {
+				console.log(employee);
 			});
 	}
 }
