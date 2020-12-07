@@ -7,7 +7,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { AuthModule } from "./auth/auth.module";
 import { SharedModule } from "./shared/shared.module";
 import { TreeModule } from "./tree/tree.module";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { APIInterceptor } from "./shared/api.interceptor";
 
 @NgModule({
@@ -16,6 +16,7 @@ import { APIInterceptor } from "./shared/api.interceptor";
 		BrowserModule,
 		AppRoutingModule,
 		FontAwesomeModule,
+		HttpClientModule,
 		AuthModule,
 		SharedModule,
 		TreeModule,
@@ -29,4 +30,6 @@ import { APIInterceptor } from "./shared/api.interceptor";
 	],
 	bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+	constructor() {}
+}
