@@ -4,18 +4,20 @@ import { Injectable } from "@angular/core";
 import { LoginDTO } from "./dto/login.dto";
 import { LoginInfo } from "./login-info.model";
 import { Employee } from "../employee/employee.model";
-import { Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 
 @Injectable({
 	providedIn: "root",
 })
 export class AuthService {
-	user: Subject<Employee> = new Subject<Employee>();
+	loginInfo: BehaviorSubject<LoginInfo> = new BehaviorSubject<LoginInfo>(
+		null
+	);
 
 	constructor(private http: HttpClient) {}
 
 	logout() {
-		this.user.next(null);
+		this.loginInfo.next(null);
 		localStorage.removeItem("loginInfo");
 	}
 
@@ -36,7 +38,11 @@ export class AuthService {
 	}
 
 	private handleAuthentication(loginInfo: LoginInfo) {
-		this.user.next(loginInfo.employee);
+		this.loginInfo.next(loginInfo);
 		localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+	}
+
+	isLoggedIn() {
+		return !!this.loginInfo;
 	}
 }

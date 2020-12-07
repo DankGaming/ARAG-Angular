@@ -6,6 +6,7 @@ import {
 	HttpRequest,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
@@ -16,6 +17,7 @@ export class APIInterceptor implements HttpInterceptor {
 		const apiReq = req.clone({
 			url: `http://134.122.55.77:5000${req.url}`,
 		});
+
 		return next.handle(apiReq);
 	}
 }
