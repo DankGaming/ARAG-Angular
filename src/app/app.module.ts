@@ -7,6 +7,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { AuthModule } from "./auth/auth.module";
 import { SharedModule } from "./shared/shared.module";
 import { TreeModule } from "./tree/tree.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { APIInterceptor } from "./shared/api.interceptor";
 
 @NgModule({
 	declarations: [AppComponent],
@@ -18,7 +20,13 @@ import { TreeModule } from "./tree/tree.module";
 		SharedModule,
 		TreeModule,
 	],
-	providers: [],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: APIInterceptor,
+			multi: true,
+		},
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}
