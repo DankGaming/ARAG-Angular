@@ -42,9 +42,7 @@ export class AuthService {
 		localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
 	}
 
-	isLoggedIn() {
-		return !!this.loginInfo.getValue();
-	}
+	isLoggedIn = () => !!this.loginInfo.getValue();
 
 	autoLogin(): void {
 		let loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
