@@ -15,9 +15,8 @@ export class EmployeeNavigationComponent implements OnInit {
 	constructor(private authService: AuthService, private router: Router) {}
 
 	ngOnInit(): void {
-		this.authService.loginInfo.subscribe((loginInfo: LoginInfo) => {
-			if (loginInfo?.employee) this.employee = loginInfo.employee;
-		});
+		const loginInfo = this.authService.loginInfo.getValue();
+		if (loginInfo?.employee) this.employee = loginInfo.employee;
 	}
 
 	logout(): void {
