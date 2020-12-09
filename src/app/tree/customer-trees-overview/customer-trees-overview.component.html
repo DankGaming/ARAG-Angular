@@ -1,0 +1,17 @@
+<div class="container">
+    <app-header title="Beslissingsbomen" subtitle="Kies welke beslissingsboom u wilt doorlopen"></app-header>
+
+    <ul>
+        <li *ngFor="let tree of trees">
+            <app-tree-row [tree]="tree"></app-tree-row>
+        </li>
+
+        <li *ngFor="let tree of trees">
+            <app-tree-row [tree]="tree"></app-tree-row>
+        </li>
+
+        <li *ngFor="let tree of trees">
+            <app-tree-row [tree]="tree"></app-tree-row>
+        </li>
+    </ul>
+</div>
