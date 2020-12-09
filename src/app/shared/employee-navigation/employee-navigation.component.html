@@ -1,23 +1,15 @@
-<nav>
+<nav class="topnav" id="myTopnav">
     <div class="container">
-        <div class="nav-container">
-            <ul>
-                <li>
-                    <a [routerLink]="['employees/trees']">Beslissingsbomen</a>
-                </li>
-            </ul>
-    
-            <ul class="right" *ngIf="employee">
-                <li *ngIf="isAdmin()">
-                    <a [routerLink]="['employees/admin']">Administratiepaneel</a>
-                </li>
-                <li>
-                    <a [routerLink]="['settings']">Instellingen</a>
-                </li>
-                <li>
-                    <a (click)="logout()">Uitloggen</a>
-                </li>
-            </ul>
-        </div>
+        <a [routerLink]="['employees/trees']" class="active">Beslisbomen</a>
+        <!-- <a [routerLink]="['employees/admin']" >Administratiepaneel</a>
+        <a [routerLink]="['settings']" >Instellingen</a> -->
+        <a (click)="logout()">Uitloggen</a>
+        <a (click)="dropdown()" class="icon">
+            <div class="bun">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </a>
     </div>
 </nav>
