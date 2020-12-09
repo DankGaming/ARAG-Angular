@@ -129,6 +129,11 @@ nav {
 
             li {
                 margin-right: 30px;
+                
+                a {
+                    cursor: pointer;
+                    position: relative;
+                }
             }
 
             &.right {
@@ -143,13 +148,21 @@ nav {
         height: auto;
         padding: 10px;
 
-        ul {
+        .nav-container {
             flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
 
-            li {
-                margin: 10px 0;
+            ul {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+    
+                li {
+                    margin: 10px 0;
+                }
+    
+                &.right {
+                    margin-left: 10px
+                }
             }
         }
     }
