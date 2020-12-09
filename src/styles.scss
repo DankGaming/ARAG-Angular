@@ -66,12 +66,19 @@ hr {
     padding: 10px 15px;
     border: none;
     border-radius: $border-radius;
-    cursor: pointer;
     transition: .3s;
     max-width: max-content;
 
-    &:hover {
-        filter: brightness(93%);
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    &:not(:disabled) {
+        cursor: pointer;
+
+        &:hover {
+            filter: brightness(93%);
+        }
     }
 
     &.primary {
