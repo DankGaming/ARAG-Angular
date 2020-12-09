@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/auth/auth.service";
 import { LoginInfo } from "src/app/auth/login-info.model";
-import { Employee } from "src/app/employee/employee.model";
+import { Employee, Role } from "src/app/employee/employee.model";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
 
@@ -28,5 +28,9 @@ export class EmployeeNavigationComponent implements OnInit {
 	logout(): void {
 		this.authService.logout();
 		this.router.navigate(["login"]);
+	}
+
+	isAdmin(): boolean {
+		return this.employee.role == Role.ADMIN;
 	}
 }
