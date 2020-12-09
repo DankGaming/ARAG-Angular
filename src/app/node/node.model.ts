@@ -1,11 +1,5 @@
 import { Tree } from "../tree/tree.model";
-
-export enum ContentType {
-	QUESTION = "QUESTION",
-	ANSWER = "ANSWER",
-	NOTIFICATION = "NOTIFICATION",
-}
-
+import { ContentType } from "./content-type.model";
 export class Node {
 	id: number;
 	content: string;
