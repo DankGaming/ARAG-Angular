@@ -104,3 +104,53 @@ input {
     border: 1px solid $color-gray-200;
     background-color: $color-gray-100;
 }
+
+nav {
+    min-height: 80px;
+    height: 80px;
+    background-color: $color-white;
+    box-shadow: $shadow;
+    margin-bottom: 30px;
+    border-top: 15px solid $color-primary;
+
+    & > .container {
+        height: 100%;
+    }
+
+    .nav-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+
+        ul {
+            display: flex;
+
+            li {
+                margin-right: 30px;
+            }
+
+            &.right {
+                margin-left: auto;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    nav {
+        height: auto;
+        padding: 10px;
+
+        ul {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+
+            li {
+                margin: 10px 0;
+            }
+        }
+    }
+}

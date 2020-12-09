@@ -1,0 +1,20 @@
+<nav>
+    <div class="container">
+        <div class="nav-container">
+            <ul>
+                <li>
+                    <a [routerLink]="['employees/trees']">Beslissingsbomen</a>
+                </li>
+                <li>
+                    <a [routerLink]="['employees/admin']">Administratiepaneel</a>
+                </li>
+            </ul>
+    
+            <ul class="right">
+                <li *ngIf="employee">
+                    <a>{{ employee.firstname }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
