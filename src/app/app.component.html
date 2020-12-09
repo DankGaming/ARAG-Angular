@@ -1,5 +1,5 @@
-<app-public-navigation></app-public-navigation>
-<app-employee-navigation></app-employee-navigation>
+<app-employee-navigation *ngIf="isLoggedIn"></app-employee-navigation>
+<app-public-navigation *ngIf="!isLoggedIn"></app-public-navigation>
 
 <div class="container">
     <router-outlet></router-outlet>
