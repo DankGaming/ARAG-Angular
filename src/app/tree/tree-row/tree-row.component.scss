@@ -17,6 +17,8 @@
         .description {
             font-size: 13px;
             color: $color-gray-600;
+            max-width: 400px;
+            margin-top: 5px;
         }
     }
 
@@ -36,7 +38,7 @@
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
     .tree-row {
         flex-direction: column;
         align-items: flex-start;
