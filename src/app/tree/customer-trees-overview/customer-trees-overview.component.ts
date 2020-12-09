@@ -8,7 +8,7 @@ import { TreeService } from "../tree.service";
 	styleUrls: ["./customer-trees-overview.component.scss"],
 })
 export class CustomerTreesOverviewComponent implements OnInit {
-	trees: Tree[];
+	trees: Tree[] = [];
 
 	constructor(private treeService: TreeService) {}
 
