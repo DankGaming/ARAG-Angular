@@ -24,7 +24,5 @@ export class EmployeeNavigationComponent implements OnInit {
 		this.router.navigate(["login"]);
 	}
 
-	isAdmin(): boolean {
-		return this.employee.role == Role.ADMIN;
-	}
+	isAdmin = () => this.employee.role == Role.ADMIN;
 }
