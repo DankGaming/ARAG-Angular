@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/auth/auth.service";
-import { Employee, Role } from "src/app/employee/employee.model";
 import { Router } from "@angular/router";
+import { Employee, Role } from "src/app/employee/employee.model";
 
 @Component({
     selector: "app-employee-navigation",
