@@ -9,7 +9,7 @@ import { LoginInfo } from "./auth/login-info.model";
     styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit, OnDestroy {
-    isLoggedIn: boolean = false;
+    isLoggedIn = false;
     loginInfoSubscription: Subscription;
 
     constructor(private authService: AuthService) {}

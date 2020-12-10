@@ -12,6 +12,8 @@ import { AuthService } from "../auth.service";
 export class LoginComponent implements OnInit {
     error: string;
 
+    name = "sdsd";
+
     constructor(private authService: AuthService, private router: Router) {}
 
     ngOnInit(): void {}
