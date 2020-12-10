@@ -10,18 +10,18 @@ import { TreeRunComponent } from "./tree-run/tree-run.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
-	declarations: [
-		TreesComponent,
-		CustomerTreesOverviewComponent,
-		TreeRowComponent,
-		TreeRunComponent,
-	],
-	imports: [
-		CommonModule,
-		RouterModule,
-		TreeRoutingModule,
-		SharedModule,
-		FontAwesomeModule,
-	],
+    declarations: [
+        TreesComponent,
+        CustomerTreesOverviewComponent,
+        TreeRowComponent,
+        TreeRunComponent,
+    ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        TreeRoutingModule,
+        SharedModule,
+        FontAwesomeModule,
+    ],
 })
 export class TreeModule {}

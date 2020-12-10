@@ -9,29 +9,29 @@ import { SharedModule } from "./shared/shared.module";
 import { TreeModule } from "./tree/tree.module";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { APIInterceptor } from "./shared/api.interceptor";
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
-	declarations: [AppComponent],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		FontAwesomeModule,
-		HttpClientModule,
-		AuthModule,
-		SharedModule,
-		TreeModule,
-		FormsModule
-	],
-	providers: [
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: APIInterceptor,
-			multi: true,
-		},
-	],
-	bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FontAwesomeModule,
+        HttpClientModule,
+        AuthModule,
+        SharedModule,
+        TreeModule,
+        FormsModule,
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: APIInterceptor,
+            multi: true,
+        },
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule {
-	constructor() {}
+    constructor() {}
 }

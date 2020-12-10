@@ -8,18 +8,18 @@ import { RouterModule } from "@angular/router";
 import { EmployeeNavigationComponent } from "./employee-navigation/employee-navigation.component";
 
 @NgModule({
-	declarations: [
-		HeaderComponent,
-		ErrorBoxComponent,
-		PublicNavigationComponent,
-		EmployeeNavigationComponent,
-	],
-	imports: [CommonModule, FontAwesomeModule, RouterModule],
-	exports: [
-		HeaderComponent,
-		ErrorBoxComponent,
-		PublicNavigationComponent,
-		EmployeeNavigationComponent,
-	],
+    declarations: [
+        HeaderComponent,
+        ErrorBoxComponent,
+        PublicNavigationComponent,
+        EmployeeNavigationComponent,
+    ],
+    imports: [CommonModule, FontAwesomeModule, RouterModule],
+    exports: [
+        HeaderComponent,
+        ErrorBoxComponent,
+        PublicNavigationComponent,
+        EmployeeNavigationComponent,
+    ],
 })
 export class SharedModule {}
