@@ -4,3 +4,4 @@ export class LoginInfo {
     employee: Employee;
     jwt: string;
 }
+
