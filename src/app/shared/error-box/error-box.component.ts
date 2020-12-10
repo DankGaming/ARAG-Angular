@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons"
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "app-error-box",
@@ -7,11 +7,9 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons"
 	styleUrls: ["./error-box.component.scss"],
 })
 export class ErrorBoxComponent implements OnInit {
-    @Input() message: string;
+	@Input() message: string;
 
-    icons = {
-        faExclamationTriangle: faExclamationTriangle
-    }
+	icons = { faExclamationTriangle };
 
 	constructor() {}
 

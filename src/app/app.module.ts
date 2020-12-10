@@ -9,7 +9,7 @@ import { SharedModule } from "./shared/shared.module";
 import { TreeModule } from "./tree/tree.module";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { APIInterceptor } from "./shared/api.interceptor";
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
 	declarations: [AppComponent],
@@ -21,7 +21,7 @@ import { FormsModule } from '@angular/forms';
 		AuthModule,
 		SharedModule,
 		TreeModule,
-		FormsModule
+		FormsModule,
 	],
 	providers: [
 		{

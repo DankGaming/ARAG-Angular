@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
+import {
+	HttpClient,
+	HttpErrorResponse,
+	HttpParams,
+} from "@angular/common/http";
 import { catchError, map, take, tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { LoginDTO } from "./dto/login.dto";
@@ -16,7 +20,7 @@ export class AuthService {
 
 	constructor(private http: HttpClient) {}
 
-	logout() {
+	logout(): void {
 		this.loginInfo.next(null);
 		localStorage.removeItem("loginInfo");
 	}
@@ -37,7 +41,7 @@ export class AuthService {
 		return observer;
 	}
 
-	private handleAuthentication(loginInfo: LoginInfo) {
+	private handleAuthentication(loginInfo: LoginInfo): void {
 		this.loginInfo.next(loginInfo);
 		localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
 	}
@@ -45,7 +49,7 @@ export class AuthService {
 	isLoggedIn = () => !!this.loginInfo.getValue();
 
 	autoLogin(): void {
-		let loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
+		const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
 		if (!loginInfo) return;
 		this.loginInfo.next(loginInfo);
 	}

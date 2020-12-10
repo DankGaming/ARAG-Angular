@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -27,10 +27,13 @@ export class LoginComponent implements OnInit {
 				email: values.email,
 				password: values.password,
 			})
-			.subscribe((employee: Employee) => {
-				this.router.navigate(["/"]);
-			}, (error: HttpErrorResponse) => {
-				this.error = error.error.error.message;
-			});
+			.subscribe(
+				(employee: Employee) => {
+					this.router.navigate(["/"]);
+				},
+				(error: HttpErrorResponse) => {
+					this.error = error.error.error.message;
+				}
+			);
 	}
 }
