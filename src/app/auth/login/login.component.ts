@@ -14,7 +14,9 @@ export class LoginComponent implements OnInit {
 
 	constructor(private authService: AuthService, private router: Router) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		console.log("sd");
+	}
 
 	login(form: NgForm): void {
 		if (form.invalid) return;
