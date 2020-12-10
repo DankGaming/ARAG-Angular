@@ -124,6 +124,10 @@ module.exports = {
         "@typescript-eslint/naming-convention": [
             "error",
             {
+                "selector": "class",
+                "format": ["PascalCase"]
+            },
+            {
                 "selector": ["variable"],
                 "format": ["camelCase"]
             },
