@@ -1,0 +1,10 @@
+<div class="tree-row">
+    <div class="tree-info">
+        <h3 class="title">{{ tree.name }}</h3>
+        <p class="description" *ngIf="tree.description">{{ tree.description }}</p>
+    </div>
+
+    <button class="walk-through-button" [routerLink]="['/customer', 'tree', tree.id]">
+        <fa-icon [icon]="icons.faArrowRight"></fa-icon>
+    </button>
+</div>

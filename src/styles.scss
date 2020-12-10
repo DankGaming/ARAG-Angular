@@ -1,5 +1,6 @@
 @import "/src/app/shared/variables";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
 
 * {
 	padding: 0;
@@ -12,7 +13,7 @@ html {
 }
 
 body {
-	font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
+	font-family: "Roboto", Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: $color-black;
@@ -37,7 +38,8 @@ h6 {
 }
 
 h1 {
-	font-size: 1.6rem;
+    font-size: 1.6rem;
+    font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
 }
 
 a,
@@ -46,7 +48,7 @@ li {
 	font-size: 15px;
 	text-decoration: none;
 	color: $color-black;
-	font-weight: 100;
+	font-weight: 400;
 }
 
 hr {
@@ -66,12 +68,19 @@ hr {
     padding: 10px 15px;
     border: none;
     border-radius: $border-radius;
-    cursor: pointer;
     transition: .3s;
     max-width: max-content;
 
-    &:hover {
-        filter: brightness(93%);
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    &:not(:disabled) {
+        cursor: pointer;
+
+        &:hover {
+            filter: brightness(93%);
+        }
     }
 
     &.primary {
@@ -94,4 +103,67 @@ input {
     border-radius: $border-radius;
     border: 1px solid $color-gray-200;
     background-color: $color-gray-100;
+}
+
+nav {
+    min-height: 80px;
+    height: 80px;
+    background-color: $color-white;
+    box-shadow: $shadow;
+    margin-bottom: 30px;
+    border-top: 15px solid $color-primary;
+
+    .nav-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+
+        ul {
+            display: flex;
+
+            li {
+                margin-right: 30px;
+                
+                a {
+                    cursor: pointer;
+                    position: relative;
+
+                    &.active {
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            &.right {
+                margin-left: auto;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    nav {
+        height: auto;
+        padding: 10px;
+
+        .nav-container {
+            flex-direction: column;
+
+            ul {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+    
+                li {
+                    margin: 10px 0;
+                }
+    
+                &.right {
+                    margin-left: 10px
+                }
+            }
+        }
+    }
 }

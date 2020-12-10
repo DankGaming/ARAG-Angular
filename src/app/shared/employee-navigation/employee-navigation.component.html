@@ -1,0 +1,21 @@
+<nav>
+    <div class="nav-container container">
+        <ul>
+            <li>
+                <a [routerLink]="['employees/trees']" routerLinkActive="active">Beslissingsbomen</a>
+            </li>
+        </ul>
+
+        <ul class="right" *ngIf="employee">
+            <li *ngIf="isAdmin()">
+                <a [routerLink]="['employees/admin']" routerLinkActive="active">Administratiepaneel</a>
+            </li>
+            <li>
+                <a [routerLink]="['settings']" routerLinkActive="active">Instellingen</a>
+            </li>
+            <li>
+                <a (click)="logout()">Uitloggen</a>
+            </li>
+        </ul>
+    </div>
+</nav>

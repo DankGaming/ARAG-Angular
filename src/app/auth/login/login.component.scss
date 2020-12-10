@@ -2,7 +2,7 @@
 
 main {
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - 120px);
     display: flex;
     justify-content: center;
     align-items: center;   
@@ -12,7 +12,7 @@ main {
         background-color: $color-white;
         border-radius: $border-radius;
         box-shadow: $shadow;
-        min-width: 400px;
+        min-width: 450px;
 
         h1 {
             margin-bottom: 20px;
