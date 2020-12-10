@@ -12,6 +12,9 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v2
+
             - name: Set up Node.js
               uses: actions/setup-node@v1
               with:
@@ -20,5 +23,5 @@ jobs:
             - name: Install Node.js dependencies
               run: npm install
 
-            - name: Run linters
+            - name: Run tests
               run: npm run test

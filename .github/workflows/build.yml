@@ -23,5 +23,5 @@ jobs:
             - name: Install Node.js dependencies
               run: npm install
 
-            - name: Run linters
+            - name: Build app
               run: npm run build
