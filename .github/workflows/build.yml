@@ -22,18 +22,12 @@ jobs:
 
             - name: Cache node modules
               uses: actions/cache@v2
-              env:
-                cache-name: cache-node-modules
-              with:
-                path: |
-                  ~/cache
-                  !~/cache/exclude
-                  **/node_modules
-                key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-                restore-keys: |
-                  ${{ runner.OS }}-npm-cache-
+              width:
+                path: node_modules
+                key: node-modules-${{ hashFiles('package-lock.json') }}
 
             - name: Install Node.js dependencies
+              if: steps.node-cache.outputs.cache-hit != 'true'
               run: npm install
 
             - name: Build app
