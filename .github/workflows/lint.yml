@@ -1,13 +1,25 @@
-name: CI
+name: Lint
 
-on: push
+on:
+    push:
+    pull_request: [master, dev]
 
 jobs:
-    build:
+    run-linters:
+        name: Run linters
         runs-on: ubuntu-latest
+
         steps:
-            - uses: actions/checkout@v2
-            - name: Install modules
-              run: yarn
-            - name: Run ESLint
-              run: eslint . --ext .js,.jsx,.ts,.tsx
+            - name: Check out Git repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12
+
+            - name: Install Node.js dependencies
+              run: npm install
+
+            - name: Run linters
+              run: npm run lint
