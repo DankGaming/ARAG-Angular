@@ -22,7 +22,7 @@ jobs:
               
             - name: Cache node modules
               uses: actions/cache@v2
-              width:
+              with:
                 path: node_modules
                 key: node-modules-${{ hashFiles('package-lock.json') }}
 
