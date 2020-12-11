@@ -1,4 +1,4 @@
-<app-modal title="Nieuwe beslissingsboom" (close)="closeModal()">
+<app-modal title="Nieuwe beslissingsboom" (closeModal)="close()">
     <ng-container body>
         <form #createTreeForm="ngForm" id="create-tree-form" (ngSubmit)="createTree(createTreeForm)" autocomplete="off">
             <div class="form-group">

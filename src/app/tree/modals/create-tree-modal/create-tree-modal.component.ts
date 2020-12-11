@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Tree } from "../../tree.model";
 import { TreeService } from "../../tree.service";
@@ -9,15 +9,15 @@ import { TreeService } from "../../tree.service";
 	styleUrls: ["./create-tree-modal.component.scss"],
 })
 export class CreateTreeModalComponent implements OnInit {
-	@Output() close = new EventEmitter<null>();
+	@Output() closeModal = new EventEmitter<null>();
 	@Output() tree = new EventEmitter<Partial<Tree>>();
 
 	constructor(private treeService: TreeService) {}
 
 	ngOnInit(): void {}
 
-	closeModal(): void {
-		this.close.emit();
+	close(): void {
+		this.closeModal.emit();
 	}
 
 	createTree(form: NgForm): void {
@@ -28,7 +28,7 @@ export class CreateTreeModalComponent implements OnInit {
 			.subscribe((tree: Partial<Tree>) => {
 				this.treeService.treeSubject.next();
 				this.tree.emit(tree);
-				this.close.emit();
+				this.closeModal.emit();
 			});
 	}
 }

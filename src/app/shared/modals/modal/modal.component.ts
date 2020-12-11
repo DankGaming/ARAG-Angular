@@ -16,7 +16,7 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 export class ModalComponent implements OnInit {
 	@Input() title: string;
 	@Input() subtitle: string;
-	@Output() close = new EventEmitter<null>();
+	@Output() closeModal = new EventEmitter<null>();
 
 	icons = { faTimesCircle };
 
@@ -24,7 +24,7 @@ export class ModalComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	closeModal(): void {
-		this.close.emit();
+	close(): void {
+		this.closeModal.emit();
 	}
 }
