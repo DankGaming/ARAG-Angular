@@ -6,6 +6,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { PublicNavigationComponent } from "./public-navigation/public-navigation.component";
 import { RouterModule } from "@angular/router";
 import { EmployeeNavigationComponent } from "./employee-navigation/employee-navigation.component";
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
     declarations: [
@@ -13,6 +14,7 @@ import { EmployeeNavigationComponent } from "./employee-navigation/employee-navi
         ErrorBoxComponent,
         PublicNavigationComponent,
         EmployeeNavigationComponent,
+        ModalComponent,
     ],
     imports: [CommonModule, FontAwesomeModule, RouterModule],
     exports: [
