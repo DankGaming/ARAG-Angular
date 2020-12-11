@@ -9,6 +9,8 @@ import { TreeRowComponent } from "./tree-row/tree-row.component";
 import { TreeRunComponent } from "./tree-run/tree-run.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { EmployeeTreesOverviewComponent } from "./employee-trees-overview/employee-trees-overview.component";
+import { CreateTreeModalComponent } from "./modals/create-tree-modal/create-tree-modal.component";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
 	declarations: [
@@ -17,6 +19,7 @@ import { EmployeeTreesOverviewComponent } from "./employee-trees-overview/employ
 		TreeRowComponent,
 		TreeRunComponent,
 		EmployeeTreesOverviewComponent,
+		CreateTreeModalComponent,
 	],
 	imports: [
 		CommonModule,
@@ -24,6 +27,7 @@ import { EmployeeTreesOverviewComponent } from "./employee-trees-overview/employ
 		TreeRoutingModule,
 		SharedModule,
 		FontAwesomeModule,
+		FormsModule,
 	],
 })
 export class TreeModule {}

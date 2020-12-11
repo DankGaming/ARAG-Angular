@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, OnInit } from "@angular/core";
+import {
+	Component,
+	ElementRef,
+	EventEmitter,
+	Input,
+	OnInit,
+	Output,
+} from "@angular/core";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "app-modal",
@@ -8,13 +16,15 @@ import { Component, ElementRef, Input, OnInit } from "@angular/core";
 export class ModalComponent implements OnInit {
 	@Input() title: string;
 	@Input() subtitle: string;
-	@Input() show: boolean;
+	@Output() close = new EventEmitter<null>();
+
+	icons = { faTimesCircle };
 
 	constructor(private element: ElementRef) {}
 
 	ngOnInit(): void {}
 
-	close(): void {
-		this.show = false;
+	closeModal(): void {
+		this.close.emit();
 	}
 }

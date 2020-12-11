@@ -1,13 +1,20 @@
-<div class="overlay" (click)="close()"></div>
-<div class="modal-container">
-    <header>
-        <h3>{{ title }}</h3>
-        <p *ngIf="subtitle" class="caption">{{ subtitle }}</p>
-    </header>
-    <section class="modal-body">
-        <ng-content select="[body]"></ng-content>
-    </section>
-    <footer>
-        <ng-content select="[footer]"></ng-content>
-    </footer>
+<div class="overlay" (click)="closeModal()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+        <header>
+            <div class="modal-title">
+                <h3>{{ title }}</h3>
+                <p *ngIf="subtitle" class="caption">{{ subtitle }}</p>
+            </div>
+    
+            <button class="close-button" (click)="closeModal()">
+                <fa-icon [icon]="icons.faTimesCircle"></fa-icon>
+            </button>
+        </header>
+        <section class="modal-body">
+            <ng-content select="[body]"></ng-content>
+        </section>
+        <footer>
+            <ng-content select="[footer]"></ng-content>
+        </footer>
+    </div>
 </div>

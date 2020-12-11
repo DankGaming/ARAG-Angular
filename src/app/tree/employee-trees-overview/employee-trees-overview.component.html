@@ -1,6 +1,6 @@
 <div class="container">
-    <app-header title="Beslissingsbomen" subtitle="Kies welke beslissingsboom u bewerken">
-        <button class="button primary">
+    <app-header title="Beslissingsbomen" subtitle="Kies welke beslissingsboom u wil bewerken">
+        <button class="button primary" (click)="showCreateTreeModal = true">
             <fa-icon [icon]="icons.faPlus"></fa-icon>
             Nieuwe boom
         </button>
@@ -12,20 +12,7 @@
         </li>
     </ul>
 
-    <app-modal title="Modal" subtitle="Reisvoucher" [show]="showModal" *ngIf="showModal">
-        <ng-container body>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque dolor illo pariatur laborum tempore enim eos laudantium nostrum praesentium magni, corrupti dignissimos non amet voluptas quis aliquid voluptatum! Libero illo repellendus perspiciatis facilis voluptatum consequuntur consequatur laborum ullam quibusdam in?</p>
-        </ng-container>
-
-        <ng-container footer>
-            <button class="button">
-                Button
-            </button>
-            <button class="button primary">
-                Button
-            </button>
-        </ng-container>
-    </app-modal>
+    <app-create-tree-modal *ngIf="showCreateTreeModal" (close)="showCreateTreeModal = false"></app-create-tree-modal>
 
     <ng-template #noTreesContainer>
         <p>Er zijn nog geen beslissingsbomen. Klik <span class="bold">hier</span> om een beslissingsboom te maken.</p>

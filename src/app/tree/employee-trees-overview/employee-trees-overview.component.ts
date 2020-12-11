@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { OrderDirection } from "src/app/shared/Http-filter";
 
 @Component({
 	selector: "app-employee-trees-overview",
@@ -10,15 +11,25 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 })
 export class EmployeeTreesOverviewComponent implements OnInit {
 	trees: Tree[] = [];
-	showModal = true;
+	showCreateTreeModal = false;
 
 	icons = { faPlus };
 
 	constructor(private treeService: TreeService) {}
 
 	ngOnInit(): void {
+		this.fetchTrees();
+
+		this.treeService.treeSubject.subscribe(() => this.fetchTrees());
+	}
+
+	fetchTrees(): void {
 		this.treeService
-			.findAll({ concept: true })
+			.findAll({
+				concept: true,
+				order: "createdAt",
+				orderDirection: OrderDirection.DESC,
+			})
 			.subscribe((trees: Tree[]) => {
 				this.trees = trees;
 			});
