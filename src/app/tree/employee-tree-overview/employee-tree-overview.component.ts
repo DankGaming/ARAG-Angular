@@ -2,6 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
+import {
+	faTrashAlt,
+	faAngleDoubleUp,
+	faWalking,
+} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "app-employee-tree-overview",
@@ -10,6 +15,12 @@ import { TreeService } from "../tree.service";
 })
 export class EmployeeTreeOverviewComponent implements OnInit {
 	tree: Tree;
+
+	icons = {
+		faTrashAlt,
+		faAngleDoubleUp,
+		faWalking,
+	};
 
 	constructor(
 		private treeService: TreeService,

@@ -1,3 +1,18 @@
 <div *ngIf="tree">
-    <app-header [title]="tree.name"></app-header>
+    <app-header [title]="tree.name">
+        <div class="header-buttons">
+            <button class="button danger">
+                <fa-icon [icon]="icons.faTrashAlt"></fa-icon>
+                Verwijder
+            </button>
+            <button class="button primary">
+                <fa-icon [icon]="icons.faAngleDoubleUp"></fa-icon>
+                Publiceer
+            </button>
+            <button class="button">
+                <fa-icon [icon]="icons.faWalking"></fa-icon>
+                Doorlopen
+            </button>
+        </div>
+    </app-header>
 </div>
