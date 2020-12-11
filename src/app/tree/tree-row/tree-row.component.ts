@@ -3,16 +3,18 @@ import { Tree } from "../tree.model";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-    selector: "app-tree-row",
-    templateUrl: "./tree-row.component.html",
-    styleUrls: ["./tree-row.component.scss"],
+	selector: "app-tree-row",
+	templateUrl: "./tree-row.component.html",
+	styleUrls: ["./tree-row.component.scss"],
 })
 export class TreeRowComponent implements OnInit {
-    @Input() tree: Tree;
+	@Input() tree: Tree;
+	@Input() showCreator = false;
+	@Input() navigationLink: any[];
 
-    icons = { faArrowRight };
+	icons = { faArrowRight };
 
-    constructor() {}
+	constructor() {}
 
-    ngOnInit(): void {}
+	ngOnInit(): void {}
 }

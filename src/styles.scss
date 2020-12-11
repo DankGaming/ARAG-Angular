@@ -143,6 +143,17 @@ nav {
     }
 }
 
+.caption {
+    font-size: 13px;
+    color: $color-gray-600;
+    max-width: 400px;
+    margin-top: 5px;
+}
+
+span.bold {
+    font-weight: bold;
+}
+
 @media only screen and (max-width: 600px) {
     nav {
         height: auto;

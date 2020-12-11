@@ -8,6 +8,7 @@ import { CustomerTreesOverviewComponent } from "./customer-trees-overview/custom
 import { TreeRowComponent } from "./tree-row/tree-row.component";
 import { TreeRunComponent } from "./tree-run/tree-run.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { EmployeeTreesOverviewComponent } from './employee-trees-overview/employee-trees-overview.component';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
         CustomerTreesOverviewComponent,
         TreeRowComponent,
         TreeRunComponent,
+        EmployeeTreesOverviewComponent,
     ],
     imports: [
         CommonModule,

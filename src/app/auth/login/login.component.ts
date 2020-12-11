@@ -14,9 +14,7 @@ export class LoginComponent implements OnInit {
 
 	constructor(private authService: AuthService, private router: Router) {}
 
-	ngOnInit(): void {
-		console.log("sd");
-	}
+	ngOnInit(): void {}
 
 	login(form: NgForm): void {
 		if (form.invalid) return;
@@ -33,7 +31,7 @@ export class LoginComponent implements OnInit {
 			})
 			.subscribe(
 				() => {
-					this.router.navigate(["/"]);
+					this.router.navigate(["/employee/trees"]);
 				},
 				(error: HttpErrorResponse) => {
 					this.error = error.error.error.message;
