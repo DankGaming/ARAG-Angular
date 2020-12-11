@@ -24,11 +24,14 @@ export class CreateTreeModalComponent implements OnInit {
 		const values = form.value;
 
 		this.treeService
-			.create({ name: values.name, description: values.description })
+			.create({
+				name: values.name,
+				description: values.description,
+			})
 			.subscribe((tree: Partial<Tree>) => {
-				this.treeService.treeSubject.next();
 				this.tree.emit(tree);
 				this.closeModal.emit();
+				this.treeService.treeSubject.next();
 			});
 	}
 }

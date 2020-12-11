@@ -1,4 +1,4 @@
 export interface CreateTreeDTO {
 	name: string;
-	description: string;
+	description?: string;
 }
