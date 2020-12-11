@@ -51,7 +51,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 			.subscribe((topNode: Node) => {
 				const childNodes: Node[] = [];
 
-				for (let child of topNode.children) {
+				for (const child of topNode.children) {
 					this.nodeService
 						.findByID(this.tree.id, child.id)
 						.subscribe((childNode: Node) => {

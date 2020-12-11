@@ -27,7 +27,7 @@ export class TreeService {
 
 	findByID(id: number): Observable<Tree> {
 		const observer: Observable<Tree> = this.http
-			.get<HttpResult<Tree>>("/trees/" + id)
+			.get<HttpResult<Tree>>(`/trees/${id}`)
 			.pipe(map((response: HttpResult<Tree>) => response.result));
 		return observer;
 	}
