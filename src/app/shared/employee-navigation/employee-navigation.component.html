@@ -2,13 +2,13 @@
     <div class="nav-container container">
         <ul>
             <li>
-                <a [routerLink]="['employees/trees']" routerLinkActive="active">Beslissingsbomen</a>
+                <a [routerLink]="['employee/trees']" routerLinkActive="active">Beslissingsbomen</a>
             </li>
         </ul>
 
         <ul class="right" *ngIf="employee">
             <li *ngIf="isAdmin()">
-                <a [routerLink]="['employees/admin']" routerLinkActive="active">Administratiepaneel</a>
+                <a [routerLink]="['employee/admin']" routerLinkActive="active">Administratiepaneel</a>
             </li>
             <li>
                 <a [routerLink]="['settings']" routerLinkActive="active">Instellingen</a>

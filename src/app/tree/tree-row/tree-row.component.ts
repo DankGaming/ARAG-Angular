@@ -9,6 +9,8 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 })
 export class TreeRowComponent implements OnInit {
     @Input() tree: Tree;
+    @Input() showCreator = false;
+    @Input() navigationLink: any[];
 
     icons = { faArrowRight };
 

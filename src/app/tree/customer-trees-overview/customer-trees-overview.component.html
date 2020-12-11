@@ -3,7 +3,7 @@
 
     <ul *ngIf="trees.length > 0; else noTreesContainer">
         <li *ngFor="let tree of trees">
-            <app-tree-row [tree]="tree"></app-tree-row>
+            <app-tree-row [tree]="tree" [navigationLink]="['/customer', 'tree', tree.id]"></app-tree-row>
         </li>
     </ul>
 
