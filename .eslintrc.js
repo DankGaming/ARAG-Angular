@@ -21,7 +21,6 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
-    // "parser": "@typescript-eslint/parser",
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "project": ["./tsconfig.json"],
@@ -124,6 +123,10 @@ module.exports = {
         "@typescript-eslint/naming-convention": [
             "error",
             {
+                "selector": "class",
+                "format": ["PascalCase"]
+            },
+            {
                 "selector": ["variable"],
                 "format": ["camelCase"]
             },
@@ -156,6 +159,7 @@ module.exports = {
         "@typescript-eslint/no-misused-promises": "off",
         "@typescript-eslint/no-floating-promises": "off",
         "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/no-unused-vars": "error",
         "@typescript-eslint/quotes": [
             "error",
             "double"

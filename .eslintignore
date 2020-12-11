@@ -1,0 +1,5 @@
+.github/
+node_modules/
+e2e/
+assets/
+environment/
