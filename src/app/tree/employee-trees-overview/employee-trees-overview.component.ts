@@ -19,11 +19,10 @@ export class EmployeeTreesOverviewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.fetchTrees();
-		this.treeService.treeSubject.subscribe(() => this.fetchTrees);
+		this.treeService.treeSubject.subscribe(() => this.fetchTrees());
 	}
 
 	fetchTrees(): void {
-		console.log(this);
 		this.treeService
 			.findAll({
 				concept: true,
