@@ -1,9 +1,9 @@
 <div class="container">
     <app-header title="Beslissingsbomen" subtitle="Kies welke beslissingsboom u bewerken">
-        <a class="button primary" [routerLink]="['/employee', 'tree', 'add']">
+        <button class="button primary">
             <fa-icon [icon]="icons.faPlus"></fa-icon>
             Nieuwe boom
-        </a>
+        </button>
     </app-header>
 
     <ul *ngIf="trees.length > 0; else noTreesContainer">

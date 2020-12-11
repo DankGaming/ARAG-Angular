@@ -8,22 +8,22 @@ import { CustomerTreesOverviewComponent } from "./customer-trees-overview/custom
 import { TreeRowComponent } from "./tree-row/tree-row.component";
 import { TreeRunComponent } from "./tree-run/tree-run.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { EmployeeTreesOverviewComponent } from './employee-trees-overview/employee-trees-overview.component';
+import { EmployeeTreesOverviewComponent } from "./employee-trees-overview/employee-trees-overview.component";
 
 @NgModule({
-    declarations: [
-        TreesComponent,
-        CustomerTreesOverviewComponent,
-        TreeRowComponent,
-        TreeRunComponent,
-        EmployeeTreesOverviewComponent,
-    ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        TreeRoutingModule,
-        SharedModule,
-        FontAwesomeModule,
-    ],
+	declarations: [
+		TreesComponent,
+		CustomerTreesOverviewComponent,
+		TreeRowComponent,
+		TreeRunComponent,
+		EmployeeTreesOverviewComponent,
+	],
+	imports: [
+		CommonModule,
+		RouterModule,
+		TreeRoutingModule,
+		SharedModule,
+		FontAwesomeModule,
+	],
 })
 export class TreeModule {}

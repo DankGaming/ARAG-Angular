@@ -4,7 +4,6 @@ import { AuthGuard } from "../auth/auth.guard";
 import { CustomerTreesOverviewComponent } from "./customer-trees-overview/customer-trees-overview.component";
 import { EmployeeTreesOverviewComponent } from "./employee-trees-overview/employee-trees-overview.component";
 import { TreeRunComponent } from "./tree-run/tree-run.component";
-import { TreesComponent } from "./trees/trees.component";
 
 const routes: Routes = [
 	{
