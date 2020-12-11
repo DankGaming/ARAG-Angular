@@ -1,0 +1,41 @@
+<div class="node-container">
+    <header>
+        <p class="type">{{ type }} {{ node.id }}</p>
+        <p class="title">{{ node.content }}</p>
+    </header>
+    <section class="node-content" [class]="{ 'not-last-one': (node.children?.length > 0 && !isQuestion()) }">
+        <ul>
+            <li *ngIf="isQuestion()">{{ node.children.length }} antwoorden</li>
+            <li *ngIf="isRoot()">start</li>
+        </ul>
+        <ul class="right">
+            <ng-container *ngIf="isQuestion()">
+                <li>
+                    <button>Wijzig</button>
+                </li>
+                <li *ngIf="!isCurrentTop">
+                    <button (click)="expandQuestion()">Uitklappen</button>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="isNotification()">
+                <li>
+                    <button>Nieuwe notificatie</button>
+                </li>
+                <li>
+                    <button>Nieuwe vraag</button>
+                </li>
+                <li>
+                    <button>Wijzig</button>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="isAnswer()">
+                <li>
+                    <button>Wijzig</button>
+                </li>
+            </ng-container>
+        </ul>
+    </section>
+    <section class="node-children" *ngIf="!isQuestion() && node.children?.length > 0">
+        <app-node-container *ngFor="let child of node.children" [tree]="tree" [node]="child"></app-node-container>
+    </section>
+</div>

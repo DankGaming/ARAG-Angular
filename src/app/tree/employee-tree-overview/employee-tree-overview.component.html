@@ -1,5 +1,5 @@
-<div *ngIf="tree">
-    <app-header [title]="tree.name">
+<div *ngIf="tree && top?.node && top?.children">
+    <app-header [title]="tree.name" [subtitle]="tree.description">
         <div class="header-buttons">
             <button class="button danger">
                 <fa-icon [icon]="icons.faTrashAlt"></fa-icon>
@@ -15,4 +15,16 @@
             </button>
         </div>
     </app-header>
+
+    <div class="question-container">
+        <div class="nodes-container">
+            <app-node-wrapper>
+                <app-node-container [tree]="tree" [node]="top.node" [isCurrentTop]="true"></app-node-container>
+            </app-node-wrapper>
+
+            <app-node-wrapper class="indent" *ngFor="let child of top.children">
+                <app-node-container [tree]="tree" [node]="child" (expand)="changeTopNode(child)"></app-node-container>
+            </app-node-wrapper>
+        </div>
+    </div>
 </div>

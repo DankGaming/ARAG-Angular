@@ -11,7 +11,9 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { EmployeeTreesOverviewComponent } from "./employee-trees-overview/employee-trees-overview.component";
 import { CreateTreeModalComponent } from "./modals/create-tree-modal/create-tree-modal.component";
 import { FormsModule } from "@angular/forms";
-import { EmployeeTreeOverviewComponent } from './employee-tree-overview/employee-tree-overview.component';
+import { EmployeeTreeOverviewComponent } from "./employee-tree-overview/employee-tree-overview.component";
+import { NodeContainerComponent } from "./employee-tree-overview/node-wrapper/node-container/node-container.component";
+import { NodeWrapperComponent } from "./employee-tree-overview/node-wrapper/node-wrapper.component";
 
 @NgModule({
 	declarations: [
@@ -22,6 +24,8 @@ import { EmployeeTreeOverviewComponent } from './employee-tree-overview/employee
 		EmployeeTreesOverviewComponent,
 		CreateTreeModalComponent,
 		EmployeeTreeOverviewComponent,
+		NodeContainerComponent,
+		NodeWrapperComponent,
 	],
 	imports: [
 		CommonModule,

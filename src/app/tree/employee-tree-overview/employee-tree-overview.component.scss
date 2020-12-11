@@ -7,3 +7,14 @@
         margin: 0 10px;
     }
 }
+
+.question-container {
+    .nodes-container {
+        display: grid;
+        grid-gap: 20px;
+
+        .indent {
+            margin-left: 30px;
+        }
+    }
+}

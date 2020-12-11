@@ -7,6 +7,8 @@ import {
 	faAngleDoubleUp,
 	faWalking,
 } from "@fortawesome/free-solid-svg-icons";
+import { NodeService } from "src/app/node/node.service";
+import { Node } from "src/app/node/node.model";
 
 @Component({
 	selector: "app-employee-tree-overview",
@@ -16,6 +18,11 @@ import {
 export class EmployeeTreeOverviewComponent implements OnInit {
 	tree: Tree;
 
+	top: {
+		node: Node;
+		children: Node[];
+	};
+
 	icons = {
 		faTrashAlt,
 		faAngleDoubleUp,
@@ -24,6 +31,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 
 	constructor(
 		private treeService: TreeService,
+		private nodeService: NodeService,
 		private route: ActivatedRoute
 	) {}
 
@@ -31,7 +39,35 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		this.route.params.subscribe((params: Params) => {
 			this.treeService.findByID(params.id).subscribe((tree: Tree) => {
 				this.tree = tree;
+
+				this.fetchTop(tree.root?.id);
 			});
 		});
+	}
+
+	fetchTop(id: number): void {
+		this.nodeService
+			.findByID(this.tree.id, id)
+			.subscribe((topNode: Node) => {
+				const childNodes: Node[] = [];
+
+				for (let child of topNode.children) {
+					this.nodeService
+						.findByID(this.tree.id, child.id)
+						.subscribe((childNode: Node) => {
+							childNodes.push(childNode);
+						});
+				}
+
+				this.top = {
+					node: topNode,
+					children: childNodes,
+				};
+			});
+	}
+
+	changeTopNode(node: Node): void {
+		console.log("sd");
+		this.fetchTop(node.id);
 	}
 }
