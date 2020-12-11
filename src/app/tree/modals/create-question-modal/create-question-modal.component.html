@@ -1,0 +1,16 @@
+<app-modal title="Nieuwe / wijzig vraag" (closeModal)="close()">
+    <ng-container body>
+        <form #createQuestionForm="ngForm" id="create-tree-form" (ngSubmit)="createQuestion(createQuestionForm)" autocomplete="off">
+            <div class="form-group">
+                <label for="name">Vraag</label>
+                <input type="text" name="content" id="content" placeholder="Beslissingsboomnaam" ngModel required>
+            </div>>
+        </form>
+    </ng-container>
+
+    <ng-container footer>
+        <button class="button primary" [disabled]="createQuestionForm.invalid" form="create-tree-form">
+            Opslaan
+        </button>
+    </ng-container>
+</app-modal><p>create-question-modal works!</p>
