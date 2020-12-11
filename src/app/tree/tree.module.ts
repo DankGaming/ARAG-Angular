@@ -11,6 +11,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { EmployeeTreesOverviewComponent } from "./employee-trees-overview/employee-trees-overview.component";
 import { CreateTreeModalComponent } from "./modals/create-tree-modal/create-tree-modal.component";
 import { FormsModule } from "@angular/forms";
+import { EmployeeTreeOverviewComponent } from './employee-tree-overview/employee-tree-overview.component';
 
 @NgModule({
 	declarations: [
@@ -20,6 +21,7 @@ import { FormsModule } from "@angular/forms";
 		TreeRunComponent,
 		EmployeeTreesOverviewComponent,
 		CreateTreeModalComponent,
+		EmployeeTreeOverviewComponent,
 	],
 	imports: [
 		CommonModule,
