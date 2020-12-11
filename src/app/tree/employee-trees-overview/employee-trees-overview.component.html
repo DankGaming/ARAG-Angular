@@ -1,5 +1,10 @@
 <div class="container">
-    <app-header title="Beslissingsbomen" subtitle="Kies welke beslissingsboom u bewerken"></app-header>
+    <app-header title="Beslissingsbomen" subtitle="Kies welke beslissingsboom u bewerken">
+        <a class="button primary" [routerLink]="['/employee', 'tree', 'add']">
+            <fa-icon [icon]="icons.faPlus"></fa-icon>
+            Nieuwe boom
+        </a>
+    </app-header>
 
     <ul *ngIf="trees.length > 0; else noTreesContainer">
         <li *ngFor="let tree of trees">
@@ -8,6 +13,6 @@
     </ul>
 
     <ng-template #noTreesContainer>
-        <p>Er zijn geen beslissingsbomen</p>
+        <p>Er zijn nog geen beslissingsbomen. Klik <span class="bold">hier</span> om een beslissingsboom te maken.</p>
     </ng-template>
 </div>

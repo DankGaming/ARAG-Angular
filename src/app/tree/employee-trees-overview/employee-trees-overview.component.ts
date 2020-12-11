@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "app-employee-trees-overview",
@@ -9,6 +10,8 @@ import { TreeService } from "../tree.service";
 })
 export class EmployeeTreesOverviewComponent implements OnInit {
 	trees: Tree[] = [];
+
+	icons = { faPlus };
 
 	constructor(private treeService: TreeService) {}
 
