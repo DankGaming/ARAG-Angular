@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { OrderDirection } from "src/app/shared/Http-filter";
+import { OrderDirection } from "src/app/shared/http-filter";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
 

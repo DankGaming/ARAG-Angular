@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { OrderDirection } from "src/app/shared/Http-filter";
+import { OrderDirection } from "src/app/shared/http-filter";
 
 @Component({
 	selector: "app-employee-trees-overview",
