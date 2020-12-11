@@ -17,22 +17,6 @@ main {
         h1 {
             margin-bottom: 20px;
         }
-
-        form {
-            .form-group {
-                margin-bottom: 20px;
-                display: flex;
-                flex-direction: column;
-
-                label {
-                    font-weight: bold;
-                    font-size: 11px;
-                    text-transform: uppercase;
-                    margin-bottom: 5px;
-                    color: $color-gray-600;
-                }
-            }
-        }
     }
 }
 
