@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ContentType } from "src/app/node/content-type.model";
+import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
 import { Node } from "src/app/node/node.model";
 import { Tree } from "src/app/tree/tree.model";
+import { faChevronRight, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "app-node-container",
@@ -11,18 +13,20 @@ import { Tree } from "src/app/tree/tree.model";
 export class NodeContainerComponent implements OnInit {
 	@Input() node: Node;
 	@Input() tree: Tree;
+	@Input() graph: DirectedAcyclicGraph;
 	@Input() isCurrentTop: boolean = false;
 
-	@Output() expand = new EventEmitter();
+	@Output() expand = new EventEmitter<Node>();
 
 	type: string;
+	icons = { faChevronRight, faArrowDown };
 
 	constructor() {}
 
 	ngOnInit(): void {
 		this.type = this.isQuestion()
 			? "Vraag"
-			: this.isAnswer
+			: this.isAnswer()
 			? "Antwoord"
 			: "Notificatie";
 	}
@@ -33,7 +37,7 @@ export class NodeContainerComponent implements OnInit {
 	isNotification = (): boolean => this.node.type === ContentType.NOTIFICATION;
 	isAnswer = (): boolean => this.node.type === ContentType.ANSWER;
 
-	expandQuestion(): void {
-		this.expand.emit();
+	expandQuestion(node: Node): void {
+		this.expand.emit(node);
 	}
 }

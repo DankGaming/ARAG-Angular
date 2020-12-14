@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
 import {
@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NodeService } from "src/app/node/node.service";
 import { Node } from "src/app/node/node.model";
+import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
+import { ContentType } from "src/app/node/content-type.model";
 
 @Component({
 	selector: "app-employee-tree-overview",
@@ -17,6 +19,7 @@ import { Node } from "src/app/node/node.model";
 })
 export class EmployeeTreeOverviewComponent implements OnInit {
 	tree: Tree;
+	graph: DirectedAcyclicGraph;
 
 	top: {
 		node: Node;
@@ -32,42 +35,55 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	constructor(
 		private treeService: TreeService,
 		private nodeService: NodeService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private router: Router
 	) {}
 
 	ngOnInit(): void {
 		this.route.params.subscribe((params: Params) => {
-			this.treeService.findByID(params.id).subscribe((tree: Tree) => {
-				this.tree = tree;
+			this.route.queryParams.subscribe((queryParams: Params) => {
+				this.treeService.findByID(params.id).subscribe((tree: Tree) => {
+					this.tree = tree;
 
-				this.fetchTop(tree.root?.id);
+					if (!queryParams.top) {
+						return this.navigateToTop();
+					}
+
+					this.fetchTop(queryParams.top);
+				});
 			});
+		});
+	}
+
+	private navigateToTop(nodeID: number = this.tree.root?.id) {
+		this.router.navigate([], {
+			queryParams: {
+				top: nodeID,
+			},
+			relativeTo: this.route,
+			queryParamsHandling: "merge",
 		});
 	}
 
 	fetchTop(id: number): void {
 		this.nodeService
-			.findByID(this.tree.id, id)
-			.subscribe((topNode: Node) => {
-				const childNodes: Node[] = [];
+			.findDirectedAcyclicGraph(this.tree.id)
+			.subscribe((graph: DirectedAcyclicGraph) => {
+				this.graph = graph;
+				const node = graph.nodes[id];
+				const edges = graph.edges[id];
 
-				for (const child of topNode.children) {
-					this.nodeService
-						.findByID(this.tree.id, child.id)
-						.subscribe((childNode: Node) => {
-							childNodes.push(childNode);
-						});
-				}
+				if (node.type !== ContentType.QUESTION)
+					return this.navigateToTop();
 
 				this.top = {
-					node: topNode,
-					children: childNodes,
+					node: node,
+					children: edges.map((id: number) => graph.nodes[id]),
 				};
 			});
 	}
 
 	changeTopNode(node: Node): void {
-		console.log("sd");
-		this.fetchTop(node.id);
+		this.navigateToTop(node.id);
 	}
 }

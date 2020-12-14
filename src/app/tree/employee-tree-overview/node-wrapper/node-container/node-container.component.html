@@ -3,9 +3,10 @@
         <p class="type">{{ type }} {{ node.id }}</p>
         <p class="title">{{ node.content }}</p>
     </header>
-    <section class="node-content" [class]="{ 'not-last-one': (node.children?.length > 0 && !isQuestion()) }">
+    <section class="node-content">
         <ul>
-            <li *ngIf="isQuestion()">{{ node.children.length }} antwoorden</li>
+            <li *ngIf="!isRoot() && graph.edges[node.id] && graph.edges[node.id].length !== 0 && !isQuestion()"><fa-icon [icon]="icons.faArrowDown" class="arrow"></fa-icon></li>
+            <li *ngIf="isQuestion()">{{ graph.edges[node.id].length }} antwoorden</li>
             <li *ngIf="isRoot()">start</li>
         </ul>
         <ul class="right">
@@ -14,7 +15,7 @@
                     <button>Wijzig</button>
                 </li>
                 <li *ngIf="!isCurrentTop">
-                    <button (click)="expandQuestion()">Uitklappen</button>
+                    <button (click)="expandQuestion(node)">Uitklappen <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
                 </li>
             </ng-container>
             <ng-container *ngIf="isNotification()">
@@ -35,7 +36,7 @@
             </ng-container>
         </ul>
     </section>
-    <section class="node-children" *ngIf="!isQuestion() && node.children?.length > 0">
-        <app-node-container *ngFor="let child of node.children" [tree]="tree" [node]="child"></app-node-container>
+    <section class="node-children" *ngIf="!isQuestion() && graph.edges[node.id].length > 0">
+        <app-node-container *ngFor="let id of graph.edges[node.id]" [tree]="tree" [node]="graph.nodes[id]" [graph]="graph" (expand)="expandQuestion($event)"></app-node-container>
     </section>
 </div>

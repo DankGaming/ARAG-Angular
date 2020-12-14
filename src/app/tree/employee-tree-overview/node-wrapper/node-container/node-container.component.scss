@@ -3,7 +3,6 @@
 .node-container {
     header {
         padding-bottom: 20px;
-        // border-bottom: 1px solid $color-gray-200;
 
         .type {
             text-transform: uppercase;
@@ -27,9 +26,18 @@
         padding-top: 20px;
         display: flex;
 
-        &.not-last-one {
+        &:not(:last-child) {
             padding-bottom: 20px;
-            border-bottom: 1px solid $color-gray-200;
+            position: relative;
+            
+            &::after {
+                border-bottom: 1px solid $color-gray-200;
+                position: absolute;
+                content: "";
+                width: 97%;
+                right: 0;
+                bottom: 0;
+            }
         }
 
         ul {
@@ -43,6 +51,16 @@
 
                 &:last-of-type {
                     margin-right: 0;
+                }
+
+                fa-icon {
+                    margin-left: 2px;
+                    font-size: 11px;
+                    
+                    &.arrow {
+                        position: relative;
+                        top: 27px;
+                    }
                 }
             }
 
