@@ -24,5 +24,8 @@ import { AuthInterceptorService } from "./auth-interceptor";
             multi: true,
         },
     ],
+    exports: [
+        LoginComponent
+    ]
 })
 export class AuthModule {}

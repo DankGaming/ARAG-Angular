@@ -13,21 +13,24 @@ import { CreateTreeModalComponent } from "./modals/create-tree-modal/create-tree
 import { FormsModule } from "@angular/forms";
 
 @NgModule({
-	declarations: [
-		TreesComponent,
-		CustomerTreesOverviewComponent,
-		TreeRowComponent,
-		TreeRunComponent,
-		EmployeeTreesOverviewComponent,
-		CreateTreeModalComponent,
-	],
-	imports: [
-		CommonModule,
-		RouterModule,
-		TreeRoutingModule,
-		SharedModule,
-		FontAwesomeModule,
-		FormsModule,
-	],
+    declarations: [
+        TreesComponent,
+        CustomerTreesOverviewComponent,
+        TreeRowComponent,
+        TreeRunComponent,
+        EmployeeTreesOverviewComponent,
+        CreateTreeModalComponent,
+    ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        TreeRoutingModule,
+        SharedModule,
+        FontAwesomeModule,
+        FormsModule,
+    ],
+    exports: [
+        TreeRowComponent
+    ]
 })
 export class TreeModule {}
