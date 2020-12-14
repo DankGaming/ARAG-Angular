@@ -60,19 +60,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		});
 	}
 
-	private navigateToTop(nodeID: number = this.tree.root?.id): void {
-		this.router.navigate([], {
-			queryParams: {
-				top: nodeID,
-			},
-			relativeTo: this.route,
-			queryParamsHandling: "merge",
-		});
-	}
-
-	back(): void {
-		this.location.back();
-	}
+	back = (): void => this.location.back();
 
 	fetchTop(id: number): void {
 		this.nodeService
@@ -89,7 +77,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 					return this.navigateToTop();
 
 				this.top = {
-					node: node,
+					node,
 					children: edges.map((id: number) => graph.nodes[id]),
 				};
 			});
@@ -97,5 +85,15 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 
 	changeTopNode(node: Node): void {
 		this.navigateToTop(node.id);
+	}
+
+	private navigateToTop(nodeID: number = this.tree.root?.id): void {
+		this.router.navigate([], {
+			queryParams: {
+				top: nodeID,
+			},
+			relativeTo: this.route,
+			queryParamsHandling: "merge",
+		});
 	}
 }

@@ -1,5 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { Node } from "src/app/node/node.model";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
 	selector: "app-node-wrapper",
