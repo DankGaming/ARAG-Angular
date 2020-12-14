@@ -17,6 +17,12 @@
     </app-header>
 
     <div class="question-container">
+        <div class="top-bar">
+            <button class="back-button" (click)="back()" *ngIf="top.node.id !== tree.root.id">
+                <fa-icon [icon]="icons.faArrowLeft"></fa-icon>
+                Vorige vraag
+            </button>
+        </div>
         <div class="nodes-container">
             <app-node-wrapper>
                 <app-node-container [tree]="tree" [node]="top.node" [isCurrentTop]="true" [graph]="graph"></app-node-container>

@@ -6,11 +6,18 @@ import {
 	faTrashAlt,
 	faAngleDoubleUp,
 	faWalking,
+	faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { NodeService } from "src/app/node/node.service";
 import { Node } from "src/app/node/node.model";
 import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
 import { ContentType } from "src/app/node/content-type.model";
+import { Location } from "@angular/common";
+
+interface Top {
+	node: Node;
+	children: Node[];
+}
 
 @Component({
 	selector: "app-employee-tree-overview",
@@ -20,23 +27,21 @@ import { ContentType } from "src/app/node/content-type.model";
 export class EmployeeTreeOverviewComponent implements OnInit {
 	tree: Tree;
 	graph: DirectedAcyclicGraph;
-
-	top: {
-		node: Node;
-		children: Node[];
-	};
+	top: Top;
 
 	icons = {
 		faTrashAlt,
 		faAngleDoubleUp,
 		faWalking,
+		faArrowLeft,
 	};
 
 	constructor(
 		private treeService: TreeService,
 		private nodeService: NodeService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private location: Location
 	) {}
 
 	ngOnInit(): void {
@@ -55,7 +60,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		});
 	}
 
-	private navigateToTop(nodeID: number = this.tree.root?.id) {
+	private navigateToTop(nodeID: number = this.tree.root?.id): void {
 		this.router.navigate([], {
 			queryParams: {
 				top: nodeID,
@@ -65,7 +70,11 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		});
 	}
 
-	fetchTop(id: number): void {
+	back(): void {
+		this.location.back();
+	}
+
+	fetchTop(id: number, addPreviousTop: boolean = true): void {
 		this.nodeService
 			.findDirectedAcyclicGraph(this.tree.id)
 			.subscribe((graph: DirectedAcyclicGraph) => {

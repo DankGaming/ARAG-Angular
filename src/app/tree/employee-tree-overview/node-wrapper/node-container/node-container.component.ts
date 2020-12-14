@@ -3,7 +3,11 @@ import { ContentType } from "src/app/node/content-type.model";
 import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
 import { Node } from "src/app/node/node.model";
 import { Tree } from "src/app/tree/tree.model";
-import { faChevronRight, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import {
+	faChevronRight,
+	faArrowDown,
+	faTree,
+} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "app-node-container",
@@ -19,7 +23,7 @@ export class NodeContainerComponent implements OnInit {
 	@Output() expand = new EventEmitter<Node>();
 
 	type: string;
-	icons = { faChevronRight, faArrowDown };
+	icons = { faChevronRight, faArrowDown, faTree };
 
 	constructor() {}
 

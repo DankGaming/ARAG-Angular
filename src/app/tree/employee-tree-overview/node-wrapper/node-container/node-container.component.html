@@ -7,7 +7,7 @@
         <ul>
             <li *ngIf="!isRoot() && graph.edges[node.id] && graph.edges[node.id].length !== 0 && !isQuestion()"><fa-icon [icon]="icons.faArrowDown" class="arrow"></fa-icon></li>
             <li *ngIf="isQuestion()">{{ graph.edges[node.id].length }} antwoorden</li>
-            <li *ngIf="isRoot()">start</li>
+            <li *ngIf="isRoot()"><fa-icon [icon]="icons.faTree"></fa-icon> start</li>
         </ul>
         <ul class="right">
             <ng-container *ngIf="isQuestion()">
@@ -19,12 +19,6 @@
                 </li>
             </ng-container>
             <ng-container *ngIf="isNotification()">
-                <li>
-                    <button>Nieuwe notificatie</button>
-                </li>
-                <li>
-                    <button>Nieuwe vraag</button>
-                </li>
                 <li>
                     <button>Wijzig</button>
                 </li>
