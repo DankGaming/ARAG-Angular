@@ -74,9 +74,12 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		this.location.back();
 	}
 
-	fetchTop(id: number, addPreviousTop: boolean = true): void {
+	fetchTop(id: number): void {
 		this.nodeService
-			.findDirectedAcyclicGraph(this.tree.id)
+			.findDirectedAcyclicGraph(this.tree.id, {
+				start: id,
+				end: ContentType.QUESTION,
+			})
 			.subscribe((graph: DirectedAcyclicGraph) => {
 				this.graph = graph;
 				const node = graph.nodes[id];

@@ -1,4 +1,4 @@
-<div *ngIf="tree && top?.node && top?.children">
+<div *ngIf="tree">
     <app-header [title]="tree.name" [subtitle]="tree.description">
         <div class="header-buttons">
             <button class="button danger">
@@ -18,12 +18,12 @@
 
     <div class="question-container">
         <div class="top-bar">
-            <button class="back-button" (click)="back()" *ngIf="top.node.id !== tree.root.id">
+            <button class="back-button" (click)="back()" *ngIf="top &&  top.node.id !== tree.root.id">
                 <fa-icon [icon]="icons.faArrowLeft"></fa-icon>
                 Vorige vraag
             </button>
         </div>
-        <div class="nodes-container">
+        <div class="nodes-container" *ngIf="top?.node && top?.children">
             <app-node-wrapper>
                 <app-node-container [tree]="tree" [node]="top.node" [isCurrentTop]="true" [graph]="graph"></app-node-container>
             </app-node-wrapper>

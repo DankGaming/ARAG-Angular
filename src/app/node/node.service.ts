@@ -1,8 +1,9 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { HttpResult } from "../shared/http-result";
+import { FilterDirectedAcyclicGraphDTO } from "../tree/dto/filter-directed-acyclic-graph.dto";
 import { DirectedAcyclicGraph } from "./directed-acyclic-graph.model";
 import { Node } from "./node.model";
 
@@ -12,9 +13,14 @@ import { Node } from "./node.model";
 export class NodeService {
 	constructor(private http: HttpClient) {}
 
-	findDirectedAcyclicGraph(treeID: number): Observable<DirectedAcyclicGraph> {
+	findDirectedAcyclicGraph(
+		treeID: number,
+		filter?: FilterDirectedAcyclicGraphDTO
+	): Observable<DirectedAcyclicGraph> {
 		const observer: Observable<DirectedAcyclicGraph> = this.http
-			.get<HttpResult<DirectedAcyclicGraph>>(`/trees/${treeID}/nodes`)
+			.get<HttpResult<DirectedAcyclicGraph>>(`/trees/${treeID}/nodes`, {
+				params: filter as HttpParams,
+			})
 			.pipe(
 				map(
 					(response: HttpResult<DirectedAcyclicGraph>) =>
