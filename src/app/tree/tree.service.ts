@@ -25,6 +25,13 @@ export class TreeService {
 		return observer;
 	}
 
+	findByID(id: number): Observable<Tree> {
+		const observer: Observable<Tree> = this.http
+			.get<HttpResult<Tree>>(`/trees/${id}`)
+			.pipe(map((response: HttpResult<Tree>) => response.result));
+		return observer;
+	}
+
 	create(dto: CreateTreeDTO): Observable<Partial<Tree>> {
 		const observer: Observable<Partial<Tree>> = this.http
 			.post<HttpResult<Partial<Tree>>>("/trees", {

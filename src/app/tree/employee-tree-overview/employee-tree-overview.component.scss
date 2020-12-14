@@ -1,0 +1,29 @@
+.header-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+
+    & > * {
+        margin: 0 10px;
+    }
+}
+
+.question-container {
+
+    .top-bar {
+        margin-bottom: 15px;
+
+        fa-icon {
+            margin-right: 10px;
+        }
+    }
+
+    .nodes-container {
+        display: grid;
+        grid-gap: 20px;
+
+        .indent {
+            margin-left: 30px;
+        }
+    }
+}
