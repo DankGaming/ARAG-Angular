@@ -51,7 +51,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 					this.tree = tree;
 
 					if (!queryParams.top) {
-						return this.navigateToTop();
+						return this.navigateToTop(this.tree.root?.id, true);
 					}
 
 					this.fetchTop(queryParams.top);
@@ -87,13 +87,17 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		this.navigateToTop(node.id);
 	}
 
-	private navigateToTop(nodeID: number = this.tree.root?.id): void {
+	private navigateToTop(
+		nodeID: number = this.tree.root?.id,
+		replaceUrl: boolean = false
+	): void {
 		this.router.navigate([], {
 			queryParams: {
 				top: nodeID,
 			},
 			relativeTo: this.route,
 			queryParamsHandling: "merge",
+			replaceUrl,
 		});
 	}
 }
