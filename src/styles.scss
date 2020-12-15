@@ -283,6 +283,7 @@ nav .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
 @media (max-width:767px) {
     nav.nav-container.container {
         border-top:1px solid #000;
+        padding: 0;
     }
     nav .logo {
         display: block;
@@ -322,9 +323,6 @@ nav .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
     nav li a {
         margin-left: 0px;
         padding: 15px 0px;
-    }
-    .container {
-        padding: 0 0;
     }
     .nav-con {
         position: fixed;
