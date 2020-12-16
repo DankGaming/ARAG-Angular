@@ -1,0 +1,15 @@
+<app-modal [title]="question ? 'Wijzig vraag' : 'Nieuwe vraag'" [subtitle]="question?.content" (closeModal)="close()">
+    <ng-container body>
+        <form #setQuestionForm="ngForm" id="set-question-form" (ngSubmit)="question ? update(setQuestionForm) : create(setQuestionForm)" autocomplete="off">
+            <div class="form-group">
+                <label for="content">Vraag</label>
+                <input type="text" name="content" placeholder="Vraag" id="content" [ngModel]="question?.content" ngModel required>
+            </div>
+        </form>
+    </ng-container>
+    <ng-container footer>
+        <button class="button primary" [disabled]="setQuestionForm.invalid" form="set-question-form">
+            Opslaan
+        </button>
+    </ng-container>
+</app-modal>

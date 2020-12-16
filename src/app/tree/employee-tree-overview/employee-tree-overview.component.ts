@@ -15,14 +15,6 @@ import { Node } from "src/app/node/node.model";
 import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
 import { ContentType } from "src/app/node/content-type.model";
 import { Location } from "@angular/common";
-import {
-	animate,
-	state,
-	style,
-	transition,
-	trigger,
-} from "@angular/animations";
-
 interface Top {
 	node: Node;
 	children: Node[];
@@ -43,6 +35,18 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		questions: Node[];
 	};
 	searchTimeout: number;
+
+	modals: {
+		setQuestion: {
+			show: boolean;
+			question: Node;
+		};
+	} = {
+		setQuestion: {
+			show: false,
+			question: null,
+		},
+	};
 
 	icons = {
 		faTrashAlt,
@@ -100,7 +104,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 			});
 	}
 
-	changeTopNode(node: Node): void {
+	changeTopNode(node: Partial<Node>): void {
 		this.navigateToTop(node.id);
 	}
 
@@ -150,6 +154,11 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 				relativeTo: this.route,
 			});
 		});
+	}
+
+	editQuestion(node: Node): void {
+		this.modals.setQuestion.question = node;
+		this.modals.setQuestion.show = true;
 	}
 
 	private navigateToTop(

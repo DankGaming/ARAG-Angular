@@ -1,8 +1,8 @@
 name: Build
 
 on:
-    push:
-        branches: "**"
+    pul_request:
+        branches: [master, dev]
 
 jobs:
     run-build:

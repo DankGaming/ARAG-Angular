@@ -16,6 +16,7 @@ import { NodeContainerComponent } from "./employee-tree-overview/node-wrapper/no
 import { NodeWrapperComponent } from "./employee-tree-overview/node-wrapper/node-wrapper.component";
 import { SearchResultsComponent } from "./employee-tree-overview/search-results/search-results.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NodeModule } from "../node/node.module";
 
 @NgModule({
 	declarations: [
@@ -38,6 +39,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 		FontAwesomeModule,
 		FormsModule,
 		BrowserAnimationsModule,
+		NodeModule,
 	],
 })
 export class TreeModule {}
