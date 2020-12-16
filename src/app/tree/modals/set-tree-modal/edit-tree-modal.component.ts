@@ -1,30 +1,34 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Tree } from "../../tree.model";
 import { TreeService } from "../../tree.service";
 
 @Component({
-	selector: "app-create-tree-modal",
-	templateUrl: "./create-tree-modal.component.html",
-	styleUrls: ["./create-tree-modal.component.scss"],
+	selector: "app-edit-tree-modal",
+	templateUrl: "./set-tree-modal.component.html",
+	styleUrls: ["./set-tree-modal.component.scss"],
 })
-export class CreateTreeModalComponent implements OnInit {
+export class EditTreeModalComponent implements OnInit {
 	@Output() closeModal = new EventEmitter<null>();
-	@Output() tree = new EventEmitter<Partial<Tree>>();
+    @Output() tree = new EventEmitter<Partial<Tree>>();
+    
+    @Input() model: Tree;
 
-	constructor(private treeService: TreeService) {}
+	constructor(private treeService: TreeService) {
+        
+    }
 
 	ngOnInit(): void {}
 
 	close(): void {
 		this.closeModal.emit();
-	}
+    }
 
-	createTree(form: NgForm): void {
+	submit(form: NgForm): void {
 		const values = form.value;
 
 		this.treeService
-			.create({
+			.update({
 				name: values.name,
 				description: values.description,
 			})

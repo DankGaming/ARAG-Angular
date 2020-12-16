@@ -1,6 +1,6 @@
 <app-modal title="Nieuwe beslissingsboom" (closeModal)="close()">
     <ng-container body>
-        <form #createTreeForm="ngForm" id="create-tree-form" (ngSubmit)="createTree(createTreeForm)" autocomplete="off">
+        <form #createTreeForm="ngForm" id="create-tree-form" (ngSubmit)="submit(createTreeForm)" autocomplete="off">
             <div class="form-group">
                 <label for="name">Beslissingsboomnaam</label>
                 <input type="text" name="name" id="name" placeholder="Beslissingsboomnaam" ngModel required>
