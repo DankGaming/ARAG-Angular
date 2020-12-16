@@ -1,0 +1,14 @@
+<app-modal title="Bevestiging" (closeModal)="close()">
+    <ng-container body>
+        <p>Weet u het zeker?</p>
+    </ng-container>
+
+    <ng-container footer>
+        <button class="button primary">
+            Ja
+        </button>
+        <button class="button primary" (click)="close()">
+            Nee
+        </button>
+    </ng-container>
+</app-modal>
