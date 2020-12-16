@@ -10,7 +10,7 @@ import { TreeService } from "../../tree.service";
 })
 export class SetTreeModalComponent implements OnInit {
 	@Output() closeModal = new EventEmitter<null>();
-@Output() set = new EventEmitter<Partial<Tree>>();
+    @Output() set = new EventEmitter<Partial<Tree>>();
 
 	@Input() tree?: Tree;
 
