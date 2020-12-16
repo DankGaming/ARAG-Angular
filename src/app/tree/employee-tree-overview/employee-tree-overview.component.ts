@@ -15,13 +15,6 @@ import { Node } from "src/app/node/node.model";
 import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
 import { ContentType } from "src/app/node/content-type.model";
 import { Location } from "@angular/common";
-import {
-	animate,
-	state,
-	style,
-	transition,
-	trigger,
-} from "@angular/animations";
 
 interface Top {
 	node: Node;
