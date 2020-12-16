@@ -43,4 +43,9 @@ export class TreeService {
 
 		return observer;
 	}
+
+	remove(id: number): Observable<HttpResult<null>> {
+		const observer = this.http.delete<HttpResult<null>>(`/trees/${id}`);
+		return observer;
+	}
 }

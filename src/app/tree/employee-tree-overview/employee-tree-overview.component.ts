@@ -15,6 +15,13 @@ import { Node } from "src/app/node/node.model";
 import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
 import { ContentType } from "src/app/node/content-type.model";
 import { Location } from "@angular/common";
+import {
+	animate,
+	state,
+	style,
+	transition,
+	trigger,
+} from "@angular/animations";
 
 interface Top {
 	node: Node;
@@ -135,6 +142,14 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 
 	clearSearchValue(): void {
 		this.searchValue = "";
+	}
+
+	removeTree(): void {
+		this.treeService.remove(this.tree.id).subscribe(() => {
+			this.router.navigate([".."], {
+				relativeTo: this.route,
+			});
+		});
 	}
 
 	private navigateToTop(

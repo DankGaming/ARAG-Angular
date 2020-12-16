@@ -12,7 +12,16 @@
         <ul class="right">
             <ng-container *ngIf="isQuestion()">
                 <li>
-                    <button>Wijzig</button>
+                    <button>
+                        <fa-icon [icon]="icons.faPlus"></fa-icon>
+                        Nieuw antwoord
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <fa-icon [icon]="icons.faPen"></fa-icon>
+                        Wijzig
+                    </button>
                 </li>
                 <li *ngIf="!isCurrentTop">
                     <button (click)="expandQuestion(node)">Uitklappen <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
@@ -20,12 +29,30 @@
             </ng-container>
             <ng-container *ngIf="isNotification()">
                 <li>
-                    <button>Wijzig</button>
+                    <button>
+                        <fa-icon [icon]="icons.faLink"></fa-icon>
+                        Koppel
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <fa-icon [icon]="icons.faPen"></fa-icon>
+                        Wijzig
+                    </button>
                 </li>
             </ng-container>
             <ng-container *ngIf="isAnswer()">
                 <li>
-                    <button>Wijzig</button>
+                    <button>
+                        <fa-icon [icon]="icons.faLink"></fa-icon>
+                        Koppel
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <fa-icon [icon]="icons.faPen"></fa-icon>
+                        Wijzig
+                    </button>
                 </li>
             </ng-container>
         </ul>
