@@ -4,19 +4,17 @@ import { Tree } from "../../tree.model";
 import { TreeService } from "../../tree.service";
 
 @Component({
-	selector: "app-edit-tree-modal",
+	selector: "app-set-tree-modal",
 	templateUrl: "./set-tree-modal.component.html",
 	styleUrls: ["./set-tree-modal.component.scss"],
 })
-export class EditTreeModalComponent implements OnInit {
+export class SetTreeModalComponent implements OnInit {
 	@Output() closeModal = new EventEmitter<null>();
-    @Output() tree = new EventEmitter<Partial<Tree>>();
-    
-    @Input() model: Tree;
+    @Output() set = new EventEmitter<Partial<Tree>>();
 
-	constructor(private treeService: TreeService) {
-        
-    }
+	@Input() tree?: Tree;
+
+	constructor(private treeService: TreeService) {}
 
 	ngOnInit(): void {}
 
@@ -24,18 +22,23 @@ export class EditTreeModalComponent implements OnInit {
 		this.closeModal.emit();
     }
 
-	submit(form: NgForm): void {
-		const values = form.value;
-
+	create(form: NgForm): void {
 		this.treeService
-			.update({
-				name: values.name,
-				description: values.description,
-			})
+			.create({...form.value})
 			.subscribe((tree: Partial<Tree>) => {
-				this.tree.emit(tree);
+				this.set.emit(tree);
 				this.closeModal.emit();
 				this.treeService.treeSubject.next();
+			});
+	}
+
+	update(form: NgForm): void {
+		this.treeService
+			.update(this.tree.id, {...form.value})
+			.subscribe((tree: Partial<Tree>) => {
+				this.set.emit(tree);
+				this.closeModal.emit();
+				Object.assign(this.tree, tree);
 			});
 	}
 }

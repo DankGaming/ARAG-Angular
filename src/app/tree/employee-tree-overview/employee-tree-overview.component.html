@@ -5,7 +5,7 @@
                 <fa-icon [icon]="icons.faTrashAlt"></fa-icon>
                 Verwijder
             </button>
-            <button class="button primary" (click)="showEditTreeModal = true">
+            <button class="button" (click)="showEditTreeModal = true">
                 <fa-icon [icon]="icons.faPen"></fa-icon>
                 Bewerken
             </button>
@@ -38,4 +38,4 @@
         </div>
     </div>
 </div>
-<app-edit-tree-modal *ngIf="showEditTreeModal" [model]="tree" (closeModal)="showEditTreeModal = false"></app-edit-tree-modal>
+<app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>

@@ -45,10 +45,10 @@ export class TreeService {
 		return observer;
 	}
 
-	update(dto: UpdateTreeDTO): Observable<Partial<Tree>> {
+	update(id: number, dto: UpdateTreeDTO): Observable<Partial<Tree>> {
 		const observer: Observable<Partial<Tree>> = this.http
-			.patch<HttpResult<Partial<Tree>>>("/trees", {
-				...dto			
+			.patch<HttpResult<Partial<Tree>>>(`/trees/${id}`, {
+				...dto
 			})
 			.pipe(
 				map((response: HttpResult<Partial<Tree>>) => response.result)

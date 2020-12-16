@@ -1,19 +1,19 @@
-<app-modal title="Nieuwe beslissingsboom" (closeModal)="close()">
+<app-modal [title]="tree ? 'Beslissingsboom bewerken' : 'Beslissingsboom maken'" [subtitle]="tree?.name" (closeModal)="close()">
     <ng-container body>
-        <form #createTreeForm="ngForm" id="create-tree-form" (ngSubmit)="submit(createTreeForm)" autocomplete="off">
+        <form #setTreeForm="ngForm" id="set-tree-form" (ngSubmit)="tree ? update(setTreeForm) : create(setTreeForm)" autocomplete="off">
             <div class="form-group">
                 <label for="name">Beslissingsboomnaam</label>
-                <input type="text" name="name" id="name" placeholder="Beslissingsboomnaam" ngModel required>
+                <input type="text" name="name" id="name" placeholder="Beslissingsboomnaam" [ngModel]="tree?.name" required>
             </div>
             <div class="form-group">
                 <label for="description">Omschrijving</label>
-                <textarea name="description" id="description" placeholder="Omschrijving" ngModel></textarea>
+                <textarea name="description" id="description" placeholder="Omschrijving" [ngModel]="tree?.description"></textarea>
             </div>
         </form>
     </ng-container>
 
     <ng-container footer>
-        <button class="button primary" [disabled]="createTreeForm.invalid" form="create-tree-form">
+        <button class="button primary" [disabled]="setTreeForm.invalid" form="set-tree-form">
             Opslaan
         </button>
     </ng-container>
