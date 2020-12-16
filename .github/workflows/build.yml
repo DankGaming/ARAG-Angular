@@ -1,7 +1,7 @@
 name: Build
 
 on:
-    pul_request:
+    pull_request:
         branches: [master, dev]
 
 jobs:
