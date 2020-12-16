@@ -108,25 +108,27 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 
 		this.searchTimeout = window.setTimeout(
 			() => {
-				this.nodeService
-					.findDirectedAcyclicGraph(this.tree.id, {
-						search: this.searchValue,
-					})
-					.subscribe((graph: DirectedAcyclicGraph) => {
-						const nodes = Object.values(graph.nodes);
-
-						this.searchResults = {
-							questions: nodes.filter(
-								(node: Node) =>
-									node.type === ContentType.QUESTION
-							),
-						};
-					});
-
+				this.searchDirectedAcyclicGraph();
 				this.searchTimeout = null;
 			},
 			wait ? 200 : 0
 		);
+	}
+
+	searchDirectedAcyclicGraph(): void {
+		this.nodeService
+			.findDirectedAcyclicGraph(this.tree.id, {
+				search: this.searchValue.trim(),
+			})
+			.subscribe((graph: DirectedAcyclicGraph) => {
+				const nodes = Object.values(graph.nodes);
+
+				this.searchResults = {
+					questions: nodes.filter(
+						(node: Node) => node.type === ContentType.QUESTION
+					),
+				};
+			});
 	}
 
 	clearSearchResults(): void {

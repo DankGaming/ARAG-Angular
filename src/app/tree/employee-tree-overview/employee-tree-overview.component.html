@@ -28,7 +28,7 @@
             <ul class="right">
                 <li id="search-bar-container">
                     <input type="text" placeholder="Zoeken" [(ngModel)]="searchValue" (input)="search()" (keyup.enter)="search(false)">
-                    <app-search-results [@searchResults] [searchResults]="searchResults" *ngIf="searchResults" (clickedOutside)="clearSearchResults()" (clickedInside)="clearSearchResults(); clearSearchValue()"></app-search-results>
+                    <app-search-results [searchResults]="searchResults" *ngIf="searchResults" (clickedOutside)="clearSearchResults()" (clickedInside)="clearSearchResults(); clearSearchValue()"></app-search-results>
                 </li>
                 <li>
                     <button class="button primary">
