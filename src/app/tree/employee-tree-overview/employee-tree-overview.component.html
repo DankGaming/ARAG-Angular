@@ -18,10 +18,25 @@
 
     <div class="question-container">
         <div class="top-bar">
-            <button class="back-button" (click)="back()" *ngIf="top &&  top.node.id !== tree.root.id">
-                <fa-icon [icon]="icons.faArrowLeft"></fa-icon>
-                Vorige vraag
-            </button>
+            <div>
+                <button class="back-button" (click)="back()" *ngIf="top &&  top.node.id !== tree.root.id">
+                    <fa-icon [icon]="icons.faArrowLeft"></fa-icon>
+                    Vorige vraag
+                </button>
+            </div>
+
+            <ul class="right">
+                <li id="search-bar-container">
+                    <input type="text" placeholder="Zoeken" [(ngModel)]="searchValue" (input)="search()" (keyup.enter)="search(false)">
+                    <app-search-results [searchResults]="searchResults" *ngIf="searchResults" (clickedOutside)="clearSearchResults()" (clickedInside)="clearSearchResults(); clearSearchValue()"></app-search-results>
+                </li>
+                <li>
+                    <button class="button primary">
+                        <fa-icon [icon]="icons.faPlus"></fa-icon>
+                        Nieuwe vraag
+                    </button>
+                </li>
+            </ul>
         </div>
         <div class="nodes-container" *ngIf="top?.node && top?.children">
             <app-node-wrapper>

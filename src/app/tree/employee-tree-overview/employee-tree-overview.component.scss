@@ -1,3 +1,5 @@
+@import "/src/app/shared/variables";
+
 .header-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -12,10 +14,69 @@
 
     .top-bar {
         margin-bottom: 15px;
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        grid-gap: 15px;
 
-        fa-icon {
-            margin-right: 10px;
+        button {
+            justify-self: flex-start;
+
+            fa-icon {
+                margin-right: 10px;
+            }
         }
+
+        .right {
+            justify-self: flex-end;
+
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            grid-gap: 15px;
+
+            li {
+                
+                button {
+                    height: 100%;
+                }
+
+                &#search-bar-container {
+                    position: relative;
+                    width: 100%;
+
+                    input {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: 750px) {
+            grid-template-columns: 1fr;
+
+            .right {
+                justify-self: stretch;
+                display: flex;
+
+                button {
+                    justify-self: stretch;
+                }
+
+                @media only screen and (max-width: 400px) {
+                    flex-direction: column;
+
+                    li {
+                        flex-grow: 1;
+                        display: flex;
+
+                        button {
+                            flex-grow: 1;
+                            max-width: none;
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     .nodes-container {
@@ -26,4 +87,8 @@
             margin-left: 30px;
         }
     }
+}
+
+@media only screen and (max-width: 520px) {
+    // .question-container .
 }

@@ -14,6 +14,7 @@ import { FormsModule } from "@angular/forms";
 import { EmployeeTreeOverviewComponent } from "./employee-tree-overview/employee-tree-overview.component";
 import { NodeContainerComponent } from "./employee-tree-overview/node-wrapper/node-container/node-container.component";
 import { NodeWrapperComponent } from "./employee-tree-overview/node-wrapper/node-wrapper.component";
+import { SearchResultsComponent } from './employee-tree-overview/search-results/search-results.component';
 
 @NgModule({
 	declarations: [
@@ -26,6 +27,7 @@ import { NodeWrapperComponent } from "./employee-tree-overview/node-wrapper/node
 		EmployeeTreeOverviewComponent,
 		NodeContainerComponent,
 		NodeWrapperComponent,
+		SearchResultsComponent,
 	],
 	imports: [
 		CommonModule,
