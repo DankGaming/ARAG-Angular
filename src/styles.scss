@@ -328,6 +328,8 @@ nav .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
         position: fixed;
         width: 100%;
         z-index: 100;
+        border-top: unset;
+        border-bottom: 1px solid #000;
     }
 }
 @media (min-width: 767px) {
