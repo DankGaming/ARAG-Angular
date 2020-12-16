@@ -24,16 +24,14 @@ export class SearchResultsComponent implements OnInit {
 	@Output() clickedInside = new EventEmitter();
 	@Output() clickedOutside = new EventEmitter();
 
-	private clickWasInside = false;
-
 	icons = { faChevronRight };
+
+	private clickWasInside = false;
 
 	constructor(private route: ActivatedRoute) {}
 
-	ngOnInit(): void {}
-
 	@HostListener("focusout")
-	loseFocus() {
+	loseFocus(): void {
 		this.lostFocus.emit();
 	}
 
@@ -51,6 +49,8 @@ export class SearchResultsComponent implements OnInit {
 		this.clickWasInside = false;
 	}
 
+	ngOnInit(): void {}
+
 	isActive = (question: Node): boolean =>
-		this.route.snapshot.queryParams.top == question.id;
+		+this.route.snapshot.queryParams.top === question.id;
 }

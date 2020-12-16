@@ -121,8 +121,6 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 									node.type === ContentType.QUESTION
 							),
 						};
-
-						console.log(this.searchResults.questions);
 					});
 
 				this.searchTimeout = null;
