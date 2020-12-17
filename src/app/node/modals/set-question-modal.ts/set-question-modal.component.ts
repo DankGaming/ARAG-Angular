@@ -19,21 +19,23 @@ export class SetQuestionModalComponent implements OnInit {
 	@Output() closeModal = new EventEmitter();
 	@Output() set = new EventEmitter<Partial<Node>>();
 
-	type = {
-		name: "Dropdown",
-		value: QuestionType.DROPDOWN,
-	};
 	types = [
 		{ name: "Dropdown", value: QuestionType.DROPDOWN },
 		{ name: "Radio", value: QuestionType.RADIO },
 	];
+	type: { name: string; value: QuestionType };
 
 	constructor(
 		private questionService: QuestionService,
 		private nodeService: NodeService
 	) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.type =
+			this.types.find(
+				(type) => type.value === this.question?.questionInfo.type
+			) ?? this.types[0];
+	}
 
 	close(): void {
 		this.closeModal.emit();
@@ -48,7 +50,7 @@ export class SetQuestionModalComponent implements OnInit {
 				type: ContentType.QUESTION,
 				root: values.treeRoot,
 				info: {
-					type: QuestionType.DROPDOWN,
+					type: values.type.value,
 				},
 			})
 			.subscribe((node: Partial<Node>) => {
@@ -65,12 +67,13 @@ export class SetQuestionModalComponent implements OnInit {
 				content: values.content,
 				root: values.treeRoot,
 				info: {
-					type: QuestionType.DROPDOWN,
+					type: values.type.value,
 				},
 			})
 			.subscribe((node: Partial<Node>) => {
 				this.question.content = node.content;
-				this.tree.root = this.question;
+				this.question.questionInfo.type = this.type.value;
+				if (values.treeRoot) this.tree.root = this.question;
 				this.close();
 			});
 	}
