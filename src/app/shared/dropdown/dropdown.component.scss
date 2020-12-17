@@ -43,12 +43,13 @@
         position: absolute;
         top: 100%;
         left: 0;
+        max-height: max(min(50vh, 500px), 300px);
+        overflow-y: auto;
 
         li {
             padding: 10px 0;
             border-bottom: 1px solid $color-gray-300;
             cursor: pointer;
-            font-size: 13px;
 
             &:first-of-type {
                 padding-top: 0;

@@ -1,16 +1,5 @@
-import {
-	Component,
-	EventEmitter,
-	forwardRef,
-	Input,
-	OnInit,
-	Output,
-} from "@angular/core";
-import {
-	CheckboxControlValueAccessor,
-	ControlValueAccessor,
-	NG_VALUE_ACCESSOR,
-} from "@angular/forms";
+import { Component, forwardRef, Input, OnInit } from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
 	selector: "app-toggle",

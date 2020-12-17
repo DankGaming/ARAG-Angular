@@ -1,14 +1,11 @@
 import {
-	AfterViewInit,
-	ChangeDetectorRef,
 	Component,
 	ContentChild,
-	ContentChildren,
 	ElementRef,
 	forwardRef,
+	HostListener,
 	Input,
 	OnInit,
-	QueryList,
 	TemplateRef,
 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
@@ -28,60 +25,64 @@ import { DropdownSelectedDirective } from "./dropdown-selected.directive";
 		},
 	],
 })
-export class DropdownComponent
-	implements OnInit, AfterViewInit, ControlValueAccessor {
-	@Input() options: Array<any> = [];
+export class DropdownComponent<T> implements OnInit, ControlValueAccessor {
+	@Input() options: Array<T> = [];
 	@Input() disabled: boolean = false;
 	@Input() name: string;
 
 	@ContentChild(DropdownSelectedDirective, { read: TemplateRef })
-	dropdownSelectedTemplate: any;
+	dropdownSelectedTemplate: TemplateRef<DropdownSelectedDirective>;
 	@ContentChild(DropdownOptionDirective, { read: TemplateRef })
-	dropdownOptionTemplate: any;
+	dropdownOptionTemplate: TemplateRef<DropdownOptionDirective>;
 
 	showDropdown: boolean = false;
+	selected: T;
 
 	icons = { faChevronDown };
 
-	selected: any;
+	constructor(private element: ElementRef) {}
 
-	@Input() public set value(value: any) {
+	@HostListener("document:click", ["$event"])
+	clickOutside(event: Event): void {
+		if (!this.element.nativeElement.contains(event.target)) {
+			this.showDropdown = false;
+		}
+	}
+
+	@Input() public set value(value: T) {
 		if (!this.disabled) {
 			this.selected = value;
 			this.onChange(value);
 		}
 	}
 
-	public get value(): any {
+	public get value(): T {
 		return this.selected;
 	}
 
 	public onChange: any = () => {};
 	public onTouch: any = () => {};
 
-	constructor() {}
-
 	ngOnInit(): void {}
 
-	writeValue(obj: any): void {
+	writeValue(obj: T): void {
 		this.value = obj;
 		console.log();
 	}
-	registerOnChange(fn: any): void {
+
+	registerOnChange(fn: T): void {
 		this.onChange = fn;
 	}
-	registerOnTouched(fn: any): void {
+
+	registerOnTouched(fn: T): void {
 		this.onTouch = fn;
 	}
+
 	setDisabledState?(isDisabled: boolean): void {
 		this.disabled = isDisabled;
 	}
 
-	setOption(option: any): void {
+	setOption(option: T): void {
 		this.writeValue(option);
-	}
-
-	ngAfterViewInit(): void {
-		console.log(this.dropdownSelectedTemplate);
 	}
 }
