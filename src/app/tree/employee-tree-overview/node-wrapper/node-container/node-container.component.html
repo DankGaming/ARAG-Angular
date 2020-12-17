@@ -5,7 +5,7 @@
     </header>
     <section class="node-content">
         <ul>
-            <li *ngIf="!isRoot() && graph.edges[node.id] && graph.edges[node.id].length !== 0 && !isQuestion()"><fa-icon [icon]="icons.faArrowDown" class="arrow"></fa-icon></li>
+            <li *ngIf="graph.edges[node.id] && graph.edges[node.id].length !== 0 && !isQuestion() && !isCurrentTop"><fa-icon [icon]="icons.faArrowDown" class="arrow"></fa-icon></li>
             <li *ngIf="isQuestion()">{{ graph.edges[node.id].length }} antwoorden</li>
             <li *ngIf="isRoot()"><fa-icon [icon]="icons.faTree"></fa-icon> start</li>
         </ul>
@@ -57,7 +57,7 @@
             </ng-container>
         </ul>
     </section>
-    <section class="node-children" *ngIf="!isQuestion() && graph.edges[node.id].length > 0">
+    <section class="node-children" *ngIf="graph.edges[node.id].length > 0 && !isCurrentTop">
         <ng-container *ngFor="let id of graph.edges[node.id]">
             <app-node-container *ngIf="graph.nodes[id]" [tree]="tree" [node]="graph.nodes[id]" [graph]="graph" (expand)="expandQuestion($event)"></app-node-container>
         </ng-container>

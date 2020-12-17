@@ -17,6 +17,8 @@ export class SetQuestionModalComponent implements OnInit {
 	@Output() closeModal = new EventEmitter();
 	@Output() set = new EventEmitter<Partial<Tree>>();
 
+	isRoot: boolean = false;
+
 	constructor(private questionService: QuestionService) {}
 
 	ngOnInit(): void {}
@@ -27,19 +29,20 @@ export class SetQuestionModalComponent implements OnInit {
 
 	create(form: NgForm): void {
 		const values = form.value;
+		console.log(values);
 
-		this.questionService
-			.create(this.tree.id, {
-				content: values.content,
-				type: ContentType.QUESTION,
-				info: {
-					type: QuestionType.DROPDOWN,
-				},
-			})
-			.subscribe((node: Partial<Node>) => {
-				this.set.emit(node);
-				this.close();
-			});
+		// this.questionService
+		// 	.create(this.tree.id, {
+		// 		content: values.content,
+		// 		type: ContentType.QUESTION,
+		// 		info: {
+		// 			type: QuestionType.DROPDOWN,
+		// 		},
+		// 	})
+		// 	.subscribe((node: Partial<Node>) => {
+		// 		this.set.emit(node);
+		// 		this.close();
+		// 	});
 	}
 
 	update(form: NgForm): void {
@@ -56,5 +59,9 @@ export class SetQuestionModalComponent implements OnInit {
 				this.question.content = node.content;
 				this.close();
 			});
+	}
+
+	toggle(value: boolean): void {
+		console.log(value);
 	}
 }

@@ -7,6 +7,8 @@ import { PublicNavigationComponent } from "./public-navigation/public-navigation
 import { RouterModule } from "@angular/router";
 import { EmployeeNavigationComponent } from "./employee-navigation/employee-navigation.component";
 import { ModalComponent } from "./modals/modal/modal.component";
+import { ToggleComponent } from "./toggle/toggle.component";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
 	declarations: [
@@ -15,14 +17,16 @@ import { ModalComponent } from "./modals/modal/modal.component";
 		PublicNavigationComponent,
 		EmployeeNavigationComponent,
 		ModalComponent,
+		ToggleComponent,
 	],
-	imports: [CommonModule, FontAwesomeModule, RouterModule],
+	imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule],
 	exports: [
 		HeaderComponent,
 		ErrorBoxComponent,
 		PublicNavigationComponent,
 		EmployeeNavigationComponent,
 		ModalComponent,
+		ToggleComponent,
 	],
 })
 export class SharedModule {}

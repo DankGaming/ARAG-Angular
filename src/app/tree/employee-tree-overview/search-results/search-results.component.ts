@@ -18,6 +18,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 export class SearchResultsComponent implements OnInit {
 	@Input() searchResults: {
 		questions: Node[];
+		notifications: Node[];
 	};
 
 	@Output() lostFocus = new EventEmitter();
