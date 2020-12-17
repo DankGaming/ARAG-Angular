@@ -38,7 +38,9 @@ export class NodeService {
 		return observer;
 	}
 
-	remove(id: number): Observable<HttpResult<null>> {
-		return this.http.delete<HttpResult<null>>(`/nodes/${id}`);
+	remove(treeID: number, nodeID: number): Observable<HttpResult<null>> {
+		return this.http.delete<HttpResult<null>>(
+			`/trees/${treeID}/nodes/${nodeID}`
+		);
 	}
 }
