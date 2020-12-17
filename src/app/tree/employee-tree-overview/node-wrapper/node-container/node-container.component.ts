@@ -28,6 +28,10 @@ export class NodeContainerComponent implements OnInit {
 	type: string;
 	icons = { faChevronRight, faArrowDown, faTree, faLink, faPen, faPlus };
 
+	modals = {
+		showSetQuestion: false,
+	};
+
 	constructor() {}
 
 	ngOnInit(): void {
@@ -46,5 +50,9 @@ export class NodeContainerComponent implements OnInit {
 
 	expandQuestion(node: Node): void {
 		this.expand.emit(node);
+	}
+
+	editQuestion(): void {
+		this.modals.showSetQuestion = true;
 	}
 }

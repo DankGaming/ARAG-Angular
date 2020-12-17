@@ -37,6 +37,18 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	};
 	searchTimeout: number;
 
+	modals: {
+		setQuestion: {
+			show: boolean;
+			question: Node;
+		};
+	} = {
+		setQuestion: {
+			show: false,
+			question: null,
+		},
+	};
+
 	icons = {
 		faTrashAlt,
 		faAngleDoubleUp,
@@ -93,7 +105,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 			});
 	}
 
-	changeTopNode(node: Node): void {
+	changeTopNode(node: Partial<Node>): void {
 		this.navigateToTop(node.id);
 	}
 
@@ -145,6 +157,11 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 				relativeTo: this.route,
 			});
 		});
+	}
+
+	editQuestion(node: Node): void {
+		this.modals.setQuestion.question = node;
+		this.modals.setQuestion.show = true;
 	}
 
 	private navigateToTop(

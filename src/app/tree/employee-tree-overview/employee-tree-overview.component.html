@@ -31,7 +31,7 @@
                     <app-search-results [searchResults]="searchResults" *ngIf="searchResults" (clickedOutside)="clearSearchResults()" (clickedInside)="clearSearchResults(); clearSearchValue()"></app-search-results>
                 </li>
                 <li>
-                    <button class="button primary">
+                    <button class="button primary" (click)="modals.setQuestion.show = true">
                         <fa-icon [icon]="icons.faPlus"></fa-icon>
                         Nieuwe vraag
                     </button>
@@ -50,8 +50,11 @@
             </app-node-wrapper>
 
             <app-node-wrapper class="indent" *ngFor="let child of top.children">
-                <app-node-container [tree]="tree" [node]="child" [graph]="graph" (expand)="changeTopNode($event)"></app-node-container>
+                <app-node-container [tree]="tree" [node]="child" [graph]="graph" (expand)="changeTopNode($event)" 
+                ></app-node-container>
             </app-node-wrapper>
         </div>
     </div>
+
+    <app-set-question-modal *ngIf="modals.setQuestion.show" (closeModal)="modals.setQuestion.show = false" (set)="changeTopNode($event)"></app-set-question-modal>
 </div>
