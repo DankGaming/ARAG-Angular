@@ -34,13 +34,13 @@
             font-size: 13px;
             transition: .3s;
             position: relative;
-            display: flex;
-            align-items: center;
 
             fa-icon {
                 font-size: 5px;
                 margin-right: 5px;
                 color: $color-gray-800;
+                position: relative;
+                bottom: 3px;
             }
 
             span {

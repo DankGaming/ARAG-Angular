@@ -15,10 +15,9 @@ import { QuestionService } from "../../question.service";
 export class SetQuestionModalComponent implements OnInit {
 	@Input() tree: Tree;
 	@Input() question?: Node;
+	@Input() isRoot: boolean = false;
 	@Output() closeModal = new EventEmitter();
-	@Output() set = new EventEmitter<Partial<Tree>>();
-
-	isRoot: boolean = false;
+	@Output() set = new EventEmitter<Partial<Node>>();
 
 	constructor(
 		private questionService: QuestionService,
@@ -33,9 +32,6 @@ export class SetQuestionModalComponent implements OnInit {
 
 	create(form: NgForm): void {
 		const values = form.value;
-
-		console.log(values);
-		console.log(values.treeRoot);
 
 		this.questionService
 			.create(this.tree.id, {
@@ -58,6 +54,7 @@ export class SetQuestionModalComponent implements OnInit {
 		this.questionService
 			.update(this.tree.id, this.question.id, {
 				content: values.content,
+				root: values.treeRoot,
 				info: {
 					type: QuestionType.DROPDOWN,
 				},
@@ -68,11 +65,8 @@ export class SetQuestionModalComponent implements OnInit {
 			});
 	}
 
-	toggle(value: boolean): void {
-		console.log(value);
-	}
-
 	remove(): void {
 		this.nodeService.remove(this.tree.id, this.question.id).subscribe();
+		this.close();
 	}
 }

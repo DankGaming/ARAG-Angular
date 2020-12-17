@@ -5,9 +5,9 @@
                 <label for="content">Vraag</label>
                 <input type="text" name="content" placeholder="Vraag" id="content" [ngModel]="question?.content" ngModel required>
             </div>
-            <div class="form-group">
+            <div class="form-group" *ngIf="!isRoot">
                 <label for="tree-root">Maak vraag start van boom</label>
-                <app-toggle name="treeRoot" [(ngModel)]="isRoot" required></app-toggle>
+                <app-toggle name="treeRoot" [ngModel]="isRoot" required></app-toggle>
             </div>
             <div class="form-group">
                 <label for="">Type vraag</label>
