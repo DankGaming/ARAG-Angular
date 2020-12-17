@@ -64,5 +64,5 @@
     </div>
   
   <app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>
-  <app-set-question-modal *ngIf="modals.setQuestion.show" (closeModal)="modals.setQuestion.show = false" (set)="changeTopNode($event)"></app-set-question-modal>
+  <app-set-question-modal *ngIf="modals.setQuestion.show" (closeModal)="modals.setQuestion.show = false" (set)="changeTopNode($event)" [tree]="tree"></app-set-question-modal>
 </div>
