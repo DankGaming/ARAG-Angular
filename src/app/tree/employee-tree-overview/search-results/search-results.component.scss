@@ -21,6 +21,11 @@
 
     ul {
         margin-top: 10px;
+        margin-bottom: 30px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
 
         li {
             padding: 10px 0;

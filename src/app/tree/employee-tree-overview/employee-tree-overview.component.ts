@@ -33,6 +33,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	searchValue: string = "";
 	searchResults: {
 		questions: Node[];
+		notifications: Node[];
 	};
 	searchTimeout: number;
 
@@ -94,8 +95,8 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 				const node = graph.nodes[id];
 				const edges = graph.edges[id];
 
-				if (node.type !== ContentType.QUESTION)
-					return this.navigateToTop();
+				// if (node.type !== ContentType.QUESTION)
+				// 	return this.navigateToTop();
 
 				this.top = {
 					node,
@@ -130,6 +131,10 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 							questions: nodes.filter(
 								(node: Node) =>
 									node.type === ContentType.QUESTION
+							),
+							notifications: nodes.filter(
+								(node: Node) =>
+									node.type === ContentType.NOTIFICATION
 							),
 						};
 					});

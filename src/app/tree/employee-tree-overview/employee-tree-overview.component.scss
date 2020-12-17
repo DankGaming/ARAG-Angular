@@ -45,6 +45,9 @@
 
 
 @keyframes publish {
+    0%, 15% {
+        transform: translateY(0);
+    }
     // End
     40%, 50% {
         transform: translateY(-155%);

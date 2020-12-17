@@ -1,12 +1,24 @@
 <div class="search-results">
-    <ng-container *ngIf="searchResults?.questions?.length > 0; else noResults">
-        <p>Vragen</p>
-        <ul>
-            <li *ngFor="let question of searchResults?.questions" [routerLink]="['.']" [queryParams]="{ top: question.id }">
-                <fa-icon [icon]="icons.faChevronRight" *ngIf="isActive(question)"></fa-icon> <span class="bold">{{ question.id }}:</span> {{ question.content }}
-            </li>            
-        </ul>
+    <ng-container *ngIf="searchResults?.questions?.length > 0 || searchResults?.notifications?.length > 0 else noResults">
+        <ng-container *ngIf="searchResults?.questions?.length > 0">
+            <p>Vragen</p>
+            <ul>
+                <li *ngFor="let question of searchResults?.questions" [routerLink]="['.']" [queryParams]="{ top: question.id }">
+                    <fa-icon [icon]="icons.faChevronRight" *ngIf="isActive(question)"></fa-icon> <span class="bold">{{ question.id }}:</span> {{ question.content }}
+                </li>            
+            </ul>
+        </ng-container>
+    
+        <ng-container *ngIf="searchResults?.notifications?.length > 0">
+            <p>Notificaties</p>
+            <ul>
+                <li *ngFor="let notification of searchResults?.notifications" [routerLink]="['.']" [queryParams]="{ top: notification.id }">
+                    <fa-icon [icon]="icons.faChevronRight" *ngIf="isActive(notification)"></fa-icon> <span class="bold">{{ notification.id }}:</span> {{ notification.content }}
+                </li>            
+            </ul>
+        </ng-container>
     </ng-container>
+
     <ng-template #noResults>
         <p>Geen resultaten gevonden</p>
     </ng-template>
