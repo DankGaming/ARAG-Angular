@@ -10,7 +10,15 @@
                 <app-toggle name="treeRoot" [ngModel]="isRoot" required></app-toggle>
             </div>
             <div class="form-group">
-                <label for="">Type vraag</label>
+                <label for="type">Type vraag</label>
+                <app-dropdown [(ngModel)]="type" name="type" id="type" ngDefaultControl required [options]="types">
+                    <ng-template dropdownSelected let-selected>
+                        <p>{{ selected.name }}</p>
+                    </ng-template>
+                    <ng-template dropdownOption let-option>
+                        <p>{{ option.name }}</p>
+                    </ng-template>
+                </app-dropdown>
             </div>
         </form>
     </ng-container>

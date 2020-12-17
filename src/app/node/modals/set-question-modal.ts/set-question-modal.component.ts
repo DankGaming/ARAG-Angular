@@ -19,6 +19,15 @@ export class SetQuestionModalComponent implements OnInit {
 	@Output() closeModal = new EventEmitter();
 	@Output() set = new EventEmitter<Partial<Node>>();
 
+	type = {
+		name: "Dropdown",
+		value: QuestionType.DROPDOWN,
+	};
+	types = [
+		{ name: "Dropdown", value: QuestionType.DROPDOWN },
+		{ name: "Radio", value: QuestionType.RADIO },
+	];
+
 	constructor(
 		private questionService: QuestionService,
 		private nodeService: NodeService
