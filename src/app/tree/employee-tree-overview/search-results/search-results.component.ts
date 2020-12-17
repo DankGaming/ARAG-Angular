@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Node } from "src/app/node/node.model";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "app-search-results",
@@ -25,7 +25,7 @@ export class SearchResultsComponent implements OnInit {
 	@Output() clickedInside = new EventEmitter();
 	@Output() clickedOutside = new EventEmitter();
 
-	icons = { faChevronRight };
+	icons = { faChevronRight: faCircle };
 
 	private clickWasInside = false;
 

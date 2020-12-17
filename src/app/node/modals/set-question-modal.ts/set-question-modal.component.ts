@@ -34,6 +34,9 @@ export class SetQuestionModalComponent implements OnInit {
 	create(form: NgForm): void {
 		const values = form.value;
 
+		console.log(values);
+		console.log(values.treeRoot);
+
 		this.questionService
 			.create(this.tree.id, {
 				content: values.content,
@@ -70,6 +73,6 @@ export class SetQuestionModalComponent implements OnInit {
 	}
 
 	remove(): void {
-		this.nodeService.remove(this.question.id).subscribe();
+		this.nodeService.remove(this.tree.id, this.question.id).subscribe();
 	}
 }
