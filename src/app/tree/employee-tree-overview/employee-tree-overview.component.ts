@@ -7,6 +7,8 @@ import {
 	faAngleDoubleUp,
 	faWalking,
 	faArrowLeft,
+	faPlus,
+	faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { NodeService } from "src/app/node/node.service";
 import { Node } from "src/app/node/node.model";
@@ -29,11 +31,19 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	graph: DirectedAcyclicGraph;
 	top: Top;
 
+	searchValue: string = "";
+	searchResults: {
+		questions: Node[];
+	};
+	searchTimeout: number;
+
 	icons = {
 		faTrashAlt,
 		faAngleDoubleUp,
 		faWalking,
 		faArrowLeft,
+		faPlus,
+		faSearch,
 	};
 
 	constructor(
@@ -85,6 +95,56 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 
 	changeTopNode(node: Node): void {
 		this.navigateToTop(node.id);
+	}
+
+	search(wait: boolean = true): void {
+		if (!this.searchValue) {
+			clearTimeout(this.searchTimeout);
+			this.searchTimeout = null;
+			return this.clearSearchResults();
+		}
+
+		if (this.searchTimeout) clearTimeout(this.searchTimeout);
+
+		this.searchTimeout = window.setTimeout(
+			() => {
+				this.searchDirectedAcyclicGraph();
+				this.searchTimeout = null;
+			},
+			wait ? 200 : 0
+		);
+	}
+
+	searchDirectedAcyclicGraph(): void {
+		this.nodeService
+			.findDirectedAcyclicGraph(this.tree.id, {
+				search: this.searchValue.trim(),
+			})
+			.subscribe((graph: DirectedAcyclicGraph) => {
+				const nodes = Object.values(graph.nodes);
+
+				this.searchResults = {
+					questions: nodes.filter(
+						(node: Node) => node.type === ContentType.QUESTION
+					),
+				};
+			});
+	}
+
+	clearSearchResults(): void {
+		this.searchResults = null;
+	}
+
+	clearSearchValue(): void {
+		this.searchValue = "";
+	}
+
+	removeTree(): void {
+		this.treeService.remove(this.tree.id).subscribe(() => {
+			this.router.navigate([".."], {
+				relativeTo: this.route,
+			});
+		});
 	}
 
 	private navigateToTop(
