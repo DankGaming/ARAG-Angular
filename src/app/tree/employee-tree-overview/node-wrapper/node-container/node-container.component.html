@@ -57,7 +57,7 @@
             </ng-container>
         </ul>
     </section>
-    <section class="node-children" *ngIf="graph.edges[node.id].length > 0 && !isCurrentTop">
+    <section class="node-children" *ngIf="!isQuestion() && graph.edges[node.id].length > 0 && !isCurrentTop">
         <ng-container *ngFor="let id of graph.edges[node.id]">
             <app-node-container *ngIf="graph.nodes[id]" [tree]="tree" [node]="graph.nodes[id]" [graph]="graph" (expand)="expandQuestion($event)"></app-node-container>
         </ng-container>

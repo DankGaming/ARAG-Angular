@@ -3,6 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Tree } from "src/app/tree/tree.model";
 import { ContentType } from "../../content-type.model";
 import { Node } from "../../node.model";
+import { NodeService } from "../../node.service";
 import { QuestionType } from "../../question-info.model";
 import { QuestionService } from "../../question.service";
 
@@ -19,7 +20,10 @@ export class SetQuestionModalComponent implements OnInit {
 
 	isRoot: boolean = false;
 
-	constructor(private questionService: QuestionService) {}
+	constructor(
+		private questionService: QuestionService,
+		private nodeService: NodeService
+	) {}
 
 	ngOnInit(): void {}
 
@@ -63,5 +67,9 @@ export class SetQuestionModalComponent implements OnInit {
 
 	toggle(value: boolean): void {
 		console.log(value);
+	}
+
+	remove(): void {
+		this.nodeService.remove(this.question.id);
 	}
 }

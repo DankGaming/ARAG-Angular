@@ -37,4 +37,8 @@ export class NodeService {
 			.pipe(map((response: HttpResult<Node>) => response.result));
 		return observer;
 	}
+
+	remove(id: number): Observable<HttpResult<null>> {
+		return this.http.delete<HttpResult<null>>(`/nodes/${id}`);
+	}
 }
