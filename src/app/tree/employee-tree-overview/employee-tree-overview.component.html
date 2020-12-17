@@ -5,10 +5,17 @@
                 <fa-icon [icon]="icons.faTrashAlt"></fa-icon>
                 Verwijder
             </button>
+          
+            <button class="button" (click)="showEditTreeModal = true">
+                <fa-icon [icon]="icons.faPen"></fa-icon>
+                Bewerken
+            </button>
+
             <button class="button publish-animation">
                 <fa-icon [icon]="icons.faAngleDoubleUp"></fa-icon>
                 Publiceer
             </button>
+          
             <button class="button" [routerLink]="['/customers', 'trees', tree.id]">
                 <fa-icon [icon]="icons.faWalking"></fa-icon>
                 Doorlopen
@@ -55,6 +62,7 @@
             </app-node-wrapper>
         </div>
     </div>
-
-    <app-set-question-modal *ngIf="modals.setQuestion.show" (closeModal)="modals.setQuestion.show = false" (set)="changeTopNode($event)"></app-set-question-modal>
+  
+  <app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>
+  <app-set-question-modal *ngIf="modals.setQuestion.show" (closeModal)="modals.setQuestion.show = false" (set)="changeTopNode($event)"></app-set-question-modal>
 </div>
