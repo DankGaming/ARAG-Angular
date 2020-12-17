@@ -7,6 +7,7 @@ import {
 	faAngleDoubleUp,
 	faWalking,
 	faArrowLeft,
+	faPen,
 	faPlus,
 	faSearch,
 } from "@fortawesome/free-solid-svg-icons";
@@ -47,9 +48,12 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		faAngleDoubleUp,
 		faWalking,
 		faArrowLeft,
+		faPen,
 		faPlus,
 		faSearch,
 	};
+
+	showEditTreeModal = false;
 
 	constructor(
 		private treeService: TreeService,

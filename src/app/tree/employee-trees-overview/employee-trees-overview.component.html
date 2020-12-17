@@ -12,9 +12,9 @@
         </li>
     </ul>
 
-    <app-create-tree-modal *ngIf="showCreateTreeModal" (closeModal)="showCreateTreeModal = false"></app-create-tree-modal>
-
     <ng-template #noTreesContainer>
-        <p>Er zijn nog geen beslissingsbomen. Klik <span class="bold">hier</span> om een beslissingsboom te maken.</p>
+        <p>Er zijn nog geen beslissingsbomen. Klik <span class="bold" (click)="showCreateTreeModal = true">hier</span> om een beslissingsboom te maken.</p>
     </ng-template>
+
+    <app-set-tree-modal *ngIf="showCreateTreeModal" (closeModal)="showCreateTreeModal = false"></app-set-tree-modal>
 </main>
