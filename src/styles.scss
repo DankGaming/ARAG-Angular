@@ -178,7 +178,7 @@ nav ul {
     padding: 0;
     list-style: none;
     overflow: hidden;
-    border-bottom:1px solid #fff;
+    border-bottom: 1px solid #fff;
 }
 
 nav li a {
@@ -187,8 +187,8 @@ nav li a {
     margin-left: 10px;
     padding:15px 30px;
 }
-nav li a:hover{
-}
+
+
 nav li a:hover,
 nav .menu-btn:hover {
     text-decoration: underline;
@@ -228,7 +228,6 @@ nav .menu-icon {
     padding: 28px 20px;
     position: relative;
     user-select: none;
-    border-left: 1px solid #000;
 }
 
 nav .menu-icon .navicon {
@@ -283,9 +282,8 @@ nav .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
 nav .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
     top: 0;
 }
-@media (max-width:767px) {
+@media (max-width: 767px) {
     nav.nav-container.container {
-        border-top:1px solid #000;
         padding: 0;
     }
     nav .logo {
@@ -309,11 +307,9 @@ nav .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
         text-align: center;
     }
     nav ul {
-        border-bottom: unset;
+        border-bottom: none;
     }
-    nav .menu.left {
-        border-top: 1px solid #000;
-    }
+
     ul.menu.left {
         float: unset;
     }
@@ -332,7 +328,6 @@ nav .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
         width: 100%;
         z-index: 100;
         border-top: unset;
-        border-bottom: 1px solid #000;
     }
 }
 @media (min-width: 767px) {
