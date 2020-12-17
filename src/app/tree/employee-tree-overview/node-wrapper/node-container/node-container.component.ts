@@ -42,17 +42,13 @@ export class NodeContainerComponent implements OnInit {
 			: "Notificatie";
 	}
 
-	isRoot = (): boolean => this.node.id === this.tree.root.id;
+	isRoot = (): boolean => this.node.id === this.tree.root?.id;
 
 	isQuestion = (): boolean => this.node.type === ContentType.QUESTION;
 	isNotification = (): boolean => this.node.type === ContentType.NOTIFICATION;
 	isAnswer = (): boolean => this.node.type === ContentType.ANSWER;
 
-	expandQuestion(node: Node): void {
-		this.expand.emit(node);
-	}
-
-	editQuestion(): void {
-		this.modals.showSetQuestion = true;
+	expandQuestion(node: Partial<Node>): void {
+		this.expand.emit(node as Node);
 	}
 }

@@ -38,16 +38,8 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	};
 	searchTimeout: number;
 
-	modals: {
-		setQuestion: {
-			show: boolean;
-			question: Node;
-		};
-	} = {
-		setQuestion: {
-			show: false,
-			question: null,
-		},
+	modals = {
+		showSetQuestion: false,
 	};
 
 	icons = {
@@ -161,11 +153,6 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 				relativeTo: this.route,
 			});
 		});
-	}
-
-	editQuestion(node: Node): void {
-		this.modals.setQuestion.question = node;
-		this.modals.setQuestion.show = true;
 	}
 
 	private navigateToTop(

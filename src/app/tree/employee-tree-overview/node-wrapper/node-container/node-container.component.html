@@ -18,7 +18,7 @@
                     </button>
                 </li>
                 <li>
-                    <button (click)="editQuestion()">
+                    <button (click)="this.modals.showSetQuestion = true">
                         <fa-icon [icon]="icons.faPen"></fa-icon>
                         Wijzig
                     </button>
@@ -63,5 +63,5 @@
         </ng-container>
     </section>
 
-    <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" [question]="node" [tree]="tree"></app-set-question-modal>
+    <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" [question]="node" [tree]="tree" [isRoot]="isRoot()" (set)="expandQuestion($event)"></app-set-question-modal>
 </div>
