@@ -15,6 +15,7 @@ import { Node } from "src/app/node/node.model";
 import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
 import { ContentType } from "src/app/node/content-type.model";
 import { Location } from "@angular/common";
+
 interface Top {
 	node: Node;
 	children: Node[];
@@ -120,29 +121,30 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 
 		this.searchTimeout = window.setTimeout(
 			() => {
-				this.nodeService
-					.findDirectedAcyclicGraph(this.tree.id, {
-						search: this.searchValue,
-					})
-					.subscribe((graph: DirectedAcyclicGraph) => {
-						const nodes = Object.values(graph.nodes);
-
-						this.searchResults = {
-							questions: nodes.filter(
-								(node: Node) =>
-									node.type === ContentType.QUESTION
-							),
-							notifications: nodes.filter(
-								(node: Node) =>
-									node.type === ContentType.NOTIFICATION
-							),
-						};
-					});
-
+				this.searchDirectedAcyclicGraph();
 				this.searchTimeout = null;
 			},
 			wait ? 200 : 0
 		);
+	}
+
+	searchDirectedAcyclicGraph(): void {
+		this.nodeService
+			.findDirectedAcyclicGraph(this.tree.id, {
+				search: this.searchValue.trim(),
+			})
+			.subscribe((graph: DirectedAcyclicGraph) => {
+				const nodes = Object.values(graph.nodes);
+
+				this.searchResults = {
+					questions: nodes.filter(
+						(node: Node) => node.type === ContentType.QUESTION
+					),
+					notifications: nodes.filter(
+						(node: Node) => node.type === ContentType.NOTIFICATION
+					),
+				};
+			});
 	}
 
 	clearSearchResults(): void {
