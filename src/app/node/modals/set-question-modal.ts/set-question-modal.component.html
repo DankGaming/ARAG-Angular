@@ -16,8 +16,13 @@
         </form>
     </ng-container>
     <ng-container footer>
-        <button class="button primary" [disabled]="setQuestionForm.invalid" form="set-question-form">
-            Opslaan
-        </button>
+        <div class="footer-button-container">
+            <button class="button primary" [disabled]="setQuestionForm.invalid" form="set-question-form">
+                Opslaan
+            </button>
+            <button class="button danger" *ngIf="question" (click)="remove()">
+                Verwijder
+            </button>
+        </div>
     </ng-container>
 </app-modal>
