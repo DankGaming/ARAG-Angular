@@ -1,4 +1,4 @@
 export interface HttpResult<T> {
-    result: T;
-    success: boolean;
+	result?: T;
+	success: boolean;
 }

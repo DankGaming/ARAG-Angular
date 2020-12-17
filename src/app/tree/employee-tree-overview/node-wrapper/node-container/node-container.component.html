@@ -1,0 +1,67 @@
+<div class="node-container">
+    <header>
+        <p class="type">{{ type }} {{ node.id }}</p>
+        <p class="title">{{ node.content }}</p>
+    </header>
+    <section class="node-content">
+        <ul>
+            <li *ngIf="!isRoot() && graph.edges[node.id] && graph.edges[node.id].length !== 0 && !isQuestion()"><fa-icon [icon]="icons.faArrowDown" class="arrow"></fa-icon></li>
+            <li *ngIf="isQuestion()">{{ graph.edges[node.id].length }} antwoorden</li>
+            <li *ngIf="isRoot()"><fa-icon [icon]="icons.faTree"></fa-icon> start</li>
+        </ul>
+        <ul class="right">
+            <ng-container *ngIf="isQuestion()">
+                <li>
+                    <button>
+                        <fa-icon [icon]="icons.faPlus"></fa-icon>
+                        Nieuw antwoord
+                    </button>
+                </li>
+                <li>
+                    <button (click)="editQuestion()">
+                        <fa-icon [icon]="icons.faPen"></fa-icon>
+                        Wijzig
+                    </button>
+                </li>
+                <li *ngIf="!isCurrentTop">
+                    <button (click)="expandQuestion(node)">Uitklappen <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="isNotification()">
+                <li>
+                    <button>
+                        <fa-icon [icon]="icons.faLink"></fa-icon>
+                        Koppel
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <fa-icon [icon]="icons.faPen"></fa-icon>
+                        Wijzig
+                    </button>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="isAnswer()">
+                <li>
+                    <button>
+                        <fa-icon [icon]="icons.faLink"></fa-icon>
+                        Koppel
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <fa-icon [icon]="icons.faPen"></fa-icon>
+                        Wijzig
+                    </button>
+                </li>
+            </ng-container>
+        </ul>
+    </section>
+    <section class="node-children" *ngIf="!isQuestion() && graph.edges[node.id].length > 0">
+        <ng-container *ngFor="let id of graph.edges[node.id]">
+            <app-node-container *ngIf="graph.nodes[id]" [tree]="tree" [node]="graph.nodes[id]" [graph]="graph" (expand)="expandQuestion($event)"></app-node-container>
+        </ng-container>
+    </section>
+
+    <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" [question]="node" [tree]="tree"></app-set-question-modal>
+</div>

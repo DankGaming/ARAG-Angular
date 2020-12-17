@@ -1,0 +1,8 @@
+@import "/src/app/shared/variables";
+
+.node-wrapper {
+    padding: 15px;
+    border-radius: $border-radius;
+    background-color: $color-white;
+    box-shadow: $shadow;
+}
