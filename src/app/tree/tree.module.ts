@@ -14,6 +14,9 @@ import { EmployeeTreeOverviewComponent } from "./employee-tree-overview/employee
 import { NodeContainerComponent } from "./employee-tree-overview/node-wrapper/node-container/node-container.component";
 import { NodeWrapperComponent } from "./employee-tree-overview/node-wrapper/node-wrapper.component";
 import { SetTreeModalComponent } from "./modals/set-tree-modal/set-tree-modal.component";
+import { SearchResultsComponent } from "./employee-tree-overview/search-results/search-results.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NodeModule } from "../node/node.module";
 
 @NgModule({
 	declarations: [
@@ -26,6 +29,7 @@ import { SetTreeModalComponent } from "./modals/set-tree-modal/set-tree-modal.co
 		NodeContainerComponent,
 		NodeWrapperComponent,
 		SetTreeModalComponent,
+		SearchResultsComponent,
 	],
 	imports: [
 		CommonModule,
@@ -33,7 +37,9 @@ import { SetTreeModalComponent } from "./modals/set-tree-modal/set-tree-modal.co
 		TreeRoutingModule,
 		SharedModule,
 		FontAwesomeModule,
-		FormsModule
+		FormsModule,
+		BrowserAnimationsModule,
+		NodeModule,
 	],
 })
 export class TreeModule {}

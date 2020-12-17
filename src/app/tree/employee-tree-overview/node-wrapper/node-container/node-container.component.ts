@@ -7,6 +7,9 @@ import {
 	faChevronRight,
 	faArrowDown,
 	faTree,
+	faLink,
+	faPen,
+	faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -23,7 +26,11 @@ export class NodeContainerComponent implements OnInit {
 	@Output() expand = new EventEmitter<Node>();
 
 	type: string;
-	icons = { faChevronRight, faArrowDown, faTree };
+	icons = { faChevronRight, faArrowDown, faTree, faLink, faPen, faPlus };
+
+	modals = {
+		showSetQuestion: false,
+	};
 
 	constructor() {}
 
@@ -43,5 +50,9 @@ export class NodeContainerComponent implements OnInit {
 
 	expandQuestion(node: Node): void {
 		this.expand.emit(node);
+	}
+
+	editQuestion(): void {
+		this.modals.showSetQuestion = true;
 	}
 }

@@ -1,0 +1,13 @@
+<div class="search-results">
+    <ng-container *ngIf="searchResults?.questions?.length > 0; else noResults">
+        <p>Vragen</p>
+        <ul>
+            <li *ngFor="let question of searchResults?.questions" [routerLink]="['.']" [queryParams]="{ top: question.id }">
+                <fa-icon [icon]="icons.faChevronRight" *ngIf="isActive(question)"></fa-icon> <span class="bold">{{ question.id }}:</span> {{ question.content }}
+            </li>            
+        </ul>
+    </ng-container>
+    <ng-template #noResults>
+        <p>Geen resultaten gevonden</p>
+    </ng-template>
+</div>

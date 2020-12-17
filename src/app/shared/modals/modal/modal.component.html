@@ -1,5 +1,5 @@
-<div class="overlay" (click)="close()">
-    <div class="modal-container" (click)="$event.stopPropagation()">
+<div class="overlay" (mousedown)="close()">
+    <div class="modal-container" (mousedown)="$event.stopPropagation()">
         <header>
             <div class="modal-title">
                 <h3>{{ title }}</h3>

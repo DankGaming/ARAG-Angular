@@ -54,5 +54,9 @@ export class TreeService {
 				map((response: HttpResult<Partial<Tree>>) => response.result)
 			);
 		return observer;
+  }
+  
+	remove(id: number): Observable<HttpResult<null>> {
+		return this.http.delete<HttpResult<null>>(`/trees/${id}`);
 	}
 }
