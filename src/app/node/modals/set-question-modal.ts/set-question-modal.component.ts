@@ -61,6 +61,7 @@ export class SetQuestionModalComponent implements OnInit {
 			})
 			.subscribe((node: Partial<Node>) => {
 				this.question.content = node.content;
+				this.tree.root = this.question;
 				this.close();
 			});
 	}
