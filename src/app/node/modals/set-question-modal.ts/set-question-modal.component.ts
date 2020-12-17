@@ -33,20 +33,20 @@ export class SetQuestionModalComponent implements OnInit {
 
 	create(form: NgForm): void {
 		const values = form.value;
-		console.log(values);
 
-		// this.questionService
-		// 	.create(this.tree.id, {
-		// 		content: values.content,
-		// 		type: ContentType.QUESTION,
-		// 		info: {
-		// 			type: QuestionType.DROPDOWN,
-		// 		},
-		// 	})
-		// 	.subscribe((node: Partial<Node>) => {
-		// 		this.set.emit(node);
-		// 		this.close();
-		// 	});
+		this.questionService
+			.create(this.tree.id, {
+				content: values.content,
+				type: ContentType.QUESTION,
+				root: values.treeRoot,
+				info: {
+					type: QuestionType.DROPDOWN,
+				},
+			})
+			.subscribe((node: Partial<Node>) => {
+				this.set.emit(node);
+				this.close();
+			});
 	}
 
 	update(form: NgForm): void {
@@ -70,6 +70,6 @@ export class SetQuestionModalComponent implements OnInit {
 	}
 
 	remove(): void {
-		this.nodeService.remove(this.question.id);
+		this.nodeService.remove(this.question.id).subscribe();
 	}
 }
