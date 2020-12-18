@@ -19,10 +19,9 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
 
 	@Input()
 	public set value(isChecked: boolean) {
-		if (!this.disabled) {
-			this.isChecked = isChecked;
-			this.onChange(isChecked);
-		}
+		if (this.disabled) return;
+		this.isChecked = isChecked;
+		this.onChange(isChecked);
 	}
 
 	public get value(): boolean {

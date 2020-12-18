@@ -52,6 +52,4 @@ export class NodeContainerComponent implements OnInit {
 	expandNode(node: Partial<Node>): void {
 		this.expand.emit(node as Node);
 	}
-
-	refresh(): void {}
 }
