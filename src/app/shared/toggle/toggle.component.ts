@@ -37,11 +37,17 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
 
 	ngOnInit(): void {}
 
-	registerOnChange = (fn: any): void => (this.onChange = fn);
+	registerOnChange(fn: any): void {
+		this.onChange = fn;
+	}
 
-	writeValue = (obj: any): void => (this.value = obj);
+	writeValue(obj: any): void {
+		this.value = obj;
+	}
 
-	registerOnTouched = (fn: any): void => (this.onTouch = fn);
+	registerOnTouched(fn: any): void {
+		this.onTouch = fn;
+	}
 
 	setDisabledState?(isDisabled: boolean): void {
 		this.disabled = isDisabled;
