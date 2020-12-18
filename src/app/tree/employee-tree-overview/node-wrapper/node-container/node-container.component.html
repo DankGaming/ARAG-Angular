@@ -102,7 +102,6 @@
         (closeModal)="modals.showSetAnswer = false" 
         [question]="isQuestion() ? node : previousNode" 
         [tree]="tree" 
-        [answer]="isAnswer() ? node : null" 
-        (set)="refresh()">
+        [answer]="isAnswer() ? node : null">
     </app-set-answer-modal>
 </div>
