@@ -92,8 +92,8 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 				const node = graph.nodes[id];
 				const edges = graph.edges[id];
 
-				// if (node.type !== ContentType.QUESTION)
-				// 	return this.navigateToTop();
+				if (node.type === ContentType.ANSWER)
+					return this.navigateToTop();
 
 				this.top = {
 					node,
