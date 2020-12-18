@@ -40,6 +40,7 @@ export class SetAnswerModalComponent implements OnInit {
 			.subscribe((answer: Partial<Node>) => {
 				this.set.emit(answer);
 				this.close();
+				this.treeService.treeSubject.next();
 			});
 	}
 
@@ -60,5 +61,6 @@ export class SetAnswerModalComponent implements OnInit {
 	remove(): void {
 		this.nodeService.remove(this.tree.id, this.answer.id).subscribe();
 		this.close();
+		this.treeService.treeSubject.next();
 	}
 }
