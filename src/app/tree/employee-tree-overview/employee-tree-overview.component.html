@@ -72,7 +72,6 @@
             </app-node-wrapper>
         </div>
     </div>
-  
-  <app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>
-  <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" (set)="changeTopNode($event)" [tree]="tree"></app-set-question-modal>
+    <app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>
+    <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" (set)="changeTopNode($event)" [tree]="tree"></app-set-question-modal>
 </div>
