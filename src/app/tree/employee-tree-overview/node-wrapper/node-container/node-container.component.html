@@ -5,7 +5,7 @@
     </header>
     <section class="node-content">
         <ul>
-            <li *ngIf="graph.edges[node.id] && graph.edges[node.id].length !== 0 && !isQuestion() && !isCurrentTop"><fa-icon [icon]="icons.faArrowDown" class="arrow"></fa-icon></li>
+            <li *ngIf="graph.edges[node.id]?.length !== 0 && !isQuestion() && !isCurrentTop"><fa-icon [icon]="icons.faArrowDown" class="arrow"></fa-icon></li>
             <li *ngIf="isQuestion()">{{ graph.edges[node.id].length }} antwoorden</li>
             <li *ngIf="isRoot()"><fa-icon [icon]="icons.faTree"></fa-icon> start</li>
         </ul>
