@@ -49,7 +49,7 @@
             </ng-container>
             <ng-container *ngIf="isNotification()">
                 <li>
-                    <button>
+                    <button (click)="modals.showLink = true">
                         <fa-icon [icon]="icons.faLink"></fa-icon>
                         Koppel
                     </button>
@@ -63,7 +63,7 @@
             </ng-container>
             <ng-container *ngIf="isAnswer()">
                 <li>
-                    <button>
+                    <button (click)="modals.showLink = true">
                         <fa-icon [icon]="icons.faLink"></fa-icon>
                         Koppel
                     </button>
@@ -103,6 +103,14 @@
         [question]="isQuestion() ? node : previousNode" 
         [tree]="tree" 
         [answer]="isAnswer() ? node : null" 
-        (set)="refresh()">
+    >
     </app-set-answer-modal>
+    <app-link-modal 
+        *ngIf="modals.showLink" 
+        (closeModal)="modals.showLink = false" 
+        [tree]="tree"
+        [node]="node"
+        [previousNode]="isAnswer() ? previousNode : null"
+    >
+    </app-link-modal>
 </div>
