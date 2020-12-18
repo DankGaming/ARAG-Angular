@@ -30,6 +30,7 @@ export class NodeContainerComponent implements OnInit {
 
 	modals = {
 		showSetQuestion: false,
+		showSetAnswer: false,
 	};
 
 	constructor() {}
@@ -48,7 +49,9 @@ export class NodeContainerComponent implements OnInit {
 	isNotification = (): boolean => this.node.type === ContentType.NOTIFICATION;
 	isAnswer = (): boolean => this.node.type === ContentType.ANSWER;
 
-	expandQuestion(node: Partial<Node>): void {
+	expandNode(node: Partial<Node>): void {
 		this.expand.emit(node as Node);
 	}
+
+	refresh(): void {}
 }

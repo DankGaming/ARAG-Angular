@@ -12,7 +12,7 @@
         <ul class="right">
             <ng-container *ngIf="isQuestion()">
                 <li>
-                    <button>
+                    <button (click)="modals.showSetAnswer = true">
                         <fa-icon [icon]="icons.faPlus"></fa-icon>
                         Nieuw antwoord
                     </button>
@@ -24,7 +24,7 @@
                     </button>
                 </li>
                 <li *ngIf="!isCurrentTop">
-                    <button (click)="expandQuestion(node)">Uitklappen <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
+                    <button (click)="expandNode(node)">Uitklappen <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
                 </li>
             </ng-container>
             <ng-container *ngIf="isNotification()">
@@ -49,7 +49,7 @@
                     </button>
                 </li>
                 <li>
-                    <button>
+                    <button (click)="modals.showSetAnswer = true">
                         <fa-icon [icon]="icons.faPen"></fa-icon>
                         Wijzig
                     </button>
@@ -59,9 +59,24 @@
     </section>
     <section class="node-children" *ngIf="!isQuestion() && graph.edges[node.id].length > 0 && !isCurrentTop">
         <ng-container *ngFor="let id of graph.edges[node.id]">
-            <app-node-container *ngIf="graph.nodes[id]" [tree]="tree" [node]="graph.nodes[id]" [graph]="graph" (expand)="expandQuestion($event)"></app-node-container>
+            <app-node-container *ngIf="graph.nodes[id]" [tree]="tree" [node]="graph.nodes[id]" [graph]="graph" (expand)="expandNode($event)"></app-node-container>
         </ng-container>
     </section>
 
-    <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" [question]="node" [tree]="tree" [isRoot]="isRoot()" (set)="expandQuestion($event)"></app-set-question-modal>
+    <app-set-question-modal 
+        *ngIf="modals.showSetQuestion" 
+        (closeModal)="modals.showSetQuestion = false" 
+        [question]="node" 
+        [tree]="tree" 
+        [isRoot]="isRoot()" 
+        (set)="expandNode($event)">
+    </app-set-question-modal>
+    <app-set-answer-modal 
+        *ngIf="modals.showSetAnswer" 
+        (closeModal)="modals.showSetAnswer = false" 
+        [question]="node" 
+        [tree]="tree" 
+        [answer]="isAnswer() ? node : null" 
+        (set)="refresh()">
+    </app-set-answer-modal>
 </div>
