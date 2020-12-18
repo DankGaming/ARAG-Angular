@@ -1,4 +1,4 @@
-<app-modal title="Koppel" [subtitle]="" (closeModal)="close()" *ngIf="node">
+<app-modal title="Koppel" [subtitle]="" (closeModal)="close()" *ngIf="nodes">
     <ng-container body>
         <form #linkForm="ngForm" id="link-form" (ngSubmit)="link(linkForm)" autocomplete="off">
             <div class="form-group">
