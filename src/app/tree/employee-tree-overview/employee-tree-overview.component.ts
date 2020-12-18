@@ -54,10 +54,10 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		faSearch,
 	};
 
+	showEditTreeModal = false;
+
 	private params: Params;
 	private queryParams: Params;
-
-	showEditTreeModal = false;
 
 	constructor(
 		private treeService: TreeService,
