@@ -53,11 +53,21 @@
         </div>
         <div class="nodes-container" *ngIf="top?.node && top?.children">
             <app-node-wrapper>
-                <app-node-container [tree]="tree" [node]="top.node" [isCurrentTop]="true" [graph]="graph"></app-node-container>
+                <app-node-container 
+                    [tree]="tree" 
+                    [node]="top.node" 
+                    [isCurrentTop]="true" 
+                    [graph]="graph">
+                </app-node-container>
             </app-node-wrapper>
 
             <app-node-wrapper class="indent" *ngFor="let child of top.children">
-                <app-node-container [tree]="tree" [node]="child" [graph]="graph" (expand)="changeTopNode($event)" 
+                <app-node-container 
+                    [tree]="tree" 
+                    [node]="child" 
+                    [graph]="graph" 
+                    [previousNode]="top.node" 
+                    (expand)="changeTopNode($event)" 
                 ></app-node-container>
             </app-node-wrapper>
         </div>

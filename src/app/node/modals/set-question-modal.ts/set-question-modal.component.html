@@ -1,4 +1,4 @@
-<app-modal [title]="question ? 'Wijzig vraag' : 'Nieuwe vraag'" [subtitle]="question?.content" (closeModal)="close()">
+<app-modal [title]="question ? 'Wijzig vraag' : 'Nieuwe vraag'" [subtitle]="'Beslissingsboom: ' + tree.name" (closeModal)="close()">
     <ng-container body>
         <form #setQuestionForm="ngForm" id="set-question-form" (ngSubmit)="question ? update(setQuestionForm) : create(setQuestionForm)" autocomplete="off">
             <div class="form-group">

@@ -49,8 +49,9 @@ export class SetAnswerModalComponent implements OnInit {
 				content: values.content,
 			})
 			.subscribe((answer: Partial<Node>) => {
-				Object.assign(this.answer, answer);
+				this.set.emit(answer);
 				this.close();
+				Object.assign(this.answer, answer);
 			});
 	}
 
