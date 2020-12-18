@@ -36,7 +36,7 @@
 
     .options {
         width: 100%;
-        padding: 20px;
+        padding: 0 20px;
         background-color: $color-white;
         border-radius: $border-radius;
         box-shadow: $shadow-dark;
@@ -47,16 +47,15 @@
         overflow-y: auto;
 
         li {
-            padding: 10px 0;
+            padding: 13px 0;
             border-bottom: 1px solid $color-gray-300;
             cursor: pointer;
 
-            &:first-of-type {
-                padding-top: 0;
+            &::ng-deep p {
+                font-size: 13px;
             }
 
             &:last-of-type {
-                padding-bottom: 0;
                 border-bottom: none;
             }
         }
