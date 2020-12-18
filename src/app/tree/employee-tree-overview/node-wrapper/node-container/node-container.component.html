@@ -20,13 +20,11 @@
             <li *ngIf="graph.edges[node.id] && graph.edges[node.id].length !== 0 && !isQuestion() && !isCurrentTop"><fa-icon [icon]="icons.faArrowDown" class="arrow"></fa-icon></li>
             <li *ngIf="isQuestion()">
                 {{ graph.edges[node.id].length }}
-                <ng-container [ngSwitch]="true">
-                    <ng-container *ngSwitchCase="graph.edges[node.id].length === 1">
-                        antwoord
-                    </ng-container>
-                    <ng-container *ngSwitchCase="graph.edges[node.id].length !== 1">
-                        antwoorden
-                    </ng-container>
+                <ng-container *ngIf="graph.edges[node.id].length === 1">
+                    antwoord
+                </ng-container>
+                <ng-container *ngIf="graph.edges[node.id].length !== 1">
+                    antwoorden
                 </ng-container>
             </li>
             <li *ngIf="isRoot()"><fa-icon [icon]="icons.faTree"></fa-icon> start</li>
