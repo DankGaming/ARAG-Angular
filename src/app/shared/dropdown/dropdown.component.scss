@@ -12,6 +12,7 @@
         position: relative;
         cursor: pointer;
         font-size: 13px;
+        user-select: none;
 
         .right {
             margin-left: auto;
@@ -43,8 +44,9 @@
         position: absolute;
         top: 100%;
         left: 0;
-        max-height: max(min(50vh, 500px), 300px);
+        max-height: max(min(50vh, 300px), 300px);
         overflow-y: auto;
+        z-index: 2;
 
         li {
             padding: 13px 0;

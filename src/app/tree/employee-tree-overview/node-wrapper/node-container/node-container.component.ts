@@ -36,6 +36,7 @@ export class NodeContainerComponent implements OnInit {
 	modals = {
 		showSetQuestion: false,
 		showSetAnswer: false,
+		showLink: false,
 	};
 
 	constructor() {}
