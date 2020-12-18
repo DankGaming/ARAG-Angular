@@ -65,7 +65,7 @@ export class LinkModalComponent implements OnInit {
 			.subscribe((node: Node) => {
 				this.node = node;
 
-				if (node.children.length > 0) {
+				if (node.children?.length > 0) {
 					const nodeType: ContentType = node.children[0].type;
 					this.type = {
 						name:
