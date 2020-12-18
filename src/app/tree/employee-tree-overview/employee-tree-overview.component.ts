@@ -35,19 +35,12 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	searchValue: string = "";
 	searchResults: {
 		questions: Node[];
+		notifications: Node[];
 	};
 	searchTimeout: number;
 
-	modals: {
-		setQuestion: {
-			show: boolean;
-			question: Node;
-		};
-	} = {
-		setQuestion: {
-			show: false,
-			question: null,
-		},
+	modals = {
+		showSetQuestion: false,
 	};
 
 	icons = {
@@ -99,7 +92,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 				const node = graph.nodes[id];
 				const edges = graph.edges[id];
 
-				if (node.type !== ContentType.QUESTION)
+				if (node.type === ContentType.ANSWER)
 					return this.navigateToTop();
 
 				this.top = {
@@ -143,6 +136,9 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 					questions: nodes.filter(
 						(node: Node) => node.type === ContentType.QUESTION
 					),
+					notifications: nodes.filter(
+						(node: Node) => node.type === ContentType.NOTIFICATION
+					),
 				};
 			});
 	}
@@ -161,11 +157,6 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 				relativeTo: this.route,
 			});
 		});
-	}
-
-	editQuestion(node: Node): void {
-		this.modals.setQuestion.question = node;
-		this.modals.setQuestion.show = true;
 	}
 
 	private navigateToTop(

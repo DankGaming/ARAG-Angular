@@ -26,9 +26,9 @@
     <div class="question-container">
         <div class="top-bar">
             <div>
-                <button class="back-button" (click)="back()" *ngIf="top && top.node.id !== tree.root.id">
+                <button class="back-button" (click)="back()" *ngIf="top && top?.node.id !== tree?.root?.id">
                     <fa-icon [icon]="icons.faArrowLeft"></fa-icon>
-                    Vorige vraag
+                    Terug
                 </button>
             </div>
 
@@ -38,7 +38,7 @@
                     <app-search-results [searchResults]="searchResults" *ngIf="searchResults" (clickedOutside)="clearSearchResults()" (clickedInside)="clearSearchResults(); clearSearchValue()"></app-search-results>
                 </li>
                 <li>
-                    <button class="button primary" (click)="modals.setQuestion.show = true">
+                    <button class="button primary" (click)="modals.showSetQuestion = true">
                         <fa-icon [icon]="icons.faPlus"></fa-icon>
                         Nieuwe vraag
                     </button>
@@ -62,7 +62,7 @@
             </app-node-wrapper>
         </div>
     </div>
-  
-  <app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>
-  <app-set-question-modal *ngIf="modals.setQuestion.show" (closeModal)="modals.setQuestion.show = false" (set)="changeTopNode($event)"></app-set-question-modal>
+
+    <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" (set)="changeTopNode($event)" [tree]="tree"></app-set-question-modal>
+    <app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>
 </div>

@@ -37,4 +37,10 @@ export class NodeService {
 			.pipe(map((response: HttpResult<Node>) => response.result));
 		return observer;
 	}
+
+	remove(treeID: number, nodeID: number): Observable<HttpResult<null>> {
+		return this.http.delete<HttpResult<null>>(
+			`/trees/${treeID}/nodes/${nodeID}`
+		);
+	}
 }

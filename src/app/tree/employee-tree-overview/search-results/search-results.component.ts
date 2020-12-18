@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Node } from "src/app/node/node.model";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "app-search-results",
@@ -18,13 +18,14 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 export class SearchResultsComponent implements OnInit {
 	@Input() searchResults: {
 		questions: Node[];
+		notifications: Node[];
 	};
 
 	@Output() lostFocus = new EventEmitter();
 	@Output() clickedInside = new EventEmitter();
 	@Output() clickedOutside = new EventEmitter();
 
-	icons = { faChevronRight };
+	icons = { faCircle };
 
 	private clickWasInside = false;
 
