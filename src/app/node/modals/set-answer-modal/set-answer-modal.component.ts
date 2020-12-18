@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Tree } from "src/app/tree/tree.model";
+import { TreeService } from "src/app/tree/tree.service";
 import { AnswerService } from "../../answer.service";
 import { ContentType } from "../../content-type.model";
 import { Node } from "../../node.model";
@@ -20,7 +21,8 @@ export class SetAnswerModalComponent implements OnInit {
 
 	constructor(
 		private answerService: AnswerService,
-		private nodeService: NodeService
+		private nodeService: NodeService,
+		private treeService: TreeService
 	) {}
 
 	ngOnInit(): void {}
@@ -51,7 +53,7 @@ export class SetAnswerModalComponent implements OnInit {
 			.subscribe((answer: Partial<Node>) => {
 				this.set.emit(answer);
 				this.close();
-				Object.assign(this.answer, answer);
+				this.treeService.treeSubject.next();
 			});
 	}
 

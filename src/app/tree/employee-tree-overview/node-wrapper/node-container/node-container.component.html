@@ -87,8 +87,7 @@
         (closeModal)="modals.showSetQuestion = false" 
         [question]="node" 
         [tree]="tree" 
-        [isRoot]="isRoot()" 
-        (set)="expandNode($event)">
+        [isRoot]="isRoot()">
     </app-set-question-modal>
     <app-set-answer-modal 
         *ngIf="modals.showSetAnswer" 
