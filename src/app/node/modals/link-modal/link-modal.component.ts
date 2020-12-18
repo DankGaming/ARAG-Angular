@@ -114,7 +114,15 @@ export class LinkModalComponent implements OnInit {
 			.subscribe(() => this.linked());
 	}
 
-	private linkNotification(form: NgForm): void {}
+	private linkNotification(form: NgForm): void {
+		const values = form.value;
+
+		this.notificationService
+			.update(this.tree.id, this.node.id, {
+				next: values.nextNode.id,
+			})
+			.subscribe(() => this.linked());
+	}
 
 	private linked(): void {
 		this.close();
