@@ -1,0 +1,32 @@
+<div class="tree-run-question">
+    <div class="question-text">
+        <h3 class="title"> {{node.content}} </h3>
+    </div>
+
+    <!-- <ul *ngIf="node.children.length > 0;">
+        <li *ngFor="let answer of node.children">
+            <p>{{answer.content}}</p>
+        </li>
+    </ul> -->
+</div>
+<div class="form-group">
+    <app-dropdown [(ngModel)]="type" name="type" id="type" ngDefaultControl required [options]="types">
+        <ng-template dropdownSelected let-selected>
+            <p>{{ selected.name }}</p>
+        </ng-template>
+        <ng-template dropdownOption let-option>
+            <p>{{ option.name }}</p>
+        </ng-template>
+    </app-dropdown>
+</div>
+<button class="next-node-button" (click)="confirmAnswer()">
+    Volgende
+</button>
+<div *ngIf="nextNode;">
+    <div *ngIf="nextQuestion; else elseBlock">
+        <app-tree-run-question [treeID] = treeID [nodeID] = type.value.children[0].id></app-tree-run-question>
+    </div>
+    <ng-template #elseBlock>
+        <app-tree-run-notification [treeID] = treeID [nodeID] = type.value.children[0].id></app-tree-run-notification>
+    </ng-template>
+</div>

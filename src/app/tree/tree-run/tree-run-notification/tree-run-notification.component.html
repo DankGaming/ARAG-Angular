@@ -1,0 +1,17 @@
+<div class="tree-run-notification">
+    <div class="notification-text">
+        <h3 class="title"> Notification1 </h3>
+        <p class="caption"> {{node.content}} </p>
+    </div>
+    <div *ngIf="hasChild;">
+        <div *ngIf="childType; else elseBlock">
+            <app-tree-run-question [treeID] = treeID [nodeID] = childID></app-tree-run-question>
+        </div>
+        <ng-template #elseBlock>
+            <app-tree-run-notification [treeID] = treeID [nodeID] = childID></app-tree-run-notification>
+        </ng-template>
+    </div>
+
+    <button class="next-node-button">
+    </button>
+</div>

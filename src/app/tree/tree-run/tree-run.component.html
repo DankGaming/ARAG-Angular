@@ -1,1 +1,12 @@
-<p>tree-run works!</p>
+<h1 class="title"> {{ this.tree.name }} </h1>
+<div class="tree-row">
+    <div class="tree-info">
+    </div>
+    <div *ngIf="rootTypeQuestion; else elseBlock">
+        <app-tree-run-question [treeID] = tree.id [nodeID] = tree.root.id></app-tree-run-question>
+    </div>
+    <ng-template #elseBlock>
+        <app-tree-run-notification [treeID] = tree.id [nodeID] = tree.root.id></app-tree-run-notification>
+    </ng-template>
+    
+</div>
