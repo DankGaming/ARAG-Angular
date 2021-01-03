@@ -19,7 +19,6 @@ export class TreeRunComponent implements OnInit {
     id: number;
     type: String;
     rootTypeQuestion = false;
-    rootTypeNotification = false;
 
     
     @Input() routerLink: any[];
@@ -34,21 +33,13 @@ export class TreeRunComponent implements OnInit {
 
         this.treeService.findByID(this.id).subscribe((tree: Tree) => {
             this.tree = tree;
-            console.log((this.tree.root.type));
             
             if (this.tree.root.type = ContentType.QUESTION) {
                 this.rootTypeQuestion = true;
-                console.log('er is wel een vervolgvraag'); //This will be executed
             }
             else if (this.tree.root.type = ContentType.NOTIFICATION) {
-                console.log('er is wel een vervolgnotificatie'); //This will be executed
-                this.rootTypeNotification = true;
-            }
-            else if (this.tree.root.type = ContentType.ANSWER) {
-                console.log('er is wel een vervolgantwoord'); //This will be executed
+                this.rootTypeQuestion = false;
             }
         });
-        
-        
-    
-}}
+    }
+}

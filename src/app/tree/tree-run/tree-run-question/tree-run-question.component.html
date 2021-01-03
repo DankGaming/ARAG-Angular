@@ -1,32 +1,53 @@
-<div class="tree-run-question">
-    <div class="question-text">
-        <h3 class="title"> {{node.content}} </h3>
-    </div>
+<main>
+    <div class="tree-run-question-container">
+        <div class="question-number">
+            <b> VRAAG {{questionCounter}} </b>
+        </div>
+        <div class="question-text">
+            <p> {{node.content}} </p>
+        </div>
 
-    <!-- <ul *ngIf="node.children.length > 0;">
-        <li *ngFor="let answer of node.children">
-            <p>{{answer.content}}</p>
-        </li>
-    </ul> -->
-</div>
-<div class="form-group">
-    <app-dropdown [(ngModel)]="type" name="type" id="type" ngDefaultControl required [options]="types">
-        <ng-template dropdownSelected let-selected>
-            <p>{{ selected.name }}</p>
-        </ng-template>
-        <ng-template dropdownOption let-option>
-            <p>{{ option.name }}</p>
-        </ng-template>
-    </app-dropdown>
-</div>
-<button class="next-node-button" (click)="confirmAnswer()">
-    Volgende
-</button>
-<div *ngIf="nextNode;">
-    <div *ngIf="nextQuestion; else elseBlock">
-        <app-tree-run-question [treeID] = treeID [nodeID] = type.value.children[0].id></app-tree-run-question>
+
+        <div class="selected-answer">
+            <div class="dropdown">
+                <div class="form-group">
+                    <app-dropdown [(ngModel)]="type" name="type" id="type" ngDefaultControl required [options]="types">
+                        <ng-template dropdownSelected let-selected>
+                            <p>{{ selected.name }}</p>
+                        </ng-template>
+                        <ng-template dropdownOption let-option>
+                            <p>{{ option.name }}</p>
+                        </ng-template>
+                    </app-dropdown>
+                </div>
+            </div>
+
+            <div class="next-node-button">
+                <button class="button primary" (click)="confirmAnswer()">
+                    Bevestigen
+                </button>
+            </div>
+        </div>
     </div>
-    <ng-template #elseBlock>
-        <app-tree-run-notification [treeID] = treeID [nodeID] = type.value.children[0].id></app-tree-run-notification>
-    </ng-template>
+</main>
+
+
+<div class="next-node">
+    <div *ngIf="answerConfirmed">
+        <div *ngIf="nextNode; else endOfTree">
+            <div *ngIf="nextQuestion; else loadNotification">
+                <div class="connect-line"></div>
+                <app-tree-run-question [treeID] = treeID [nodeID] = type.value.children[0].id [questionCounter] = questionCounter></app-tree-run-question>
+            </div>
+            <ng-template #loadNotification>
+                <div class="connect-line"></div>
+                <app-tree-run-notification [treeID] = treeID [nodeID] = type.value.children[0].id [questionCounter] = questionCounter></app-tree-run-notification>
+            </ng-template>
+        </div>
+        <ng-template #endOfTree>
+            <div class="tree-end">
+                <p>Dit is het einde van de boom</p>
+            </div>
+        </ng-template>
+    </div>
 </div>

@@ -1,0 +1,26 @@
+@import "/src/app/shared/variables";
+
+main {
+    width: 100%;
+    padding: 20px;
+    background-color: $color-white;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+}
+
+.notification {
+    padding-bottom: 10px;
+}
+
+.connect-line {
+    width: 5px;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: $color-white;
+    box-shadow: $shadow;
+}
+
+.tree-end {
+    padding-top: 20px;
+}

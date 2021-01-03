@@ -1,17 +1,27 @@
-<div class="tree-run-notification">
-    <div class="notification-text">
-        <h3 class="title"> Notification1 </h3>
-        <p class="caption"> {{node.content}} </p>
-    </div>
-    <div *ngIf="hasChild;">
-        <div *ngIf="childType; else elseBlock">
-            <app-tree-run-question [treeID] = treeID [nodeID] = childID></app-tree-run-question>
+<main>
+    <div class="tree-run-notification">
+        <div class="notification">
+            <b> NOTIFICATIE </b>
         </div>
-        <ng-template #elseBlock>
-            <app-tree-run-notification [treeID] = treeID [nodeID] = childID></app-tree-run-notification>
+        <div class="notification-text">
+            <p> {{node.content}} </p>
+        </div>
+    </div>
+</main>
+<div class="next-node">
+    <div *ngIf="hasChild; else endOfTree">
+        <div *ngIf="childType; else loadNotification">
+            <div class="connect-line"></div>
+            <app-tree-run-question [treeID] = treeID [nodeID] = childID [questionCounter] = questionCounter></app-tree-run-question>
+        </div>
+        <ng-template #loadNotification>
+            <div class="connect-line"></div>
+            <app-tree-run-notification [treeID] = treeID [nodeID] = childID [questionCounter] = questionCounter></app-tree-run-notification>
         </ng-template>
     </div>
-
-    <button class="next-node-button">
-    </button>
+    <ng-template #endOfTree>
+        <div class="tree-end">
+            <p>Dit is het einde van de boom</p>
+        </div>
+    </ng-template>
 </div>

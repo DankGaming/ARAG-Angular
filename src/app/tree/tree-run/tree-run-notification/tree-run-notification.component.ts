@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Tree } from "../../tree.model";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Node } from "src/app/node/node.model";
 import { NodeService } from "src/app/node/node.service";
 import { ContentType } from "src/app/node/content-type.model";
@@ -18,6 +16,7 @@ export class TreeRunNotificationComponent implements OnInit {
 
     @Input() treeID: number;
     @Input() nodeID: number;
+    @Input() questionCounter: number;
     
     constructor(private nodeService: NodeService) {}
 
@@ -36,6 +35,5 @@ export class TreeRunNotificationComponent implements OnInit {
                 }
             }
         });
-        console.log((this.node.content));
     }
 }

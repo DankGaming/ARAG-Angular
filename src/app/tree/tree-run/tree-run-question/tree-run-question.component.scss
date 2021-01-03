@@ -1,12 +1,45 @@
 @import "/src/app/shared/variables";
 
-.tree-run-question {
+main {
+    width: 100%;
     padding: 20px;
     background-color: $color-white;
-    box-shadow: $shadow;
     border-radius: $border-radius;
-    display: flex;
-    align-items: center;
+    box-shadow: $shadow;
+}
+
+.question-number {
+    padding-bottom: 10px;
+}
+
+.selected-answer {
+    padding-top: 15px;
+}
+.dropdown {
+    width: 80%;
+    display: inline-block ;
+    margin-right:30px;
+    
+}
+
+
+.next-node-button {
+    max-width: 20%;
+    align-items: right;
+    display: inline-block;
+}
+
+.connect-line {
+    width: 5px;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: $color-white;
+    box-shadow: $shadow;
+}
+
+.tree-end {
+    padding-top: 20px;
 }
 
 
