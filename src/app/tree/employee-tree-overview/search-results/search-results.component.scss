@@ -21,6 +21,11 @@
 
     ul {
         margin-top: 10px;
+        margin-bottom: 30px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
 
         li {
             padding: 10px 0;
@@ -31,13 +36,16 @@
             position: relative;
 
             fa-icon {
-                font-size: 11px;
+                font-size: 5px;
                 margin-right: 5px;
                 color: $color-gray-800;
+                position: relative;
+                bottom: 3px;
             }
 
             span {
                 color: $color-gray-800;
+                margin-right: 5px;
             }
 
             &:last-of-type {

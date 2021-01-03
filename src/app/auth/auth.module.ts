@@ -9,23 +9,20 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptorService } from "./auth-interceptor";
 
 @NgModule({
-    declarations: [LoginComponent],
-    imports: [
-        CommonModule,
-        RouterModule,
-        AuthRoutingModule,
-        SharedModule,
-        FormsModule,
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptorService,
-            multi: true,
-        },
-    ],
-    exports: [
-        LoginComponent
-    ]
+	declarations: [LoginComponent],
+	imports: [
+		CommonModule,
+		RouterModule,
+		AuthRoutingModule,
+		SharedModule,
+		FormsModule,
+	],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptorService,
+			multi: true,
+		},
+	],
 })
 export class AuthModule {}

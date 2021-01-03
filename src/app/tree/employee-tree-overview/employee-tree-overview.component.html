@@ -26,9 +26,9 @@
     <div class="question-container">
         <div class="top-bar">
             <div>
-                <button class="back-button" (click)="back()" *ngIf="top && top.node.id !== tree.root.id">
+                <button class="back-button" (click)="back()" *ngIf="top && top?.node.id !== tree?.root?.id">
                     <fa-icon [icon]="icons.faArrowLeft"></fa-icon>
-                    Vorige vraag
+                    Terug
                 </button>
             </div>
 
@@ -38,7 +38,7 @@
                     <app-search-results [searchResults]="searchResults" *ngIf="searchResults" (clickedOutside)="clearSearchResults()" (clickedInside)="clearSearchResults(); clearSearchValue()"></app-search-results>
                 </li>
                 <li>
-                    <button class="button primary" (click)="modals.setQuestion.show = true">
+                    <button class="button primary" (click)="modals.showSetQuestion = true">
                         <fa-icon [icon]="icons.faPlus"></fa-icon>
                         Nieuwe vraag
                     </button>
@@ -53,16 +53,25 @@
         </div>
         <div class="nodes-container" *ngIf="top?.node && top?.children">
             <app-node-wrapper>
-                <app-node-container [tree]="tree" [node]="top.node" [isCurrentTop]="true" [graph]="graph"></app-node-container>
+                <app-node-container 
+                    [tree]="tree" 
+                    [node]="top.node" 
+                    [isCurrentTop]="true" 
+                    [graph]="graph">
+                </app-node-container>
             </app-node-wrapper>
 
             <app-node-wrapper class="indent" *ngFor="let child of top.children">
-                <app-node-container [tree]="tree" [node]="child" [graph]="graph" (expand)="changeTopNode($event)" 
+                <app-node-container 
+                    [tree]="tree" 
+                    [node]="child" 
+                    [graph]="graph" 
+                    [previousNode]="top.node" 
+                    (expand)="changeTopNode($event)" 
                 ></app-node-container>
             </app-node-wrapper>
         </div>
     </div>
-  
-  <app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>
-  <app-set-question-modal *ngIf="modals.setQuestion.show" (closeModal)="modals.setQuestion.show = false" (set)="changeTopNode($event)"></app-set-question-modal>
+    <app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>
+    <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" (set)="changeTopNode($event)" [tree]="tree"></app-set-question-modal>
 </div>

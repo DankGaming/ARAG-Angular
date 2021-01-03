@@ -1,0 +1,20 @@
+<app-modal [title]="answer ? 'Wijzig antwoord' : 'Nieuw antwoord'" [subtitle]="'Antwoord op: ' + question.content" (closeModal)="close()">
+    <ng-container body>
+        <form #setAnswerForm="ngForm" id="set-answer-form" (ngSubmit)="answer ? update(setAnswerForm) : create(setAnswerForm)" autocomplete="off">
+            <div class="form-group">
+                <label for="content">Antwoord</label>
+                <input type="text" name="content" placeholder="Antwoord" id="content" [ngModel]="answer?.content" ngModel required>
+            </div>
+        </form>
+    </ng-container>
+    <ng-container footer>
+        <div class="footer-button-container">
+            <button class="button primary" [disabled]="setAnswerForm.invalid" form="set-answer-form">
+                Opslaan
+            </button>
+            <button class="button danger" *ngIf="answer" (click)="remove()">
+                Verwijder
+            </button>
+        </div>
+    </ng-container>
+</app-modal>

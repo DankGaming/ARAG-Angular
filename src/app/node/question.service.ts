@@ -13,6 +13,14 @@ import { Node } from "./node.model";
 export class QuestionService {
 	constructor(private http: HttpClient) {}
 
+	findAll(treeID: number): Observable<Node[]> {
+		const observable: Observable<Node[]> = this.http
+			.get<HttpResult<Node[]>>(`/trees/${treeID}/questions`)
+			.pipe(map((response: HttpResult<Node[]>) => response.result));
+
+		return observable;
+	}
+
 	create(treeID: number, dto: CreateQuestionDTO): Observable<Partial<Node>> {
 		const observer: Observable<Partial<Node>> = this.http
 			.post<HttpResult<Partial<Node>>>(`/trees/${treeID}/questions`, {

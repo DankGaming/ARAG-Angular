@@ -1,3 +1,3 @@
 export class UpdateNodeDTO {
-	content: string;
+	content?: string;
 }

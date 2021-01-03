@@ -19,40 +19,37 @@ import {
 })
 export class NodeContainerComponent implements OnInit {
 	@Input() node: Node;
+	@Input() previousNode?: Node;
 	@Input() tree: Tree;
 	@Input() graph: DirectedAcyclicGraph;
 	@Input() isCurrentTop: boolean = false;
 
 	@Output() expand = new EventEmitter<Node>();
 
-	type: string;
+	types = {
+		question: ContentType.QUESTION,
+		answer: ContentType.ANSWER,
+		notification: ContentType.NOTIFICATION,
+	};
 	icons = { faChevronRight, faArrowDown, faTree, faLink, faPen, faPlus };
 
 	modals = {
 		showSetQuestion: false,
+		showSetAnswer: false,
+		showLink: false,
 	};
 
 	constructor() {}
 
-	ngOnInit(): void {
-		this.type = this.isQuestion()
-			? "Vraag"
-			: this.isAnswer()
-			? "Antwoord"
-			: "Notificatie";
-	}
+	ngOnInit(): void {}
 
-	isRoot = (): boolean => this.node.id === this.tree.root.id;
+	isRoot = (): boolean => this.node.id === this.tree.root?.id;
 
 	isQuestion = (): boolean => this.node.type === ContentType.QUESTION;
 	isNotification = (): boolean => this.node.type === ContentType.NOTIFICATION;
 	isAnswer = (): boolean => this.node.type === ContentType.ANSWER;
 
-	expandQuestion(node: Node): void {
-		this.expand.emit(node);
-	}
-
-	editQuestion(): void {
-		this.modals.showSetQuestion = true;
+	expandNode(node: Partial<Node>): void {
+		this.expand.emit(node as Node);
 	}
 }

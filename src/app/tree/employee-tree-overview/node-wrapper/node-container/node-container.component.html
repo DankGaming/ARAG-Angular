@@ -1,35 +1,55 @@
 <div class="node-container">
     <header>
-        <p class="type">{{ type }} {{ node.id }}</p>
+        <p class="type">
+            <ng-container [ngSwitch]="node.type">
+                <ng-container *ngSwitchCase="types.question">
+                    Vraag
+                </ng-container>
+                <ng-container *ngSwitchCase="types.answer">
+                    Antwoord
+                </ng-container>
+                <ng-container *ngSwitchCase="types.notification">
+                    Notificatie
+                </ng-container>
+            </ng-container>
+            {{ node.id }}</p>
         <p class="title">{{ node.content }}</p>
     </header>
     <section class="node-content">
         <ul>
-            <li *ngIf="!isRoot() && graph.edges[node.id] && graph.edges[node.id].length !== 0 && !isQuestion()"><fa-icon [icon]="icons.faArrowDown" class="arrow"></fa-icon></li>
-            <li *ngIf="isQuestion()">{{ graph.edges[node.id].length }} antwoorden</li>
+            <li *ngIf="graph.edges[node.id] && graph.edges[node.id].length !== 0 && !isQuestion() && !isCurrentTop"><fa-icon [icon]="icons.faArrowDown" class="arrow"></fa-icon></li>
+            <li *ngIf="isQuestion()">
+                {{ graph.edges[node.id].length }}
+                <ng-container *ngIf="graph.edges[node.id].length === 1">
+                    antwoord
+                </ng-container>
+                <ng-container *ngIf="graph.edges[node.id].length !== 1">
+                    antwoorden
+                </ng-container>
+            </li>
             <li *ngIf="isRoot()"><fa-icon [icon]="icons.faTree"></fa-icon> start</li>
         </ul>
         <ul class="right">
             <ng-container *ngIf="isQuestion()">
                 <li>
-                    <button>
+                    <button (click)="modals.showSetAnswer = true">
                         <fa-icon [icon]="icons.faPlus"></fa-icon>
                         Nieuw antwoord
                     </button>
                 </li>
                 <li>
-                    <button (click)="editQuestion()">
+                    <button (click)="this.modals.showSetQuestion = true">
                         <fa-icon [icon]="icons.faPen"></fa-icon>
                         Wijzig
                     </button>
                 </li>
                 <li *ngIf="!isCurrentTop">
-                    <button (click)="expandQuestion(node)">Uitklappen <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
+                    <button (click)="expandNode(node)">Uitklappen <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
                 </li>
             </ng-container>
             <ng-container *ngIf="isNotification()">
                 <li>
-                    <button>
+                    <button (click)="modals.showLink = true">
                         <fa-icon [icon]="icons.faLink"></fa-icon>
                         Koppel
                     </button>
@@ -43,13 +63,13 @@
             </ng-container>
             <ng-container *ngIf="isAnswer()">
                 <li>
-                    <button>
+                    <button (click)="modals.showLink = true">
                         <fa-icon [icon]="icons.faLink"></fa-icon>
                         Koppel
                     </button>
                 </li>
                 <li>
-                    <button>
+                    <button (click)="modals.showSetAnswer = true">
                         <fa-icon [icon]="icons.faPen"></fa-icon>
                         Wijzig
                     </button>
@@ -57,11 +77,40 @@
             </ng-container>
         </ul>
     </section>
-    <section class="node-children" *ngIf="!isQuestion() && graph.edges[node.id].length > 0">
+    <section class="node-children" *ngIf="!isQuestion() && graph.edges[node.id].length > 0 && !isCurrentTop">
         <ng-container *ngFor="let id of graph.edges[node.id]">
-            <app-node-container *ngIf="graph.nodes[id]" [tree]="tree" [node]="graph.nodes[id]" [graph]="graph" (expand)="expandQuestion($event)"></app-node-container>
+            <app-node-container 
+                *ngIf="graph.nodes[id]" 
+                [tree]="tree" 
+                [node]="graph.nodes[id]" 
+                [previousNode]="node"
+                [graph]="graph" 
+                (expand)="expandNode($event)">
+            </app-node-container>
         </ng-container>
     </section>
 
-    <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" [question]="node" [tree]="tree"></app-set-question-modal>
+    <app-set-question-modal 
+        *ngIf="modals.showSetQuestion" 
+        (closeModal)="modals.showSetQuestion = false" 
+        [question]="node" 
+        [tree]="tree" 
+        [isRoot]="isRoot()">
+    </app-set-question-modal>
+    <app-set-answer-modal 
+        *ngIf="modals.showSetAnswer" 
+        (closeModal)="modals.showSetAnswer = false" 
+        [question]="isQuestion() ? node : previousNode" 
+        [tree]="tree" 
+        [answer]="isAnswer() ? node : null" 
+    >
+    </app-set-answer-modal>
+    <app-link-modal 
+        *ngIf="modals.showLink" 
+        (closeModal)="modals.showLink = false" 
+        [tree]="tree"
+        [node]="node"
+        [previousNode]="isAnswer() ? previousNode : null"
+    >
+    </app-link-modal>
 </div>

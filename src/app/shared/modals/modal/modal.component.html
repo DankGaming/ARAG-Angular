@@ -10,10 +10,10 @@
                 <fa-icon [icon]="icons.faTimesCircle"></fa-icon>
             </button>
         </header>
-        <section class="modal-body">
+        <section class="modal-body" *ngIf="showBody">
             <ng-content select="[body]"></ng-content>
         </section>
-        <footer>
+        <footer *ngIf="showFooter">
             <ng-content select="[footer]"></ng-content>
         </footer>
     </div>
