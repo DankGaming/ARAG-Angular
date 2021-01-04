@@ -8,8 +8,8 @@ import { Modal } from "../modal.interface";
 })
 export class ConfirmBoxModalComponent implements OnInit, Modal {
   @Output() closeModal = new EventEmitter();
-  @Output() confirmedAction = new EventEmitter();
-  @Output() rejectedAction = new EventEmitter();
+  @Output() confirmed = new EventEmitter();
+  @Output() rejected = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
@@ -19,11 +19,11 @@ export class ConfirmBoxModalComponent implements OnInit, Modal {
 
   confirm(): void {
     this.close();
-    this.confirmedAction.emit();
+    this.confirmed.emit();
   }
 
   reject(): void  {
     this.close();
-    this.rejectedAction.emit();
+    this.rejected.emit();
   }
 }
