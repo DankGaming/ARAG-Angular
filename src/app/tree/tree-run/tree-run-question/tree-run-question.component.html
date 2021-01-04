@@ -1,14 +1,13 @@
 <main *ngIf="node">
     <div class="tree-run-question-container">
         <div class="question-number">
-            <b>Vraag {{questionCounter}}</b>
+            <b>Vraag {{ questionCounter }}</b>
         </div>
         <div class="question-text">
             <p>{{ node.content }}</p>
         </div>
 
-
-        <div class="selected-answer" *ngIf="hasAnswers()">
+        <div class="selected-answer-container" *ngIf="hasAnswers()">
             <div class="dropdown">
                 <div class="form-group">
                     <app-dropdown [(ngModel)]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
@@ -22,11 +21,9 @@
                 </div>
             </div>
 
-            <div class="next-node-button">
-                <button class="button primary" (click)="confirmAnswer()">
-                    Bevestigen
-                </button>
-            </div>
+            <button class="button primary" (click)="confirmAnswer()">
+                Bevestigen
+            </button>
         </div>
     </div>
 </main>

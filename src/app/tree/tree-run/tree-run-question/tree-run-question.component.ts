@@ -3,6 +3,8 @@ import { Node } from "src/app/node/node.model";
 import { NodeService } from "src/app/node/node.service";
 import { ContentType } from "src/app/node/content-type.model";
 import { Tree } from "../../tree.model";
+import { CommonModule } from '@angular/common';  
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
     selector: "app-tree-run-question",
