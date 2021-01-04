@@ -1,17 +1,17 @@
-<main>
+<main *ngIf="node">
     <div class="tree-run-question-container">
         <div class="question-number">
-            <b> VRAAG {{questionCounter}} </b>
+            <b> vraag {{questionCounter}} </b>
         </div>
         <div class="question-text">
             <p> {{node.content}} </p>
         </div>
 
 
-        <div class="selected-answer">
+        <div class="selected-answer" *ngIf="answersCheck">
             <div class="dropdown">
                 <div class="form-group">
-                    <app-dropdown [(ngModel)]="type" name="type" id="type" ngDefaultControl required [options]="types">
+                    <app-dropdown [(ngModel)]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
                         <ng-template dropdownSelected let-selected>
                             <p>{{ selected.name }}</p>
                         </ng-template>
@@ -37,11 +37,11 @@
         <div *ngIf="nextNode; else endOfTree">
             <div *ngIf="nextQuestion; else loadNotification">
                 <div class="connect-line"></div>
-                <app-tree-run-question [treeID] = treeID [nodeID] = type.value.children[0].id [questionCounter] = questionCounter></app-tree-run-question>
+                <app-tree-run-question [treeID] = treeID [nodeID] = selectedAnswer.value.children[0].id [questionCounter] = questionCounter></app-tree-run-question>
             </div>
             <ng-template #loadNotification>
                 <div class="connect-line"></div>
-                <app-tree-run-notification [treeID] = treeID [nodeID] = type.value.children[0].id [questionCounter] = questionCounter></app-tree-run-notification>
+                <app-tree-run-notification [treeID] = treeID [nodeID] = selectedAnswer.value.children[0].id [questionCounter] = questionCounter></app-tree-run-notification>
             </ng-template>
         </div>
         <ng-template #endOfTree>

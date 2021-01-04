@@ -12,6 +12,7 @@ export class TreeRunNotificationComponent implements OnInit {
     node: Node;
     hasChild = false;
     childType = false;
+    nodeCheck = false;
     childID: number;
 
     @Input() treeID: number;
@@ -23,6 +24,7 @@ export class TreeRunNotificationComponent implements OnInit {
     ngOnInit(): void {
         this.nodeService.findByID(this.treeID, this.nodeID).subscribe((node: Node) => {
             this.node = node;
+            this.nodeCheck = true;
 
             if (this.node.children.length > 0) {
                 this.hasChild = true;

@@ -11,12 +11,12 @@ import { ContentType } from "src/app/node/content-type.model";
 export class TreeRunQuestionComponent implements OnInit {
     node: Node;
     selectedAnswer: { name: string; value: Node };
-    type: { name: string; value: Node };
-    types: { name: string; value: Node }[] = [];
+    answer: { name: string; value: Node };
+    answers: { name: string; value: Node }[] = [];
+    answersCheck = false;
     nextNode =false;
     nextQuestion = false;
     answerConfirmed = false;
-    
 
     @Input() treeID: number;
     @Input() nodeID: number;
@@ -30,16 +30,18 @@ export class TreeRunQuestionComponent implements OnInit {
             this.node = node;
             
             for (let i of node.children) {
-                this.types.push({name: i.content, value: i});
+                this.answers.push({name: i.content, value: i});
               }
+            this.selectedAnswer = this.answers[0];
+            this.answersCheck = true;
         });
     }
 
     confirmAnswer(): void {
         this.answerConfirmed = true;
-        if (this.type.value.children.length > 0) {
+        if (this.selectedAnswer.value.children.length > 0) {
             this.nextNode = true;
-            if (this.type.value.children[0].type == ContentType.QUESTION) {
+            if (this.selectedAnswer.value.children[0].type == ContentType.QUESTION) {
                 this.nextQuestion = true;
             }
             else {
