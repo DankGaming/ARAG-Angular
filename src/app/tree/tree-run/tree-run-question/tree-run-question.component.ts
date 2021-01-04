@@ -45,12 +45,12 @@ export class TreeRunQuestionComponent implements OnInit {
             }
         }
     }
-    
-    answersCheck() {
+
+    answersCheck(): boolean {
         return (this.answers.length > 0);
     }
 
-    nextNode() {
+    nextNode(): boolean {
         return (this.selectedAnswer.children?.length > 0);
     }
 }

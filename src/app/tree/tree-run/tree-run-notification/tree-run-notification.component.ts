@@ -24,15 +24,15 @@ export class TreeRunNotificationComponent implements OnInit {
         });
     }
 
-    nodeCheck() {
+    nodeCheck(): boolean {
         return (this.node != null);
     }
 
-    hasChild() {
+    hasChild(): boolean {
         return (this.node.children?.length > 0);
     }
 
-    childType() {
+    childType(): boolean {
         return (this.node.children[0].type === ContentType.QUESTION);
     }
 }
