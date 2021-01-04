@@ -8,7 +8,7 @@
         </div>
 
 
-        <div class="selected-answer" *ngIf="answersCheck">
+        <div class="selected-answer" *ngIf="answersCheck()">
             <div class="dropdown">
                 <div class="form-group">
                     <app-dropdown [(ngModel)]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
@@ -34,7 +34,7 @@
 
 <div class="next-node">
     <div *ngIf="answerConfirmed">
-        <div *ngIf="nextNode; else endOfTree">
+        <div *ngIf="nextNode(); else endOfTree">
             <div *ngIf="nextQuestion; else loadNotification">
                 <div class="connect-line"></div>
                 <app-tree-run-question [tree] = tree [nodeInput] = selectedAnswer.children[0] [questionCounter] = questionCounter></app-tree-run-question>

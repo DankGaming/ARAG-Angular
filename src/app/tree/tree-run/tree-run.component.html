@@ -2,8 +2,8 @@
     <h1 class="title">{{ this.tree.name }}</h1>
 
     <div class="root-node">
-        <div *ngIf="hasRoot;">
-            <div *ngIf="rootTypeQuestion; else rootTypeNotification">
+        <div *ngIf="hasRoot();">
+            <div *ngIf="rootTypeQuestion(); else rootTypeNotification">
                 <app-tree-run-question [tree] = tree [nodeInput] = tree.root [questionCounter] = "0"></app-tree-run-question>
             </div>
             <ng-template #rootTypeNotification>

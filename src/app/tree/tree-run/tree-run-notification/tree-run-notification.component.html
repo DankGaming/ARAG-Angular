@@ -1,27 +1,30 @@
-<main *ngIf="nodeCheck">
-    <div class="tree-run-notification">
-        <div class="notification">
-            <b>Notificatie</b>
+<div *ngIf="nodeCheck()">
+    <main>
+        <div class="tree-run-notification">
+            <div class="notification">
+                <b>Notificatie</b>
+            </div>
+            <div class="notification-text">
+                <p>{{ node.content }}</p>
+            </div>
         </div>
-        <div class="notification-text">
-            <p>{{ node.content }}</p>
+    </main>
+
+    <div class="next-node">
+        <div *ngIf="hasChild(); else endOfTree">
+            <div *ngIf="childType(); else loadNotification">
+                <div class="connect-line"></div>
+                <app-tree-run-question [tree] = tree [nodeInput] = node.children[0] [questionCounter] = questionCounter></app-tree-run-question>
+            </div>
+            <ng-template #loadNotification>
+                <div class="connect-line"></div>
+                <app-tree-run-notification [tree] = tree [nodeInput] = node.children[0] [questionCounter] = questionCounter></app-tree-run-notification>
+            </ng-template>
         </div>
-    </div>
-</main>
-<div class="next-node">
-    <div *ngIf="hasChild; else endOfTree">
-        <div *ngIf="childType; else loadNotification">
-            <div class="connect-line"></div>
-            <app-tree-run-question [tree] = tree [nodeInput] = node.children[0] [questionCounter] = questionCounter></app-tree-run-question>
-        </div>
-        <ng-template #loadNotification>
-            <div class="connect-line"></div>
-            <app-tree-run-notification [tree] = tree [nodeInput] = node.children[0] [questionCounter] = questionCounter></app-tree-run-notification>
+        <ng-template #endOfTree>
+            <div class="tree-end">
+                <p>Dit is het einde van de boom</p>
+            </div>
         </ng-template>
     </div>
-    <ng-template #endOfTree>
-        <div class="tree-end">
-            <p>Dit is het einde van de boom</p>
-        </div>
-    </ng-template>
 </div>

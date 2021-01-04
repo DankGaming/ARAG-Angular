@@ -15,26 +15,24 @@ export class TreeRunNotificationComponent implements OnInit {
     @Input() questionCounter: number;
 
     node: Node;
-    hasChild = false;
-    childType = false;
-    nodeCheck = false;
 
     constructor(private nodeService: NodeService) {}
 
     ngOnInit(): void {
         this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
-            this.nodeCheck = true;
-
-            if (this.node.children.length > 0) {
-                this.hasChild = true;
-                if (this.node.children[0].type === ContentType.QUESTION) {
-                    this.childType = true;
-                }
-                else if (this.node.children[0].type === ContentType.NOTIFICATION) {
-                    this.childType = false;
-                }
-            }
         });
+    }
+
+    nodeCheck() {
+        return (this.node != null);
+    }
+
+    hasChild() {
+        return (this.node.children?.length > 0);
+    }
+
+    childType() {
+        return (this.node.children[0].type === ContentType.QUESTION);
     }
 }

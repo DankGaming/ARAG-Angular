@@ -14,8 +14,6 @@ export class TreeRunComponent implements OnInit {
 
     tree: Tree;
     type: string;
-    hasRoot = false;
-    rootTypeQuestion = false;
 
     constructor(private activatedRoute: ActivatedRoute, private treeService: TreeService) {}
 
@@ -24,16 +22,15 @@ export class TreeRunComponent implements OnInit {
             
             this.treeService.findByID(+params.id).subscribe((tree: Tree) => {
                 this.tree = tree;
-
-                if (this.tree.root?.type === ContentType.QUESTION) {
-                    this.rootTypeQuestion = true;
-                    this.hasRoot = true;
-                }
-                else if (this.tree.root?.type === ContentType.NOTIFICATION) {
-                    this.rootTypeQuestion = false;
-                    this.hasRoot = true;
-                }
             });
         });
+    }
+
+    hasRoot() {
+        return (this.tree.root != null);
+    }
+
+    rootTypeQuestion() {
+        return (this.tree.root?.type === ContentType.QUESTION);
     }
 }
