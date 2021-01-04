@@ -17,12 +17,16 @@ main {
 }
 
 .selected-answer-container {
-    padding-top: 15px;
+    margin-top: 15px;
     display: flex;
 
     .dropdown {
         flex-grow: 1;
-        margin-right: 20px;  
+        margin-right: 20px;
+    }
+
+    button {
+        height: inherit;
     }
 
     @media only screen and (max-width: 550px) {

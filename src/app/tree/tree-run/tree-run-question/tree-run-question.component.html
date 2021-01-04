@@ -7,27 +7,22 @@
             <p>{{ node.content }}</p>
         </div>
 
-        <div class="selected-answer-container" *ngIf="hasAnswers()">
-            <div class="dropdown">
-                <div class="form-group">
-                    <app-dropdown [(ngModel)]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
-                        <ng-template dropdownSelected let-selected>
-                            <p>{{ selected.content }}</p>
-                        </ng-template>
-                        <ng-template dropdownOption let-option>
-                            <p>{{ option.content }}</p>
-                        </ng-template>
-                    </app-dropdown>
-                </div>
-            </div>
+        <form #answerForm="ngForm" (ngSubmit)="confirmAnswer(answerForm)" class="selected-answer-container" *ngIf="hasAnswers()">
+                <app-dropdown class="dropdown" [ngModel]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
+                    <ng-template dropdownSelected let-selected>
+                        <p>{{ selected.content }}</p>
+                    </ng-template>
+                    <ng-template dropdownOption let-option>
+                        <p>{{ option.content }}</p>
+                    </ng-template>
+                </app-dropdown>
 
-            <button class="button primary" (click)="confirmAnswer()">
+            <button class="button primary">
                 Bevestigen
             </button>
-        </div>
+        </form>
     </div>
 </main>
-
 
 <div class="next-node">
     <div *ngIf="answerConfirmed">

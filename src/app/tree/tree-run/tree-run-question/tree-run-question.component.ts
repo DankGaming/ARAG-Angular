@@ -3,8 +3,7 @@ import { Node } from "src/app/node/node.model";
 import { NodeService } from "src/app/node/node.service";
 import { ContentType } from "src/app/node/content-type.model";
 import { Tree } from "../../tree.model";
-import { CommonModule } from '@angular/common';  
-import { BrowserModule } from '@angular/platform-browser';
+import { NgForm } from "@angular/forms";
 
 @Component({
     selector: "app-tree-run-question",
@@ -36,10 +35,12 @@ export class TreeRunQuestionComponent implements OnInit {
         });
     }
 
-    confirmAnswer(): void {
+    confirmAnswer(form: NgForm): void {
+        const selectedAnswer = form.value.selectedAnswer;
+
         this.answerConfirmed = true;
-        if (this.selectedAnswer.children?.length > 0) {
-            if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
+        if (selectedAnswer.children?.length > 0) {
+            if (selectedAnswer.children[0].type === ContentType.QUESTION) {
                 this.nextQuestion = true;
             }
             else {
