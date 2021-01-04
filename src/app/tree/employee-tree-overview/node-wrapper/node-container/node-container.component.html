@@ -32,13 +32,13 @@
         <ul class="right">
             <ng-container *ngIf="isQuestion()">
                 <li>
-                    <button (click)="modals.showSetAnswer = true">
+                    <button (click)="setAnswer()">
                         <fa-icon [icon]="icons.faPlus"></fa-icon>
                         Nieuw antwoord
                     </button>
                 </li>
                 <li>
-                    <button (click)="this.modals.showSetQuestion = true">
+                    <button (click)="editQuestion()">
                         <fa-icon [icon]="icons.faPen"></fa-icon>
                         Wijzig
                     </button>
@@ -49,7 +49,7 @@
             </ng-container>
             <ng-container *ngIf="isNotification()">
                 <li>
-                    <button (click)="modals.showLink = true">
+                    <button (click)="linkNode()">
                         <fa-icon [icon]="icons.faLink"></fa-icon>
                         Koppel
                     </button>
@@ -63,13 +63,13 @@
             </ng-container>
             <ng-container *ngIf="isAnswer()">
                 <li>
-                    <button (click)="modals.showLink = true">
+                    <button (click)="linkNode()">
                         <fa-icon [icon]="icons.faLink"></fa-icon>
                         Koppel
                     </button>
                 </li>
                 <li>
-                    <button (click)="modals.showSetAnswer = true">
+                    <button (click)="setAnswer()">
                         <fa-icon [icon]="icons.faPen"></fa-icon>
                         Wijzig
                     </button>
@@ -84,33 +84,12 @@
                 [tree]="tree" 
                 [node]="graph.nodes[id]" 
                 [previousNode]="node"
+                [topNode]="topNode"
                 [graph]="graph" 
                 (expand)="expandNode($event)">
             </app-node-container>
         </ng-container>
     </section>
 
-    <app-set-question-modal 
-        *ngIf="modals.showSetQuestion" 
-        (closeModal)="modals.showSetQuestion = false" 
-        [question]="node" 
-        [tree]="tree" 
-        [isRoot]="isRoot()">
-    </app-set-question-modal>
-    <app-set-answer-modal 
-        *ngIf="modals.showSetAnswer" 
-        (closeModal)="modals.showSetAnswer = false" 
-        [question]="isQuestion() ? node : previousNode" 
-        [tree]="tree" 
-        [answer]="isAnswer() ? node : null" 
-    >
-    </app-set-answer-modal>
-    <app-link-modal 
-        *ngIf="modals.showLink" 
-        (closeModal)="modals.showLink = false" 
-        [tree]="tree"
-        [node]="node"
-        [previousNode]="isAnswer() ? previousNode : null"
-    >
-    </app-link-modal>
+    <ng-container appPlaceholder></ng-container>
 </div>
