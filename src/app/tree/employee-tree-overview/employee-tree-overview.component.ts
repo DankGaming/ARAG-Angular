@@ -21,6 +21,7 @@ import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { ModalService } from "src/app/shared/modal.service";
 import { SetTreeModalComponent } from "../modals/set-tree-modal/set-tree-modal.component";
 import { SetQuestionModalComponent } from "src/app/node/modals/set-question-modal.ts/set-question-modal.component";
+import { SetNotificationModalComponent } from "src/app/node/modals/set-notification-modal/set-notification-modal.component";
 
 interface Top {
 	node: Node;
@@ -198,6 +199,12 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		const modal = this.modalService.createModal(SetQuestionModalComponent, this.modalHost);
 		modal.instance.tree = this.tree;
 		modal.instance.set.subscribe((question: Node) => this.changeTopNode(question));
+	}
+
+	createNotification(): void {
+		const modal = this.modalService.createModal(SetNotificationModalComponent, this.modalHost);
+		modal.instance.tree = this.tree;
+		modal.instance.set.subscribe((notification: Node) => this.changeTopNode(notification));
 	}
 
 	private navigateToTop(
