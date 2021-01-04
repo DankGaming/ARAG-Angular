@@ -8,14 +8,14 @@
         </div>
 
         <form #answerForm="ngForm" (ngSubmit)="confirmAnswer(answerForm)" class="selected-answer-container" *ngIf="hasAnswers()">
-                <app-dropdown class="dropdown" [ngModel]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
-                    <ng-template dropdownSelected let-selected>
-                        <p>{{ selected.content }}</p>
-                    </ng-template>
-                    <ng-template dropdownOption let-option>
-                        <p>{{ option.content }}</p>
-                    </ng-template>
-                </app-dropdown>
+            <app-dropdown class="dropdown" [ngModel]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
+                <ng-template dropdownSelected let-selected>
+                    <p>{{ selected.content }}</p>
+                </ng-template>
+                <ng-template dropdownOption let-option>
+                    <p>{{ option.content }}</p>
+                </ng-template>
+            </app-dropdown>
 
             <button class="button primary">
                 Bevestigen
