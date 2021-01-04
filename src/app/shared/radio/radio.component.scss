@@ -1,0 +1,10 @@
+.option-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 8px;
+    text-transform: none;
+
+    input {
+        margin-right: 10px;
+    }
+}

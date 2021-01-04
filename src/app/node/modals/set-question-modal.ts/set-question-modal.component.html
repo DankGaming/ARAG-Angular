@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
                 <label for="type">Type vraag</label>
-                <app-dropdown [(ngModel)]="type" name="type" id="type" ngDefaultControl required [options]="types">
+                <app-dropdown [ngModel]="type" name="type" id="type" ngDefaultControl required [options]="types">
                     <ng-template dropdownSelected let-selected>
                         <p>{{ selected.name }}</p>
                     </ng-template>

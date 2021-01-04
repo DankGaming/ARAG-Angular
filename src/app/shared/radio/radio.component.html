@@ -1,0 +1,6 @@
+<label class="option-container" *ngFor="let option of options">
+    <input type="radio" [name]="name" [value]="option" [checked]="value == option" (click)="setOption(option)">
+    <div>
+        <ng-container *ngTemplateOutlet="radioOptionTemplate; context: { $implicit: option }"></ng-container>
+    </div>
+</label>

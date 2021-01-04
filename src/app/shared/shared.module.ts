@@ -13,6 +13,8 @@ import { DropdownComponent } from "./dropdown/dropdown.component";
 import { DropdownOptionDirective } from "./dropdown/dropdown-option.directive";
 import { DropdownSelectedDirective } from "./dropdown/dropdown-selected.directive";
 import { PlaceholderDirective } from './placeholder.directive';
+import { RadioComponent } from './radio/radio.component';
+import { RadioOptionDirective } from './radio/radio-option.directive';
 
 @NgModule({
 	declarations: [
@@ -26,6 +28,8 @@ import { PlaceholderDirective } from './placeholder.directive';
 		DropdownOptionDirective,
 		DropdownSelectedDirective,
 		PlaceholderDirective,
+		RadioComponent,
+		RadioOptionDirective,
 	],
 	imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule],
 	exports: [
@@ -38,7 +42,9 @@ import { PlaceholderDirective } from './placeholder.directive';
 		DropdownComponent,
 		DropdownOptionDirective,
 		DropdownSelectedDirective,
-		PlaceholderDirective
+		PlaceholderDirective,
+		RadioComponent,
+		RadioOptionDirective
 	],
 })
 export class SharedModule {}

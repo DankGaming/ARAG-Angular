@@ -25,6 +25,7 @@ import { LinkModalComponent } from "src/app/node/modals/link-modal/link-modal.co
 export class NodeContainerComponent implements OnInit {
 	@Input() node: Node;
 	@Input() previousNode?: Node;
+	@Input() topNode: Node;
 	@Input() tree: Tree;
 	@Input() graph: DirectedAcyclicGraph;
 	@Input() isCurrentTop: boolean = false;
@@ -78,6 +79,6 @@ export class NodeContainerComponent implements OnInit {
 		const modal = this.modalService.createModal(LinkModalComponent, this.modalHost);
 		modal.instance.tree = this.tree;
 		modal.instance.node = this.node;
-		modal.instance.previousNode = this.isAnswer() ? this.previousNode : null;
+		modal.instance.topNode = this.topNode;
 	}
 }

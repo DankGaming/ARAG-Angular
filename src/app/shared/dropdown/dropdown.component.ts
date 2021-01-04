@@ -67,7 +67,6 @@ export class DropdownComponent<T> implements OnInit, ControlValueAccessor {
 
 	writeValue(obj: T): void {
 		this.value = obj;
-		console.log();
 	}
 
 	registerOnChange(fn: T): void {

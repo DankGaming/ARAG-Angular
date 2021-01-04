@@ -18,27 +18,35 @@ import { QuestionService } from "../../question.service";
 export class LinkModalComponent implements OnInit, Modal {
 	@Input() tree: Tree;
 	@Input() node: Node;
-	@Input() previousNode?: Node;
+	@Input() topNode: Node;
 	@Output() closeModal = new EventEmitter();
 	@Output() set = new EventEmitter<Partial<Node>>();
 
-	type?: { name: string; value: ContentType } = {
-		name: "Notification",
-		value: ContentType.NOTIFICATION,
-	};
+	types: { name: string; value: ContentType }[] = [
+		{
+			name: "Vraag",
+			value: ContentType.QUESTION
+		},
+		{
+			name: "Notificatie",
+			value: ContentType.NOTIFICATION
+		}
+	]
+	type = this.types[0];
 
 	questions: Node[] = [];
 	notifications: Node[] = [];
 
 	nodes: Node[];
+	defaultNode: Node;
 
-	get defaultNode(): Node {
-		if (this.type && this.node.children?.length > 0) {
-			return this.node.children[0];
-		} else {
-			return this.nodes[0];
-		}
-	}
+	// get defaultNode(): Node {
+	// 	if (this.type && this.node.children?.length > 0) {
+	// 		return this.node.children[0];
+	// 	} else {
+	// 		return this.nodes[0];
+	// 	}
+	// }
 
 	constructor(
 		private questionService: QuestionService,
@@ -92,6 +100,12 @@ export class LinkModalComponent implements OnInit, Modal {
 				this.nodes = this.notifications;
 				break;
 		}
+
+		if (this.node.children.length > 0) {
+			this.defaultNode = this.node.children[0].type == this.type.value ? this.node.children[0] : this.nodes[0];
+		} else {
+			this.defaultNode = this.nodes[0];
+		}
 	}
 
 	link(form: NgForm): void {
@@ -105,11 +119,34 @@ export class LinkModalComponent implements OnInit, Modal {
 		}
 	}
 
+	unlink(): void {
+		switch (this.node.type) {
+			case ContentType.ANSWER:
+				this.unlinkAnswer();
+				break;
+			case ContentType.NOTIFICATION:
+				this.unlinkNotification();
+				break;
+		}
+	}
+
+	private unlinkAnswer() {
+		this.answerService.unlink(this.tree.id, this.topNode.id, this.node.id).subscribe(() => {
+			this.treeService.treeSubject.next();
+		});
+	}
+
+	private unlinkNotification() {
+		this.notificationService.unlink(this.tree.id, this.node.id).subscribe(() => {
+			this.treeService.treeSubject.next();
+		})
+	}
+
 	private linkQuestion(form: NgForm): void {
 		const values = form.value;
 
 		this.answerService
-			.update(this.tree.id, this.previousNode?.id, this.node.id, {
+			.update(this.tree.id, this.topNode?.id, this.node.id, {
 				next: values.nextNode.id,
 			})
 			.subscribe(() => this.linked());
