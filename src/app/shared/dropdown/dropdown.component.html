@@ -1,8 +1,8 @@
 <div class="dropdown-container" [id]="name">
     <div class="dropdown" (click)="showDropdown = !showDropdown">
-        <ng-container *ngIf="selected">
+        <div class="selected-container" *ngIf="selected">
             <ng-container *ngTemplateOutlet="dropdownSelectedTemplate; context: { $implicit: selected }"></ng-container>
-        </ng-container>
+        </div>
 
         <div class="right">
             <fa-icon [icon]="icons.faChevronDown"></fa-icon>
