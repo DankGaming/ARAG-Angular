@@ -46,11 +46,11 @@ export class TreeRunQuestionComponent implements OnInit {
         }
     }
 
-    answersCheck(): boolean {
-        return (this.answers.length > 0);
+    hasAnswers(): boolean {
+        return this.answers.length > 0;
     }
 
-    nextNode(): boolean {
-        return (this.selectedAnswer.children?.length > 0);
+    hasChildNode(): boolean {
+        return this.selectedAnswer.children?.length > 0;
     }
 }

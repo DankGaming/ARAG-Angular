@@ -3,7 +3,7 @@
 
     <div class="root-node">
         <div *ngIf="hasRoot();">
-            <div *ngIf="rootTypeQuestion(); else rootTypeNotification">
+            <div *ngIf="rootNodeIsQuestion(); else rootTypeNotification">
                 <app-tree-run-question [tree] = tree [nodeInput] = tree.root [questionCounter] = "0"></app-tree-run-question>
             </div>
             <ng-template #rootTypeNotification>

@@ -1,4 +1,4 @@
-<div *ngIf="nodeCheck()">
+<div *ngIf="hasNode()">
     <main>
         <div class="tree-run-notification">
             <div class="notification">
@@ -12,7 +12,7 @@
 
     <div class="next-node">
         <div *ngIf="hasChild(); else endOfTree">
-            <div *ngIf="childType(); else loadNotification">
+            <div *ngIf="childTypeIsQuestion(); else loadNotification">
                 <div class="connect-line"></div>
                 <app-tree-run-question [tree] = tree [nodeInput] = node.children[0] [questionCounter] = questionCounter></app-tree-run-question>
             </div>

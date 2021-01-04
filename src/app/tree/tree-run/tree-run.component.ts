@@ -27,10 +27,10 @@ export class TreeRunComponent implements OnInit {
     }
 
     hasRoot(): boolean {
-        return (this.tree.root != null);
+        return this.tree.root != null;
     }
 
-    rootTypeQuestion(): boolean {
-        return (this.tree.root?.type === ContentType.QUESTION);
+    rootNodeIsQuestion(): boolean {
+        return this.tree.root?.type === ContentType.QUESTION;
     }
 }
