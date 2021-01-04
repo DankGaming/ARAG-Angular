@@ -15,8 +15,8 @@ export class TreeRunQuestionComponent implements OnInit {
     @Input() questionCounter: number;
 
     node: Node;
-    selectedAnswer: { name: string; value: Node };
-    answers: { name: string; value: Node }[] = [];
+    selectedAnswer: Node;
+    answers: Node[] = [];
     answersCheck = false;
     nextNode = false;
     nextQuestion = false;
@@ -30,7 +30,7 @@ export class TreeRunQuestionComponent implements OnInit {
             this.node = node;
 
             for (const i of node.children) {
-                this.answers.push({name: i.content, value: i});
+                this.answers.push(i);
               }
             this.selectedAnswer = this.answers[0];
             this.answersCheck = true;
@@ -39,9 +39,9 @@ export class TreeRunQuestionComponent implements OnInit {
 
     confirmAnswer(): void {
         this.answerConfirmed = true;
-        if (this.selectedAnswer.value.children.length > 0) {
+        if (this.selectedAnswer.children.length > 0) {
             this.nextNode = true;
-            if (this.selectedAnswer.value.children[0].type === ContentType.QUESTION) {
+            if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
                 this.nextQuestion = true;
             }
             else {
