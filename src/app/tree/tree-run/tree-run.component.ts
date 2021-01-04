@@ -15,23 +15,26 @@ export class TreeRunComponent implements OnInit {
     tree: Tree;
     id: number;
     type: string;
+    hasRoot = false;
     rootTypeQuestion = false;
 
     constructor(private activatedRoute: ActivatedRoute, private treeService: TreeService) {}
 
     ngOnInit(): void {
         this.activatedRoute.params.subscribe((params: Params) => {
-            this.id = +params[".id"];
+            this.id = +params.id;
         });
 
         this.treeService.findByID(this.id).subscribe((tree: Tree) => {
             this.tree = tree;
 
-            if (this.tree.root.type === ContentType.QUESTION) {
+            if (this.tree.root?.type === ContentType.QUESTION) {
                 this.rootTypeQuestion = true;
+                this.hasRoot = true;
             }
-            else if (this.tree.root.type === ContentType.NOTIFICATION) {
+            else if (this.tree.root?.type === ContentType.NOTIFICATION) {
                 this.rootTypeQuestion = false;
+                this.hasRoot = true;
             }
         });
     }

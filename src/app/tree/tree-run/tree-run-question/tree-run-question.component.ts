@@ -27,7 +27,7 @@ export class TreeRunQuestionComponent implements OnInit {
         this.questionCounter = this.questionCounter + 1;
         this.nodeService.findByID(this.treeID, this.nodeID).subscribe((node: Node) => {
             this.node = node;
-            
+
             for (const i of node.children) {
                 this.answers.push({name: i.content, value: i});
               }

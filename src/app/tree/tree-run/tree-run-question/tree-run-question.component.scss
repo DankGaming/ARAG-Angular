@@ -10,7 +10,10 @@ main {
 
 .question-number {
     text-transform: uppercase;
-    padding-bottom: 10px;
+    font-weight: bold;
+    color: $color-gray-600;
+    font-size: 11px;
+    margin-bottom: 3px;
 }
 
 .selected-answer {

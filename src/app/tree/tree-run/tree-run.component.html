@@ -1,12 +1,17 @@
 <div *ngIf="tree">
-<h1 class="title"> {{ this.tree.name }} </h1>
+    <h1 class="title">{{ this.tree.name }}</h1>
 
-<div class="root-node">
-    <div *ngIf="rootTypeQuestion; else rootTypeNotification">
-        <app-tree-run-question [treeID] = tree.id [nodeID] = tree.root.id [questionCounter] = "0"></app-tree-run-question>
+    <div class="root-node">
+        <div *ngIf="hasRoot;">
+            <div *ngIf="rootTypeQuestion; else rootTypeNotification">
+                <app-tree-run-question [treeID] = tree.id [nodeID] = tree.root.id [questionCounter] = "0"></app-tree-run-question>
+            </div>
+            <ng-template #rootTypeNotification>
+                <app-tree-run-notification [treeID] = tree.id [nodeID] = tree.root.id [questionCounter] = "0"></app-tree-run-notification>
+            </ng-template>
+        </div>
+        <ng-template #noRootNode>
+            <p>De boom is heeft geen startpunt.</p>
+        </ng-template>
     </div>
-    <ng-template #rootTypeNotification>
-        <app-tree-run-notification [treeID] = tree.id [nodeID] = tree.root.id [questionCounter] = "0"></app-tree-run-notification>
-    </ng-template>
-</div>
 </div>

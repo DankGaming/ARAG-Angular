@@ -18,7 +18,7 @@ export class TreeRunNotificationComponent implements OnInit {
     childType = false;
     nodeCheck = false;
     childID: number;
-    
+
     constructor(private nodeService: NodeService) {}
 
     ngOnInit(): void {
