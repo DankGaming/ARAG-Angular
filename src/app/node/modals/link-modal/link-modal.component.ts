@@ -101,9 +101,9 @@ export class LinkModalComponent implements OnInit, Modal {
 	}
 
 	link(form: NgForm): void {
-		switch (this.type.value) {
-			case ContentType.QUESTION:
-				this.linkQuestion(form);
+		switch (this.node.type) {
+			case ContentType.ANSWER:
+				this.linkAnswer(form);
 				break;
 			case ContentType.NOTIFICATION:
 				this.linkNotification(form);
@@ -134,7 +134,7 @@ export class LinkModalComponent implements OnInit, Modal {
 		});
 	}
 
-	private linkQuestion(form: NgForm): void {
+	private linkAnswer(form: NgForm): void {
 		const values = form.value;
 
 		this.answerService
