@@ -7,25 +7,23 @@ import { Modal } from "../modal.interface";
   styleUrls: ["./confirm-box-modal.component.scss"]
 })
 export class ConfirmBoxModalComponent implements OnInit, Modal {
-  @Output() closeModal = new EventEmitter<null>();
-  @Output() confirmedAction = new EventEmitter<null>();
-  @Output() rejectedAction = new EventEmitter<null>();
+  @Output() closeModal = new EventEmitter();
+  @Output() confirmedAction = new EventEmitter();
+  @Output() rejectedAction = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  close(): void {
-		this.closeModal.emit();
-  }
+	close = (): void => this.closeModal.emit();
 
   confirm(): void {
-    this.closeModal.emit();
+    this.close();
     this.confirmedAction.emit();
   }
 
   reject(): void  {
-    this.closeModal.emit();
-    this.confirmedAction.emit();
+    this.close();
+    this.rejectedAction.emit();
   }
 }
