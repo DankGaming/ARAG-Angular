@@ -31,7 +31,7 @@ export class LinkModalComponent implements OnInit, Modal {
 			name: "Notificatie",
 			value: ContentType.NOTIFICATION
 		}
-	]
+	];
 	type = this.types[0];
 
 	questions: Node[] = [];
@@ -39,14 +39,6 @@ export class LinkModalComponent implements OnInit, Modal {
 
 	nodes: Node[];
 	defaultNode: Node;
-
-	// get defaultNode(): Node {
-	// 	if (this.type && this.node.children?.length > 0) {
-	// 		return this.node.children[0];
-	// 	} else {
-	// 		return this.nodes[0];
-	// 	}
-	// }
 
 	constructor(
 		private questionService: QuestionService,
@@ -102,7 +94,7 @@ export class LinkModalComponent implements OnInit, Modal {
 		}
 
 		if (this.node.children.length > 0) {
-			this.defaultNode = this.node.children[0].type == this.type.value ? this.node.children[0] : this.nodes[0];
+			this.defaultNode = this.node.children[0].type === this.type.value ? this.node.children[0] : this.nodes[0];
 		} else {
 			this.defaultNode = this.nodes[0];
 		}
@@ -130,16 +122,16 @@ export class LinkModalComponent implements OnInit, Modal {
 		}
 	}
 
-	private unlinkAnswer() {
+	private unlinkAnswer(): void {
 		this.answerService.unlink(this.tree.id, this.topNode.id, this.node.id).subscribe(() => {
 			this.treeService.treeSubject.next();
 		});
 	}
 
-	private unlinkNotification() {
+	private unlinkNotification(): void {
 		this.notificationService.unlink(this.tree.id, this.node.id).subscribe(() => {
 			this.treeService.treeSubject.next();
-		})
+		});
 	}
 
 	private linkQuestion(form: NgForm): void {

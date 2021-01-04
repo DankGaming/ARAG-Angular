@@ -39,8 +39,8 @@ export class NotificationService {
 		return observable;
 	}
 
-	unlink(treeID: number, notificationID: number): Observable<Object> {
-		const observable: Observable<Object> = this.http.patch(`/trees/${treeID}/notifications/${notificationID}/unlink`, {});
+	unlink(treeID: number, notificationID: number): Observable<null> {
+		const observable: Observable<null> = this.http.patch<null>(`/trees/${treeID}/notifications/${notificationID}/unlink`, {});
 		return observable;
 	}
 }

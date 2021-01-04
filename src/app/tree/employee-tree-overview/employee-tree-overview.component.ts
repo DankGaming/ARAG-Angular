@@ -33,6 +33,8 @@ interface Top {
 	styleUrls: ["./employee-tree-overview.component.scss"],
 })
 export class EmployeeTreeOverviewComponent implements OnInit {
+	@ViewChild(PlaceholderDirective, { static: false }) modalHost: PlaceholderDirective;
+
 	tree: Tree;
 	graph: DirectedAcyclicGraph;
 	top: Top;
@@ -47,8 +49,6 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	modals = {
 		showSetQuestion: false,
 	};
-
-	@ViewChild(PlaceholderDirective, { static: false }) modalHost: PlaceholderDirective;
 
 	icons = {
 		faTrashAlt,
@@ -197,7 +197,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	createQuestion(): void {
 		const modal = this.modalService.createModal(SetQuestionModalComponent, this.modalHost);
 		modal.instance.tree = this.tree;
-		modal.instance.set.subscribe((question: Node) => this.changeTopNode(question))
+		modal.instance.set.subscribe((question: Node) => this.changeTopNode(question));
 	}
 
 	private navigateToTop(

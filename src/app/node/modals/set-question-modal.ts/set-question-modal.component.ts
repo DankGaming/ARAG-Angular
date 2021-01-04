@@ -77,7 +77,7 @@ export class SetQuestionModalComponent implements OnInit, Modal {
 				this.question.content = node.content;
 				this.question.questionInfo = {
 					type: values.type.value
-				}
+				};
 				if (values.treeRoot) this.tree.root = this.question;
 				this.close();
 			});

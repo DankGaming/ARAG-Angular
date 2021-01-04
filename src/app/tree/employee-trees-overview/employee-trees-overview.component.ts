@@ -15,11 +15,10 @@ import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 	styleUrls: ["./employee-trees-overview.component.scss"],
 })
 export class EmployeeTreesOverviewComponent implements OnInit {
+	@ViewChild(PlaceholderDirective, { static: false }) modalHost: PlaceholderDirective;
 	trees: Tree[] = [];
 	employee: Employee;
 	showCreateTreeModal = false;
-
-	@ViewChild(PlaceholderDirective, { static: false }) modalHost: PlaceholderDirective;
 
 	icons = { faPlus };
 

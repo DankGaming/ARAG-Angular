@@ -52,8 +52,11 @@ export class AnswerService {
 		return observable;
 	}
 
-	unlink(treeID: number, questionID: number, answerID: number): Observable<Object> {
-		const observable: Observable<Object> = this.http.patch(`/trees/${treeID}/questions/${questionID}/answers/${answerID}/unlink`, {});
+	unlink(treeID: number, questionID: number, answerID: number): Observable<null> {
+		const observable: Observable<null> = this.http.patch<null>(
+			`/trees/${treeID}/questions/${questionID}/answers/${answerID}/unlink`,
+			{}
+		);
 		return observable;
 	}
 }

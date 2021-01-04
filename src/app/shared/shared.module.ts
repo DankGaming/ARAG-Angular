@@ -12,9 +12,7 @@ import { FormsModule } from "@angular/forms";
 import { DropdownComponent } from "./dropdown/dropdown.component";
 import { DropdownOptionDirective } from "./dropdown/dropdown-option.directive";
 import { DropdownSelectedDirective } from "./dropdown/dropdown-selected.directive";
-import { PlaceholderDirective } from './placeholder.directive';
-import { RadioComponent } from './radio/radio.component';
-import { RadioOptionDirective } from './radio/radio-option.directive';
+import { PlaceholderDirective } from "./placeholder.directive";
 
 @NgModule({
 	declarations: [
@@ -28,8 +26,6 @@ import { RadioOptionDirective } from './radio/radio-option.directive';
 		DropdownOptionDirective,
 		DropdownSelectedDirective,
 		PlaceholderDirective,
-		RadioComponent,
-		RadioOptionDirective,
 	],
 	imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule],
 	exports: [
@@ -43,8 +39,6 @@ import { RadioOptionDirective } from './radio/radio-option.directive';
 		DropdownOptionDirective,
 		DropdownSelectedDirective,
 		PlaceholderDirective,
-		RadioComponent,
-		RadioOptionDirective
 	],
 })
 export class SharedModule {}
