@@ -7,6 +7,11 @@ import { PublicNavigationComponent } from "./public-navigation/public-navigation
 import { RouterModule } from "@angular/router";
 import { EmployeeNavigationComponent } from "./employee-navigation/employee-navigation.component";
 import { ModalComponent } from "./modals/modal/modal.component";
+import { ToggleComponent } from "./toggle/toggle.component";
+import { FormsModule } from "@angular/forms";
+import { DropdownComponent } from "./dropdown/dropdown.component";
+import { DropdownOptionDirective } from "./dropdown/dropdown-option.directive";
+import { DropdownSelectedDirective } from "./dropdown/dropdown-selected.directive";
 
 @NgModule({
 	declarations: [
@@ -15,14 +20,22 @@ import { ModalComponent } from "./modals/modal/modal.component";
 		PublicNavigationComponent,
 		EmployeeNavigationComponent,
 		ModalComponent,
+		ToggleComponent,
+		DropdownComponent,
+		DropdownOptionDirective,
+		DropdownSelectedDirective,
 	],
-	imports: [CommonModule, FontAwesomeModule, RouterModule],
+	imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule],
 	exports: [
 		HeaderComponent,
 		ErrorBoxComponent,
 		PublicNavigationComponent,
 		EmployeeNavigationComponent,
 		ModalComponent,
+		ToggleComponent,
+		DropdownComponent,
+		DropdownOptionDirective,
+		DropdownSelectedDirective,
 	],
 })
 export class SharedModule {}

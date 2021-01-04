@@ -10,7 +10,6 @@
 
 html {
     height: 100%;
-    margin-bottom: 60px;
 }
 
 body {
@@ -22,6 +21,7 @@ body {
 	overflow-x: hidden;
 	height: 100%;
     font-weight: normal;
+    font-size: 14px;
 }
 
 ul {
@@ -46,7 +46,7 @@ h1 {
 a,
 p,
 li {
-	font-size: 15px;
+	font-size: 14px;
 	text-decoration: none;
 	color: $color-black;
 	font-weight: 400;
@@ -79,6 +79,7 @@ button {
     max-width: max-content;
     font-size: 13px;
     background-color: $color-gray-200;
+    white-space: nowrap;
 
     fa-icon {
         margin-right: 7px;
@@ -133,6 +134,7 @@ input, textarea {
     border: 1px solid $color-gray-200;
     background-color: $color-gray-100;
     font-family: inherit;
+    display: block;
 }
 
 textarea {

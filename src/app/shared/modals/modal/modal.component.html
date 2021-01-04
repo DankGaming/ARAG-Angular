@@ -1,5 +1,5 @@
-<div class="overlay" (click)="close()">
-    <div class="modal-container" (click)="$event.stopPropagation()">
+<div class="overlay" (mousedown)="close()">
+    <div class="modal-container" (mousedown)="$event.stopPropagation()">
         <header>
             <div class="modal-title">
                 <h3>{{ title }}</h3>
@@ -10,10 +10,10 @@
                 <fa-icon [icon]="icons.faTimesCircle"></fa-icon>
             </button>
         </header>
-        <section class="modal-body">
+        <section class="modal-body" *ngIf="showBody">
             <ng-content select="[body]"></ng-content>
         </section>
-        <footer>
+        <footer *ngIf="showFooter">
             <ng-content select="[footer]"></ng-content>
         </footer>
     </div>

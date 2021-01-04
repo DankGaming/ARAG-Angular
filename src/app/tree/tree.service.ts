@@ -6,6 +6,7 @@ import { HttpResult } from "../shared/http-result";
 import { CreateTreeDTO } from "./dto/create-tree.dto";
 import { FilterTreesDTO } from "./dto/filter-trees.dto";
 import { Tree } from "./tree.model";
+import { UpdateTreeDTO } from "./dto/update-tree.dto";
 
 @Injectable({
 	providedIn: "root",
@@ -42,5 +43,20 @@ export class TreeService {
 			);
 
 		return observer;
+	}
+
+	update(id: number, dto: UpdateTreeDTO): Observable<Partial<Tree>> {
+		const observer: Observable<Partial<Tree>> = this.http
+			.patch<HttpResult<Partial<Tree>>>(`/trees/${id}`, {
+				...dto,
+			})
+			.pipe(
+				map((response: HttpResult<Partial<Tree>>) => response.result)
+			);
+		return observer;
+	}
+
+	remove(id: number): Observable<HttpResult<null>> {
+		return this.http.delete<HttpResult<null>>(`/trees/${id}`);
 	}
 }
