@@ -8,6 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 export class ConfirmBoxModalComponent implements OnInit {
   @Output() closeModal = new EventEmitter<null>();
   @Output() confirmedAction = new EventEmitter<null>();
+  @Output() rejectedAction = new EventEmitter<null>();
   constructor() { }
 
   ngOnInit(): void {
@@ -18,6 +19,11 @@ export class ConfirmBoxModalComponent implements OnInit {
   }
 
   confirm(): void {
+    this.closeModal.emit();
+    this.confirmedAction.emit();
+  }
+
+  reject(): void  {
     this.closeModal.emit();
     this.confirmedAction.emit();
   }
