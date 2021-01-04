@@ -2,6 +2,7 @@ import { Component, Input, OnInit} from "@angular/core";
 import { Node } from "src/app/node/node.model";
 import { NodeService } from "src/app/node/node.service";
 import { ContentType } from "src/app/node/content-type.model";
+import { Tree } from "../../tree.model";
 
 @Component({
     selector: "app-tree-run-question",
@@ -9,8 +10,8 @@ import { ContentType } from "src/app/node/content-type.model";
     styleUrls: ["./tree-run-question.component.scss"],
 })
 export class TreeRunQuestionComponent implements OnInit {
-    @Input() treeID: number;
-    @Input() nodeID: number;
+    @Input() tree: Tree;
+    @Input() nodeInput: Node;
     @Input() questionCounter: number;
 
     node: Node;
@@ -25,7 +26,7 @@ export class TreeRunQuestionComponent implements OnInit {
 
     ngOnInit(): void {
         this.questionCounter = this.questionCounter + 1;
-        this.nodeService.findByID(this.treeID, this.nodeID).subscribe((node: Node) => {
+        this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
 
             for (const i of node.children) {

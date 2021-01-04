@@ -13,7 +13,6 @@ export class TreeRunComponent implements OnInit {
     @Input() routerLink: any[];
 
     tree: Tree;
-    id: number;
     type: string;
     hasRoot = false;
     rootTypeQuestion = false;
@@ -22,20 +21,19 @@ export class TreeRunComponent implements OnInit {
 
     ngOnInit(): void {
         this.activatedRoute.params.subscribe((params: Params) => {
-            this.id = +params.id;
-        });
+            
+            this.treeService.findByID(+params.id).subscribe((tree: Tree) => {
+                this.tree = tree;
 
-        this.treeService.findByID(this.id).subscribe((tree: Tree) => {
-            this.tree = tree;
-
-            if (this.tree.root?.type === ContentType.QUESTION) {
-                this.rootTypeQuestion = true;
-                this.hasRoot = true;
-            }
-            else if (this.tree.root?.type === ContentType.NOTIFICATION) {
-                this.rootTypeQuestion = false;
-                this.hasRoot = true;
-            }
+                if (this.tree.root?.type === ContentType.QUESTION) {
+                    this.rootTypeQuestion = true;
+                    this.hasRoot = true;
+                }
+                else if (this.tree.root?.type === ContentType.NOTIFICATION) {
+                    this.rootTypeQuestion = false;
+                    this.hasRoot = true;
+                }
+            });
         });
     }
 }
