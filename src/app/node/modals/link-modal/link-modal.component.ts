@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { Modal } from "src/app/shared/modals/modal.interface";
 import { Tree } from "src/app/tree/tree.model";
 import { TreeService } from "src/app/tree/tree.service";
 import { AnswerService } from "../../answer.service";
@@ -14,7 +15,7 @@ import { QuestionService } from "../../question.service";
 	templateUrl: "./link-modal.component.html",
 	styleUrls: ["./link-modal.component.scss"],
 })
-export class LinkModalComponent implements OnInit {
+export class LinkModalComponent implements OnInit, Modal {
 	@Input() tree: Tree;
 	@Input() node: Node;
 	@Input() previousNode?: Node;

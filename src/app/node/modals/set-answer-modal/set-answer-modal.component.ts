@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { Modal } from "src/app/shared/modals/modal.interface";
 import { Tree } from "src/app/tree/tree.model";
 import { TreeService } from "src/app/tree/tree.service";
 import { AnswerService } from "../../answer.service";
@@ -12,7 +13,7 @@ import { NodeService } from "../../node.service";
 	templateUrl: "./set-answer-modal.component.html",
 	styleUrls: ["./set-answer-modal.component.scss"],
 })
-export class SetAnswerModalComponent implements OnInit {
+export class SetAnswerModalComponent implements OnInit, Modal {
 	@Input() tree: Tree;
 	@Input() question: Node;
 	@Input() answer?: Node;
