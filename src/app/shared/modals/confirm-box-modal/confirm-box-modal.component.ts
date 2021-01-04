@@ -21,8 +21,4 @@ export class ConfirmBoxModalComponent implements OnInit {
     this.closeModal.emit();
     this.confirmedAction.emit();
   }
-
-  print(): void{
-    console.log("Hi there");
-  }
 }
