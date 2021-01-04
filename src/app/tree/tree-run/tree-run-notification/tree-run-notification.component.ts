@@ -9,15 +9,15 @@ import { ContentType } from "src/app/node/content-type.model";
     styleUrls: ["./tree-run-notification.component.scss"],
 })
 export class TreeRunNotificationComponent implements OnInit {
+    @Input() treeID: number;
+    @Input() nodeID: number;
+    @Input() questionCounter: number;
+
     node: Node;
     hasChild = false;
     childType = false;
     nodeCheck = false;
     childID: number;
-
-    @Input() treeID: number;
-    @Input() nodeID: number;
-    @Input() questionCounter: number;
     
     constructor(private nodeService: NodeService) {}
 
@@ -29,10 +29,10 @@ export class TreeRunNotificationComponent implements OnInit {
             if (this.node.children.length > 0) {
                 this.hasChild = true;
                 this.childID = this.node.children[0].id;
-                if (this.node.children[0].type = ContentType.QUESTION) {
+                if (this.node.children[0].type === ContentType.QUESTION) {
                     this.childType = true;
                 }
-                else if (this.node.children[0].type = ContentType.NOTIFICATION) {
+                else if (this.node.children[0].type === ContentType.NOTIFICATION) {
                     this.childType = false;
                 }
             }
