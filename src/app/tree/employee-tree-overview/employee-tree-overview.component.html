@@ -6,7 +6,7 @@
                 Verwijder
             </button>
           
-            <button class="button" (click)="showEditTreeModal = true">
+            <button class="button" (click)="editTree()">
                 <fa-icon [icon]="icons.faPen"></fa-icon>
                 Bewerken
             </button>
@@ -38,7 +38,7 @@
                     <app-search-results [searchResults]="searchResults" *ngIf="searchResults" (clickedOutside)="clearSearchResults()" (clickedInside)="clearSearchResults(); clearSearchValue()"></app-search-results>
                 </li>
                 <li>
-                    <button class="button primary" (click)="modals.showSetQuestion = true">
+                    <button class="button primary" (click)="createQuestion()">
                         <fa-icon [icon]="icons.faPlus"></fa-icon>
                         Nieuwe vraag
                     </button>
@@ -72,6 +72,6 @@
             </app-node-wrapper>
         </div>
     </div>
-    <app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>
-    <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" (set)="changeTopNode($event)" [tree]="tree"></app-set-question-modal>
+
+    <ng-container appPlaceholder></ng-container>
 </div>

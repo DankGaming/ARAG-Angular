@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
@@ -17,6 +17,10 @@ import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model"
 import { ContentType } from "src/app/node/content-type.model";
 import { Location } from "@angular/common";
 import { skip } from "rxjs/operators";
+import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
+import { ModalService } from "src/app/shared/modal.service";
+import { SetTreeModalComponent } from "../modals/set-tree-modal/set-tree-modal.component";
+import { SetQuestionModalComponent } from "src/app/node/modals/set-question-modal.ts/set-question-modal.component";
 
 interface Top {
 	node: Node;
@@ -44,6 +48,8 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		showSetQuestion: false,
 	};
 
+	@ViewChild(PlaceholderDirective, { static: false }) modalHost: PlaceholderDirective;
+
 	icons = {
 		faTrashAlt,
 		faAngleDoubleUp,
@@ -64,7 +70,8 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		private nodeService: NodeService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private location: Location
+		private location: Location,
+		private modalService: ModalService
 	) {}
 
 	ngOnInit(): void {
@@ -180,6 +187,17 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 				relativeTo: this.route,
 			});
 		});
+	}
+
+	editTree(): void {
+		const modal = this.modalService.createModal(SetTreeModalComponent, this.modalHost);
+		modal.instance.tree = this.tree;
+	}
+
+	createQuestion(): void {
+		const modal = this.modalService.createModal(SetQuestionModalComponent, this.modalHost);
+		modal.instance.tree = this.tree;
+		modal.instance.set.subscribe((question: Node) => this.changeTopNode(question))
 	}
 
 	private navigateToTop(
