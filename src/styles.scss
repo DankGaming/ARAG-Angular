@@ -205,6 +205,9 @@ nav .logo {
 nav li {
     float: left;
 }
+ul li a.active {
+    font-weight: bold;
+}
 nav .menu {
     clear: none;
     max-height: none;
@@ -213,9 +216,7 @@ nav .menu {
 ul.menu.left{
     float:left;
 }
-ul.menu.left a, .menupublic li a{
-    font-weight: bold;
-}
+
 ul.menu.right{
     float:right;
     margin-left: auto;
