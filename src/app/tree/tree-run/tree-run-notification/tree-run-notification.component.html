@@ -14,7 +14,7 @@
         <div *ngIf="hasChild(); else endOfTree">
             <div *ngIf="childTypeIsQuestion(); else loadNotification">
                 <div class="connect-line"></div>
-                <app-tree-run-question [tree] = tree [nodeInput] = node.children[0] [questionCounter] = questionCounter></app-tree-run-question>
+                <app-tree-run-question [tree]=tree [nodeInput]=node.children[0] [questionCounter]=questionCounter></app-tree-run-question>
             </div>
             <ng-template #loadNotification>
                 <div class="connect-line"></div>
