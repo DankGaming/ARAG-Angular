@@ -2,9 +2,15 @@
     <ng-container body>
         <form #linkForm="ngForm" id="link-form" (ngSubmit)="link(linkForm)" autocomplete="off">
             <div class="form-group">
-                <label for="">Vervolgtype</label>
-                <!-- <input type="text" name="content" placeholder="Antwoord" id="content" [ngModel]="" ngModel required> -->
-                {{ type.name }}
+                <label for="type">Vervolgtype</label>
+                <app-dropdown [(ngModel)]="type" id="type" name="type" [options]="types" (ngModelChange)="switchType()">
+                    <ng-template dropdownSelected let-selected>
+                        <p>{{ selected.name }}</p>
+                    </ng-template>
+                    <ng-template dropdownOption let-option>
+                        <p>{{ option.name }}</p>
+                    </ng-template>
+                </app-dropdown>
             </div>
 
             <div class="form-group" *ngIf="nodes">
@@ -29,9 +35,9 @@
             <button class="button primary" [disabled]="linkForm.invalid" form="link-form">
                 Opslaan
             </button>
-            <!-- <button class="button danger" *ngIf="answer" (click)="remove()">
+            <button class="button danger" *ngIf="node.children.length > 0" (click)="unlink()">
                 Verwijder koppeling
-            </button> -->
+            </button>
         </div>
     </ng-container>
 </app-modal>
