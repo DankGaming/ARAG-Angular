@@ -4,7 +4,7 @@
     <div class="root-node">
         <div *ngIf="hasRoot();">
             <div *ngIf="rootNodeIsQuestion(); else rootTypeNotification">
-                <app-tree-run-question [tree] = tree [nodeInput] = tree.root [questionCounter] = "0"></app-tree-run-question>
+                <app-tree-run-question [tree]=tree [nodeInput]=tree.root [questionCounter]="0"></app-tree-run-question>
             </div>
             <ng-template #rootTypeNotification>
                 <app-tree-run-notification [tree] = tree [nodeInput] = tree.root [questionCounter] = "0"></app-tree-run-notification>
