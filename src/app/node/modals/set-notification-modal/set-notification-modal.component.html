@@ -1,9 +1,9 @@
-<app-modal [title]="notification ? 'Wijzig notificatie' : 'Nieuwe notificatie'" [subtitle]="'Beslissingsboom: ' + tree.name" (closeModal)="close()">
+ng se<app-modal [title]="notification ? 'Wijzig notificatie' : 'Nieuwe notificatie'" [subtitle]="'Beslissingsboom: ' + tree.name" (closeModal)="close()">
     <ng-container body>
         <form #setNotificationForm="ngForm" id="set-notification-form" (ngSubmit)="notification ? update(setNotificationForm) : create(setNotificationForm)" autocomplete="off">
             <div class="form-group">
                 <label for="content">Notificatie</label>
-                <textarea name="content" placeholder="Notificatie" id="content" [ngModel]="notification?.content" required></textarea>
+                <angular-editor name="content" id="content" [config]="editorConfig" [placeholder]="'Enter text here...'" [ngModel]="notification?.content" required></angular-editor>
             </div>
             <div class="form-group" *ngIf="!isRoot">
                 <label for="tree-root">Maak notificatie start van boom</label>
