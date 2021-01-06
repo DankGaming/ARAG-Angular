@@ -1,0 +1,10 @@
+<app-modal [title]="title" [showBody]="false" (closeModal)="close()">
+    <ng-container footer>
+        <button class="button primary" (click)="confirm()">
+            Ja
+        </button>
+        <button class="button primary" (click)="reject()">
+            Nee
+        </button>
+    </ng-container>
+</app-modal>
