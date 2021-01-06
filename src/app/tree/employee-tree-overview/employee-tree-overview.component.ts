@@ -18,9 +18,10 @@ import { ContentType } from "src/app/node/content-type.model";
 import { Location } from "@angular/common";
 import { skip } from "rxjs/operators";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
-import { ModalService } from "src/app/shared/modal.service";
 import { SetTreeModalComponent } from "../modals/set-tree-modal/set-tree-modal.component";
 import { SetQuestionModalComponent } from "src/app/node/modals/set-question-modal.ts/set-question-modal.component";
+import { ModalService } from "src/app/shared/modal.service";
+import { ConfirmBoxModalComponent } from "src/app/shared/modals/confirm-box-modal/confirm-box-modal.component";
 
 interface Top {
 	node: Node;
@@ -182,9 +183,14 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	}
 
 	removeTree(): void {
-		this.treeService.remove(this.tree.id).subscribe(() => {
-			this.router.navigate([".."], {
-				relativeTo: this.route,
+		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
+		modal.instance.description = `U staat op het punt om de boom '${this.tree.name}'
+		te verwijderen. Deze actie kan niet ongedaan worden. Weet u het zeker?`;
+		modal.instance.confirmed.subscribe(() => {
+			this.treeService.remove(this.tree.id).subscribe(() => {
+				this.router.navigate([".."], {
+					relativeTo: this.route,
+				});
 			});
 		});
 	}
@@ -198,6 +204,15 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		const modal = this.modalService.createModal(SetQuestionModalComponent, this.modalHost);
 		modal.instance.tree = this.tree;
 		modal.instance.set.subscribe((question: Node) => this.changeTopNode(question));
+	}
+
+	publishTree(): void {
+		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
+		modal.instance.description = `U staat op het punt om '${this.tree.name}'
+		te publiceren. Dit betekent dat deze boom voor iedereen zichtbaar is. Weet u het zeker?`;
+		modal.instance.confirmed.subscribe(() => {
+			// TODO: publish tree
+		});
 	}
 
 	private navigateToTop(
