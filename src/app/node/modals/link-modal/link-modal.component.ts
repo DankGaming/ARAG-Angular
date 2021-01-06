@@ -55,11 +55,11 @@ export class LinkModalComponent implements OnInit, Modal {
 				this.questions = questions;
 				
 				// Delete top node from questions if top node is question
-				if (this.topNode.type === ContentType.QUESTION) {
-					const question = this.questions.find((question: Node) => question.id === this.topNode.id);
-					const index = this.questions.indexOf(question);
-					this.questions.splice(index, 1);
-				}
+				// if (this.topNode.type === ContentType.QUESTION) {
+				// 	const question = this.questions.find((question: Node) => question.id === this.topNode.id);
+				// 	const index = this.questions.indexOf(question);
+				// 	this.questions.splice(index, 1);
+				// }
 			});
 
 		this.notificationService
@@ -68,18 +68,18 @@ export class LinkModalComponent implements OnInit, Modal {
 				this.notifications = notifications;
 
 				// Delete self from notifications
-				const notification = this.notifications.find((notification: Node) => notification.id === this.node.id);
-				if (notification) {
-					const index = this.notifications.indexOf(notification);
-					this.notifications.splice(index, 1);
-				}
+				// const notification = this.notifications.find((notification: Node) => notification.id === this.node.id);
+				// if (notification) {
+				// 	const index = this.notifications.indexOf(notification);
+				// 	this.notifications.splice(index, 1);
+				// }
 
-				// Delete top node from notifications if top node is notification
-				if (this.topNode.type === ContentType.NOTIFICATION) {
-					const notification = this.notifications.find((notification: Node) => notification.id === this.topNode.id);
-					const index = this.notifications.indexOf(notification);
-					this.notifications.splice(index, 1);
-				}
+				// // Delete top node from notifications if top node is notification
+				// if (this.topNode.type === ContentType.NOTIFICATION) {
+				// 	const notification = this.notifications.find((notification: Node) => notification.id === this.topNode.id);
+				// 	const index = this.notifications.indexOf(notification);
+				// 	this.notifications.splice(index, 1);
+				// }
 			});
 
 		this.nodeService

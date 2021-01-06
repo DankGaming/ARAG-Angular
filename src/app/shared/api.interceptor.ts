@@ -14,7 +14,8 @@ export class APIInterceptor implements HttpInterceptor {
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
         const apiReq = req.clone({
-            url: `http://134.122.55.77:5000${req.url}`,
+            // url: `http://134.122.55.77:5000${req.url}`,
+            url: `http://localhost:3000${req.url}`
         });
 
         return next.handle(apiReq);
