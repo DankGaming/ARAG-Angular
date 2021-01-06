@@ -9,22 +9,22 @@ import { Modal } from "../modal.interface";
 export class ConfirmBoxModalComponent implements OnInit, Modal {
     @Input() title: string = "Weet u het zeker?";
     @Input() description: string;
-	@Output() closeModal = new EventEmitter();
-	@Output() confirmed = new EventEmitter();
+	  @Output() closeModal = new EventEmitter();
+	  @Output() confirmed = new EventEmitter();
     @Output() rejected = new EventEmitter();
     constructor() {}
 
-	ngOnInit(): void {}
+    ngOnInit(): void {}
 
-	close = (): void => this.closeModal.emit();
+    close = (): void => this.closeModal.emit();
 
-	confirm(): void {
-		this.close();
-		this.confirmed.emit();
-	}
+    confirm(): void {
+        this.close();
+        this.confirmed.emit();
+    }
 
-	reject(): void {
-		this.close();
-		this.rejected.emit();
-	}
+    reject(): void {
+        this.close();
+        this.rejected.emit();
+    }
 }
