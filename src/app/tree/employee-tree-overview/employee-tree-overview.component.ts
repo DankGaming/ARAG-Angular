@@ -207,6 +207,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 
 	publishTree(): void {
 		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
+		modal.instance.description = `U staat op het punt om '${this.tree.name}' te publiceren. Dit betekent dat deze boom voor iedereen zichtbaar is. Weet u het zeker?`;
 		modal.instance.confirmed.subscribe(() => {
 			// TODO: publish tree
 		})
