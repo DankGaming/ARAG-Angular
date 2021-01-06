@@ -16,6 +16,7 @@ import { ModalService } from "src/app/shared/modal.service";
 import { SetQuestionModalComponent } from "src/app/node/modals/set-question-modal.ts/set-question-modal.component";
 import { SetAnswerModalComponent } from "src/app/node/modals/set-answer-modal/set-answer-modal.component";
 import { LinkModalComponent } from "src/app/node/modals/link-modal/link-modal.component";
+import { SetNotificationModalComponent } from "src/app/node/modals/set-notification-modal/set-notification-modal.component";
 
 @Component({
 	selector: "app-node-container",
@@ -66,6 +67,13 @@ export class NodeContainerComponent implements OnInit {
 		modal.instance.isRoot = this.isRoot();
 		modal.instance.tree = this.tree;
 		modal.instance.question = this.node;
+	}
+
+	editNotification(): void {
+		const modal = this.modalService.createModal(SetNotificationModalComponent, this.modalHost);
+		modal.instance.isRoot = this.isRoot();
+		modal.instance.tree = this.tree;
+		modal.instance.notification = this.node;
 	}
 
 	setAnswer(): void {
