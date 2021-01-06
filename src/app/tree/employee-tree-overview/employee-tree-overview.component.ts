@@ -212,7 +212,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		modal.instance.tree = this.tree;
 		modal.instance.set.subscribe((notification: Node) => this.changeTopNode(notification));
   	}
-  
+
 	publishTree(): void {
 		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
 		modal.instance.description = `U staat op het punt om '${this.tree.name}'
