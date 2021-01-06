@@ -49,40 +49,28 @@ export class LinkModalComponent implements OnInit, Modal {
 	) {}
 
 	ngOnInit(): void {
-		this.questionService
-			.findAll(this.tree.id)
-			.subscribe((questions: Node[]) => {
-				this.questions = questions;
-			});
-
-		this.notificationService
-			.findAll(this.tree.id)
-			.subscribe((notifications: Node[]) => {
-				this.notifications = notifications;
-				const notification = this.notifications.find((notification: Node) => notification.id === this.node.id);
-				if (notification) {
-					const index = this.notifications.indexOf(notification);
-					this.notifications.splice(index, 1);
-				}
-			});
-
 		this.nodeService
-			.findByID(this.tree.id, this.node.id)
-			.subscribe((node: Node) => {
-				this.node = node;
+			.linkables(this.tree.id, this.node.id)
+			.subscribe((nodes: Node[]) => {
+				this.questions = nodes.filter(
+					(node: Node) => node.type === ContentType.QUESTION
+				);
+				this.notifications = nodes.filter(
+					(node: Node) => node.type === ContentType.NOTIFICATION
+				);
 
-				if (node.children?.length > 0) {
-					const nodeType: ContentType = node.children[0].type;
-					this.type = {
-						name:
-							nodeType === ContentType.QUESTION
-								? "Vraag"
-								: "Notificatie",
-						value: nodeType,
-					};
-				}
+				this.nodeService
+					.findByID(this.tree.id, this.node.id)
+					.subscribe((node: Node) => {
+						this.node = node;
 
-				this.switchType();
+						if (node.children?.length > 0) {
+							const nodeType: ContentType = node.children[0].type;
+							this.type = this.types.find(type => type.value === nodeType);
+						}
+
+						this.switchType();
+					});
 			});
 	}
 
