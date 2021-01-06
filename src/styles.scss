@@ -118,6 +118,10 @@ form {
         display: flex;
         flex-direction: column;
 
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
         label {
             font-weight: bold;
             font-size: 11px;
@@ -142,7 +146,7 @@ textarea {
     height: 100px;
 }
 
-nav {
+.nav-con {
     min-height: 80px;
     height: 80px;
     background-color: $color-white;
@@ -150,48 +154,224 @@ nav {
     margin-bottom: 30px;
     border-top: 15px solid $color-primary;
 
+}
+@media only screen and (min-width: 767px) {
     .nav-container {
         display: flex;
         align-items: center;
         height: 100%;
         flex-wrap: wrap;
         align-items: center;
-
-        ul {
-            display: flex;
-
-            li {
-                margin-right: 30px;
-                
-                a {
-                    cursor: pointer;
-                    position: relative;
-
-                    &.active {
-                        font-weight: bold;
-                    }
-                }
-            }
-
-            &.right {
-                margin-left: auto;
-            }
-        }
     }
 }
-
 .caption {
     font-size: 13px;
     color: $color-gray-600;
     max-width: 400px;
     margin-top: 5px;
+
 }
 
 span.bold {
     font-weight: bold;
 }
 
-@media only screen and (max-width: 600px) {
+
+nav {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow: hidden;
+    }
+    li {
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            margin-left: 10px;
+            padding: 0px 15px;
+        }
+
+        float: left;
+    }
+    .menu-btn {
+        display: none;
+        &:checked {
+
+            ~ {
+
+                .menu {
+                    max-height: 240px;
+                }
+
+                .menu-icon {
+
+                    .navicon {
+
+                        background: transparent;
+
+                        &:before {
+                            transform: rotate(-45deg);
+                        }
+
+                        &:after {
+                            transform: rotate(45deg);
+                        }
+                    }
+                    &:not(.steps) {
+
+                        .navicon {
+
+                            &:before {
+                                top: 0;
+                            }
+
+                            &:after {
+                                top: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .logo {
+        display: none;
+        float: left;
+        font-size: 2em;
+        text-decoration: none;
+        margin-top: 10px;
+    }
+
+    .menu {
+        clear: none;
+        max-height: none;
+    }
+
+    .menu-icon {
+        cursor: pointer;
+        float: right;
+        background: #fae41a;
+        padding: 28px 20px;
+        position: relative;
+        user-select: none;
+
+        .navicon {
+            background: #000;
+            display: block;
+            height: 2px;
+            position: relative;
+            transition: background .2s ease-out;
+            width: 18px;
+
+            &:before {
+                background: #000;
+                content: '';
+                display: block;
+                height: 100%;
+                position: absolute;
+                transition: all .2s ease-out;
+                width: 100%;
+                top: 5px;
+            }
+
+            &:after {
+                background: #000;
+                content: '';
+                display: block;
+                height: 100%;
+                position: absolute;
+                transition: all .2s ease-out;
+                width: 100%;
+                top: -5px;
+            }
+        }
+    }
+}
+ul {
+
+    li {
+        a.active {
+            font-weight: bold;
+        }
+    }
+}
+
+ul.menu.left {
+    float: left;
+}
+
+ul.menu.right {
+    float: right;
+    margin-left: auto;
+}
+
+@media (max-width: 767px) {
+    //margin-top 80px to fix navbar overlay on mobile;
+    body{
+        margin-top:70px;
+    }
+    nav.nav-container.container {
+        padding: 0;
+    }
+    nav {
+        .logo {
+            display: block;
+            float: left;
+            margin-left: 15px;
+            text-align: unset;
+        }
+        li {
+            float: unset;
+            display: unset;
+            a {
+                margin-left: 0px;
+                padding: 15px 0px;
+            }
+        }
+        .menu {
+            clear: both;
+            max-height: 0;
+            transition: max-height .2s ease-out;
+            text-align: center;
+        }
+        ul {
+            border-bottom: none;
+        }
+    }
+    .nav-con {
+        min-height: unset;
+        height: unset;
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        z-index: 100;
+        border-top: unset;
+    }
+    ul.menu.left {
+        float: unset;
+        a {
+            font-weight: unset;
+        }
+    }
+    ul.menu.right {
+        float: unset;
+    }
+}
+
+@media (min-width: 767px) {
+    nav .menu-icon {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 767px) {
     nav {
         height: auto;
         padding: 10px;
@@ -203,11 +383,11 @@ span.bold {
                 flex-direction: column;
                 align-items: flex-start;
                 justify-content: center;
-    
+
                 li {
                     margin: 10px 0;
                 }
-    
+
                 &.right {
                     margin-left: 10px
                 }

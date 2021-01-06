@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import { HttpResult } from "../shared/http-result";
 import { UpdateNotificationDTO } from "./dto/update-notification.dto";
 import { Node } from "./node.model";
+import { CreateNotificationDTO } from "./dto/create-notification.dto";
 
 @Injectable({
 	providedIn: "root",
@@ -37,5 +38,21 @@ export class NotificationService {
 			);
 
 		return observable;
+	}
+
+	unlink(treeID: number, notificationID: number): Observable<null> {
+		const observable: Observable<null> = this.http.patch<null>(`/trees/${treeID}/notifications/${notificationID}/unlink`, {});
+		return observable;
+	}
+
+	create(treeID: number, dto: CreateNotificationDTO): Observable<Partial<Node>> {
+		const observer: Observable<Partial<Node>> = this.http
+			.post<HttpResult<Partial<Node>>>(`/trees/${treeID}/notifications/`, {
+				...dto,
+			})
+			.pipe(
+				map((response: HttpResult<Partial<Node>>) => response.result)
+			);
+		return observer;
 	}
 }

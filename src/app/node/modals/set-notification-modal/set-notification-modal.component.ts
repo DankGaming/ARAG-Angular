@@ -3,64 +3,68 @@ import { NgForm } from "@angular/forms";
 import { Modal } from "src/app/shared/modals/modal.interface";
 import { Tree } from "src/app/tree/tree.model";
 import { TreeService } from "src/app/tree/tree.service";
-import { AnswerService } from "../../answer.service";
+import { NotificationService } from "../../notification.service";
 import { ContentType } from "../../content-type.model";
 import { Node } from "../../node.model";
 import { NodeService } from "../../node.service";
 
 @Component({
-	selector: "app-set-answer-modal",
-	templateUrl: "./set-answer-modal.component.html",
-	styleUrls: ["./set-answer-modal.component.scss"],
+	selector: "app-set-notification-modal",
+	templateUrl: "./set-notification-modal.component.html",
+	styleUrls: ["./set-notification-modal.component.scss"],
 })
-export class SetAnswerModalComponent implements OnInit, Modal {
+export class SetNotificationModalComponent implements OnInit, Modal {
 	@Input() tree: Tree;
-	@Input() question: Node;
-	@Input() answer?: Node;
+	@Input() notification?: Node;
+	@Input() isRoot: boolean = false;
 	@Output() closeModal = new EventEmitter();
 	@Output() set = new EventEmitter<Partial<Node>>();
 
 	constructor(
-		private answerService: AnswerService,
+		private notificationService: NotificationService,
 		private nodeService: NodeService,
 		private treeService: TreeService
 	) {}
 
 	ngOnInit(): void {}
 
-	close = (): void => this.closeModal.emit();
+	close(): void {
+		this.closeModal.emit();
+	}
 
 	create(form: NgForm): void {
 		const values = form.value;
 
-		this.answerService
-			.create(this.tree.id, this.question.id, {
+		this.notificationService
+			.create(this.tree.id, {
 				content: values.content,
-				type: ContentType.ANSWER,
+				type: ContentType.NOTIFICATION,
+				root: values.treeRoot
 			})
-			.subscribe((answer: Partial<Node>) => {
-				this.set.emit(answer);
+			.subscribe((node: Partial<Node>) => {
+				this.set.emit(node);
 				this.close();
-				this.treeService.treeSubject.next();
 			});
 	}
 
 	update(form: NgForm): void {
 		const values = form.value;
 
-		this.answerService
-			.update(this.tree.id, this.question.id, this.answer.id, {
+		this.notificationService
+			.update(this.tree.id, this.notification.id, {
 				content: values.content,
+				root: values.treeRoot
 			})
-			.subscribe((answer: Partial<Node>) => {
-				this.set.emit(answer);
+			.subscribe((node: Partial<Node>) => {
+				this.notification.content = node.content;
+				if (values.treeRoot) this.tree.root = this.notification;
 				this.close();
-				this.treeService.treeSubject.next();
 			});
 	}
 
+
 	remove(): void {
-		this.nodeService.remove(this.tree.id, this.answer.id).subscribe();
+		this.nodeService.remove(this.tree.id, this.notification.id).subscribe();
 		this.close();
 		this.treeService.treeSubject.next();
 	}

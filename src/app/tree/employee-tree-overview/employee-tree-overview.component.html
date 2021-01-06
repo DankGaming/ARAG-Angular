@@ -6,12 +6,12 @@
                 Verwijder
             </button>
           
-            <button class="button" (click)="showEditTreeModal = true">
+            <button class="button" (click)="editTree()">
                 <fa-icon [icon]="icons.faPen"></fa-icon>
                 Bewerken
             </button>
 
-            <button class="button publish-animation">
+            <button class="button publish-animation" (click)="publishTree()">
                 <fa-icon [icon]="icons.faAngleDoubleUp"></fa-icon>
                 Publiceer
             </button>
@@ -38,13 +38,13 @@
                     <app-search-results [searchResults]="searchResults" *ngIf="searchResults" (clickedOutside)="clearSearchResults()" (clickedInside)="clearSearchResults(); clearSearchValue()"></app-search-results>
                 </li>
                 <li>
-                    <button class="button primary" (click)="modals.showSetQuestion = true">
+                    <button class="button primary" (click)="createQuestion()">
                         <fa-icon [icon]="icons.faPlus"></fa-icon>
                         Nieuwe vraag
                     </button>
                 </li>
                 <li>
-                    <button class="button primary">
+                    <button class="button primary" (click)="createNotification()">
                         <fa-icon [icon]="icons.faPlus"></fa-icon>
                         Nieuwe notificatie
                     </button>
@@ -67,11 +67,12 @@
                     [node]="child" 
                     [graph]="graph" 
                     [previousNode]="top.node" 
+                    [topNode]="top.node"
                     (expand)="changeTopNode($event)" 
                 ></app-node-container>
             </app-node-wrapper>
         </div>
     </div>
-    <app-set-tree-modal *ngIf="showEditTreeModal" [tree]="tree" (closeModal)="showEditTreeModal = false"></app-set-tree-modal>
-    <app-set-question-modal *ngIf="modals.showSetQuestion" (closeModal)="modals.showSetQuestion = false" (set)="changeTopNode($event)" [tree]="tree"></app-set-question-modal>
+
+    <ng-container appPlaceholder></ng-container>
 </div>

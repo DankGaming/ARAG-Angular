@@ -12,6 +12,8 @@ import { FormsModule } from "@angular/forms";
 import { DropdownComponent } from "./dropdown/dropdown.component";
 import { DropdownOptionDirective } from "./dropdown/dropdown-option.directive";
 import { DropdownSelectedDirective } from "./dropdown/dropdown-selected.directive";
+import { PlaceholderDirective } from "./placeholder.directive";
+import { ConfirmBoxModalComponent } from "./modals/confirm-box-modal/confirm-box-modal.component";
 
 @NgModule({
 	declarations: [
@@ -24,6 +26,8 @@ import { DropdownSelectedDirective } from "./dropdown/dropdown-selected.directiv
 		DropdownComponent,
 		DropdownOptionDirective,
 		DropdownSelectedDirective,
+		PlaceholderDirective,
+		ConfirmBoxModalComponent,
 	],
 	imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule],
 	exports: [
@@ -36,6 +40,8 @@ import { DropdownSelectedDirective } from "./dropdown/dropdown-selected.directiv
 		DropdownComponent,
 		DropdownOptionDirective,
 		DropdownSelectedDirective,
+		PlaceholderDirective,
+		ConfirmBoxModalComponent,
 	],
 })
 export class SharedModule {}
