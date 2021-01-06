@@ -20,6 +20,7 @@ import { skip } from "rxjs/operators";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { SetTreeModalComponent } from "../modals/set-tree-modal/set-tree-modal.component";
 import { SetQuestionModalComponent } from "src/app/node/modals/set-question-modal.ts/set-question-modal.component";
+import { SetNotificationModalComponent } from "src/app/node/modals/set-notification-modal/set-notification-modal.component";
 import { ModalService } from "src/app/shared/modal.service";
 import { ConfirmBoxModalComponent } from "src/app/shared/modals/confirm-box-modal/confirm-box-modal.component";
 
@@ -206,6 +207,12 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		modal.instance.set.subscribe((question: Node) => this.changeTopNode(question));
 	}
 
+	createNotification(): void {
+		const modal = this.modalService.createModal(SetNotificationModalComponent, this.modalHost);
+		modal.instance.tree = this.tree;
+		modal.instance.set.subscribe((notification: Node) => this.changeTopNode(notification));
+  }
+  
 	publishTree(): void {
 		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
 		modal.instance.description = `U staat op het punt om '${this.tree.name}'
