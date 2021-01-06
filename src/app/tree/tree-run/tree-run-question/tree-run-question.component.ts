@@ -3,7 +3,6 @@ import { Node } from "src/app/node/node.model";
 import { NodeService } from "src/app/node/node.service";
 import { ContentType } from "src/app/node/content-type.model";
 import { Tree } from "../../tree.model";
-import { NgForm } from "@angular/forms";
 
 @Component({
     selector: "app-tree-run-question",
