@@ -5,9 +5,9 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { OrderDirection } from "src/app/shared/http-filter";
 import { AuthService } from "src/app/auth/auth.service";
 import { Employee } from "src/app/employee/employee.model";
-import { ModalService } from "src/app/shared/modal.service";
 import { SetTreeModalComponent } from "../modals/set-tree-modal/set-tree-modal.component";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
+import { ModalService } from "src/app/shared/modal.service";
 
 @Component({
 	selector: "app-employee-trees-overview",
