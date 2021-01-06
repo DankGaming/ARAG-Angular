@@ -179,45 +179,54 @@ nav {
         padding: 0;
         list-style: none;
         overflow: hidden;
-        border-bottom: 1px solid #fff;
     }
     li {
+
+        &:hover {
+            cursor: pointer;
+        }
+
         a {
             display: block;
             text-decoration: none;
             margin-left: 10px;
             padding: 0px 15px;
-            &:hover {
-                text-decoration: underline;
-            }
         }
+
         float: left;
     }
     .menu-btn {
-        &:hover {
-            text-decoration: underline;
-        }
         display: none;
         &:checked {
+
             ~ {
+
                 .menu {
                     max-height: 240px;
                 }
+
                 .menu-icon {
+
                     .navicon {
+
                         background: transparent;
+
                         &:before {
                             transform: rotate(-45deg);
                         }
+
                         &:after {
                             transform: rotate(45deg);
                         }
                     }
                     &:not(.steps) {
+
                         .navicon {
+
                             &:before {
                                 top: 0;
                             }
+
                             &:after {
                                 top: 0;
                             }
@@ -227,6 +236,7 @@ nav {
             }
         }
     }
+
     .logo {
         display: none;
         float: left;
@@ -234,18 +244,20 @@ nav {
         text-decoration: none;
         margin-top: 10px;
     }
+
     .menu {
         clear: none;
         max-height: none;
     }
+
     .menu-icon {
         cursor: pointer;
-        display: inline-block;
         float: right;
         background: #fae41a;
         padding: 28px 20px;
         position: relative;
         user-select: none;
+
         .navicon {
             background: #000;
             display: block;
@@ -253,6 +265,7 @@ nav {
             position: relative;
             transition: background .2s ease-out;
             width: 18px;
+
             &:before {
                 background: #000;
                 content: '';
@@ -263,6 +276,7 @@ nav {
                 width: 100%;
                 top: 5px;
             }
+
             &:after {
                 background: #000;
                 content: '';
@@ -277,15 +291,18 @@ nav {
     }
 }
 ul {
+
     li {
         a.active {
             font-weight: bold;
         }
     }
 }
+
 ul.menu.left {
     float: left;
 }
+
 ul.menu.right {
     float: right;
     margin-left: auto;
