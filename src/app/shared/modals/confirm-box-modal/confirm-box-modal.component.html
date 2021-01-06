@@ -1,4 +1,7 @@
-<app-modal [title]="title" [showBody]="false" (closeModal)="close()">
+<app-modal [title]="title" [showBody]="description != null" (closeModal)="close()">
+    <ng-container *ngIf="description" body>
+        <p>{{ description }}</p>
+    </ng-container>
     <ng-container footer>
         <button class="button primary" (click)="confirm()">
             Ja
