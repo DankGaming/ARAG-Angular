@@ -8,6 +8,7 @@ import { Employee } from "src/app/employee/employee.model";
 import { ModalService } from "src/app/shared/modal.service";
 import { SetTreeModalComponent } from "../modals/set-tree-modal/set-tree-modal.component";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
+import { ConfirmBoxModalComponent } from "src/app/shared/modals/confirm-box-modal/confirm-box-modal.component";
 
 @Component({
 	selector: "app-employee-trees-overview",
@@ -47,6 +48,6 @@ export class EmployeeTreesOverviewComponent implements OnInit {
 	}
 
 	createTree(): void {
-		this.modalService.createModal(SetTreeModalComponent, this.modalHost);
+		this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
 	}
 }

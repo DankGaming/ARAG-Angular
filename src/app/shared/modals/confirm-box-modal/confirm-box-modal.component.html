@@ -1,4 +1,4 @@
-<app-modal title="Weet u het zeker?" (closeModal)="close()">
+<app-modal title="Weet u het zeker?" [showBody]="false" (closeModal)="close()">
     <ng-container footer>
         <button class="button primary" (click)="confirm()">
             Ja
