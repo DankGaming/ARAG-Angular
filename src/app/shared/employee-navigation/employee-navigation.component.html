@@ -1,6 +1,9 @@
-<nav>
-    <div class="nav-container container">
-        <ul>
+<div class="nav-con">
+    <nav class="nav-container container">
+        <h2 class="logo">ARAG</h2>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu left">
             <li>
                 <a [routerLink]="['']" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Beslissingsbomen</a>
             </li>
@@ -8,8 +11,7 @@
                 <a [routerLink]="['employees/trees']" routerLinkActive="active">Dashboard</a>
             </li>
         </ul>
-
-        <ul class="right" *ngIf="employee">
+        <ul class="menu right" *ngIf="employee">
             <li *ngIf="isAdmin()">
                 <a [routerLink]="['employees/admin']" routerLinkActive="active">Administratiepaneel</a>
             </li>
@@ -20,5 +22,6 @@
                 <a (click)="logout()">Uitloggen</a>
             </li>
         </ul>
-    </div>
-</nav>
+    </nav>
+</div>
+
