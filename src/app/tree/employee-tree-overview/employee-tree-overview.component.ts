@@ -211,7 +211,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		const modal = this.modalService.createModal(SetNotificationModalComponent, this.modalHost);
 		modal.instance.tree = this.tree;
 		modal.instance.set.subscribe((notification: Node) => this.changeTopNode(notification));
-  }
+  	}
   
 	publishTree(): void {
 		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
