@@ -18,9 +18,10 @@ import { ContentType } from "src/app/node/content-type.model";
 import { Location } from "@angular/common";
 import { skip } from "rxjs/operators";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
-import { ModalService } from "src/app/shared/modal.service";
 import { SetTreeModalComponent } from "../modals/set-tree-modal/set-tree-modal.component";
 import { SetQuestionModalComponent } from "src/app/node/modals/set-question-modal.ts/set-question-modal.component";
+import { ModalService } from "src/app/shared/modal.service";
+import { ConfirmBoxModalComponent } from "src/app/shared/modals/confirm-box-modal/confirm-box-modal.component";
 
 interface Top {
 	node: Node;
@@ -182,11 +183,14 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	}
 
 	removeTree(): void {
-		this.treeService.remove(this.tree.id).subscribe(() => {
-			this.router.navigate([".."], {
-				relativeTo: this.route,
+		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
+		modal.instance.confirmed.subscribe(() => {
+			this.treeService.remove(this.tree.id).subscribe(() => {
+				this.router.navigate([".."], {
+					relativeTo: this.route,
+				});
 			});
-		});
+		})
 	}
 
 	editTree(): void {
