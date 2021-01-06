@@ -66,13 +66,7 @@ export class LinkModalComponent implements OnInit, Modal {
 
 						if (node.children?.length > 0) {
 							const nodeType: ContentType = node.children[0].type;
-							this.type = {
-								name:
-									nodeType === ContentType.QUESTION
-										? "Vraag"
-										: "Notificatie",
-								value: nodeType,
-							};
+							this.type = this.types.find(type => type.value === nodeType);
 						}
 
 						this.switchType();
