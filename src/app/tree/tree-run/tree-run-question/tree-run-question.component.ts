@@ -17,7 +17,7 @@ export class TreeRunQuestionComponent implements OnInit {
     node: Node;
     selectedAnswer: Node;
     answers: Node[] = [];
-    nextQuestion = false;
+    nextNodeIsQuestion = false;
     answerConfirmed = false;
 
     constructor(private nodeService: NodeService) {}
@@ -26,24 +26,21 @@ export class TreeRunQuestionComponent implements OnInit {
         this.questionCounter++;
         this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
-
-            for (const i of node.children) {
-                this.answers.push(i);
-              }
+            this.answers = node.children;
             this.selectedAnswer = this.answers[0];
         });
     }
 
     confirmAnswer(): void {
-        this.answerConfirmed = true;
         if (this.selectedAnswer.children?.length > 0) {
             if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
-                this.nextQuestion = true;
+                this.nextNodeIsQuestion = true;
             }
             else {
-                this.nextQuestion = false;
+                this.nextNodeIsQuestion = false;
             }
         }
+        this.answerConfirmed = true;
     }
 
     hasAnswers(): boolean {

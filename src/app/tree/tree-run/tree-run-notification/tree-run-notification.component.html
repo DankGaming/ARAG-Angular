@@ -11,20 +11,15 @@
     </main>
 
     <div class="next-node">
-        <div *ngIf="hasChild(); else endOfTree">
+        <div *ngIf="hasChild();">
             <div *ngIf="childTypeIsQuestion(); else loadNotification">
                 <div class="connect-line"></div>
-                <app-tree-run-question [tree] = tree [nodeInput] = node.children[0] [questionCounter] = questionCounter></app-tree-run-question>
+                <app-tree-run-question [tree]=tree [nodeInput]=node.children[0] [questionCounter]=questionCounter></app-tree-run-question>
             </div>
             <ng-template #loadNotification>
                 <div class="connect-line"></div>
-                <app-tree-run-notification [tree] = tree [nodeInput] = node.children[0] [questionCounter] = questionCounter></app-tree-run-notification>
+                <app-tree-run-notification [tree]=tree [nodeInput]=node.children[0] [questionCounter]=questionCounter></app-tree-run-notification>
             </ng-template>
         </div>
-        <ng-template #endOfTree>
-            <div class="tree-end">
-                <p>Dit is het einde van de boom</p>
-            </div>
-        </ng-template>
     </div>
 </div>
