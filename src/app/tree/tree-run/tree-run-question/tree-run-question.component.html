@@ -1,28 +1,26 @@
-<main *ngIf="node">
-    <div class="tree-run-question-container">
-        <div class="question-number">
-            <b>Vraag {{ questionCounter }}</b>
-        </div>
-        <div class="question-text">
-            <p>{{ node.content }}</p>
-        </div>
-
-        <form #answerForm="ngForm" (ngSubmit)="confirmAnswer()" class="selected-answer-container" *ngIf="hasAnswers()">
-            <app-dropdown class="dropdown" [(ngModel)]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
-                <ng-template dropdownSelected let-selected>
-                    <p>{{ selected.content }}</p>
-                </ng-template>
-                <ng-template dropdownOption let-option>
-                    <p>{{ option.content }}</p>
-                </ng-template>
-            </app-dropdown>
-
-            <button class="button primary">
-                Bevestigen
-            </button>
-        </form>
+<div class="tree-run-question-container" *ngIf="node">
+    <div class="question-number">
+        <b>Vraag {{ questionCounter }}</b>
     </div>
-</main>
+    <div class="question-text">
+        <p>{{ node.content }}</p>
+    </div>
+
+    <form #answerForm="ngForm" (ngSubmit)="confirmAnswer()" class="selected-answer-container" *ngIf="hasAnswers()">
+        <app-dropdown class="dropdown" [(ngModel)]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
+            <ng-template dropdownSelected let-selected>
+                <p>{{ selected.content }}</p>
+            </ng-template>
+            <ng-template dropdownOption let-option>
+                <p>{{ option.content }}</p>
+            </ng-template>
+        </app-dropdown>
+
+        <button class="button primary">
+            Bevestigen
+        </button>
+    </form>
+</div>
 
 <div class="next-node">
     <div *ngIf="answerConfirmed">
