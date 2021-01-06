@@ -12,8 +12,7 @@ export class ConfirmBoxModalComponent implements OnInit, Modal {
 	@Output() closeModal = new EventEmitter();
 	@Output() confirmed = new EventEmitter();
     @Output() rejected = new EventEmitter();
-    
-	constructor() {}
+    constructor() {}
 
 	ngOnInit(): void {}
 

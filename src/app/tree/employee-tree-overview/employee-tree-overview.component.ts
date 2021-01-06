@@ -184,14 +184,15 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 
 	removeTree(): void {
 		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
-		modal.instance.description = `U staat op het punt om de boom '${this.tree.name}' te verwijderen. Deze actie kan niet ongedaan worden. Weet u het zeker?`;
+		modal.instance.description = `U staat op het punt om de boom '${this.tree.name}'
+		te verwijderen. Deze actie kan niet ongedaan worden. Weet u het zeker?`;
 		modal.instance.confirmed.subscribe(() => {
 			this.treeService.remove(this.tree.id).subscribe(() => {
 				this.router.navigate([".."], {
 					relativeTo: this.route,
 				});
 			});
-		})
+		});
 	}
 
 	editTree(): void {
@@ -207,10 +208,11 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 
 	publishTree(): void {
 		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
-		modal.instance.description = `U staat op het punt om '${this.tree.name}' te publiceren. Dit betekent dat deze boom voor iedereen zichtbaar is. Weet u het zeker?`;
+		modal.instance.description = `U staat op het punt om '${this.tree.name}'
+		te publiceren. Dit betekent dat deze boom voor iedereen zichtbaar is. Weet u het zeker?`;
 		modal.instance.confirmed.subscribe(() => {
 			// TODO: publish tree
-		})
+		});
 	}
 
 	private navigateToTop(
