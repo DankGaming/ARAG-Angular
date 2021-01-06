@@ -43,4 +43,13 @@ export class NodeService {
 			`/trees/${treeID}/nodes/${nodeID}`
 		);
 	}
+
+	linkables(treeID: number, nodeID: number): Observable<Node[]> {
+		const observable: Observable<Node[]> = this.http.get<HttpResult<Node[]>>(
+			`/trees/${treeID}/nodes/${nodeID}/linkable`
+		).pipe(
+			map((response: HttpResult<Node[]>) => response.result)
+		);
+		return observable;
+	}
 }
