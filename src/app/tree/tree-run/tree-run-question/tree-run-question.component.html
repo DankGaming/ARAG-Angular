@@ -7,8 +7,8 @@
             <p>{{ node.content }}</p>
         </div>
 
-        <form #answerForm="ngForm" (ngSubmit)="confirmAnswer(answerForm)" class="selected-answer-container" *ngIf="hasAnswers()">
-            <app-dropdown class="dropdown" [ngModel]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
+        <form #answerForm="ngForm" (ngSubmit)="confirmAnswer()" class="selected-answer-container" *ngIf="hasAnswers()">
+            <app-dropdown class="dropdown" [(ngModel)]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
                 <ng-template dropdownSelected let-selected>
                     <p>{{ selected.content }}</p>
                 </ng-template>

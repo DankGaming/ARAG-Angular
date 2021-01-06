@@ -32,10 +32,9 @@ export class TreeRunQuestionComponent implements OnInit {
         });
     }
 
-    confirmAnswer(form: NgForm): void {
-        const selectedAnswer = form.value.selectedAnswer;
-        if (selectedAnswer.children?.length > 0) {
-            if (selectedAnswer.children[0].type === ContentType.QUESTION) {
+    confirmAnswer(): void {
+        if (this.selectedAnswer.children?.length > 0) {
+            if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
                 this.nextNodeIsQuestion = true;
             }
             else {
