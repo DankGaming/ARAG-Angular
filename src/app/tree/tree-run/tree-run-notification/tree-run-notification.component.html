@@ -1,14 +1,12 @@
 <div *ngIf="hasNode()">
-    <main>
-        <div class="tree-run-notification">
-            <div class="notification">
-                <b>Notificatie</b>
-            </div>
-            <div class="notification-text">
-                <p>{{ node.content }}</p>
-            </div>
+    <div class="tree-run-notification">
+        <div class="notification">
+            <b>Notificatie</b>
         </div>
-    </main>
+        <div class="notification-text">
+            <p>{{ node.content }}</p>
+        </div>
+    </div>
 
     <div class="next-node">
         <div *ngIf="hasChild();">
