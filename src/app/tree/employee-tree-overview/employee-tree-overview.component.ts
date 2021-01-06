@@ -184,6 +184,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 
 	removeTree(): void {
 		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
+		modal.instance.description = `U staat op het punt om de boom '${this.tree.name}' te verwijderen. Deze actie kan niet ongedaan worden. Weet u het zeker?`;
 		modal.instance.confirmed.subscribe(() => {
 			this.treeService.remove(this.tree.id).subscribe(() => {
 				this.router.navigate([".."], {
@@ -202,6 +203,13 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 		const modal = this.modalService.createModal(SetQuestionModalComponent, this.modalHost);
 		modal.instance.tree = this.tree;
 		modal.instance.set.subscribe((question: Node) => this.changeTopNode(question));
+	}
+
+	publishTree(): void {
+		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
+		modal.instance.confirmed.subscribe(() => {
+			// TODO: publish tree
+		})
 	}
 
 	private navigateToTop(

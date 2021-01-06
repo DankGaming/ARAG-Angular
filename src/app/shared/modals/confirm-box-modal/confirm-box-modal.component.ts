@@ -7,10 +7,12 @@ import { Modal } from "../modal.interface";
 	styleUrls: ["./confirm-box-modal.component.scss"],
 })
 export class ConfirmBoxModalComponent implements OnInit, Modal {
-	@Input() title: string = "Weet u het zeker?";
+    @Input() title: string = "Weet u het zeker?";
+    @Input() description: string;
 	@Output() closeModal = new EventEmitter();
 	@Output() confirmed = new EventEmitter();
-	@Output() rejected = new EventEmitter();
+    @Output() rejected = new EventEmitter();
+    
 	constructor() {}
 
 	ngOnInit(): void {}
