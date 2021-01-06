@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Modal } from "../modal.interface";
 
 @Component({
@@ -7,6 +7,7 @@ import { Modal } from "../modal.interface";
   styleUrls: ["./confirm-box-modal.component.scss"]
 })
 export class ConfirmBoxModalComponent implements OnInit, Modal {
+  @Input() title: string = "Weet u het zeker?";
   @Output() closeModal = new EventEmitter();
   @Output() confirmed = new EventEmitter();
   @Output() rejected = new EventEmitter();
