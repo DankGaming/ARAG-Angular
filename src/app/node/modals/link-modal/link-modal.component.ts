@@ -53,11 +53,6 @@ export class LinkModalComponent implements OnInit, Modal {
 			.findAll(this.tree.id)
 			.subscribe((questions: Node[]) => {
 				this.questions = questions;
-				const question = this.questions.find((question: Node) => question.id = this.node.id);
-				if (question) {
-					const index = this.questions.indexOf(question);
-					this.questions.splice(index, 1);
-				}
 			});
 
 		this.notificationService
