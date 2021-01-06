@@ -182,6 +182,11 @@ nav {
         border-bottom: 1px solid #fff;
     }
     li {
+
+        &:hover {
+            cursor: pointer;
+        }
+        
         a {
             display: block;
             text-decoration: none;
@@ -240,7 +245,6 @@ nav {
     }
     .menu-icon {
         cursor: pointer;
-        display: inline-block;
         float: right;
         background: #fae41a;
         padding: 28px 20px;
