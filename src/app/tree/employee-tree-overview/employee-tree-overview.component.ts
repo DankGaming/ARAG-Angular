@@ -190,7 +190,7 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 					relativeTo: this.route,
 				});
 			});
-		})
+		});
 	}
 
 	editTree(): void {
