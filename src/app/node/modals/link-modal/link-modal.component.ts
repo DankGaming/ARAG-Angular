@@ -59,7 +59,7 @@ export class LinkModalComponent implements OnInit, Modal {
 			.findAll(this.tree.id)
 			.subscribe((notifications: Node[]) => {
 				this.notifications = notifications;
-				const notification = this.notifications.find((notification: Node) => notification.id == this.node.id);
+				const notification = this.notifications.find((notification: Node) => notification.id === this.node.id);
 				if (notification) {
 					const index = this.notifications.indexOf(notification);
 					this.notifications.splice(index, 1);
