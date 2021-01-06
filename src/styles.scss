@@ -118,6 +118,10 @@ form {
         display: flex;
         flex-direction: column;
 
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
         label {
             font-weight: bold;
             font-size: 11px;
