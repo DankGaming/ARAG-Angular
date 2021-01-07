@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { OrderDirection } from "src/app/shared/http-filter";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
 
@@ -14,7 +15,11 @@ export class CustomerTreesOverviewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.treeService
-			.findAll({ concept: false })
+			.findAll({
+				concept: false,
+				order: "createdAt",
+				orderDirection: OrderDirection.DESC,
+			})
 			.subscribe((trees: Tree[]) => {
 				this.trees = trees;
 			});

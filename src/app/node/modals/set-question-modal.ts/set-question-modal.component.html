@@ -1,0 +1,35 @@
+<app-modal [title]="question ? 'Wijzig vraag' : 'Nieuwe vraag'" [subtitle]="'Beslissingsboom: ' + tree.name" (closeModal)="close()">
+    <ng-container body>
+        <form #setQuestionForm="ngForm" id="set-question-form" (ngSubmit)="question ? update(setQuestionForm) : create(setQuestionForm)" autocomplete="off">
+            <div class="form-group">
+                <label for="content">Vraag</label>
+                <input type="text" name="content" placeholder="Vraag" id="content" [ngModel]="question?.content" ngModel required>
+            </div>
+            <div class="form-group" *ngIf="!isRoot">
+                <label for="tree-root">Maak vraag start van boom</label>
+                <app-toggle name="treeRoot" [ngModel]="isRoot" required></app-toggle>
+            </div>
+            <div class="form-group">
+                <label for="type">Type vraag</label>
+                <app-dropdown [ngModel]="type" name="type" id="type" ngDefaultControl required [options]="types">
+                    <ng-template dropdownSelected let-selected>
+                        <p>{{ selected.name }}</p>
+                    </ng-template>
+                    <ng-template dropdownOption let-option>
+                        <p>{{ option.name }}</p>
+                    </ng-template>
+                </app-dropdown>
+            </div>
+        </form>
+    </ng-container>
+    <ng-container footer>
+        <div class="footer-button-container">
+            <button class="button primary" [disabled]="setQuestionForm.invalid" form="set-question-form">
+                Opslaan
+            </button>
+            <button class="button danger" *ngIf="question" (click)="remove()">
+                Verwijder
+            </button>
+        </div>
+    </ng-container>
+</app-modal>

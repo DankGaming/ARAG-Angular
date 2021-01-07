@@ -1,0 +1,20 @@
+<div class="overlay" (mousedown)="close()">
+    <div class="modal-container" (mousedown)="$event.stopPropagation()">
+        <header>
+            <div class="modal-title">
+                <h3>{{ title }}</h3>
+                <p *ngIf="subtitle" class="caption">{{ subtitle }}</p>
+            </div>
+    
+            <button class="close-button" (click)="close()">
+                <fa-icon [icon]="icons.faTimesCircle"></fa-icon>
+            </button>
+        </header>
+        <section class="modal-body" *ngIf="showBody">
+            <ng-content select="[body]"></ng-content>
+        </section>
+        <footer *ngIf="showFooter">
+            <ng-content select="[footer]"></ng-content>
+        </footer>
+    </div>
+</div>

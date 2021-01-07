@@ -1,0 +1,79 @@
+<div *ngIf="tree">
+    <app-header [title]="tree.name" [subtitle]="tree.description">
+        <div class="header-buttons">
+            <button class="button danger-animation" (click)="removeTree()">
+                <fa-icon [icon]="icons.faTrashAlt"></fa-icon>
+                Verwijder
+            </button>
+          
+            <button class="button" (click)="editTree()">
+                <fa-icon [icon]="icons.faPen"></fa-icon>
+                Bewerken
+            </button>
+
+            <button class="button publish-animation" (click)="publishTree()">
+                <fa-icon [icon]="icons.faAngleDoubleUp"></fa-icon>
+                Publiceer
+            </button>
+          
+            <button class="button" [routerLink]="['/customers', 'trees', tree.id]">
+                <fa-icon [icon]="icons.faWalking"></fa-icon>
+                Doorlopen
+            </button>
+        </div>
+    </app-header>
+
+    <div class="question-container">
+        <div class="top-bar">
+            <div>
+                <button class="back-button" (click)="back()" *ngIf="top && top?.node.id !== tree?.root?.id">
+                    <fa-icon [icon]="icons.faArrowLeft"></fa-icon>
+                    Terug
+                </button>
+            </div>
+
+            <ul class="right">
+                <li id="search-bar-container">
+                    <input type="text" placeholder="Zoeken" [(ngModel)]="searchValue" (input)="search()" (keyup.enter)="search(false)">
+                    <app-search-results [searchResults]="searchResults" *ngIf="searchResults" (clickedOutside)="clearSearchResults()" (clickedInside)="clearSearchResults(); clearSearchValue()"></app-search-results>
+                </li>
+                <li>
+                    <button class="button primary" (click)="createQuestion()">
+                        <fa-icon [icon]="icons.faPlus"></fa-icon>
+                        Nieuwe vraag
+                    </button>
+                </li>
+                <li>
+                    <button class="button primary" (click)="createNotification()">
+                        <fa-icon [icon]="icons.faPlus"></fa-icon>
+                        Nieuwe notificatie
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="nodes-container" *ngIf="top?.node && top?.children">
+            <app-node-wrapper>
+                <app-node-container 
+                    [tree]="tree" 
+                    [node]="top.node" 
+                    [isCurrentTop]="true" 
+                    [topNode]="top.node"
+                    [graph]="graph">
+                </app-node-container>
+            </app-node-wrapper>
+
+            <app-node-wrapper class="indent" *ngFor="let child of top.children">
+                <app-node-container 
+                    [tree]="tree" 
+                    [node]="child" 
+                    [graph]="graph" 
+                    [previousNode]="top.node" 
+                    [topNode]="top.node"
+                    (expand)="changeTopNode($event)" 
+                ></app-node-container>
+            </app-node-wrapper>
+        </div>
+    </div>
+
+    <ng-container appPlaceholder></ng-container>
+</div>

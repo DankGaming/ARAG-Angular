@@ -1,8 +1,7 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Employee } from "src/app/employee/employee.model";
 import { AuthService } from "../auth.service";
 
 @Component({
@@ -20,17 +19,23 @@ export class LoginComponent implements OnInit {
 	login(form: NgForm): void {
 		if (form.invalid) return;
 
-		const values = form.value;
+		const values: {
+			email: string;
+			password: string;
+		} = form.value;
 
 		this.authService
 			.login({
 				email: values.email,
 				password: values.password,
 			})
-			.subscribe((employee: Employee) => {
-				this.router.navigate(["/"]);
-			}, (error: HttpErrorResponse) => {
-				this.error = error.error.error.message;
-			});
+			.subscribe(
+				() => {
+					this.router.navigate(["/employees/trees"]);
+				},
+				(error: HttpErrorResponse) => {
+					this.error = error.error.error.message;
+				}
+			);
 	}
 }

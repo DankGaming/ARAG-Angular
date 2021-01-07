@@ -1,0 +1,20 @@
+<main>
+    <app-header title="Welkom, {{ employee.firstname }}" subtitle="Kies welke beslissingsboom u wil bewerken">
+        <button class="button primary" (click)="createTree()">
+            <fa-icon [icon]="icons.faPlus"></fa-icon>
+            Nieuwe boom
+        </button>
+    </app-header>
+
+    <ul *ngIf="trees.length > 0; else noTreesContainer">
+        <li *ngFor="let tree of trees">
+            <app-tree-row [tree]="tree" [showCreator]="true" [navigationLink]="['/employees', 'trees', tree.id]"></app-tree-row>
+        </li>
+    </ul>
+
+    <ng-template #noTreesContainer>
+        <p>Er zijn nog geen beslissingsbomen. Klik <span class="bold" (click)="createTree()">hier</span> om een beslissingsboom te maken.</p>
+    </ng-template>
+
+    <ng-container appPlaceholder></ng-container>
+</main>

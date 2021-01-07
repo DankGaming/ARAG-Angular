@@ -1,0 +1,43 @@
+<app-modal title="Koppel" [subtitle]="" (closeModal)="close()" *ngIf="nodes">
+    <ng-container body>
+        <form #linkForm="ngForm" id="link-form" (ngSubmit)="link(linkForm)" autocomplete="off">
+            <div class="form-group">
+                <label for="type">Vervolgtype</label>
+                <app-dropdown [(ngModel)]="type" id="type" name="type" [options]="types" (ngModelChange)="switchType()">
+                    <ng-template dropdownSelected let-selected>
+                        <p>{{ selected.name }}</p>
+                    </ng-template>
+                    <ng-template dropdownOption let-option>
+                        <p>{{ option.name }}</p>
+                    </ng-template>
+                </app-dropdown>
+            </div>
+
+            <div class="form-group" *ngIf="nodes">
+                <label for="next-node">Vervolg</label>
+                <app-dropdown [ngModel]="defaultNode" id="next-node" name="nextNode" [options]="nodes" *ngIf="nodes?.length > 0 else noNodes">
+                    <ng-template dropdownSelected let-selected>
+                        <p>{{ selected.content }}</p>
+                    </ng-template>
+                    <ng-template dropdownOption let-option>
+                        <p><span class="bold">{{ option.id }}:</span> {{ option.content }}</p>
+                    </ng-template>
+                </app-dropdown>
+
+                <ng-template #noNodes>
+                    <p>U moet eerst nieuwe vragen of notificaties maken</p>
+                </ng-template>
+            </div>
+        </form>
+    </ng-container>
+    <ng-container footer>
+        <div class="footer-button-container">
+            <button class="button primary" [disabled]="linkForm.invalid" form="link-form">
+                Opslaan
+            </button>
+            <button class="button danger" *ngIf="node.children.length > 0" (click)="unlink()">
+                Verwijder koppeling
+            </button>
+        </div>
+    </ng-container>
+</app-modal>

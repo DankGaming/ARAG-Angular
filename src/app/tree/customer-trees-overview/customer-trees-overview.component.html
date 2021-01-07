@@ -1,9 +1,9 @@
-<div class="container">
+<div>
     <app-header title="Beslissingsbomen" subtitle="Kies welke beslissingsboom u wilt doorlopen"></app-header>
 
     <ul *ngIf="trees.length > 0; else noTreesContainer">
         <li *ngFor="let tree of trees">
-            <app-tree-row [tree]="tree"></app-tree-row>
+            <app-tree-row [tree]="tree" [navigationLink]="['/customers', 'trees', tree.id]"></app-tree-row>
         </li>
     </ul>
 

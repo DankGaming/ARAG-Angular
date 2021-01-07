@@ -1,1 +1,17 @@
-<p>tree-run works!</p>
+<div *ngIf="tree">
+    <h1 class="title">{{ this.tree.name }}</h1>
+
+    <div class="root-node">
+        <div *ngIf="hasRoot();">
+            <div *ngIf="rootNodeIsQuestion(); else rootTypeNotification">
+                <app-tree-run-question [tree]=tree [nodeInput]=tree.root [questionCounter]="0"></app-tree-run-question>
+            </div>
+            <ng-template #rootTypeNotification>
+                <app-tree-run-notification [tree]=tree [nodeInput]=tree.root [questionCounter]="0"></app-tree-run-notification>
+            </ng-template>
+        </div>
+        <ng-template #noRootNode>
+            <p>De boom heeft geen startpunt.</p>
+        </ng-template>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+name: Lint
+
+on:
+    pull_request:
+        branches: [master, dev]
+
+jobs:
+    run-linters:
+        name: Run linters
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12
+
+            - name: Cache node modules
+              uses: actions/cache@v2
+              with:
+                  path: node_modules
+                  key: node-modules-${{ hashFiles('package-lock.json') }}
+
+            - name: Install Node.js dependencies
+              if: steps.node-cache.outputs.cache-hit != 'true'
+              run: npm install
+
+            - name: Run linters
+              run: npm run lint

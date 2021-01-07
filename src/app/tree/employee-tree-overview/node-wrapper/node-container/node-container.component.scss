@@ -1,0 +1,96 @@
+@import "/src/app/shared/variables";
+
+.node-container {
+    header {
+
+        .type {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: $color-gray-600;
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
+    }
+
+    .node-children {
+        padding-top: 20px;
+        border-bottom: 1px solid $color-gray-200;
+
+        &:last-of-type {
+            border: none;
+        }
+    }
+
+    .node-content {
+        padding-top: 20px;
+        display: flex;
+
+        &:not(:last-child) {
+            padding-bottom: 20px;
+            position: relative;
+            
+            &::after {
+                border-bottom: 1px solid $color-gray-200;
+                position: absolute;
+                content: "";
+                width: 97%;
+                right: 0;
+                bottom: 0;
+            }
+        }
+
+        ul {
+            display: flex;
+
+            li {
+                margin-right: 19px;
+                font-size: 13px;
+                font-weight: bold;
+                color: $color-gray-600;
+
+                &:last-of-type {
+                    margin-right: 0;
+                }
+
+                fa-icon {
+                    margin-left: 2px;
+                    font-size: 11px;
+                    margin-right: 2px;
+                    
+                    &.arrow {
+                        position: relative;
+                        top: 27px;
+                    }
+                }
+            }
+
+            &:first-of-type li {
+
+                &::after {
+                    position: absolute;
+                    content: "•";
+                    margin-left: 7px;
+                }
+
+                &:last-of-type::after {
+                    content: "";
+                }
+            }
+        }
+
+        ul.right {
+            margin-left: auto;
+            
+            button {
+                font-size: 13px;
+                font-weight: bold;
+                color: $color-gray-600;
+                transition: .3s;
+
+                &:hover {
+                    color: $color-gray-800
+                }
+            }
+        }
+    }
+}
