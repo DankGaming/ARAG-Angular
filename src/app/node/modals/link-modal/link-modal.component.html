@@ -35,9 +35,6 @@
             <button class="button primary" [disabled]="linkForm.invalid" form="link-form">
                 Opslaan
             </button>
-            <button class="button danger" *ngIf="node.children.length > 0" (click)="unlink()">
-                Verwijder koppeling
-            </button>
         </div>
     </ng-container>
 </app-modal>

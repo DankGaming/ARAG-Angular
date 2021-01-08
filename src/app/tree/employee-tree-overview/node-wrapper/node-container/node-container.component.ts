@@ -10,6 +10,7 @@ import {
 	faLink,
 	faPen,
 	faPlus,
+	faUnlink
 } from "@fortawesome/free-solid-svg-icons";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { ModalService } from "src/app/shared/modal.service";
@@ -17,6 +18,10 @@ import { SetQuestionModalComponent } from "src/app/node/modals/set-question-moda
 import { SetAnswerModalComponent } from "src/app/node/modals/set-answer-modal/set-answer-modal.component";
 import { LinkModalComponent } from "src/app/node/modals/link-modal/link-modal.component";
 import { SetNotificationModalComponent } from "src/app/node/modals/set-notification-modal/set-notification-modal.component";
+import { AnswerService } from "src/app/node/answer.service";
+import { NotificationService } from "src/app/node/notification.service";
+import { TreeService } from "src/app/tree/tree.service";
+import { ConfirmBoxModalComponent } from "src/app/shared/modals/confirm-box-modal/confirm-box-modal.component";
 
 @Component({
 	selector: "app-node-container",
@@ -40,7 +45,7 @@ export class NodeContainerComponent implements OnInit {
 		answer: ContentType.ANSWER,
 		notification: ContentType.NOTIFICATION,
 	};
-	icons = { faChevronRight, faArrowDown, faTree, faLink, faPen, faPlus };
+	icons = { faChevronRight, faArrowDown, faTree, faLink, faPen, faPlus, faUnlink };
 
 	modals = {
 		showSetQuestion: false,
@@ -48,11 +53,12 @@ export class NodeContainerComponent implements OnInit {
 		showLink: false,
 	};
 
-	constructor(private modalService: ModalService) {}
+	constructor(private modalService: ModalService, private answerService: AnswerService, private notificationService: NotificationService, private treeService: TreeService) {}
 
 	ngOnInit(): void {}
 
 	isRoot = (): boolean => this.node.id === this.tree.root?.id;
+	hasChildren = (): boolean => this.graph.edges[this.node.id].length > 0;
 
 	isQuestion = (): boolean => this.node.type === ContentType.QUESTION;
 	isNotification = (): boolean => this.node.type === ContentType.NOTIFICATION;
@@ -88,5 +94,31 @@ export class NodeContainerComponent implements OnInit {
 		modal.instance.tree = this.tree;
 		modal.instance.node = this.node;
 		modal.instance.topNode = this.topNode;
+	}
+
+	unlink(): void {
+		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
+		modal.instance.confirmed.subscribe(() => {
+			switch (this.node.type) {
+				case ContentType.ANSWER:
+					this.unlinkAnswer();
+					break;
+				case ContentType.NOTIFICATION:
+					this.unlinkNotification();
+					break;
+			}
+		})
+	}
+
+	private unlinkAnswer(): void {
+		this.answerService.unlink(this.tree.id, this.topNode.id, this.node.id).subscribe(() => {
+			this.treeService.treeSubject.next();
+		});
+	}
+
+	private unlinkNotification(): void {
+		this.notificationService.unlink(this.tree.id, this.node.id).subscribe(() => {
+			this.treeService.treeSubject.next();
+		});
 	}
 }

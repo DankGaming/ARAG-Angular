@@ -41,7 +41,6 @@ export class LinkModalComponent implements OnInit, Modal {
 	defaultNode: Node;
 
 	constructor(
-		private questionService: QuestionService,
 		private notificationService: NotificationService,
 		private answerService: AnswerService,
 		private nodeService: NodeService,
@@ -102,29 +101,6 @@ export class LinkModalComponent implements OnInit, Modal {
 				this.linkNotification(form);
 				break;
 		}
-	}
-
-	unlink(): void {
-		switch (this.node.type) {
-			case ContentType.ANSWER:
-				this.unlinkAnswer();
-				break;
-			case ContentType.NOTIFICATION:
-				this.unlinkNotification();
-				break;
-		}
-	}
-
-	private unlinkAnswer(): void {
-		this.answerService.unlink(this.tree.id, this.topNode.id, this.node.id).subscribe(() => {
-			this.treeService.treeSubject.next();
-		});
-	}
-
-	private unlinkNotification(): void {
-		this.notificationService.unlink(this.tree.id, this.node.id).subscribe(() => {
-			this.treeService.treeSubject.next();
-		});
 	}
 
 	private linkAnswer(form: NgForm): void {

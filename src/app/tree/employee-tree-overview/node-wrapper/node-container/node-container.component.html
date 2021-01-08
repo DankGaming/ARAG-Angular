@@ -49,7 +49,11 @@
             </ng-container>
             <ng-container *ngIf="isNotification()">
                 <li>
-                    <button (click)="linkNode()">
+                    <button (click)="unlink()" *ngIf="hasChildren()">
+                        <fa-icon [icon]="icons.faUnlink"></fa-icon>
+                        Ontkoppel
+                    </button>
+                    <button (click)="linkNode()" *ngIf="!hasChildren()">
                         <fa-icon [icon]="icons.faLink"></fa-icon>
                         Koppel
                     </button>
@@ -63,7 +67,11 @@
             </ng-container>
             <ng-container *ngIf="isAnswer()">
                 <li>
-                    <button (click)="linkNode()">
+                    <button (click)="unlink()" *ngIf="hasChildren()">
+                        <fa-icon [icon]="icons.faUnlink"></fa-icon>
+                        Ontkoppel
+                    </button>
+                    <button (click)="linkNode()" *ngIf="!hasChildren()">
                         <fa-icon [icon]="icons.faLink"></fa-icon>
                         Koppel
                     </button>
