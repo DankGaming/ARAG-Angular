@@ -1,7 +1,7 @@
 <div class="tree-row">
     <div class="tree-info">
         <h3 class="title">{{ tree.name }}</h3>
-        <p class="caption" *ngIf="tree.description">{{ tree.description }}</p>
+        <p class="caption" *ngIf="tree.description">{{ tree.description | truncate:200 }}</p>
         <p class="caption" *ngIf="showCreator == true">Gemaakt door: <span class="bold">{{ tree.creator.firstname }} {{ tree.creator.lastname }}</span></p>
     </div>
 
