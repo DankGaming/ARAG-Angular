@@ -13,7 +13,7 @@
             <p>Notificaties</p>
             <ul>
                 <li *ngFor="let notification of searchResults?.notifications" [routerLink]="['.']" [queryParams]="{ top: notification.id }">
-                    <fa-icon [icon]="icons.faCircle" *ngIf="isActive(notification)"></fa-icon> <span class="bold">{{ notification.id }}:</span> {{ notification.content }}
+                    <fa-icon [icon]="icons.faCircle" *ngIf="isActive(notification)"></fa-icon> <span class="bold">{{ notification.id }}:</span> {{ notification.content | truncate:100 }}
                 </li>            
             </ul>
         </ng-container>
