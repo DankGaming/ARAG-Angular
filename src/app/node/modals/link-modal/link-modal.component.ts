@@ -8,7 +8,6 @@ import { ContentType } from "../../content-type.model";
 import { Node } from "../../node.model";
 import { NodeService } from "../../node.service";
 import { NotificationService } from "../../notification.service";
-import { QuestionService } from "../../question.service";
 
 @Component({
 	selector: "app-link-modal",
@@ -25,12 +24,12 @@ export class LinkModalComponent implements OnInit, Modal {
 	types: { name: string; value: ContentType }[] = [
 		{
 			name: "Vraag",
-			value: ContentType.QUESTION
+			value: ContentType.QUESTION,
 		},
 		{
 			name: "Notificatie",
-			value: ContentType.NOTIFICATION
-		}
+			value: ContentType.NOTIFICATION,
+		},
 	];
 	type = this.types[0];
 
@@ -41,7 +40,6 @@ export class LinkModalComponent implements OnInit, Modal {
 	defaultNode: Node;
 
 	constructor(
-		private questionService: QuestionService,
 		private notificationService: NotificationService,
 		private answerService: AnswerService,
 		private nodeService: NodeService,
@@ -66,7 +64,9 @@ export class LinkModalComponent implements OnInit, Modal {
 
 						if (node.children?.length > 0) {
 							const nodeType: ContentType = node.children[0].type;
-							this.type = this.types.find(type => type.value === nodeType);
+							this.type = this.types.find(
+								(type) => type.value === nodeType
+							);
 						}
 
 						this.switchType();
@@ -87,7 +87,10 @@ export class LinkModalComponent implements OnInit, Modal {
 		}
 
 		if (this.node.children.length > 0) {
-			this.defaultNode = this.node.children[0].type === this.type.value ? this.node.children[0] : this.nodes[0];
+			this.defaultNode =
+				this.node.children[0].type === this.type.value
+					? this.node.children[0]
+					: this.nodes[0];
 		} else {
 			this.defaultNode = this.nodes[0];
 		}
@@ -102,29 +105,6 @@ export class LinkModalComponent implements OnInit, Modal {
 				this.linkNotification(form);
 				break;
 		}
-	}
-
-	unlink(): void {
-		switch (this.node.type) {
-			case ContentType.ANSWER:
-				this.unlinkAnswer();
-				break;
-			case ContentType.NOTIFICATION:
-				this.unlinkNotification();
-				break;
-		}
-	}
-
-	private unlinkAnswer(): void {
-		this.answerService.unlink(this.tree.id, this.topNode.id, this.node.id).subscribe(() => {
-			this.treeService.treeSubject.next();
-		});
-	}
-
-	private unlinkNotification(): void {
-		this.notificationService.unlink(this.tree.id, this.node.id).subscribe(() => {
-			this.treeService.treeSubject.next();
-		});
 	}
 
 	private linkAnswer(form: NgForm): void {
