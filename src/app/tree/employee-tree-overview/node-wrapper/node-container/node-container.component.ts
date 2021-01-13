@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import {
+	Component,
+	EventEmitter,
+	Input,
+	OnInit,
+	Output,
+	ViewChild,
+} from "@angular/core";
 import { ContentType } from "src/app/node/content-type.model";
 import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
 import { Node } from "src/app/node/node.model";
@@ -10,7 +17,7 @@ import {
 	faLink,
 	faPen,
 	faPlus,
-	faUnlink
+	faUnlink,
 } from "@fortawesome/free-solid-svg-icons";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { ModalService } from "src/app/shared/modal.service";
@@ -38,14 +45,23 @@ export class NodeContainerComponent implements OnInit {
 
 	@Output() expand = new EventEmitter<Node>();
 
-	@ViewChild(PlaceholderDirective, { static: false }) modalHost: PlaceholderDirective;
+	@ViewChild(PlaceholderDirective, { static: false })
+	modalHost: PlaceholderDirective;
 
 	types = {
 		question: ContentType.QUESTION,
 		answer: ContentType.ANSWER,
 		notification: ContentType.NOTIFICATION,
 	};
-	icons = { faChevronRight, faArrowDown, faTree, faLink, faPen, faPlus, faUnlink };
+	icons = {
+		faChevronRight,
+		faArrowDown,
+		faTree,
+		faLink,
+		faPen,
+		faPlus,
+		faUnlink,
+	};
 
 	modals = {
 		showSetQuestion: false,
@@ -53,7 +69,12 @@ export class NodeContainerComponent implements OnInit {
 		showLink: false,
 	};
 
-	constructor(private modalService: ModalService, private answerService: AnswerService, private notificationService: NotificationService, private treeService: TreeService) {}
+	constructor(
+		private modalService: ModalService,
+		private answerService: AnswerService,
+		private notificationService: NotificationService,
+		private treeService: TreeService
+	) {}
 
 	ngOnInit(): void {}
 
@@ -69,35 +90,52 @@ export class NodeContainerComponent implements OnInit {
 	}
 
 	editQuestion(): void {
-		const modal = this.modalService.createModal(SetQuestionModalComponent, this.modalHost);
+		const modal = this.modalService.createModal(
+			SetQuestionModalComponent,
+			this.modalHost
+		);
 		modal.instance.isRoot = this.isRoot();
 		modal.instance.tree = this.tree;
 		modal.instance.question = this.node;
 	}
 
 	editNotification(): void {
-		const modal = this.modalService.createModal(SetNotificationModalComponent, this.modalHost);
+		const modal = this.modalService.createModal(
+			SetNotificationModalComponent,
+			this.modalHost
+		);
 		modal.instance.isRoot = this.isRoot();
 		modal.instance.tree = this.tree;
 		modal.instance.notification = this.node;
 	}
 
 	setAnswer(): void {
-		const modal = this.modalService.createModal(SetAnswerModalComponent, this.modalHost);
-		modal.instance.question = this.isQuestion() ? this.node : this.previousNode;
+		const modal = this.modalService.createModal(
+			SetAnswerModalComponent,
+			this.modalHost
+		);
+		modal.instance.question = this.isQuestion()
+			? this.node
+			: this.previousNode;
 		modal.instance.answer = this.isAnswer() ? this.node : null;
 		modal.instance.tree = this.tree;
 	}
 
 	linkNode(): void {
-		const modal = this.modalService.createModal(LinkModalComponent, this.modalHost);
+		const modal = this.modalService.createModal(
+			LinkModalComponent,
+			this.modalHost
+		);
 		modal.instance.tree = this.tree;
 		modal.instance.node = this.node;
 		modal.instance.topNode = this.topNode;
 	}
 
 	unlink(): void {
-		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
+		const modal = this.modalService.createModal(
+			ConfirmBoxModalComponent,
+			this.modalHost
+		);
 		modal.instance.confirmed.subscribe(() => {
 			switch (this.node.type) {
 				case ContentType.ANSWER:
@@ -107,18 +145,22 @@ export class NodeContainerComponent implements OnInit {
 					this.unlinkNotification();
 					break;
 			}
-		})
+		});
 	}
 
 	private unlinkAnswer(): void {
-		this.answerService.unlink(this.tree.id, this.topNode.id, this.node.id).subscribe(() => {
-			this.treeService.treeSubject.next();
-		});
+		this.answerService
+			.unlink(this.tree.id, this.topNode.id, this.node.id)
+			.subscribe(() => {
+				this.treeService.treeSubject.next();
+			});
 	}
 
 	private unlinkNotification(): void {
-		this.notificationService.unlink(this.tree.id, this.node.id).subscribe(() => {
-			this.treeService.treeSubject.next();
-		});
+		this.notificationService
+			.unlink(this.tree.id, this.node.id)
+			.subscribe(() => {
+				this.treeService.treeSubject.next();
+			});
 	}
 }
