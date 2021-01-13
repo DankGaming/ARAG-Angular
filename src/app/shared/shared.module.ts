@@ -14,6 +14,7 @@ import { DropdownOptionDirective } from "./dropdown/dropdown-option.directive";
 import { DropdownSelectedDirective } from "./dropdown/dropdown-selected.directive";
 import { PlaceholderDirective } from "./placeholder.directive";
 import { ConfirmBoxModalComponent } from "./modals/confirm-box-modal/confirm-box-modal.component";
+import { TruncatePipe } from "./truncate.pipe";
 
 @NgModule({
 	declarations: [
@@ -28,6 +29,7 @@ import { ConfirmBoxModalComponent } from "./modals/confirm-box-modal/confirm-box
 		DropdownSelectedDirective,
 		PlaceholderDirective,
 		ConfirmBoxModalComponent,
+		TruncatePipe,
 	],
 	imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule],
 	exports: [
@@ -42,6 +44,7 @@ import { ConfirmBoxModalComponent } from "./modals/confirm-box-modal/confirm-box
 		DropdownSelectedDirective,
 		PlaceholderDirective,
 		ConfirmBoxModalComponent,
+		TruncatePipe,
 	],
 })
 export class SharedModule {}

@@ -51,6 +51,10 @@
         max-height: max(min(50vh, 300px), 300px);
         overflow-y: auto;
         z-index: 2;
+        
+        &::ng-deep {
+            white-space: initial;
+        }
 
         li {
             padding: 13px 0;
