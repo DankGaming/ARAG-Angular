@@ -48,7 +48,9 @@ export class EmployeeSettingsComponent implements OnInit {
                 this.set.emit(employee);
                 Object.assign(this.employee, employee);
                 this.showSuccesMessagePassword = true;
+                this.error = null;
             }, (error: HttpErrorResponse) => {
+                this.showSuccesMessagePassword = false;
                 this.error = error.error.error.message;
             });
     }
