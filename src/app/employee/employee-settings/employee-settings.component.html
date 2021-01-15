@@ -1,0 +1,23 @@
+<h1>Instellingen</h1>
+<p>Gegevens Wijzigen</p>
+<form #setDetailsForm="ngForm" id="change-acount-details" (ngSubmit)="update(setDetailsForm)" autocomplete="off">
+    <div class="form-group">
+        <label>Voornaam</label>
+        <input type="text" name="firstname" value="{{ employee.firstname }}" id="firstname" [ngModel]="employee?.firstname" required>
+    </div>
+    <div class="form-group">
+        <label>Achternaam</label>
+        <input type="text" name="lastname" value="{{ employee.lastname }}" id="lastname" [ngModel]="employee?.lastname" required>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" name="email" value="{{ employee.email }}" id="email" [ngModel]="employee?.email" required>
+    </div>
+    <div class="footer-button">
+        <button (click)="showMessageSucces()" class="button primary" [disabled]="setDetailsForm.invalid" form="change-acount-details">
+            Opslaan
+        </button>
+        <p *ngIf="showSuccesMessage" class="succes-message-change-employee-details">Gegevens Opgeslagen</p>
+    </div>
+</form>
+

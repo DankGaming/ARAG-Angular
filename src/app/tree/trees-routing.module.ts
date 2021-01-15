@@ -5,6 +5,7 @@ import { CustomerTreesOverviewComponent } from "./customer-trees-overview/custom
 import { EmployeeTreeOverviewComponent } from "./employee-tree-overview/employee-tree-overview.component";
 import { EmployeeTreesOverviewComponent } from "./employee-trees-overview/employee-trees-overview.component";
 import { TreeRunComponent } from "./tree-run/tree-run.component";
+import {EmployeeSettingsComponent} from "../employee/employee-settings/employee-settings.component";
 
 const routes: Routes = [
 	{
@@ -29,6 +30,11 @@ const routes: Routes = [
 		component: EmployeeTreeOverviewComponent,
 		canActivate: [AuthGuard],
 	},
+    {
+        path: "employees/settings",
+        component: EmployeeSettingsComponent,
+        canActivate: [AuthGuard],
+    },
 ];
 
 @NgModule({
