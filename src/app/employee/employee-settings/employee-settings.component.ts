@@ -12,15 +12,14 @@ import {faCheck} from "@fortawesome/free-solid-svg-icons";
   styleUrls: ["./employee-settings.component.scss"]
 })
 export class EmployeeSettingsComponent implements OnInit {
+    @Output() set = new EventEmitter<Partial<Employee>>();
+    @Input() employee?: Employee;
+
     public showSuccesMessageMail = false;
     public showSuccesMessagePassword = false;
     error: string;
 
     icons = { faCheck };
-
-    @Output() set = new EventEmitter<Partial<Employee>>();
-
-    @Input() employee?: Employee;
 
     constructor(
         private authService: AuthService,
