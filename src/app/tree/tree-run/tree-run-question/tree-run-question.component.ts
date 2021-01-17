@@ -32,15 +32,16 @@ export class TreeRunQuestionComponent implements OnInit {
     }
 
     confirmAnswer(): void {
-        if (this.selectedAnswer.children?.length > 0) {
+        this.answerConfirmed = false;
+        if (this.hasChildNode()) {
             if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
                 this.nextNodeIsQuestion = true;
             }
             else {
                 this.nextNodeIsQuestion = false;
             }
+            this.answerConfirmed = true;
         }
-        this.answerConfirmed = true;
     }
 
     hasAnswers(): boolean {
