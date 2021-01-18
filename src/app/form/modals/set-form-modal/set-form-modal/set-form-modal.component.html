@@ -2,12 +2,12 @@
     <ng-container body>
         <form #setFormForm="ngForm" id="set-form-form" (ngSubmit)="form ? update(setFormForm) : create(setFormForm)" autocomplete="off">
             <div class="form-group">
-                <label for="content">Vraag</label>
-                <input type="text" name="content" placeholder="Naam" id="content" [ngModel]="form?.content" required>
+                <label for="content">Naam</label>
+                <input type="text" name="content" placeholder="Naam" id="content">
             </div>
             <div class="form-group">
                 <label for="description">Omschrijving</label>
-                <textarea name="description" id="description" placeholder="Omschrijving" [ngModel]="form?.description"></textarea>
+                <textarea name="description" id="description" placeholder="Omschrijving"></textarea>
             </div>
         </form>
     </ng-container>
@@ -15,9 +15,6 @@
         <div class="footer-button-container">
             <button class="button primary" [disabled]="setFormForm.invalid" form="set-form-form">
                 Opslaan
-            </button>
-            <button class="button danger" *ngIf="form" (click)="remove()">
-                Verwijder
             </button>
         </div>
     </ng-container>
