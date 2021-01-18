@@ -9,14 +9,14 @@ import { EmployeeService } from "../employee.service";
   styleUrls: ["./set-employee-modal.component.scss"]
 })
 export class SetEmployeeModalComponent implements OnInit {
-
-    constructor(private employeeService: EmployeeService) {}
     @Output() closeModal = new EventEmitter();
     @Output() set = new EventEmitter<Partial<Employee>>();
 
     @Input() employee?: Employee;
 
     roles = Object.values(Role);
+
+    constructor(private employeeService: EmployeeService) {}
 
     ngOnInit(): void {}
 
