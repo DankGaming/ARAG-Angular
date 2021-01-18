@@ -1,16 +1,17 @@
-import { Component, Input, OnInit} from "@angular/core";
+import { Component, Input, OnDestroy, OnInit} from "@angular/core";
 import { Node } from "src/app/node/node.model";
 import { NodeService } from "src/app/node/node.service";
 import { ContentType } from "src/app/node/content-type.model";
 import { Tree } from "../../tree.model";
 import { QuestionType } from "src/app/node/question-info.model";
+import { Subscription } from "rxjs";
 
 @Component({
     selector: "app-tree-run-question",
     templateUrl: "./tree-run-question.component.html",
     styleUrls: ["./tree-run-question.component.scss"],
 })
-export class TreeRunQuestionComponent implements OnInit {
+export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     @Input() tree: Tree;
     @Input() nodeInput: Node;
     @Input() questionCounter: number;
@@ -22,12 +23,17 @@ export class TreeRunQuestionComponent implements OnInit {
     nextNodeIsQuestion = false;
     nextNodeIsNotification = false;
     answerConfirmed = false;
+    
+    nodeServiceSubscription: Subscription;
 
     constructor(private nodeService: NodeService) {}
+    ngOnDestroy(): void {
+        this.nodeServiceSubscription.unsubscribe();
+    }
 
     ngOnInit(): void {
         this.questionCounter++;
-        this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
+        this.nodeServiceSubscription = this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
             this.answers = node.children;
             this.selectedAnswer = this.answers[0];
@@ -35,25 +41,45 @@ export class TreeRunQuestionComponent implements OnInit {
     }
 
     confirmAnswer(): void {
-        if (this.questionTypeIsRadio()) {
-            var answerId = Number(this.selectedRadioAnswer)
-            this.nodeService.findByID(this.tree.id, answerId).subscribe((node: Node) => {
-                this.selectedAnswer = node;
-            });
-        }
         this.answerConfirmed = false;
         this.nextNodeIsNotification = false;
         this.nextNodeIsQuestion = false;
-        if (this.hasChildNode()) {
-            if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
-                this.nextNodeIsNotification = false;
-                this.nextNodeIsQuestion = true;
+        if (this.questionTypeIsRadio()) {
+            if (this.selectedRadioAnswer != null) {
+                var answerId = Number(this.selectedRadioAnswer)
+                this.nodeService.findByID(this.tree.id, answerId).subscribe((node: Node) => {
+                    this.selectedAnswer = node;
+                    if (this.hasChildNode()) {
+                        if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
+                            this.nextNodeIsNotification = false;
+                            this.nextNodeIsQuestion = true;
+                        }
+                        else {
+                            this.nextNodeIsQuestion = false;
+                            this.nextNodeIsNotification = true;
+                        }
+                        this.answerConfirmed = true;
+                    }
+                });
             }
             else {
-                this.nextNodeIsQuestion = false;
-                this.nextNodeIsNotification = true;
+                this.selectedAnswer = new Node();
             }
-            this.answerConfirmed = true;
+        }
+        else {
+            this.nodeService.findByID(this.tree.id, this.selectedAnswer.id).subscribe((node: Node) => {
+                if (this.hasChildNode()) {
+                    if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
+                        this.nextNodeIsNotification = false;
+                        this.nextNodeIsQuestion = true;
+                    }
+                    else {
+                        this.nextNodeIsQuestion = false;
+                        this.nextNodeIsNotification = true;
+                    }
+                    this.answerConfirmed = true;
+                }
+            });
         }
     }
 
@@ -68,4 +94,6 @@ export class TreeRunQuestionComponent implements OnInit {
     questionTypeIsRadio(): boolean {
         return this.node.questionInfo.type === QuestionType.RADIO;
     }
+
+    
 }
