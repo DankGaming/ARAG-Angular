@@ -6,7 +6,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { SharedModule } from "../shared/shared.module";
 import { EmployeesRoutingModule } from "./employees-routing.module";
 import { RouterModule } from "@angular/router";
-import { SetEmployeeModalComponent } from './set-employee-modal/set-employee-modal.component';
+import { SetEmployeeModalComponent } from "./set-employee-modal/set-employee-modal.component";
 import { FormsModule } from "@angular/forms";
 
 
