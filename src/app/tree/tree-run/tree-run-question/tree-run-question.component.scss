@@ -16,6 +16,38 @@
     margin-bottom: 3px;
 }
 
+.radio-answer-container {
+    margin-top: 15px;
+    input[type='radio']:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: $color-gray-300;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px $color-gray-600;
+    }
+
+    input[type='radio']:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: $color-primary;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 20px $color-gray-600;
+    }
+}
+
+
 .selected-answer-container {
     margin-top: 15px;
     display: flex;

@@ -3,6 +3,7 @@ import { Node } from "src/app/node/node.model";
 import { NodeService } from "src/app/node/node.service";
 import { ContentType } from "src/app/node/content-type.model";
 import { Tree } from "../../tree.model";
+import { QuestionType } from "src/app/node/question-info.model";
 
 @Component({
     selector: "app-tree-run-question",
@@ -16,8 +17,10 @@ export class TreeRunQuestionComponent implements OnInit {
 
     node: Node;
     selectedAnswer: Node;
+    selectedRadioAnswer: string;
     answers: Node[] = [];
     nextNodeIsQuestion = false;
+    nextNodeIsNotification = false;
     answerConfirmed = false;
 
     constructor(private nodeService: NodeService) {}
@@ -32,13 +35,23 @@ export class TreeRunQuestionComponent implements OnInit {
     }
 
     confirmAnswer(): void {
+        if (this.questionTypeIsRadio()) {
+            var answerId = Number(this.selectedRadioAnswer)
+            this.nodeService.findByID(this.tree.id, answerId).subscribe((node: Node) => {
+                this.selectedAnswer = node;
+            });
+        }
         this.answerConfirmed = false;
+        this.nextNodeIsNotification = false;
+        this.nextNodeIsQuestion = false;
         if (this.hasChildNode()) {
             if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
+                this.nextNodeIsNotification = false;
                 this.nextNodeIsQuestion = true;
             }
             else {
                 this.nextNodeIsQuestion = false;
+                this.nextNodeIsNotification = true;
             }
             this.answerConfirmed = true;
         }
@@ -50,5 +63,9 @@ export class TreeRunQuestionComponent implements OnInit {
 
     hasChildNode(): boolean {
         return this.selectedAnswer.children?.length > 0;
+    }
+
+    questionTypeIsRadio(): boolean {
+        return this.node.questionInfo.type === QuestionType.RADIO;
     }
 }
