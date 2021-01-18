@@ -41,4 +41,10 @@ export class SetEmployeeModalComponent implements OnInit {
                 Object.assign(this.employee, employee);
             });
     }
+
+    remove(): void{
+        this.employeeService.remove(this.employee.id).subscribe(() => {
+            this.employeeService.employeeSubject.next();
+        });
+    }
 }

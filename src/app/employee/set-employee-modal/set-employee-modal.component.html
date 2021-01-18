@@ -34,8 +34,13 @@
     </ng-container>
 
     <ng-container footer>
-        <button class="button primary" [disabled]="setEmployeeForm.invalid" form="set-tree-form">
-            Opslaan
-        </button>
+        <div class="footer-button-container">
+            <button class="button primary" [disabled]="setEmployeeForm.invalid" form="set-tree-form">
+                Opslaan
+            </button>
+            <button class="button danger" *ngIf="employee" (click)=remove() form="set-tree-form">
+                Verwijder
+            </button>
+        </div>
     </ng-container>
 </app-modal>
