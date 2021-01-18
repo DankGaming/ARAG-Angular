@@ -10,6 +10,7 @@ import { TreeModule } from "./tree/tree.module";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { APIInterceptor } from "./shared/api.interceptor";
 import { FormsModule } from "@angular/forms";
+import { EmployeeModule } from "./employee/employee.module";
 
 @NgModule({
     declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { FormsModule } from "@angular/forms";
         SharedModule,
         TreeModule,
         FormsModule,
+        EmployeeModule
     ],
     providers: [
         {
