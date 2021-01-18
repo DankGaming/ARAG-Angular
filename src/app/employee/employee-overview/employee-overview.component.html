@@ -1,0 +1,15 @@
+<main>
+    <app-header title="Welkom, {{ curEmployee.firstname }}" subtitle="Kies welke medewerker u wilt bewerken">
+        <button class="button primary" (click)="createEmployee()">
+            <fa-icon [icon]="icons.faPlus"></fa-icon>
+            Nieuwe medewerker
+        </button>
+    </app-header>
+    <ul *ngIf="employees.length > 0">
+        <li *ngFor="let employee of employees">
+            <app-employee-row [employee]="employee" [navigationLink]="['/employees', 'employee', employee.id]"></app-employee-row>
+        </li>
+    </ul>
+
+    <ng-container appPlaceholder></ng-container>
+</main>
