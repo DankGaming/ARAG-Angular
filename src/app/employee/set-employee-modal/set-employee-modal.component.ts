@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Employee, Role } from "../employee.model";
 import { EmployeeService } from "../employee.service";
-import { Node } from "../../node/node.model";
 
 @Component({
   selector: "app-set-employee-modal",

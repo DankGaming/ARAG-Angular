@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
-import { Tree } from "../../tree/tree.model";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Employee } from "../employee.model";
 import { ModalService } from "../../shared/modal.service";

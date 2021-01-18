@@ -6,7 +6,6 @@ import { AuthService } from "../../auth/auth.service";
 import { EmployeeService } from "../employee.service";
 import { ModalService } from "../../shared/modal.service";
 import { OrderDirection } from "../../shared/http-filter";
-import { SetTreeModalComponent } from "../../tree/modals/set-tree-modal/set-tree-modal.component";
 import { SetEmployeeModalComponent } from "../set-employee-modal/set-employee-modal.component";
 
 @Component({
