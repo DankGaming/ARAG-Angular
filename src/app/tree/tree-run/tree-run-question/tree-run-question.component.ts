@@ -23,10 +23,11 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     nextNodeIsQuestion = false;
     nextNodeIsNotification = false;
     answerConfirmed = false;
-    
+
     nodeServiceSubscription: Subscription;
 
     constructor(private nodeService: NodeService) {}
+
     ngOnDestroy(): void {
         this.nodeServiceSubscription.unsubscribe();
     }
@@ -46,7 +47,7 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
         this.nextNodeIsQuestion = false;
         if (this.questionTypeIsRadio()) {
             if (this.selectedRadioAnswer != null) {
-                var answerId = Number(this.selectedRadioAnswer)
+                const answerId = Number(this.selectedRadioAnswer);
                 this.nodeService.findByID(this.tree.id, answerId).subscribe((node: Node) => {
                     this.selectedAnswer = node;
                     if (this.hasChildNode()) {
@@ -67,7 +68,7 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
             }
         }
         else {
-            this.nodeService.findByID(this.tree.id, this.selectedAnswer.id).subscribe((node: Node) => {
+            this.nodeService.findByID(this.tree.id, this.selectedAnswer.id).subscribe(() => {
                 if (this.hasChildNode()) {
                     if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
                         this.nextNodeIsNotification = false;
@@ -94,6 +95,4 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     questionTypeIsRadio(): boolean {
         return this.node.questionInfo.type === QuestionType.RADIO;
     }
-
-    
 }
