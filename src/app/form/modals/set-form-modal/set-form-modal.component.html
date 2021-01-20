@@ -1,4 +1,4 @@
-<app-modal [title]="form ? 'Wijzig formulier' : 'Nieuw formulier'" [subtitle]="'Beslissingsboom: ' + tree.name" (closeModal)="close()">
+<app-modal [title]="form ? 'Wijzig formulier' : 'Nieuw formulier'" [subtitle]="'Beslissingsboom: ' + form.name" (closeModal)="close()">
     <ng-container body>
         <form #setFormForm="ngForm" id="set-form-form" (ngSubmit)="form ? update(setFormForm) : create(setFormForm)" autocomplete="off">
             <div class="form-group">
