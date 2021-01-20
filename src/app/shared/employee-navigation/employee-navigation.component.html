@@ -10,6 +10,9 @@
             <li>
                 <a [routerLink]="['employees/trees']" routerLinkActive="active">Dashboard</a>
             </li>
+            <li>
+                <a [routerLink]="['employees/forms']" routerLinkActive="active">Meldingsformulieren</a>
+            </li>
         </ul>
         <ul class="menu right" *ngIf="employee">
             <li *ngIf="isAdmin()">
