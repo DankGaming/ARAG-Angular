@@ -19,6 +19,7 @@ import { SetTreeModalComponent } from "./modals/set-tree-modal/set-tree-modal.co
 import { SearchResultsComponent } from "./employee-tree-overview/search-results/search-results.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NodeModule } from "../node/node.module";
+import { EmployeeSettingsComponent } from "../employee/employee-settings/employee-settings.component";
 
 @NgModule({
 	declarations: [
@@ -34,6 +35,7 @@ import { NodeModule } from "../node/node.module";
 		NodeWrapperComponent,
 		SetTreeModalComponent,
 		SearchResultsComponent,
+		EmployeeSettingsComponent,
 	],
 	imports: [
 		CommonModule,
