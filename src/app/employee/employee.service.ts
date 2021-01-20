@@ -7,6 +7,7 @@ import { CreateEmployeeDTO } from "./dto/create-employee.dto";
 import { FilterEmployeesDTO } from "./dto/filter-employees.dto";
 import { Employee } from "./employee.model";
 import { UpdateEmployeeDTO } from "./dto/update-employee.dto";
+import {UpdatePasswordDto} from "./dto/update.password.dto";
 
 @Injectable({
     providedIn: "root",
@@ -58,5 +59,16 @@ export class EmployeeService {
 
     remove(id: number): Observable<HttpResult<null>> {
         return this.http.delete<HttpResult<null>>(`/employees/${id}`);
+    }
+
+    updatePassword(id: number, dto: UpdatePasswordDto): Observable<Partial<Employee>> {
+        const observer: Observable<Partial<Employee>> = this.http
+            .patch<HttpResult<Partial<Employee>>>(`/employees/${id}/password`, {
+                ...dto,
+            })
+            .pipe(
+                map((response: HttpResult<Partial<Employee>>) => response.result)
+            );
+        return observer;
     }
 }

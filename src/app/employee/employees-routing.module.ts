@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "../auth/auth.guard";
 import { EmployeeOverviewComponent } from "./employee-overview/employee-overview.component";
 import { AdminGuard } from "../auth/admin.guard";
+import {EmployeeSettingsComponent} from "./employee-settings/employee-settings.component";
 
 const routes: Routes = [
 	{
@@ -10,6 +11,11 @@ const routes: Routes = [
 		component: EmployeeOverviewComponent,
         canActivate: [AuthGuard, AdminGuard],
 	},
+    {
+        path: "employees/settings",
+        component: EmployeeSettingsComponent,
+        canActivate: [AuthGuard],
+    },
 ];
 
 @NgModule({

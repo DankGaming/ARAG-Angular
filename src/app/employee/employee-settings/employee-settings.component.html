@@ -1,0 +1,49 @@
+<app-header title="Instellingen" subtitle="Gegevens Wijzigen"></app-header>
+<form #setDetailsForm="ngForm" id="change-acount-details" (ngSubmit)="update(setDetailsForm)" autocomplete="off">
+    <div class="form-group">
+        <label>Voornaam:</label>
+        <input type="text" name="firstname" id="firstname" [ngModel]="employee?.firstname" required>
+    </div>
+    <div class="form-group">
+        <label>Achternaam:</label>
+        <input type="text" name="lastname" id="lastname" [ngModel]="employee?.lastname" required>
+    </div>
+    <div class="form-group">
+        <label>Email:</label>
+        <input type="text" name="email" id="email" [ngModel]="employee?.email" required>
+    </div>
+    <div class="footer-button">
+        <button class="button primary" [disabled]="setDetailsForm.invalid" form="change-acount-details">
+            Opslaan
+        </button>
+        <p *ngIf="showSuccesMessageMail" class="succes-message-change-employee-details">
+            <fa-icon class="succesicon" [icon]="icons.faCheck"></fa-icon>Gegevens Opgeslagen
+        </p>
+    </div>
+</form>
+
+<p class="text-change-password"><strong>Wachtwoord wijzigen</strong></p>
+
+<form #setPasswordForm="ngForm" id="change-password" (ngSubmit)="updatePassword(setPasswordForm)" autocomplete="off">
+    <div class="form-group">
+        <label>Huidige wachtwoord:</label>
+        <input type="password" name="oldPassword" id="oldPassword" [ngModel]="employee?.password" required>
+    </div>
+    <div class="form-group">
+        <label>Nieuwe wachtwoord:</label>
+        <input type="password" name="newPassword" id="newPassword" [ngModel]="employee?.password" required>
+    </div>
+    <div class="form-group">
+        <label>Herhaal nieuwe wachtwoord</label>
+        <input type="password" name="repeatNewPassword" id="repeatNewPassword" [ngModel]="employee?.password" required>
+    </div>
+    <div class="footer-button">
+        <button class="button primary" [disabled]="setPasswordForm.invalid" form="change-password">
+            Wijzig wachtwoord
+        </button>
+        <p *ngIf="showSuccesMessagePassword" class="succes-message-change-employee-details">
+            <fa-icon class="succesicon" [icon]="icons.faCheck"></fa-icon>Wachtwoord gewijzigd
+        </p>
+    </div>
+</form>
+<app-error-box *ngIf="error" [message]="error"></app-error-box>
