@@ -1,10 +1,10 @@
 <div class="employee-row">
     <div class="employee-info">
-        <h3 class="title">{{ input.name }}</h3>
-        <p>{{input.description}}</p>
+        <h3 class="title">{{ form.name }}</h3>
+        <p>{{form.description}}</p>
     </div>
 
-    <button class="walk-through-button" (click)="editFormInput()">
+    <button class="walk-through-button" [routerLink]="navigationLink">
         <fa-icon [icon]="icons.faArrowRight"></fa-icon>
     </button>
     <ng-container appPlaceholder></ng-container>

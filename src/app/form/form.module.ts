@@ -4,17 +4,16 @@ import { SetFormModalComponent } from "./modals/set-form-modal/set-form-modal.co
 import { SharedModule } from "../shared/shared.module";
 import { FormsModule } from "@angular/forms";
 import { SetFieldModalComponent } from "./modals/set-field-modal/set-field-modal.component";
-import { FormOverviewComponent } from "./form-overview/form-overview.component";
-import { FormRowComponent } from "./form-row/form-row.component";
+import { FormsOverviewComponent } from "./forms-overview/forms-overview.component";
+import { FormsRowComponent } from "./forms-row/forms-row.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { FormsRoutingModule } from "./forms-routing.module";
 import { RouterModule } from "@angular/router";
-
-
-
+import { FormOverviewComponent } from "./form-overview/form-overview.component";
+import { FormRowComponent } from "./form-row/form-row.component";
 
 @NgModule({
-  declarations: [SetFormModalComponent, SetFieldModalComponent, FormOverviewComponent, FormRowComponent],
+  declarations: [SetFormModalComponent, SetFieldModalComponent, FormsOverviewComponent, FormsRowComponent, FormOverviewComponent, FormRowComponent],
     imports: [
         CommonModule, SharedModule, FormsModule, FontAwesomeModule, FormsRoutingModule, RouterModule
     ],

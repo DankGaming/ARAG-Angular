@@ -30,27 +30,27 @@ export class SetFieldModalComponent implements OnInit, Modal {
 
   create(form: NgForm): void {
     const values = form.value;
-
-		this.formInputService
-    .create(this.form.id, {
-      name: values.name,
-      description: values.description,
-      type: 1,
-    })
-		.subscribe((form: Partial<Form>) => {
-      this.set.emit(form);
-      this.close();
-      this.formInputService.formSubject.next();
-			});
+    this.formInputService
+        .create(this.form.id, {
+            name: values.name,
+            description: values.description,
+            type: 1,
+        })
+		.subscribe((input: Partial<FormInput>) => {
+            this.set.emit(input);
+            this.close();
+            this.formInputService.formSubject.next();
+		});
   }
 
   update(form: NgForm): void {
     this.formInputService
     .update(this.form.id, this.formInput.id, {...form.value})
-    .subscribe((employee: Partial<Form>) => {
-        this.set.emit(employee);
+    .subscribe((input: Partial<FormInput>) => {
+        this.set.emit(input);
         this.close();
-        Object.assign(this.form, employee);
+        Object.assign(this.formInput, input);
+        this.formInputService.formSubject.next();
     });
   }
 
