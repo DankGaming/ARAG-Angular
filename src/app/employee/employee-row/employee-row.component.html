@@ -1,0 +1,12 @@
+<div class="employee-row">
+    <div class="employee-info">
+        <h3 class="title">{{ employee.firstname }} {{ employee.lastname }}</h3>
+        <p>{{employee.email }}</p>
+    </div>
+
+    <button class="walk-through-button" (click)="editEmployee()">
+        <fa-icon [icon]="icons.faArrowRight" ></fa-icon>
+    </button>
+    <ng-container appPlaceholder></ng-container>
+</div>
+
