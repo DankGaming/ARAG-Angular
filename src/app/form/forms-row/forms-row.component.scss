@@ -1,0 +1,52 @@
+@import "/src/app/shared/variables";
+
+.employee-row {
+    margin: 2px;
+    padding: 10px;
+    background-color: $color-white;
+    box-shadow: $shadow;
+    border-radius: $border-radius;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .employee-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .description {
+            font-size: 13px;
+            color: $color-gray-600;
+            max-width: 400px;
+            margin-top: 5px;
+        }
+    }
+
+    .walk-through-button {
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-left: auto;
+        cursor: pointer;
+        background-color: $color-primary;
+        transition: .3s;
+
+        &:hover {
+            filter: brightness(95%);
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .employee-row {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .walk-through-button {
+            margin-left: 0;
+            margin-top: 20px;
+        }
+    }
+}

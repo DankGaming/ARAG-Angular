@@ -1,0 +1,15 @@
+<main>
+    <app-header title="Meldingsformulieren" subtitle="Kies welke meldingsformulieren u wilt bewerken">
+        <button class="button primary" (click)="createForm()">
+            <fa-icon [icon]="icons.faPlus"></fa-icon>
+            Nieuw formulier
+        </button>
+    </app-header>
+    <ul *ngIf="forms.length > 0">
+        <li *ngFor="let form of forms">
+            <app-forms-row [form]="form" [navigationLink]="['/employees', 'forms', form.id]"></app-forms-row>
+        </li>
+    </ul>
+
+    <ng-container appPlaceholder></ng-container>
+</main>
