@@ -15,6 +15,8 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     @Input() tree: Tree;
     @Input() nodeInput: Node;
     @Input() questionCounter: number;
+    @Input() previousAnswers: any[];
+    @Input() savedNodeIDs?: any[];
 
     node: Node;
     selectedAnswer: Node;
@@ -34,6 +36,13 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.questionCounter++;
+        
+        if (this.savedNodeIDs != null) {
+            this.previousAnswers.push(this.savedNodeIDs);
+            for (var val of this.previousAnswers) {
+                console.log(val);
+              }
+        }
         this.nodeServiceSubscription = this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
             this.answers = node.children;

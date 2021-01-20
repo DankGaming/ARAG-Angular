@@ -14,10 +14,12 @@ export class TreeRunComponent implements OnInit {
 
     tree: Tree;
     type: string;
+    previousAnswers: any[] = [];
 
     constructor(private activatedRoute: ActivatedRoute, private treeService: TreeService) {}
 
     ngOnInit(): void {
+        console.log(this.previousAnswers);
         this.activatedRoute.params.subscribe((params: Params) => {
 
             this.treeService.findByID(+params.id).subscribe((tree: Tree) => {

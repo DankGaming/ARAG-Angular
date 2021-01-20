@@ -13,12 +13,20 @@ export class TreeRunNotificationComponent implements OnInit {
     @Input() tree: Tree;
     @Input() nodeInput: Node;
     @Input() questionCounter: number;
+    @Input() previousAnswers: any[];
+    @Input() savedNodeIDs?: any[];
 
     node: Node;
 
     constructor(private nodeService: NodeService) {}
 
     ngOnInit(): void {
+        if (this.savedNodeIDs != null) {
+            this.previousAnswers.push(this.savedNodeIDs);
+            for (var val of this.previousAnswers) {
+                console.log(val);
+              }
+        }
         this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
         });

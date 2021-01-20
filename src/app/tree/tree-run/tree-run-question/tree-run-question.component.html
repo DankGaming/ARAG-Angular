@@ -41,12 +41,12 @@
         <div *ngIf="hasChildNode(); else noChildNode">
             <div *ngIf="nextNodeIsQuestion; else loadNotification">
                 <div class="connect-line"></div>
-                <app-tree-run-question [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [questionCounter]="questionCounter"></app-tree-run-question>
+                <app-tree-run-question [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [questionCounter]="questionCounter" [previousAnswers]="previousAnswers" [savedNodeIDs]="[node.id,selectedAnswer.id]"></app-tree-run-question>
             </div>
             <ng-template #loadNotification>
                 <div *ngIf="nextNodeIsNotification;">
                     <div class="connect-line"></div>
-                    <app-tree-run-notification [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [questionCounter]="questionCounter"></app-tree-run-notification>
+                    <app-tree-run-notification [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [questionCounter]="questionCounter" [previousAnswers]="previousAnswers" [savedNodeIDs]="[node.id,selectedAnswer.id]"></app-tree-run-notification>
                 </div>
             </ng-template>
         </div>
