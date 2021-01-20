@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
@@ -23,6 +23,7 @@ import { SetQuestionModalComponent } from "src/app/node/modals/set-question-moda
 import { SetNotificationModalComponent } from "src/app/node/modals/set-notification-modal/set-notification-modal.component";
 import { ModalService } from "src/app/shared/modal.service";
 import { ConfirmBoxModalComponent } from "src/app/shared/modals/confirm-box-modal/confirm-box-modal.component";
+import { Subscription } from "rxjs";
 
 interface Top {
 	node: Node;
@@ -34,8 +35,9 @@ interface Top {
 	templateUrl: "./employee-tree-overview.component.html",
 	styleUrls: ["./employee-tree-overview.component.scss"],
 })
-export class EmployeeTreeOverviewComponent implements OnInit {
-	@ViewChild(PlaceholderDirective, { static: false }) modalHost: PlaceholderDirective;
+export class EmployeeTreeOverviewComponent implements OnInit, OnDestroy {
+	@ViewChild(PlaceholderDirective, { static: false })
+	modalHost: PlaceholderDirective;
 
 	tree: Tree;
 	graph: DirectedAcyclicGraph;
@@ -67,6 +69,8 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	private params: Params;
 	private queryParams: Params;
 
+	private treeSubjectSubscription: Subscription;
+
 	constructor(
 		private treeService: TreeService,
 		private nodeService: NodeService,
@@ -93,7 +97,9 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 				this.refresh();
 			});
 		// Subscribe to changes on tree so you can immediately see changes
-		this.treeService.treeSubject.subscribe(() => this.refresh());
+		this.treeSubjectSubscription = this.treeService.treeSubject.subscribe(
+			() => this.refresh()
+		);
 
 		// Fetch tree and nodes for the first time
 		this.refresh();
@@ -184,7 +190,10 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	}
 
 	removeTree(): void {
-		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
+		const modal = this.modalService.createModal(
+			ConfirmBoxModalComponent,
+			this.modalHost
+		);
 		modal.instance.description = `U staat op het punt om de boom '${this.tree.name}'
 		te verwijderen. Deze actie kan niet ongedaan worden. Weet u het zeker?`;
 		modal.instance.confirmed.subscribe(() => {
@@ -197,24 +206,40 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 	}
 
 	editTree(): void {
-		const modal = this.modalService.createModal(SetTreeModalComponent, this.modalHost);
+		const modal = this.modalService.createModal(
+			SetTreeModalComponent,
+			this.modalHost
+		);
 		modal.instance.tree = this.tree;
 	}
 
 	createQuestion(): void {
-		const modal = this.modalService.createModal(SetQuestionModalComponent, this.modalHost);
+		const modal = this.modalService.createModal(
+			SetQuestionModalComponent,
+			this.modalHost
+		);
 		modal.instance.tree = this.tree;
-		modal.instance.set.subscribe((question: Node) => this.changeTopNode(question));
+		modal.instance.set.subscribe((question: Node) =>
+			this.changeTopNode(question)
+		);
 	}
 
 	createNotification(): void {
-		const modal = this.modalService.createModal(SetNotificationModalComponent, this.modalHost);
+		const modal = this.modalService.createModal(
+			SetNotificationModalComponent,
+			this.modalHost
+		);
 		modal.instance.tree = this.tree;
-		modal.instance.set.subscribe((notification: Node) => this.changeTopNode(notification));
-  	}
+		modal.instance.set.subscribe((notification: Node) =>
+			this.changeTopNode(notification)
+		);
+	}
 
 	publishTree(): void {
-		const modal = this.modalService.createModal(ConfirmBoxModalComponent, this.modalHost);
+		const modal = this.modalService.createModal(
+			ConfirmBoxModalComponent,
+			this.modalHost
+		);
 		modal.instance.description = `U staat op het punt om '${this.tree.name}'
 		te publiceren. Dit betekent dat deze boom voor iedereen zichtbaar is. Weet u het zeker?`;
 		modal.instance.confirmed.subscribe(() => {
@@ -234,5 +259,9 @@ export class EmployeeTreeOverviewComponent implements OnInit {
 			queryParamsHandling: "merge",
 			replaceUrl,
 		});
+	}
+
+	ngOnDestroy(): void {
+		this.treeSubjectSubscription.unsubscribe();
 	}
 }

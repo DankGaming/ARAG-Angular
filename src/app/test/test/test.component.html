@@ -1,0 +1,4 @@
+<form #form="ngForm" (ngSubmit)="submit(form)" enctype="multipart/form-data">
+    <input type="file" name="passpoort" (change)="handleFileInput($event.target.files)" ngModel required>
+    <button class="button primary">Upload</button>
+</form>
