@@ -30,11 +30,16 @@ export class LinkModalComponent implements OnInit, Modal {
 			name: "Notificatie",
 			value: ContentType.NOTIFICATION,
 		},
+		{
+			name: "Meldingsformulier",
+			value: ContentType.FORM,
+		},
 	];
 	type = this.types[0];
 
 	questions: Node[] = [];
 	notifications: Node[] = [];
+	forms: Node[] = [];
 
 	nodes: Node[];
 	defaultNode: Node;
@@ -83,6 +88,9 @@ export class LinkModalComponent implements OnInit, Modal {
 				break;
 			case ContentType.NOTIFICATION:
 				this.nodes = this.notifications;
+				break;
+			case ContentType.FORM:
+				this.nodes = this.forms;
 				break;
 		}
 
