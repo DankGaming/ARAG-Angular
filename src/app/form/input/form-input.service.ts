@@ -12,7 +12,7 @@ import { CreateFormInputDTO } from "./dto/create-form-input.dto";
 @Injectable({
     providedIn: "root"
 })
-export class FormService {
+export class FormInputService {
     formSubject = new Subject<null>();
 
     constructor(private http: HttpClient) {}

@@ -1,13 +1,13 @@
-<app-modal [title]="field ? 'Wijzig veld' : 'Nieuw veld'" [subtitle]="'Beslissingsboom: ' + tree.name" (closeModal)="close()">
+<app-modal [title]="formInput ? 'Wijzig veld' : 'Nieuw veld'" (closeModal)="close()">
     <ng-container body>
-        <form #setFieldForm="ngForm" id="set-field-form" (ngSubmit)="field ? update(setFieldForm) : create(setFieldForm)" autocomplete="off">
+        <form #setFieldForm="ngForm" id="set-field-form" (ngSubmit)="formInput ? update(setFieldForm) : create(setFieldForm)" autocomplete="off">
             <div class="form-group">
-                <label for="content">Vraag</label>
-                <input type="text" name="content" placeholder="Naam" id="content">
+                <label for="name">Vraag</label>
+                <input type="text" name="name" placeholder="Naam" id="name" [ngModel]="formInput?.name" required>
             </div>
             <div class="form-group">
                 <label for="description">Omschrijving</label>
-                <textarea name="description" id="description" placeholder="Omschrijving"></textarea>
+                <textarea name="description" id="description" placeholder="Omschrijving" [ngModel]="formInput?.description"></textarea>
             </div>
         </form>
     </ng-container>
@@ -16,7 +16,7 @@
             <button class="button primary" [disabled]="setFieldForm.invalid" form="set-field-form">
                 Opslaan
             </button>
-            <button class="button danger" *ngIf="field" (click)="remove()">
+            <button class="button danger" *ngIf="formInput" (click)="remove()">
                 Verwijder
             </button>
         </div>

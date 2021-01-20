@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Modal } from "src/app/shared/modals/modal.interface";
-import { Tree } from "src/app/tree/tree.model";
-import { TreeService } from "src/app/tree/tree.service";
+import { Form } from "../../form.model";
+import { FormService } from "../../form.service";
+
 
 @Component({
   selector: "app-set-form-modal",
@@ -10,14 +11,14 @@ import { TreeService } from "src/app/tree/tree.service";
   styleUrls: ["./set-form-modal.component.scss"]
 })
 export class SetFormModalComponent implements OnInit, Modal {
-  @Input() tree: Tree;
+  @Output() set = new EventEmitter<Partial<Form>>();
   @Output() closeModal = new EventEmitter();
 
+  @Input() form?: Form;
 
-  // TODO make hier een input van
-  form = true;
 
-  constructor(private treeService: TreeService,
+  constructor(
+    private formService: FormService,
     )  { }
 
 
@@ -28,26 +29,32 @@ export class SetFormModalComponent implements OnInit, Modal {
     this.closeModal.emit();
   }
 
-  // TODO hier moet een request komen
-  create(form: NgForm): void {
-    const values = form.value;
 
-    console.log(values.content);
-    console.log(values.description);
-    this.close();
+  create(form: NgForm): void {
+		this.formService
+    .create({...form.value})
+		.subscribe((form: Partial<Form>) => {
+      this.set.emit(form);
+      this.close();
+      this.formService.formSubject.next();
+			});
   }
 
-  // TODO hier moet een request komen
-  update(form: NgForm): void {
-    const values = form.value;
 
-    console.log(values.content);
-    console.log(values.description);
-    this.close();
+  update(form: NgForm): void {
+    this.formService
+    .update(this.form.id, {...form.value})
+    .subscribe((employee: Partial<Form>) => {
+        this.set.emit(employee);
+        this.close();
+        Object.assign(this.form, employee);
+    });
   }
 
   remove(): void {
-    console.log("Deze knop heeft het verwijderd");
+    this.formService.remove(this.form.id).subscribe(() => {
+      this.formService.formSubject.next();
+    });
     this.close();
   }
 }

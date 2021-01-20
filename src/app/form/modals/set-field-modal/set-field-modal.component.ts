@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Modal } from "src/app/shared/modals/modal.interface";
-import { Tree } from "src/app/tree/tree.model";
+import { FormInput } from "../../input/form-input.model";
+import { Form } from "../../form.model";
+import { FormInputService } from "../../input/form-input.service";
+
 
 @Component({
   selector: "app-set-field-modal",
@@ -9,50 +12,52 @@ import { Tree } from "src/app/tree/tree.model";
   styleUrls: ["./set-field-modal.component.scss"]
 })
 export class SetFieldModalComponent implements OnInit, Modal {
-  @Input() tree: Tree;
+  @Input() form: Form;
+  @Input() formInput?: FormInput;
   @Output() closeModal = new EventEmitter();
+  @Output() set = new EventEmitter<Partial<Form>>();
 
-  field = true;
-
-  types = [
-    { name: "Geen", value: 0 },
-		{ name: "Tekstveld", value: 1 },
-		{ name: "Bestand", value: 2 },
-  ];
-
-  type: {name: string; value: number};
-
-  constructor() { }
+  constructor(
+    private formInputService: FormInputService,
+  ) { }
 
   ngOnInit(): void {
-    this.type = this.types[0];
   }
 
   close(): void {
     this.closeModal.emit();
   }
 
-  // TODO hier moet een request komen
   create(form: NgForm): void {
     const values = form.value;
 
-    console.log(values.content);
-    console.log(values.description);
-    this.close();
+		this.formInputService
+    .create(this.form.id, {
+      name: values.name,
+      description: values.description,
+      type: 1,
+    })
+		.subscribe((form: Partial<Form>) => {
+      this.set.emit(form);
+      this.close();
+      this.formInputService.formSubject.next();
+			});
   }
 
-  // TODO hier moet een request komen
   update(form: NgForm): void {
-    const values = form.value;
-
-    console.log(values.content);
-    console.log(values.description);
-    console.log(values.type.value);
-    this.close();
+    this.formInputService
+    .update(this.form.id, this.formInput.id, {...form.value})
+    .subscribe((employee: Partial<Form>) => {
+        this.set.emit(employee);
+        this.close();
+        Object.assign(this.form, employee);
+    });
   }
 
   remove(): void {
-    console.log("Deze knop heeft het verwijderd");
+    this.formInputService.remove(this.form.id, this.formInput.id).subscribe(() => {
+      this.formInputService.formSubject.next();
+    });
     this.close();
   }
 }

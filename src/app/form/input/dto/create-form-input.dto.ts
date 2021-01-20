@@ -1,5 +1,5 @@
 export interface CreateFormInputDTO {
     name: string;
-    description: string;
+    description?: string;
     type: number;
 }
