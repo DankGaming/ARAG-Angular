@@ -247,6 +247,10 @@ export class EmployeeTreeOverviewComponent implements OnInit, OnDestroy {
 		});
 	}
 
+	ngOnDestroy(): void {
+		this.treeSubjectSubscription.unsubscribe();
+	}
+
 	private navigateToTop(
 		nodeID: number = this.tree.root?.id,
 		replaceUrl: boolean = false
@@ -259,9 +263,5 @@ export class EmployeeTreeOverviewComponent implements OnInit, OnDestroy {
 			queryParamsHandling: "merge",
 			replaceUrl,
 		});
-	}
-
-	ngOnDestroy(): void {
-		this.treeSubjectSubscription.unsubscribe();
 	}
 }
