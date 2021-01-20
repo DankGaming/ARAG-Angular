@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { Observable } from "rxjs";
+import { Form } from "src/app/form/form.model";
+import { FormService } from "src/app/form/form.service";
 import { Modal } from "src/app/shared/modals/modal.interface";
+import { FormNodeService } from "src/app/tree/forms/form-node.service";
 import { Tree } from "src/app/tree/tree.model";
 import { TreeService } from "src/app/tree/tree.service";
 import { AnswerService } from "../../answer.service";
@@ -39,7 +43,8 @@ export class LinkModalComponent implements OnInit, Modal {
 
 	questions: Node[] = [];
 	notifications: Node[] = [];
-	forms: Node[] = [];
+	formNodes: Node[] = [];
+	forms: Form[] = [];
 
 	nodes: Node[];
 	defaultNode: Node;
@@ -48,7 +53,9 @@ export class LinkModalComponent implements OnInit, Modal {
 		private notificationService: NotificationService,
 		private answerService: AnswerService,
 		private nodeService: NodeService,
-		private treeService: TreeService
+		private treeService: TreeService,
+		private formService: FormService,
+		private formNodeService: FormNodeService
 	) {}
 
 	ngOnInit(): void {
@@ -62,20 +69,32 @@ export class LinkModalComponent implements OnInit, Modal {
 					(node: Node) => node.type === ContentType.NOTIFICATION
 				);
 
-				this.nodeService
-					.findByID(this.tree.id, this.node.id)
-					.subscribe((node: Node) => {
-						this.node = node;
-
-						if (node.children?.length > 0) {
-							const nodeType: ContentType = node.children[0].type;
-							this.type = this.types.find(
-								(type) => type.value === nodeType
-							);
-						}
-
-						this.switchType();
+				this.formService.findAll().subscribe((forms: Form[]) => {
+					this.forms = forms;
+					forms.forEach((form: Form) => {
+						this.formNodes.push({
+							id: form.id,
+							content: form.name,
+							type: ContentType.FORM,
+						});
 					});
+
+					this.nodeService
+						.findByID(this.tree.id, this.node.id)
+						.subscribe((node: Node) => {
+							this.node = node;
+
+							if (node.children?.length > 0) {
+								const nodeType: ContentType =
+									node.children[0].type;
+								this.type = this.types.find(
+									(type) => type.value === nodeType
+								);
+							}
+
+							this.switchType();
+						});
+				});
 			});
 	}
 
@@ -90,7 +109,7 @@ export class LinkModalComponent implements OnInit, Modal {
 				this.nodes = this.notifications;
 				break;
 			case ContentType.FORM:
-				this.nodes = this.forms;
+				this.nodes = this.formNodes;
 				break;
 		}
 
@@ -118,21 +137,59 @@ export class LinkModalComponent implements OnInit, Modal {
 	private linkAnswer(form: NgForm): void {
 		const values = form.value;
 
-		this.answerService
-			.update(this.tree.id, this.topNode?.id, this.node.id, {
-				next: values.nextNode.id,
-			})
-			.subscribe(() => this.linked());
+		if (values.nextNode.type === ContentType.FORM) {
+			// Create form node
+			this.createFormNode(values.nextNode).subscribe(
+				(node: Partial<Node>) => {
+					this.answerService
+						.update(this.tree.id, this.topNode?.id, this.node.id, {
+							next: node.id,
+						})
+						.subscribe(() => this.linked());
+				}
+			);
+		} else {
+			this.answerService
+				.update(this.tree.id, this.topNode?.id, this.node.id, {
+					next: values.nextNode.id,
+				})
+				.subscribe(() => this.linked());
+		}
 	}
 
 	private linkNotification(form: NgForm): void {
 		const values = form.value;
 
-		this.notificationService
-			.update(this.tree.id, this.node.id, {
-				next: values.nextNode.id,
-			})
-			.subscribe(() => this.linked());
+		if (values.nextNode.type === ContentType.FORM) {
+			// Create form node
+			this.createFormNode(values.nextNode).subscribe(
+				(node: Partial<Node>) => {
+					this.notificationService
+						.update(this.tree.id, this.node.id, {
+							next: node.id,
+						})
+						.subscribe(() => this.linked());
+				}
+			);
+		} else {
+			this.notificationService
+				.update(this.tree.id, this.node.id, {
+					next: values.nextNode.id,
+				})
+				.subscribe(() => this.linked());
+		}
+	}
+
+	private createFormNode(formNode: Node): Observable<Partial<Node>> {
+		const form: Form = this.forms.find((f: Form) => f.id === formNode.id);
+
+		return this.formNodeService.create(this.tree.id, {
+			content: form.name,
+			type: ContentType.FORM,
+			info: {
+				form: form.id,
+			},
+		});
 	}
 
 	private linked(): void {

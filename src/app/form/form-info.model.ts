@@ -1,4 +1,4 @@
-import { Form } from "@angular/forms";
+import { Form } from "./form.model";
 
 export interface FormInfo {
 	id: number;
