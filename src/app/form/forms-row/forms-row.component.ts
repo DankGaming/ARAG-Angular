@@ -1,10 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { PlaceholderDirective } from "../../shared/placeholder.directive";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ModalService } from "../../shared/modal.service";
 import { Form } from "../form.model";
-import { SetFormModalComponent } from "../modals/set-form-modal/set-form-modal.component";
-import { Node } from "../../node/node.model";
 
 @Component({
   selector: "app-forms-row",

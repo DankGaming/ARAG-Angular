@@ -13,7 +13,14 @@ import { FormOverviewComponent } from "./form-overview/form-overview.component";
 import { FormRowComponent } from "./form-row/form-row.component";
 
 @NgModule({
-  declarations: [SetFormModalComponent, SetFieldModalComponent, FormsOverviewComponent, FormsRowComponent, FormOverviewComponent, FormRowComponent],
+  declarations: [
+      SetFormModalComponent,
+      SetFieldModalComponent,
+      FormsOverviewComponent,
+      FormsRowComponent,
+      FormOverviewComponent,
+      FormRowComponent
+  ],
     imports: [
         CommonModule, SharedModule, FormsModule, FontAwesomeModule, FormsRoutingModule, RouterModule
     ],
