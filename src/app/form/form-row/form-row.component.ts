@@ -26,6 +26,6 @@ export class FormRowComponent implements OnInit {
 
     editForm(): void {
         const modal = this.modalService.createModal(SetFormModalComponent, this.modalHost);
-        // modal.instance.form = this.form;
+        modal.instance.form = this.form;
     }
 }
