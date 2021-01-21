@@ -1,8 +1,8 @@
 @import "/src/app/shared/variables";
 
-.employee-row {
+.form-row {
     margin: 2px;
-    padding: 10px;
+    padding: 20px;
     background-color: $color-white;
     box-shadow: $shadow;
     border-radius: $border-radius;
@@ -10,7 +10,7 @@
     align-items: center;
     flex-wrap: wrap;
 
-    .employee-info {
+    .form-info {
         display: flex;
         flex-direction: column;
         justify-content: center;

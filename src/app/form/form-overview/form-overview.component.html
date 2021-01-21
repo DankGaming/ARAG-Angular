@@ -17,8 +17,8 @@
         </div>
     </app-header>
 
-    <div class="question-container">
-        <ul *ngIf="formInputs.length > 0">
+    <div class="input-container">
+        <ul class="inputs" *ngIf="formInputs.length > 0">
             <li *ngFor="let input of formInputs" >
                 <app-form-row [form]="form" [input]="input"></app-form-row>
             </li>
