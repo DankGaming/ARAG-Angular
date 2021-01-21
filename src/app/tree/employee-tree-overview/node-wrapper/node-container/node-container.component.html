@@ -44,7 +44,7 @@
             </ng-container>
             <ng-container *ngIf="isForm()">
                 <li>
-                    <button [routerLink]="['/employees', 'forms', node.id]">Naar meldingsformulier <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
+                    <button [routerLink]="['/employees', 'forms', node.formInfo.form.id]">Naar meldingsformulier <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
                 </li>
             </ng-container>
             <ng-container *ngIf="isNotification()">
