@@ -58,8 +58,12 @@
     }
 }
 
-.question-container {
+.input-container {
     padding-bottom: 50px;
+
+    .inputs li {
+        margin-bottom: 20px;
+    }
 
     .top-bar {
         margin-bottom: 15px;
