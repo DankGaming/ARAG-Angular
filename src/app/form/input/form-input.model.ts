@@ -10,4 +10,5 @@ export interface FormInput {
 export interface FormInputType {
 	id: number;
 	name: string;
+	friendlyName: string;
 }
