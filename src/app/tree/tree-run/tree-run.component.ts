@@ -3,6 +3,7 @@ import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
 import { ActivatedRoute, Params } from "@angular/router";
 import { ContentType } from "src/app/node/content-type.model";
+import { Subscription } from "rxjs";
 
 @Component({
     selector: "app-tree-run",
@@ -14,15 +15,21 @@ export class TreeRunComponent implements OnInit {
 
     tree: Tree;
     type: string;
-    previousAnswers: any[] = [];
+    previousAnswers: {[question:number]:number} = {}
+
+    activatedRouteSubscription: Subscription;
+    treeServiceSubscription: Subscription;
 
     constructor(private activatedRoute: ActivatedRoute, private treeService: TreeService) {}
 
-    ngOnInit(): void {
-        console.log(this.previousAnswers);
-        this.activatedRoute.params.subscribe((params: Params) => {
+    ngOnDestroy(): void {
+        this.activatedRouteSubscription.unsubscribe();
+        this.treeServiceSubscription.unsubscribe();
+    }
 
-            this.treeService.findByID(+params.id).subscribe((tree: Tree) => {
+    ngOnInit(): void {
+        this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
+            this.treeServiceSubscription = this.treeService.findByID(+params.id).subscribe((tree: Tree) => {
                 this.tree = tree;
             });
         });

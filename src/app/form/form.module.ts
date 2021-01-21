@@ -9,12 +9,13 @@ import { FormRowComponent } from "./form-row/form-row.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { FormsRoutingModule } from "./forms-routing.module";
 import { RouterModule } from "@angular/router";
+import { CustomerFormViewComponent } from "./customer-form-view/customer-form-view.component";
 
 
 
 
 @NgModule({
-  declarations: [SetFormModalComponent, SetFieldModalComponent, FormOverviewComponent, FormRowComponent],
+  declarations: [SetFormModalComponent, SetFieldModalComponent, FormOverviewComponent, FormRowComponent, CustomerFormViewComponent],
     imports: [
         CommonModule, SharedModule, FormsModule, FontAwesomeModule, FormsRoutingModule, RouterModule
     ],

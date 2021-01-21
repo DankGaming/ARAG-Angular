@@ -15,8 +15,7 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     @Input() tree: Tree;
     @Input() nodeInput: Node;
     @Input() questionCounter: number;
-    @Input() previousAnswers: any[];
-    @Input() savedNodeIDs?: any[];
+    @Input() previousAnswers:{[question:number]:number};
 
     node: Node;
     selectedAnswer: Node;
@@ -27,22 +26,23 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     answerConfirmed = false;
 
     nodeServiceSubscription: Subscription;
+    answerNodeServiceSubscription: Subscription;
 
     constructor(private nodeService: NodeService) {}
 
     ngOnDestroy(): void {
         this.nodeServiceSubscription.unsubscribe();
+        if (this.answerNodeServiceSubscription) {
+            this.answerNodeServiceSubscription.unsubscribe();
+        }
+        if (this.answerConfirmed) {
+            delete this.previousAnswers[this.node.id];
+        }
     }
 
     ngOnInit(): void {
         this.questionCounter++;
-        
-        if (this.savedNodeIDs != null) {
-            this.previousAnswers.push(this.savedNodeIDs);
-            for (var val of this.previousAnswers) {
-                console.log(val);
-              }
-        }
+        console.log(this.previousAnswers);
         this.nodeServiceSubscription = this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
             this.answers = node.children;
@@ -57,8 +57,11 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
         if (this.questionTypeIsRadio()) {
             if (this.selectedRadioAnswer != null) {
                 const answerId = Number(this.selectedRadioAnswer);
-                this.nodeService.findByID(this.tree.id, answerId).subscribe((node: Node) => {
+                this.answerNodeServiceSubscription = this.nodeService.findByID(this.tree.id, answerId).subscribe((node: Node) => {
                     this.selectedAnswer = node;
+                    console.log(this.node.id);
+                    console.log(this.selectedAnswer.id);
+                    this.previousAnswers[this.node.id] = this.selectedAnswer.id;
                     if (this.hasChildNode()) {
                         if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
                             this.nextNodeIsNotification = false;
@@ -77,7 +80,10 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
             }
         }
         else {
-            this.nodeService.findByID(this.tree.id, this.selectedAnswer.id).subscribe(() => {
+            this.answerNodeServiceSubscription = this.nodeService.findByID(this.tree.id, this.selectedAnswer.id).subscribe(() => {
+                console.log(this.node.id);
+                console.log(this.selectedAnswer.id);
+                this.previousAnswers[this.node.id] = this.selectedAnswer.id;
                 if (this.hasChildNode()) {
                     if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
                         this.nextNodeIsNotification = false;
