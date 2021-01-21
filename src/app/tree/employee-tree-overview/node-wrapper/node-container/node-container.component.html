@@ -2,17 +2,12 @@
     <header>
         <p class="type">
             <ng-container [ngSwitch]="node.type">
-                <ng-container *ngSwitchCase="types.question">
-                    Vraag
-                </ng-container>
-                <ng-container *ngSwitchCase="types.answer">
-                    Antwoord
-                </ng-container>
-                <ng-container *ngSwitchCase="types.notification">
-                    Notificatie
-                </ng-container>
+                <ng-container *ngSwitchCase="types.question">Vraag {{ node.id }}</ng-container>
+                <ng-container *ngSwitchCase="types.answer">Antwoord {{ node.id }}</ng-container>
+                <ng-container *ngSwitchCase="types.notification">Notificatie {{ node.id }}</ng-container>
+                <ng-container *ngSwitchCase="types.form">Meldingsformulier {{ node.formInfo.form.id }}</ng-container>
             </ng-container>
-            {{ node.id }}</p>
+        </p>
         <p class="title">{{ node.content }}</p>
     </header>
     <section class="node-content">
@@ -45,6 +40,11 @@
                 </li>
                 <li *ngIf="!isCurrentTop">
                     <button (click)="expandNode(node)">Uitklappen <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="isForm()">
+                <li>
+                    <button [routerLink]="['/employees', 'forms', node.formInfo.form.id]">Naar meldingsformulier <fa-icon [icon]="icons.faChevronRight"></fa-icon></button>
                 </li>
             </ng-container>
             <ng-container *ngIf="isNotification()">

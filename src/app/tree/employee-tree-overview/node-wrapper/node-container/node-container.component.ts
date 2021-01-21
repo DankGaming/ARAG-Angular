@@ -29,6 +29,7 @@ import { AnswerService } from "src/app/node/answer.service";
 import { NotificationService } from "src/app/node/notification.service";
 import { TreeService } from "src/app/tree/tree.service";
 import { ConfirmBoxModalComponent } from "src/app/shared/modals/confirm-box-modal/confirm-box-modal.component";
+import { NodeService } from "src/app/node/node.service";
 
 @Component({
 	selector: "app-node-container",
@@ -52,6 +53,7 @@ export class NodeContainerComponent implements OnInit {
 		question: ContentType.QUESTION,
 		answer: ContentType.ANSWER,
 		notification: ContentType.NOTIFICATION,
+		form: ContentType.FORM,
 	};
 	icons = {
 		faChevronRight,
@@ -73,7 +75,8 @@ export class NodeContainerComponent implements OnInit {
 		private modalService: ModalService,
 		private answerService: AnswerService,
 		private notificationService: NotificationService,
-		private treeService: TreeService
+		private treeService: TreeService,
+		private nodeService: NodeService
 	) {}
 
 	ngOnInit(): void {}
@@ -84,6 +87,7 @@ export class NodeContainerComponent implements OnInit {
 	isQuestion = (): boolean => this.node.type === ContentType.QUESTION;
 	isNotification = (): boolean => this.node.type === ContentType.NOTIFICATION;
 	isAnswer = (): boolean => this.node.type === ContentType.ANSWER;
+	isForm = (): boolean => this.node.type === ContentType.FORM;
 
 	expandNode(node: Partial<Node>): void {
 		this.expand.emit(node as Node);
@@ -145,7 +149,18 @@ export class NodeContainerComponent implements OnInit {
 					this.unlinkNotification();
 					break;
 			}
+
+			const child: Node = this.graph.nodes[
+				this.graph.edges[this.node.id][0]
+			];
+			if (child.type === ContentType.FORM) {
+				this.deleteNode(child);
+			}
 		});
+	}
+
+	private deleteNode(node: Node): void {
+		this.nodeService.remove(this.tree.id, node.id).subscribe();
 	}
 
 	private unlinkAnswer(): void {

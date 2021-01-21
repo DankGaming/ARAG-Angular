@@ -1,12 +1,22 @@
-<div class="employee-row">
-    <div class="employee-info">
-        <h3 class="title">{{ form.name }}</h3>
-        <p>{{form.description}}</p>
-    </div>
+<div class="input-container">
+    <header>
+        <p class="type">Veld {{ input.id }}</p>
+        <p class="title">{{ input.name }}</p>
+        <p class="description">{{ input.description }}</p>
+    </header>
+    <section class="input-content">
+        <ul>
+            <li>{{ input.type.friendlyName }}</li>
+        </ul>
+        <ul class="right">
+            <li>
+                <button (click)="editFormInput()">
+                    <fa-icon [icon]="icons.faPen"></fa-icon>
+                    Wijzig
+                </button>
+            </li>
+        </ul>
+    </section>
 
-    <button class="walk-through-button" (click)="editForm()">
-        <fa-icon [icon]="icons.faArrowRight" ></fa-icon>
-    </button>
     <ng-container appPlaceholder></ng-container>
 </div>
-

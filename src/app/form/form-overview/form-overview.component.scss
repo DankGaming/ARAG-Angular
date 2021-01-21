@@ -1,0 +1,149 @@
+@import "/src/app/shared/variables";
+
+.header-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+
+    & > * {
+        margin: 0 10px;
+    }
+
+    .danger-animation {
+        transition: .3s;
+
+        &:hover {
+            background-color: $color-red-600;
+            color: white;
+        }
+    }
+
+    .publish-animation {
+        position: relative;
+        padding-left: 32px;
+        overflow: hidden;
+        transition: .3s;
+
+        fa-icon {
+            position: absolute;
+            left: 13px;
+            transition: .3s;
+            transform-origin: bottom bottom;
+        }
+
+        &:hover {
+            background-color: $color-primary;
+            filter: none;
+
+            fa-icon {
+                display: block;
+                animation: publish 1s infinite;
+            }
+        }
+    }
+}
+
+
+@keyframes publish {
+    0%, 15% {
+        transform: translateY(0);
+    }
+    // End
+    40%, 50% {
+        transform: translateY(-155%);
+    }
+    // Start
+    51%, 60% {
+        transform: translateY(155%);
+    }
+}
+
+.input-container {
+    padding-bottom: 50px;
+
+    .inputs li {
+        margin-bottom: 20px;
+    }
+
+    .top-bar {
+        margin-bottom: 15px;
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        grid-gap: 15px;
+
+        button {
+            justify-self: flex-start;
+
+            fa-icon {
+                margin-right: 10px;
+            }
+        }
+
+        .right {
+            justify-self: flex-end;
+
+            display: grid;
+            grid-template-columns: 300px 1fr 1fr;
+            grid-gap: 15px;
+
+            li {
+
+                button {
+                    height: 100%;
+                    width: 100%;
+                    max-width: none;
+                }
+
+                &#search-bar-container {
+                    position: relative;
+                    width: 100%;
+
+                    input {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: 900px) {
+            grid-template-columns: 1fr;
+
+            .right {
+                justify-self: stretch;
+                display: flex;
+
+                button {
+                    justify-self: stretch;
+                }
+
+                @media only screen and (max-width: 600px) {
+                    flex-direction: column;
+
+                    li {
+                        flex-grow: 1;
+                        display: flex;
+
+                        button {
+                            flex-grow: 1;
+                            max-width: none;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    .nodes-container {
+        display: grid;
+        grid-gap: 20px;
+
+        .indent {
+            margin-left: 30px;
+        }
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    // .question-container .
+}

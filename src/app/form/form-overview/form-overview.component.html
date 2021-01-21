@@ -1,15 +1,29 @@
-<main>
-    <app-header title="Meldingsformulieren" subtitle="Kies welke meldingsformulieren u wilt bewerken">
-        <button class="button primary" (click)="createForm()">
-            <fa-icon [icon]="icons.faPlus"></fa-icon>
-            Nieuw formulier
-        </button>
+<div *ngIf="form">
+    <app-header [title]="form.name" [subtitle]="form.description">
+        <div class="header-buttons">
+            <button class="button danger-animation" (click)="removeForm()">
+                <fa-icon [icon]="icons.faTrashAlt"></fa-icon>
+                Verwijder
+            </button>
+
+            <button class="button" (click)="editForm()">
+                <fa-icon [icon]="icons.faPen"></fa-icon>
+                Bewerken
+            </button>
+            <button class="button primary" (click)="createFormInput()">
+                <fa-icon [icon]="icons.faPlus"></fa-icon>
+                Nieuw veld
+            </button>
+        </div>
     </app-header>
-    <ul *ngIf="forms.length > 0">
-        <li *ngFor="let form of forms">
-            <app-form-row [form]="form" [navigationLink]="['/employees', 'form', form.id]"></app-form-row>
-        </li>
-    </ul>
+
+    <div class="input-container">
+        <ul class="inputs" *ngIf="formInputs.length > 0">
+            <li *ngFor="let input of formInputs" >
+                <app-form-row [form]="form" [input]="input"></app-form-row>
+            </li>
+        </ul>
+    </div>
 
     <ng-container appPlaceholder></ng-container>
-</main>
+</div>
