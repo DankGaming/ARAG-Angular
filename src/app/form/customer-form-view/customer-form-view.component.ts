@@ -17,13 +17,15 @@ export class CustomerFormViewComponent implements OnInit {
     @Input() tree: Tree;
     @Input() previousAnswers:{[question:number]:number};
     
-
+    formInputs: string[];
     form: Form;
 
     constructor(private nodeService: NodeService, private formService: FormService) {}
 
     ngOnInit(): void {
-        console.log(this.previousAnswers);
+        this.formInputs.push("hallo")
+        this.formInputs.push("hey")
+        this.formInputs.push("hoi")
         // for (var nodeId in this.previousAnswers){
         //     this.nodeService.findByID(this.tree.id, nodeId[0]).subscribe((node: Node) => {
         //         this.node = node;

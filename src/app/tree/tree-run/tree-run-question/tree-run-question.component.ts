@@ -23,6 +23,7 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     answers: Node[] = [];
     nextNodeIsQuestion = false;
     nextNodeIsNotification = false;
+    nextNodeIsForm = false;
     answerConfirmed = false;
 
     nodeServiceSubscription: Subscription;
@@ -65,11 +66,18 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
                     if (this.hasChildNode()) {
                         if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
                             this.nextNodeIsNotification = false;
+                            this.nextNodeIsForm = false;
                             this.nextNodeIsQuestion = true;
+                        }
+                        else if (this.selectedAnswer.children[0].type === ContentType.NOTIFICATION) {
+                            this.nextNodeIsQuestion = false;
+                            this.nextNodeIsForm = false;
+                            this.nextNodeIsNotification = true;
                         }
                         else {
                             this.nextNodeIsQuestion = false;
-                            this.nextNodeIsNotification = true;
+                            this.nextNodeIsNotification = false;
+                            this.nextNodeIsForm = true;
                         }
                         this.answerConfirmed = true;
                     }
@@ -87,11 +95,18 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
                 if (this.hasChildNode()) {
                     if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
                         this.nextNodeIsNotification = false;
+                        this.nextNodeIsForm = false;
                         this.nextNodeIsQuestion = true;
+                    }
+                    else if (this.selectedAnswer.children[0].type === ContentType.NOTIFICATION) {
+                        this.nextNodeIsQuestion = false;
+                        this.nextNodeIsForm = false;
+                        this.nextNodeIsNotification = true;
                     }
                     else {
                         this.nextNodeIsQuestion = false;
-                        this.nextNodeIsNotification = true;
+                        this.nextNodeIsNotification = false;
+                        this.nextNodeIsForm = true;
                     }
                     this.answerConfirmed = true;
                 }

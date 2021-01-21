@@ -1,1 +1,5 @@
-<p>het werkt!</p>
+<ul *ngIf="formInputs.length > 0;">
+    <li *ngFor="let element of formInputs; let i = index">
+        <p>{{ element }}</p>>
+    </li>
+</ul>

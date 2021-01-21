@@ -16,7 +16,11 @@ const routes: Routes = [
         path: "employees/forms/:id",
         component: FormOverviewComponent,
         canActivate: [AuthGuard, AdminGuard],
-    },
+	},
+	{
+		path: "customers/forms/view",
+		component: CustomerFormViewComponent
+	}
 ];
 
 @NgModule({

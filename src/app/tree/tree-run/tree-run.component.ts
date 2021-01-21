@@ -42,4 +42,12 @@ export class TreeRunComponent implements OnInit {
     rootNodeIsQuestion(): boolean {
         return this.tree.root?.type === ContentType.QUESTION;
     }
+
+    rootNodeIsNotification(): boolean {
+        return this.tree.root?.type === ContentType.NOTIFICATION;
+    }
+
+    rootNodeIsForm(): boolean {
+        return this.tree.root?.type === ContentType.FORM;
+    }
 }

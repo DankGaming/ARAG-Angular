@@ -44,4 +44,12 @@ export class TreeRunNotificationComponent implements OnInit {
     childTypeIsQuestion(): boolean {
         return this.node.children[0].type === ContentType.QUESTION;
     }
+
+    childTypeIsNotification(): boolean {
+        return this.node.children[0].type === ContentType.NOTIFICATION;
+    }
+
+    childTypeIsForm(): boolean {
+        return this.node.children[0].type === ContentType.FORM;
+    }
 }
