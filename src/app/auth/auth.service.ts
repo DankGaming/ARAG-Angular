@@ -6,6 +6,8 @@ import { LoginInfo } from "./login-info.model";
 import { Employee } from "../employee/employee.model";
 import { BehaviorSubject, Observable } from "rxjs";
 import { HttpResult } from "../shared/http-result";
+import jwt_decode from "jwt-decode";
+import { DecodedJWT } from "./decoded-jwt";
 
 @Injectable({
 	providedIn: "root",
@@ -41,12 +43,19 @@ export class AuthService {
 		return observer;
 	}
 
-	isLoggedIn = (): boolean => !!this.loginInfo.getValue();
+	isLoggedIn = (): boolean =>
+		!!this.loginInfo.getValue() && !this.JWTIsExpired();
 
 	autoLogin(): void {
 		const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
 		if (!loginInfo) return;
 		this.loginInfo.next(loginInfo);
+	}
+
+	private JWTIsExpired(): boolean {
+		const jwt = this.loginInfo.getValue().jwt;
+		const decoded: DecodedJWT = jwt_decode(jwt);
+		return Math.floor(new Date().getTime() / 1000) >= decoded.exp;
 	}
 
 	private handleAuthentication(loginInfo: LoginInfo): void {
