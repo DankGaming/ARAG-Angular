@@ -1,5 +1,5 @@
 <div *ngIf="tree">
-    <app-header [title]="tree.name" [subtitle]="tree.description">
+    <app-header [title]="tree.name" [subtitle]="tree.description | truncate:200">
         <div class="header-buttons">
             <button class="button danger-animation" (click)="removeTree()">
                 <fa-icon [icon]="icons.faTrashAlt"></fa-icon>

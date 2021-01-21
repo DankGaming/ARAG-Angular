@@ -15,7 +15,9 @@
                 <input type="password" id="password" name="password" placeholder="Wachtwoord" ngModel required>
             </div>
 
-            <button class="button primary" [disabled]="loginForm.invalid">Inloggen</button>
+            <div class="form-group">
+                <button class="button primary" [disabled]="loginForm.invalid">Inloggen</button>
+            </div>
         </form>
     </div>
 </main>

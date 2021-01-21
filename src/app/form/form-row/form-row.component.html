@@ -1,0 +1,22 @@
+<div class="input-container">
+    <header>
+        <p class="type">Veld {{ input.id }}</p>
+        <p class="title">{{ input.name }}</p>
+        <p class="description">{{ input.description }}</p>
+    </header>
+    <section class="input-content">
+        <ul>
+            <li>{{ input.type.friendlyName }}</li>
+        </ul>
+        <ul class="right">
+            <li>
+                <button (click)="editFormInput()">
+                    <fa-icon [icon]="icons.faPen"></fa-icon>
+                    Wijzig
+                </button>
+            </li>
+        </ul>
+    </section>
+
+    <ng-container appPlaceholder></ng-container>
+</div>
