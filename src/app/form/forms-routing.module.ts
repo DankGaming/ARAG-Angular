@@ -18,7 +18,7 @@ const routes: Routes = [
         canActivate: [AuthGuard, AdminGuard],
 	},
 	{
-		path: "customers/forms/view",
+		path: "customers/forms/:id",
 		component: CustomerFormViewComponent
 	}
 ];

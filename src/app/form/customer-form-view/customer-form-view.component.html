@@ -1,5 +1,17 @@
-<ul *ngIf="formInputs.length > 0;">
-    <li *ngFor="let element of formInputs; let i = index">
-        <p>{{ element }}</p>>
-    </li>
-</ul>
+<div *ngIf=form>
+    <app-header [title]="form.name" [subtitle]="form.description"></app-header>
+    <form #formForm="ngForm" (ngSubmit)="submitAnswers(formForm)">
+        <ul *ngIf="form.inputs.length > 0;">
+            <li class="question" *ngFor="let input of form.inputs; let i = index">
+                <p class="question-text bold">{{ input.name }}</p>
+                <p class="description">{{ input.description }}</p>
+                <input required type="text" class="textfield" ngModel [name]="input.name" placeholder="Antwoord">
+            </li>
+        </ul>
+        <div class="submit-button">
+            <button [disabled]="formForm.invalid" class="button primary">
+                Bevestigen
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,11 +1,14 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Form } from "@angular/forms";
 import { ActivatedRoute, Params } from "@angular/router";
+import { Subscription } from "rxjs";
 import { ContentType } from "src/app/node/content-type.model";
 import { NodeService } from "src/app/node/node.service";
+import { Form } from "../form.model";
 import { Tree } from "src/app/tree/tree.model";
 import { TreeService } from "src/app/tree/tree.service";
 import { FormService } from "../form.service"
+import { NgForm } from "@angular/forms";
+import { JsonPipe } from "@angular/common";
 
 @Component({
     selector: "app-customer-form-view",
@@ -15,22 +18,27 @@ import { FormService } from "../form.service"
 export class CustomerFormViewComponent implements OnInit {
     @Input() routerLink: any[];
     @Input() tree: Tree;
-    @Input() previousAnswers:{[question:number]:number};
+    @Input() navigationLink: any[];
     
-    formInputs: string[];
     form: Form;
+    previousAnswers:{[question:number]:number};
 
-    constructor(private nodeService: NodeService, private formService: FormService) {}
+    constructor(private activatedRoute: ActivatedRoute, private nodeService: NodeService, private formService: FormService) {} 
 
     ngOnInit(): void {
-        this.formInputs.push("hallo")
-        this.formInputs.push("hey")
-        this.formInputs.push("hoi")
-        // for (var nodeId in this.previousAnswers){
-        //     this.nodeService.findByID(this.tree.id, nodeId[0]).subscribe((node: Node) => {
-        //         this.node = node;
-        //         this.answers = node.children;
-        //         this.selectedAnswer = this.answers[0];
-        // });
+        const queryParams = this.activatedRoute.snapshot.queryParams;
+        const params = this.activatedRoute.snapshot.params;
+
+        this.previousAnswers = JSON.parse(atob(queryParams.answers));
+        this.formService.findByID(+params.id).subscribe((form: Form) => {
+            this.form = form;
+        });
+    }
+
+    submitAnswers(form: NgForm) {
+        this.formService.submit(this.form.id, {
+            answers: this.previousAnswers,
+            form: form.value
+        }).subscribe();
     }
 }

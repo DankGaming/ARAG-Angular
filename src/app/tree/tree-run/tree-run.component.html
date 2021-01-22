@@ -3,11 +3,16 @@
 
     <div class="root-node">
         <div *ngIf="hasRoot(); else noRootNode">
-            <div *ngIf="rootNodeIsQuestion(); else rootTypeNotification">
-                <app-tree-run-question [tree]=tree [nodeInput]=tree.root [questionCounter]="0" [previousAnswers]=previousAnswers></app-tree-run-question>
+            <div *ngIf="rootNodeIsQuestion(); else loadRootNode">
+                <app-tree-run-question [tree]="tree" [nodeInput]="tree.root" [questionCounter]="0" [previousAnswers]="previousAnswers"></app-tree-run-question>
             </div>
-            <ng-template #rootTypeNotification>
-                <app-tree-run-notification [tree]=tree [nodeInput]=tree.root [questionCounter]="0" [previousAnswers]=previousAnswers></app-tree-run-notification>
+            <ng-template #loadRootNode>
+                <div *ngIf="rootNodeIsNotification; else loadForm">
+                    <app-tree-run-notification [tree]="tree" [nodeInput]="tree.root" [questionCounter]="0" [previousAnswers]="previousAnswers"></app-tree-run-notification>
+                </div>
+                <ng-template #loadForm>
+                    <app-tree-run-form [tree]="tree" [nodeInput]="tree.root" [previousAnswers]="previousAnswers"></app-tree-run-form>
+                </ng-template>
             </ng-template>
         </div>
         <ng-template #noRootNode>
