@@ -1,14 +1,16 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
 import { Subscription } from "rxjs";
 import { ContentType } from "src/app/node/content-type.model";
 import { NodeService } from "src/app/node/node.service";
 import { Form } from "../form.model";
 import { Tree } from "src/app/tree/tree.model";
-import { TreeService } from "src/app/tree/tree.service";
 import { FormService } from "../form.service"
 import { NgForm } from "@angular/forms";
 import { JsonPipe } from "@angular/common";
+import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
+import { ModalService } from "src/app/shared/modal.service";
+import { FormSubmittedModalComponent } from "../modals/form-submitted-modal/form-submitted-modal.component";
 
 @Component({
     selector: "app-customer-form-view",
@@ -17,13 +19,14 @@ import { JsonPipe } from "@angular/common";
 })
 export class CustomerFormViewComponent implements OnInit {
     @Input() routerLink: any[];
-    @Input() tree: Tree;
-    @Input() navigationLink: any[];
+
+    @ViewChild(PlaceholderDirective, { static: false })
+    modalHost: PlaceholderDirective;
     
     form: Form;
     previousAnswers:{[question:number]:number};
 
-    constructor(private activatedRoute: ActivatedRoute, private nodeService: NodeService, private formService: FormService) {} 
+    constructor(private activatedRoute: ActivatedRoute, private nodeService: NodeService, private formService: FormService, private modalService: ModalService) {} 
 
     ngOnInit(): void {
         const queryParams = this.activatedRoute.snapshot.queryParams;
@@ -40,5 +43,6 @@ export class CustomerFormViewComponent implements OnInit {
             answers: this.previousAnswers,
             form: form.value
         }).subscribe();
+        this.modalService.createModal(FormSubmittedModalComponent, this.modalHost);
     }
 }

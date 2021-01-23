@@ -1,6 +1,6 @@
 <div class="form-node-container">
     <div *ngIf="node" class="go-to-form">
-        <p class="form-text">klik hier om naar het meldformulier te gaan</p>
+        <p class="form-text">Klik hier om naar het meldformulier te gaan</p>
         <button class="button primary" [routerLink]="['/customers', 'forms', node.formInfo.form.id]" [queryParams]="{answers: encodedAnswers}">
             Doorgaan
         </button>
