@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute} from "@angular/router";
 import { NodeService } from "src/app/node/node.service";
 import { Form } from "../form.model";
-import { FormService } from "../form.service"
+import { FormService } from "../form.service";
 import { NgForm } from "@angular/forms";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { ModalService } from "src/app/shared/modal.service";
