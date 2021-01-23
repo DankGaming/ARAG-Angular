@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { NgForm } from "@angular/forms";
 import { Modal } from "src/app/shared/modals/modal.interface";
 import { Form } from "../../form.model";
 import { FormService } from "../../form.service";

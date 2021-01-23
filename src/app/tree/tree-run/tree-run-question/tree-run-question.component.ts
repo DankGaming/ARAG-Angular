@@ -15,7 +15,7 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     @Input() tree: Tree;
     @Input() nodeInput: Node;
     @Input() questionCounter: number;
-    @Input() previousAnswers:{[question:number]:number};
+    @Input() previousAnswers: {[question: number]: number};
 
     node: Node;
     selectedAnswer: Node;

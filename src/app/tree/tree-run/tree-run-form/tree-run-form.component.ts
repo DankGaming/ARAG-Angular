@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Node } from "src/app/node/node.model";
 import { NodeService } from "src/app/node/node.service";
-import { ContentType } from "src/app/node/content-type.model";
 import { Tree } from "../../tree.model";
 import { Subscription } from "rxjs";
 
@@ -13,7 +12,7 @@ import { Subscription } from "rxjs";
 export class TreeRunFormComponent implements OnInit {
     @Input() tree: Tree;
     @Input() nodeInput: Node;
-    @Input() previousAnswers:{[question:number]:number};
+    @Input() previousAnswers: {[question: number]: number};
 
     node: Node;
     get encodedAnswers(): string {
@@ -31,17 +30,6 @@ export class TreeRunFormComponent implements OnInit {
     ngOnInit(): void {
         this.nodeServiceSubscription = this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
-            console.log("form id =")
-            console.log(this.node)
-            console.log(this.node.type)
-            console.log(this.node.formInfo.id)
         });
-        console.log(Object.keys(this.previousAnswers));
-        console.log("het werkt")
     }
-
-    goToForm() {
-        console.log(this.nodeInput.content)
-    }
-
 }

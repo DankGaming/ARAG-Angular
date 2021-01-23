@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Node } from "src/app/node/node.model";
 import { NodeService } from "src/app/node/node.service";
 import { ContentType } from "src/app/node/content-type.model";
@@ -14,7 +14,7 @@ export class TreeRunNotificationComponent implements OnInit {
     @Input() tree: Tree;
     @Input() nodeInput: Node;
     @Input() questionCounter: number;
-    @Input() previousAnswers:{[question:number]:number};
+    @Input() previousAnswers: {[question: number]: number};
 
     node: Node;
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
 import { ActivatedRoute, Params } from "@angular/router";
@@ -15,7 +15,7 @@ export class TreeRunComponent implements OnInit {
 
     tree: Tree;
     type: string;
-    previousAnswers: {[question:number]:number} = {}
+    previousAnswers: {[question: number]: number} = {};
 
     activatedRouteSubscription: Subscription;
     treeServiceSubscription: Subscription;
