@@ -9,7 +9,7 @@ import { Subscription } from "rxjs";
     templateUrl: "./tree-run-form.component.html",
     styleUrls: ["./tree-run-form.component.scss"],
 })
-export class TreeRunFormComponent implements OnInit {
+export class TreeRunFormComponent implements OnInit, OnDestroy {
     @Input() tree: Tree;
     @Input() nodeInput: Node;
     @Input() previousAnswers: {[question: number]: number};

@@ -10,7 +10,7 @@ import { Subscription } from "rxjs";
     templateUrl: "./tree-run.component.html",
     styleUrls: ["./tree-run.component.scss"],
 })
-export class TreeRunComponent implements OnInit {
+export class TreeRunComponent implements OnInit, OnDestroy {
     @Input() routerLink: any[];
 
     tree: Tree;

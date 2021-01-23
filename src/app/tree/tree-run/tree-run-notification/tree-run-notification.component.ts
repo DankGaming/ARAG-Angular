@@ -10,7 +10,7 @@ import { Subscription } from "rxjs";
     templateUrl: "./tree-run-notification.component.html",
     styleUrls: ["./tree-run-notification.component.scss"],
 })
-export class TreeRunNotificationComponent implements OnInit {
+export class TreeRunNotificationComponent implements OnInit, OnDestroy {
     @Input() tree: Tree;
     @Input() nodeInput: Node;
     @Input() questionCounter: number;
