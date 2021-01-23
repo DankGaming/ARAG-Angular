@@ -43,7 +43,6 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.questionCounter++;
-        console.log(this.previousAnswers);
         this.nodeServiceSubscription = this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
             this.answers = node.children;
@@ -60,8 +59,6 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
                 const answerId = Number(this.selectedRadioAnswer);
                 this.answerNodeServiceSubscription = this.nodeService.findByID(this.tree.id, answerId).subscribe((node: Node) => {
                     this.selectedAnswer = node;
-                    console.log(this.node.id);
-                    console.log(this.selectedAnswer.id);
                     this.previousAnswers[this.node.id] = this.selectedAnswer.id;
                     if (this.hasChildNode()) {
                         if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
@@ -89,8 +86,6 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
         }
         else {
             this.answerNodeServiceSubscription = this.nodeService.findByID(this.tree.id, this.selectedAnswer.id).subscribe(() => {
-                console.log(this.node.id);
-                console.log(this.selectedAnswer.id);
                 this.previousAnswers[this.node.id] = this.selectedAnswer.id;
                 if (this.hasChildNode()) {
                     if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {

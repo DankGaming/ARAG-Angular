@@ -27,7 +27,6 @@ export class TreeRunNotificationComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.previousAnswers);
         this.nodeServiceSubscription = this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
         });
