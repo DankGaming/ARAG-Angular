@@ -10,12 +10,17 @@ import { Modal } from "../modal.interface";
 export class AlertBoxModalComponent implements OnInit, Modal {
     @Input() title: string = "Alert!";
     @Input() subtitle: string;
+    @Input() body?: string;
     @Output() closeModal = new EventEmitter();
     @Output() confirmed = new EventEmitter();
 
+    hasBody: boolean = false;
+
     constructor() {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+      this.hasBody = this.body != null;
+    }
 
     close = (): void => this.closeModal.emit();
 

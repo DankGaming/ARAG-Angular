@@ -1,5 +1,6 @@
-<app-modal [title]="title" [subtitle]="subtitle" [showBody]="false" (closeModal)="close()">
+<app-modal [title]="title" [subtitle]="subtitle" [showBody]="hasBody" (closeModal)="close()">
     <ng-container body>
+        {{ body }}
     </ng-container>
     <ng-container footer>
         <button class="button primary" (click)="confirm()">
