@@ -7,6 +7,7 @@ import { NgForm } from "@angular/forms";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { ModalService } from "src/app/shared/modal.service";
 import { FormSubmittedModalComponent } from "../modals/form-submitted-modal/form-submitted-modal.component";
+import { AuthService } from "src/app/auth/auth.service"
 
 @Component({
     selector: "app-customer-form-view",
@@ -24,9 +25,9 @@ export class CustomerFormViewComponent implements OnInit {
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private nodeService: NodeService,
         private formService: FormService,
-        private modalService: ModalService) {}
+        private modalService: ModalService,
+        private authService: AuthService) {}
 
     ngOnInit(): void {
         const queryParams = this.activatedRoute.snapshot.queryParams;
@@ -39,10 +40,12 @@ export class CustomerFormViewComponent implements OnInit {
     }
 
     submitAnswers(form: NgForm): void {
-        this.formService.submit(this.form.id, {
-            answers: this.previousAnswers,
-            form: form.value
-        }).subscribe();
+        if (!this.authService.isLoggedIn()) {
+            this.formService.submit(this.form.id, {
+                answers: this.previousAnswers,
+                form: form.value
+            }).subscribe();
+        }
         this.modalService.createModal(FormSubmittedModalComponent, this.modalHost);
     }
 }

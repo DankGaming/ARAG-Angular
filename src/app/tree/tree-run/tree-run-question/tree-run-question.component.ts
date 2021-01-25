@@ -21,10 +21,8 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     selectedAnswer: Node;
     selectedRadioAnswer: string;
     answers: Node[] = [];
-    nextNodeIsQuestion = false;
-    nextNodeIsNotification = false;
-    nextNodeIsForm = false;
     answerConfirmed = false;
+    childType: string = "";
 
     nodeServiceSubscription: Subscription;
     answerNodeServiceSubscription: Subscription;
@@ -52,8 +50,6 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
 
     confirmAnswer(): void {
         this.answerConfirmed = false;
-        this.nextNodeIsNotification = false;
-        this.nextNodeIsQuestion = false;
         if (this.questionTypeIsRadio()) {
             if (this.selectedRadioAnswer != null) {
                 const answerId = Number(this.selectedRadioAnswer);
@@ -62,22 +58,16 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
                     this.previousAnswers[this.node.id] = this.selectedAnswer.id;
                     if (this.hasChildNode()) {
                         if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
-                            this.nextNodeIsNotification = false;
-                            this.nextNodeIsForm = false;
-                            this.nextNodeIsQuestion = true;
+                            this.childType = "question";
                         }
                         else if (this.selectedAnswer.children[0].type === ContentType.NOTIFICATION) {
-                            this.nextNodeIsQuestion = false;
-                            this.nextNodeIsForm = false;
-                            this.nextNodeIsNotification = true;
+                            this.childType = "notification";
                         }
-                        else {
-                            this.nextNodeIsQuestion = false;
-                            this.nextNodeIsNotification = false;
-                            this.nextNodeIsForm = true;
+                        else if (this.selectedAnswer.children[0].type === ContentType.FORM) {
+                            this.childType = "form";
                         }
-                        this.answerConfirmed = true;
                     }
+                    this.answerConfirmed = true;
                 });
             }
             else {
@@ -89,22 +79,16 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
                 this.previousAnswers[this.node.id] = this.selectedAnswer.id;
                 if (this.hasChildNode()) {
                     if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
-                        this.nextNodeIsNotification = false;
-                        this.nextNodeIsForm = false;
-                        this.nextNodeIsQuestion = true;
+                        this.childType = "question";
                     }
                     else if (this.selectedAnswer.children[0].type === ContentType.NOTIFICATION) {
-                        this.nextNodeIsQuestion = false;
-                        this.nextNodeIsForm = false;
-                        this.nextNodeIsNotification = true;
+                        this.childType = "notification";
                     }
-                    else {
-                        this.nextNodeIsQuestion = false;
-                        this.nextNodeIsNotification = false;
-                        this.nextNodeIsForm = true;
+                    else if (this.selectedAnswer.children[0].type === ContentType.FORM) {
+                        this.childType = "form";
                     }
-                    this.answerConfirmed = true;
                 }
+                this.answerConfirmed = true;
             });
         }
     }

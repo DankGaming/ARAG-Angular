@@ -36,25 +36,19 @@
 </div>
 
 
-<div class="next-node">
-    <div *ngIf="answerConfirmed">
-        <div *ngIf="hasChildNode(); else noChildNode">
-            <div *ngIf="nextNodeIsQuestion; else loadNextNode">
-                <div class="connect-line"></div>
-                <app-tree-run-question [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [questionCounter]="questionCounter" [previousAnswers]="previousAnswers"></app-tree-run-question>
-            </div>
-            <ng-template #loadNextNode>
-                <div *ngIf="nextNodeIsNotification; else loadForm">
-                    <div class="connect-line"></div>
-                    <app-tree-run-notification [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [questionCounter]="questionCounter" [previousAnswers]="previousAnswers"></app-tree-run-notification>
-                </div>
-                <ng-template #loadForm>
-                    <app-tree-run-form [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [previousAnswers]="previousAnswers"></app-tree-run-form>
-                </ng-template>
-            </ng-template>
+<div *ngIf="answerConfirmed" class="next-node">
+    <div [ngSwitch]="childType">
+        <div *ngSwitchCase=" 'question' ">
+            <div class="connect-line"></div>
+            <app-tree-run-question [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [questionCounter]="questionCounter" [previousAnswers]="previousAnswers"></app-tree-run-question>
         </div>
-        <ng-template #noChildNode>
-            <p>Dit antwoord heeft geen vervolgnode.</p>
-        </ng-template>
+        <div *ngSwitchCase=" 'notification' ">
+            <div class="connect-line"></div>
+            <app-tree-run-notification [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [questionCounter]="questionCounter" [previousAnswers]="previousAnswers"></app-tree-run-notification>
+        </div>
+        <div *ngSwitchCase=" 'form' ">
+            <app-tree-run-form [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [previousAnswers]="previousAnswers"></app-tree-run-form>
+        </div>
+        <div *ngSwitchDefault class="no-next-node">Dit antwoord heeft geen vervolgnode.</div>
     </div>
 </div>

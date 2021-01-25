@@ -15,9 +15,7 @@ export class FormSubmittedModalComponent implements OnInit, Modal {
   @Input() form: Form;
 
 
-  constructor(
-    private formService: FormService,
-    )  { }
+  constructor() { }
 
 
   ngOnInit(): void {

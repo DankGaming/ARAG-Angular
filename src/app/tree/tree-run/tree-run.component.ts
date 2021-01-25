@@ -3,34 +3,37 @@ import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
 import { ActivatedRoute, Params } from "@angular/router";
 import { ContentType } from "src/app/node/content-type.model";
-import { Subscription } from "rxjs";
 
 @Component({
     selector: "app-tree-run",
     templateUrl: "./tree-run.component.html",
     styleUrls: ["./tree-run.component.scss"],
 })
-export class TreeRunComponent implements OnInit, OnDestroy {
+export class TreeRunComponent implements OnInit {
     @Input() routerLink: any[];
 
     tree: Tree;
     type: string;
     previousAnswers: {[question: number]: number} = {};
-
-    activatedRouteSubscription: Subscription;
-    treeServiceSubscription: Subscription;
+    rootType: string = "";
 
     constructor(private activatedRoute: ActivatedRoute, private treeService: TreeService) {}
 
-    ngOnDestroy(): void {
-        this.activatedRouteSubscription.unsubscribe();
-        this.treeServiceSubscription.unsubscribe();
-    }
-
     ngOnInit(): void {
-        this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
-            this.treeServiceSubscription = this.treeService.findByID(+params.id).subscribe((tree: Tree) => {
+        this.activatedRoute.params.subscribe((params: Params) => {
+            this.treeService.findByID(+params.id).subscribe((tree: Tree) => {
                 this.tree = tree;
+                if (this.hasRoot()) {
+                    if (this.rootNodeIsQuestion()) {
+                        this.rootType = "question";
+                    }
+                    else if (this.rootNodeIsNotification()) {
+                        this.rootType = "notification";
+                    }
+                    else if (this.rootNodeIsForm()) {
+                        this.rootType = "form";
+                    }
+                }
             });
         });
     }
