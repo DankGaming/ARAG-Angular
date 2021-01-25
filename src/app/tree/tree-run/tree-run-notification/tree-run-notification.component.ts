@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Node } from "src/app/node/node.model";
 import { NodeService } from "src/app/node/node.service";
 import { ContentType } from "src/app/node/content-type.model";
@@ -16,7 +16,12 @@ export class TreeRunNotificationComponent implements OnInit {
     @Input() previousAnswers: {[question: number]: number};
 
     node: Node;
-    childType: string = "";
+    childType: ContentType;
+    types = {
+		question: ContentType.QUESTION,
+		notification: ContentType.NOTIFICATION,
+		form: ContentType.FORM,
+	};
 
     constructor(private nodeService: NodeService) {}
 
@@ -24,15 +29,7 @@ export class TreeRunNotificationComponent implements OnInit {
         this.nodeService.findByID(this.tree.id, this.nodeInput.id).subscribe((node: Node) => {
             this.node = node;
             if (this.hasChild()) {
-                if (this.childTypeIsQuestion()) {
-                    this.childType = "question";
-                }
-                else if (this.childTypeIsNotification()) {
-                    this.childType = "notification";
-                }
-                else if (this.childTypeIsForm()) {
-                    this.childType = "form";
-                }
+                this.childType = this.node.children[0].type;
             }
         });
     }
@@ -43,17 +40,5 @@ export class TreeRunNotificationComponent implements OnInit {
 
     hasChild(): boolean {
         return this.node.children?.length > 0;
-    }
-
-    childTypeIsQuestion(): boolean {
-        return this.node.children[0].type === ContentType.QUESTION;
-    }
-
-    childTypeIsNotification(): boolean {
-        return this.node.children[0].type === ContentType.NOTIFICATION;
-    }
-
-    childTypeIsForm(): boolean {
-        return this.node.children[0].type === ContentType.FORM;
     }
 }

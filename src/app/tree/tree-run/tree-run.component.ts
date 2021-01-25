@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Tree } from "../tree.model";
 import { TreeService } from "../tree.service";
 import { ActivatedRoute, Params } from "@angular/router";
@@ -15,7 +15,12 @@ export class TreeRunComponent implements OnInit {
     tree: Tree;
     type: string;
     previousAnswers: {[question: number]: number} = {};
-    rootType: string = "";
+    rootType: ContentType;
+    types = {
+		question: ContentType.QUESTION,
+		notification: ContentType.NOTIFICATION,
+		form: ContentType.FORM,
+	};
 
     constructor(private activatedRoute: ActivatedRoute, private treeService: TreeService) {}
 
@@ -24,15 +29,16 @@ export class TreeRunComponent implements OnInit {
             this.treeService.findByID(+params.id).subscribe((tree: Tree) => {
                 this.tree = tree;
                 if (this.hasRoot()) {
-                    if (this.rootNodeIsQuestion()) {
-                        this.rootType = "question";
-                    }
-                    else if (this.rootNodeIsNotification()) {
-                        this.rootType = "notification";
-                    }
-                    else if (this.rootNodeIsForm()) {
-                        this.rootType = "form";
-                    }
+                    this.rootType = this.tree.root?.type;
+                    // if (this.rootNodeIsQuestion()) {
+                    //     this.rootType = "question";
+                    // }
+                    // else if (this.rootNodeIsNotification()) {
+                    //     this.rootType = "notification";
+                    // }
+                    // else if (this.rootNodeIsForm()) {
+                    //     this.rootType = "form";
+                    // }
                 }
             });
         });

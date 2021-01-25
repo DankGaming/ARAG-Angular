@@ -5,8 +5,9 @@ import { FormService } from "../form.service";
 import { NgForm } from "@angular/forms";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { ModalService } from "src/app/shared/modal.service";
-import { AuthService } from "src/app/auth/auth.service"
+import { AuthService } from "src/app/auth/auth.service";
 import { AlertBoxModalComponent } from "src/app/shared/modals/alert-box-modal/alert-box-modal.component";
+import { ContentType } from "src/app/node/content-type.model";
 
 @Component({
     selector: "app-customer-form-view",

@@ -22,7 +22,12 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     selectedRadioAnswer: string;
     answers: Node[] = [];
     answerConfirmed = false;
-    childType: string = "";
+    childType: ContentType;
+    types = {
+		question: ContentType.QUESTION,
+		notification: ContentType.NOTIFICATION,
+		form: ContentType.FORM,
+	};
 
     nodeServiceSubscription: Subscription;
     answerNodeServiceSubscription: Subscription;
@@ -57,15 +62,7 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
                     this.selectedAnswer = node;
                     this.previousAnswers[this.node.id] = this.selectedAnswer.id;
                     if (this.hasChildNode()) {
-                        if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
-                            this.childType = "question";
-                        }
-                        else if (this.selectedAnswer.children[0].type === ContentType.NOTIFICATION) {
-                            this.childType = "notification";
-                        }
-                        else if (this.selectedAnswer.children[0].type === ContentType.FORM) {
-                            this.childType = "form";
-                        }
+                        this.childType = this.selectedAnswer.children[0].type;
                     }
                     this.answerConfirmed = true;
                 });
@@ -78,15 +75,7 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
             this.answerNodeServiceSubscription = this.nodeService.findByID(this.tree.id, this.selectedAnswer.id).subscribe(() => {
                 this.previousAnswers[this.node.id] = this.selectedAnswer.id;
                 if (this.hasChildNode()) {
-                    if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
-                        this.childType = "question";
-                    }
-                    else if (this.selectedAnswer.children[0].type === ContentType.NOTIFICATION) {
-                        this.childType = "notification";
-                    }
-                    else if (this.selectedAnswer.children[0].type === ContentType.FORM) {
-                        this.childType = "form";
-                    }
+                    this.childType = this.selectedAnswer.children[0].type;
                 }
                 this.answerConfirmed = true;
             });
