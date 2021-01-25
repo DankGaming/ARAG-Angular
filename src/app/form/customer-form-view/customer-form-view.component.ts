@@ -50,6 +50,7 @@ export class CustomerFormViewComponent implements OnInit {
 			AlertBoxModalComponent,
 			this.modalHost
 		);
-        modal.instance.title = "Melding verzonden. We gaan voor u aan de slag.";
+        modal.instance.title = "Melding verzonden.";
+        modal.instance.subtitle = "We gaan voor u aan de slag.";
     }
 }
