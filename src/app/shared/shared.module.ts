@@ -15,6 +15,7 @@ import { DropdownSelectedDirective } from "./dropdown/dropdown-selected.directiv
 import { PlaceholderDirective } from "./placeholder.directive";
 import { ConfirmBoxModalComponent } from "./modals/confirm-box-modal/confirm-box-modal.component";
 import { TruncatePipe } from "./truncate.pipe";
+import { AlertBoxModalComponent } from "./modals/alert-box-modal/alert-box-modal.component";
 
 @NgModule({
 	declarations: [
@@ -30,6 +31,7 @@ import { TruncatePipe } from "./truncate.pipe";
 		PlaceholderDirective,
 		ConfirmBoxModalComponent,
 		TruncatePipe,
+		AlertBoxModalComponent,
 	],
 	imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule],
 	exports: [
