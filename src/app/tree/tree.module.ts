@@ -7,6 +7,8 @@ import { TreeRoutingModule } from "./trees-routing.module";
 import { CustomerTreesOverviewComponent } from "./customer-trees-overview/customer-trees-overview.component";
 import { TreeRowComponent } from "./tree-row/tree-row.component";
 import { TreeRunComponent } from "./tree-run/tree-run.component";
+import { TreeRunQuestionComponent } from "./tree-run/tree-run-question/tree-run-question.component";
+import { TreeRunNotificationComponent } from "./tree-run/tree-run-notification/tree-run-notification.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { EmployeeTreesOverviewComponent } from "./employee-trees-overview/employee-trees-overview.component";
 import { FormsModule } from "@angular/forms";
@@ -17,6 +19,7 @@ import { SetTreeModalComponent } from "./modals/set-tree-modal/set-tree-modal.co
 import { SearchResultsComponent } from "./employee-tree-overview/search-results/search-results.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NodeModule } from "../node/node.module";
+import { EmployeeSettingsComponent } from "../employee/employee-settings/employee-settings.component";
 
 @NgModule({
 	declarations: [
@@ -24,12 +27,15 @@ import { NodeModule } from "../node/node.module";
 		CustomerTreesOverviewComponent,
 		TreeRowComponent,
 		TreeRunComponent,
+		TreeRunQuestionComponent,
+		TreeRunNotificationComponent,
 		EmployeeTreesOverviewComponent,
 		EmployeeTreeOverviewComponent,
 		NodeContainerComponent,
 		NodeWrapperComponent,
 		SetTreeModalComponent,
 		SearchResultsComponent,
+		EmployeeSettingsComponent,
 	],
 	imports: [
 		CommonModule,

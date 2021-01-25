@@ -1,0 +1,12 @@
+<div class="form-row">
+    <div class="form-info">
+        <h3 class="title">{{ form.name }}</h3>
+        <p class="description">{{ form.description }}</p>
+    </div>
+
+    <button class="walk-through-button" [routerLink]="navigationLink">
+        <fa-icon [icon]="icons.faArrowRight"></fa-icon>
+    </button>
+    <ng-container appPlaceholder></ng-container>
+</div>
+

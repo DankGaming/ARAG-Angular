@@ -1,0 +1,46 @@
+<app-modal [title]="employee ? 'Medewerker bewerken' : 'Medewerker maken'"  (closeModal)="close()">
+    <ng-container body>
+        <form #setEmployeeForm="ngForm" id="set-tree-form" (ngSubmit)="employee ? update(setEmployeeForm) : create(setEmployeeForm)" autocomplete="off">
+            <div class="columns">
+                <div class="column form-group">
+                    <label for="firstname">Voornaam</label>
+                    <input type="text" name="firstname" id="firstname" placeholder="Voornaam" [ngModel]="employee?.firstname" required>
+                </div>
+                <div class="column form-group">
+                    <label for="lastname">Achternaam</label>
+                    <input type="text" name="lastname" id="lastname" placeholder="Achternaam" [ngModel]="employee?.lastname" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Email" [ngModel]="employee?.email" required>
+            </div>
+            <div class="form-group" *ngIf="!employee">
+                <label for="password">Wachtwoord</label>
+                <input type="password" name="password" id="password" placeholder="Wachtwoord" [ngModel]="employee?.password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <app-dropdown class="dropdown" [ngModel]="employee ? employee.role : roles[0]" name="role" id="role" ngDefaultControl required [options]="roles">
+                    <ng-template dropdownSelected let-selected>
+                        <p>{{ selected }}</p>
+                    </ng-template>
+                    <ng-template dropdownOption let-option>
+                        <p>{{ option }}</p>
+                    </ng-template>
+                </app-dropdown>
+            </div>
+        </form>
+    </ng-container>
+
+    <ng-container footer>
+        <div class="footer-button-container">
+            <button class="button primary" [disabled]="setEmployeeForm.invalid" form="set-tree-form">
+                Opslaan
+            </button>
+            <button class="button danger" *ngIf="employee" (click)=remove() form="set-tree-form">
+                Verwijder
+            </button>
+        </div>
+    </ng-container>
+</app-modal>

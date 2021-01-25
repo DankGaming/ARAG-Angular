@@ -1,0 +1,57 @@
+<div class="tree-run-question-container" *ngIf="node">
+    <div class="question-number">
+        <b>Vraag {{ questionCounter }}</b>
+    </div>
+    <div class="question-text">
+        <p>{{ node.content }}</p>
+    </div>
+    <div *ngIf="questionTypeIsRadio(); else questionTypeIsDropdown">
+        <form (ngSubmit)="confirmAnswer()" class="radio-answer-container" *ngIf="hasAnswers()">
+            <ul *ngIf="node.children.length > 0;">
+                <li *ngFor="let element of node.children; let i = index">
+                    <input type="radio" value="{{ element.id }}" name="{{ element.content }}" id="{{ element.id }}" name="{{ i }}" [(ngModel)]="selectedRadioAnswer">{{ element.content }}
+                </li>
+            </ul>
+            <button class="button primary">
+                Bevestigen
+            </button>
+        </form>
+    </div>
+    <ng-template #questionTypeIsDropdown>
+        <form #answerForm="ngForm" (ngSubmit)="confirmAnswer()" class="selected-answer-container" *ngIf="hasAnswers()">
+            <app-dropdown class="dropdown" [(ngModel)]="selectedAnswer" name="selectedAnswer" id="selectedAnswer" ngDefaultControl required [options]="answers">
+                <ng-template dropdownSelected let-selected>
+                    <p>{{ selected.content }}</p>
+                </ng-template>
+                <ng-template dropdownOption let-option>
+                    <p>{{ option.content }}</p>
+                </ng-template>
+            </app-dropdown>
+
+            <button class="button primary">
+             Bevestigen
+            </button>
+        </form>
+    </ng-template>
+</div>
+
+
+<div class="next-node">
+    <div *ngIf="answerConfirmed">
+        <div *ngIf="hasChildNode(); else noChildNode">
+            <div *ngIf="nextNodeIsQuestion; else loadNotification">
+                <div class="connect-line"></div>
+                <app-tree-run-question [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [questionCounter]="questionCounter"></app-tree-run-question>
+            </div>
+            <ng-template #loadNotification>
+                <div *ngIf="nextNodeIsNotification;">
+                    <div class="connect-line"></div>
+                    <app-tree-run-notification [tree]="tree" [nodeInput]="selectedAnswer.children[0]" [questionCounter]="questionCounter"></app-tree-run-notification>
+                </div>
+            </ng-template>
+        </div>
+        <ng-template #noChildNode>
+            <p>Dit antwoord heeft geen vervolgnode.</p>
+        </ng-template>
+    </div>
+</div>
