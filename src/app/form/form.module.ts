@@ -12,13 +12,11 @@ import { RouterModule } from "@angular/router";
 import { FormOverviewComponent } from "./form-overview/form-overview.component";
 import { FormRowComponent } from "./form-row/form-row.component";
 import { CustomerFormViewComponent } from "./customer-form-view/customer-form-view.component";
-import { FormSubmittedModalComponent } from "./modals/form-submitted-modal/form-submitted-modal.component";
 
 @NgModule({
   declarations: [
       SetFormModalComponent,
       SetFieldModalComponent,
-      FormSubmittedModalComponent,
       FormsOverviewComponent,
       FormsRowComponent,
       FormOverviewComponent,

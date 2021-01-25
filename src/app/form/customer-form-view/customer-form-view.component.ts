@@ -1,13 +1,12 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute} from "@angular/router";
-import { NodeService } from "src/app/node/node.service";
 import { Form } from "../form.model";
 import { FormService } from "../form.service";
 import { NgForm } from "@angular/forms";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { ModalService } from "src/app/shared/modal.service";
-import { FormSubmittedModalComponent } from "../modals/form-submitted-modal/form-submitted-modal.component";
 import { AuthService } from "src/app/auth/auth.service"
+import { AlertBoxModalComponent } from "src/app/shared/modals/alert-box-modal/alert-box-modal.component";
 
 @Component({
     selector: "app-customer-form-view",
@@ -46,6 +45,10 @@ export class CustomerFormViewComponent implements OnInit {
                 form: form.value
             }).subscribe();
         }
-        this.modalService.createModal(FormSubmittedModalComponent, this.modalHost);
+        const modal = this.modalService.createModal(
+			AlertBoxModalComponent,
+			this.modalHost
+		);
+        modal.instance.title = "Melding verzonden. We gaan voor u aan de slag.";
     }
 }

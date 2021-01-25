@@ -1,15 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Modal } from "../modal.interface";
 
 @Component({
   selector: "app-alert-box-modal",
   templateUrl: "./alert-box-modal.component.html",
   styleUrls: ["./alert-box-modal.component.scss"]
 })
-export class AlertBoxModalComponent implements OnInit {
+
+export class AlertBoxModalComponent implements OnInit, Modal {
     @Input() title: string = "Alert!";
-    @Input() subtitle: string = "Het kan zijn dat uw gegevens verloren gaan -_-";
+    @Input() subtitle: string;
     @Output() closeModal = new EventEmitter();
     @Output() confirmed = new EventEmitter();
+
     constructor() {}
 
     ngOnInit(): void {}
