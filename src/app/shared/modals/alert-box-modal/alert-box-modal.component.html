@@ -1,4 +1,4 @@
-<app-modal [title]="title" [subtitle]="subtitle" [showBody]="hasBody" (closeModal)="close()">
+<app-modal [title]="title" [subtitle]="subtitle" [showBody]="body != null" (closeModal)="close()">
     <ng-container body>
         {{ body }}
     </ng-container>

@@ -14,13 +14,9 @@ export class AlertBoxModalComponent implements OnInit, Modal {
     @Output() closeModal = new EventEmitter();
     @Output() confirmed = new EventEmitter();
 
-    hasBody: boolean = false;
-
     constructor() {}
 
-    ngOnInit(): void {
-      this.hasBody = this.body != null;
-    }
+    ngOnInit(): void { }
 
     close = (): void => this.closeModal.emit();
 
