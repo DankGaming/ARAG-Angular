@@ -12,10 +12,9 @@ import { APIInterceptor } from "./shared/api.interceptor";
 import { FormsModule } from "@angular/forms";
 import { FormModule } from "./form/form.module";
 import { EmployeeModule } from "./employee/employee.module";
-import { TestComponent } from "./shared/test/test.component";
 
 @NgModule({
-	declarations: [AppComponent, TestComponent],
+	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,

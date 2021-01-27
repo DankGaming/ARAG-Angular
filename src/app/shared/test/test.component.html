@@ -1,6 +1,0 @@
-<form #form="ngForm" (ngSubmit)="submit(form)">
-    <input type="text" name="Voornaam" ngModel>
-    <input type="file" id="file" name="Passpoort" #file (change)="handleFileInput($event.target, file)">
-
-    <button class="button primary">Submit</button>
-</form>

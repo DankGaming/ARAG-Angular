@@ -243,7 +243,7 @@ export class EmployeeTreeOverviewComponent implements OnInit, OnDestroy {
 		modal.instance.description = `U staat op het punt om '${this.tree.name}'
 		te publiceren. Dit betekent dat deze boom voor iedereen zichtbaar is. Weet u het zeker?`;
 		modal.instance.confirmed.subscribe(() => {
-			// TODO: publish tree
+			this.treeService.publish(this.tree.id).subscribe();
 		});
 	}
 
