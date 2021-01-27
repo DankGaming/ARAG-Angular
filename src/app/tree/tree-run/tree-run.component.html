@@ -1,17 +1,18 @@
 <div *ngIf="tree">
     <h1 class="title">{{ this.tree.name }}</h1>
 
-    <div class="root-node">
-        <div *ngIf="hasRoot(); else noRootNode">
-            <div *ngIf="rootNodeIsQuestion(); else rootTypeNotification">
-                <app-tree-run-question [tree]=tree [nodeInput]=tree.root [questionCounter]="0"></app-tree-run-question>
+    <div *ngIf="hasRoot()" class="root-node">
+        <div [ngSwitch]="rootType">
+            <div *ngSwitchCase="types.question">
+                <app-tree-run-question [tree]="tree" [nodeInput]="tree.root" [questionCounter]="0" [previousAnswers]="previousAnswers"></app-tree-run-question>
             </div>
-            <ng-template #rootTypeNotification>
-                <app-tree-run-notification [tree]=tree [nodeInput]=tree.root [questionCounter]="0"></app-tree-run-notification>
-            </ng-template>
+            <div *ngSwitchCase="types.notification">
+                <app-tree-run-notification [tree]="tree" [nodeInput]="tree.root" [questionCounter]="0" [previousAnswers]="previousAnswers"></app-tree-run-notification>
+            </div>
+            <div *ngSwitchCase="types.form">
+                <app-tree-run-form [tree]="tree" [nodeInput]="tree.root" [previousAnswers]="previousAnswers"></app-tree-run-form>
+            </div>
+            <div *ngSwitchDefault>De boom heeft geen startpunt.</div>
         </div>
-        <ng-template #noRootNode>
-            <p>De boom heeft geen startpunt.</p>
-        </ng-template>
     </div>
 </div>

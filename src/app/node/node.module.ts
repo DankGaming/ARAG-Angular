@@ -6,6 +6,7 @@ import { SetQuestionModalComponent } from "./modals/set-question-modal.ts/set-qu
 import { SetAnswerModalComponent } from "./modals/set-answer-modal/set-answer-modal.component";
 import { SetNotificationModalComponent } from "./modals/set-notification-modal/set-notification-modal.component";
 import { LinkModalComponent } from "./modals/link-modal/link-modal.component";
+import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 
 @NgModule({
 	declarations: [
@@ -14,7 +15,7 @@ import { LinkModalComponent } from "./modals/link-modal/link-modal.component";
 		LinkModalComponent,
 		SetNotificationModalComponent
 	],
-	imports: [CommonModule, SharedModule, FormsModule],
+	imports: [CommonModule, SharedModule, FormsModule, CKEditorModule],
 	exports: [
 		SetQuestionModalComponent,
 		SetAnswerModalComponent,
@@ -22,4 +23,5 @@ import { LinkModalComponent } from "./modals/link-modal/link-modal.component";
 		SetNotificationModalComponent
 	],
 })
+
 export class NodeModule {}

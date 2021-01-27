@@ -4,20 +4,24 @@
             <b>Notificatie</b>
         </div>
         <div class="notification-text">
-            <p>{{ node.content }}</p>
+            <p [innerHTML]="node.content"></p>
         </div>
     </div>
 
-    <div class="next-node">
-        <div *ngIf="hasChild();">
-            <div *ngIf="childTypeIsQuestion(); else loadNotification">
+    <div *ngIf="hasChild();" class="next-node">
+        <div [ngSwitch]="childType">
+            <div *ngSwitchCase="types.question">
                 <div class="connect-line"></div>
-                <app-tree-run-question [tree]=tree [nodeInput]=node.children[0] [questionCounter]=questionCounter></app-tree-run-question>
+                <app-tree-run-question [tree]="tree" [nodeInput]="node.children[0]" [questionCounter]="questionCounter" [previousAnswers]="previousAnswers"></app-tree-run-question>
             </div>
-            <ng-template #loadNotification>
+            <div *ngSwitchCase="types.notification">
                 <div class="connect-line"></div>
-                <app-tree-run-notification [tree]=tree [nodeInput]=node.children[0] [questionCounter]=questionCounter></app-tree-run-notification>
-            </ng-template>
+                <app-tree-run-notification [tree]="tree" [nodeInput]="node.children[0]" [questionCounter]="questionCounter" [previousAnswers]="previousAnswers"></app-tree-run-notification>
+            </div>
+            <div *ngSwitchCase="types.form">
+                <app-tree-run-form [tree]="tree" [nodeInput]="node.children[0]" [previousAnswers]="previousAnswers"></app-tree-run-form>
+            </div>
+            <div *ngSwitchDefault class="no-next-node">Deze notificatie heeft geen vervolgnode.</div>
         </div>
     </div>
 </div>
