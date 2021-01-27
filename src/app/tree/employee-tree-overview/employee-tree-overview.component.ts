@@ -16,7 +16,7 @@ import { Node } from "src/app/node/node.model";
 import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
 import { ContentType } from "src/app/node/content-type.model";
 import { Location } from "@angular/common";
-import { skip } from "rxjs/operators";
+import { catchError, skip } from "rxjs/operators";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { SetTreeModalComponent } from "../modals/set-tree-modal/set-tree-modal.component";
 import { SetQuestionModalComponent } from "src/app/node/modals/set-question-modal.ts/set-question-modal.component";
@@ -24,6 +24,7 @@ import { SetNotificationModalComponent } from "src/app/node/modals/set-notificat
 import { ModalService } from "src/app/shared/modal.service";
 import { ConfirmBoxModalComponent } from "src/app/shared/modals/confirm-box-modal/confirm-box-modal.component";
 import { Subscription } from "rxjs";
+import { AlertBoxModalComponent } from "src/app/shared/modals/alert-box-modal/alert-box-modal.component";
 
 interface Top {
 	node: Node;
@@ -243,7 +244,20 @@ export class EmployeeTreeOverviewComponent implements OnInit, OnDestroy {
 		modal.instance.description = `U staat op het punt om '${this.tree.name}'
 		te publiceren. Dit betekent dat deze boom voor iedereen zichtbaar is. Weet u het zeker?`;
 		modal.instance.confirmed.subscribe(() => {
-			this.treeService.publish(this.tree.id).subscribe();
+			const alertModal = this.modalService.createModal(
+				AlertBoxModalComponent,
+				this.modalHost
+			);
+			this.treeService.publish(this.tree.id).subscribe(
+				() => {
+					alertModal.instance.title = `${this.tree.name} is gepubliceerd`;
+					alertModal.instance.body = `${this.tree.name} is nu voor iedereen zichtbaar.`;
+				},
+				(err) => {
+					alertModal.instance.title = "Er is iets fout gegaan";
+					alertModal.instance.body = err.error.error.message;
+				}
+			);
 		});
 	}
 
