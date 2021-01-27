@@ -4,7 +4,7 @@ export interface Form {
     id: number;
     name: string;
     description?: string;
-    inputs?: FormInput[];
+    inputs: FormInput[];
     createdAt: Date;
     updatedAt: Date;
 }
