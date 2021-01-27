@@ -16,7 +16,7 @@ import { Node } from "src/app/node/node.model";
 import { DirectedAcyclicGraph } from "src/app/node/directed-acyclic-graph.model";
 import { ContentType } from "src/app/node/content-type.model";
 import { Location } from "@angular/common";
-import { catchError, skip } from "rxjs/operators";
+import { skip } from "rxjs/operators";
 import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { SetTreeModalComponent } from "../modals/set-tree-modal/set-tree-modal.component";
 import { SetQuestionModalComponent } from "src/app/node/modals/set-question-modal.ts/set-question-modal.component";
