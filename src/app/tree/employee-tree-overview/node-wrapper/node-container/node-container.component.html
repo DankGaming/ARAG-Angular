@@ -8,7 +8,7 @@
                 <ng-container *ngSwitchCase="types.form">Meldingsformulier {{ node.formInfo.form.id }}</ng-container>
             </ng-container>
         </p>
-        <p class="title">{{ node.content | htmlStripper }}</p>
+        <p class="title" [innerHTML]="node.content"></p>
     </header>
     <section class="node-content">
         <ul>

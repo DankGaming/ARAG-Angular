@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, NgModule, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Modal } from "src/app/shared/modals/modal.interface";
 import { Tree } from "src/app/tree/tree.model";
@@ -7,7 +7,7 @@ import { NotificationService } from "../../notification.service";
 import { ContentType } from "../../content-type.model";
 import { Node } from "../../node.model";
 import { NodeService } from "../../node.service";
-import { AngularEditorConfig } from "@kolkov/angular-editor";
+import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 @Component({
 	selector: "app-set-notification-modal",
@@ -23,33 +23,8 @@ export class SetNotificationModalComponent implements OnInit, Modal {
 	@Output() closeModal = new EventEmitter();
 	@Output() set = new EventEmitter<Partial<Node>>();
 
-    editorConfig: AngularEditorConfig = {
-        toolbarHiddenButtons: [
-            [
-                "subscript",
-                "superscript",
-                "justifyLeft",
-                "justifyCenter",
-                "justifyRight",
-                "justifyFull",
-                "indent",
-                "outdent",
-                "insertUnorderedList",
-                "insertOrderedList",
-                "heading",
-            ],
-            [
-                "backgroundColor",
-                "customClasses",
-                "link",
-                "unlink",
-                "insertImage",
-                "insertVideo",
-                "insertHorizontalRule",
-                "removeFormat",
-            ]
-        ]
-    };
+	editor = ClassicEditor;
+	config = {toolbar: { items: ["heading", "alignment", "bold", "italic", "link", "undo", "redo", "numberedList", "bulletedList" ]}};
 
 	constructor(
 		private notificationService: NotificationService,
