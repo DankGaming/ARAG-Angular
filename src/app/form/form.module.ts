@@ -11,6 +11,7 @@ import { FormsRoutingModule } from "./forms-routing.module";
 import { RouterModule } from "@angular/router";
 import { FormOverviewComponent } from "./form-overview/form-overview.component";
 import { FormRowComponent } from "./form-row/form-row.component";
+import { CustomerFormViewComponent } from "./customer-form-view/customer-form-view.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormRowComponent } from "./form-row/form-row.component";
       FormsOverviewComponent,
       FormsRowComponent,
       FormOverviewComponent,
-      FormRowComponent
+      FormRowComponent,
+      CustomerFormViewComponent
   ],
     imports: [
         CommonModule, SharedModule, FormsModule, FontAwesomeModule, FormsRoutingModule, RouterModule

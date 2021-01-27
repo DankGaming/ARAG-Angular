@@ -16,6 +16,7 @@ import { PlaceholderDirective } from "./placeholder.directive";
 import { ConfirmBoxModalComponent } from "./modals/confirm-box-modal/confirm-box-modal.component";
 import { TruncatePipe } from "./truncate.pipe";
 import { HtmlStripperPipe } from "../pipe/html-stripper.pipe";
+import { AlertBoxModalComponent } from "./modals/alert-box-modal/alert-box-modal.component";
 
 @NgModule({
 	declarations: [
@@ -31,7 +32,8 @@ import { HtmlStripperPipe } from "../pipe/html-stripper.pipe";
 		PlaceholderDirective,
 		ConfirmBoxModalComponent,
 		TruncatePipe,
-		HtmlStripperPipe
+		HtmlStripperPipe,
+		AlertBoxModalComponent
 	],
 	imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule],
 	exports: [

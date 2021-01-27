@@ -14,28 +14,28 @@ import { FormModule } from "./form/form.module";
 import { EmployeeModule } from "./employee/employee.module";
 
 @NgModule({
-    declarations: [AppComponent],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FontAwesomeModule,
-        HttpClientModule,
-        AuthModule,
-        SharedModule,
-        TreeModule,
-        FormsModule,
-        FormModule,
-        EmployeeModule
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: APIInterceptor,
-            multi: true,
-        },
-    ],
-    bootstrap: [AppComponent],
+	declarations: [AppComponent],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		FontAwesomeModule,
+		HttpClientModule,
+		AuthModule,
+		SharedModule,
+		TreeModule,
+		FormsModule,
+		FormModule,
+		EmployeeModule,
+	],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: APIInterceptor,
+			multi: true,
+		},
+	],
+	bootstrap: [AppComponent],
 })
 export class AppModule {
-    constructor() {}
+	constructor() {}
 }

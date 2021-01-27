@@ -1,0 +1,19 @@
+@import "/src/app/shared/variables";
+
+.form-node-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.go-to-form {
+    width: 100%;
+    padding: 20px;
+    background-color: $color-white;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    white-space: pre-wrap;
+}
+
+.form-text {
+    margin-bottom: 10px;
+}
