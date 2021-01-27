@@ -3,7 +3,7 @@
         <form #setNotificationForm="ngForm" id="set-notification-form" (ngSubmit)="notification ? update(setNotificationForm) : create(setNotificationForm)" autocomplete="off">
             <div class="form-group">
                 <label for="content">Notificatie</label>
-                <textarea name="content" placeholder="Notificatie" id="content" [ngModel]="notification?.content" required></textarea>
+                <ckeditor name="content" id="content" [editor]="editor" [config]="config" [ngModel]="notification?.content" required=""></ckeditor>
             </div>
             <div class="form-group" *ngIf="!isRoot">
                 <label for="tree-root">Maak notificatie start van boom</label>

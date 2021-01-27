@@ -15,6 +15,7 @@ import { DropdownSelectedDirective } from "./dropdown/dropdown-selected.directiv
 import { PlaceholderDirective } from "./placeholder.directive";
 import { ConfirmBoxModalComponent } from "./modals/confirm-box-modal/confirm-box-modal.component";
 import { TruncatePipe } from "./truncate.pipe";
+import { HtmlStripperPipe } from "../pipe/html-stripper.pipe";
 import { AlertBoxModalComponent } from "./modals/alert-box-modal/alert-box-modal.component";
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AlertBoxModalComponent } from "./modals/alert-box-modal/alert-box-modal
 		PlaceholderDirective,
 		ConfirmBoxModalComponent,
 		TruncatePipe,
-		AlertBoxModalComponent,
+		HtmlStripperPipe,
+		AlertBoxModalComponent
 	],
 	imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule],
 	exports: [
@@ -47,6 +49,7 @@ import { AlertBoxModalComponent } from "./modals/alert-box-modal/alert-box-modal
 		PlaceholderDirective,
 		ConfirmBoxModalComponent,
 		TruncatePipe,
-	],
+		HtmlStripperPipe
+	]
 })
 export class SharedModule {}

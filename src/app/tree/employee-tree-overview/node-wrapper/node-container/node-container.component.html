@@ -8,7 +8,7 @@
                 <ng-container *ngSwitchCase="types.form">Meldformulier {{ node.formInfo.form.id }}</ng-container>
             </ng-container>
         </p>
-        <p class="title">{{ node.content }}</p>
+        <p class="title" [innerHTML]="node.content"></p>
     </header>
     <section class="node-content">
         <ul>
@@ -87,13 +87,13 @@
     </section>
     <section class="node-children" *ngIf="!isQuestion() && graph.edges[node.id].length > 0 && !isCurrentTop">
         <ng-container *ngFor="let id of graph.edges[node.id]">
-            <app-node-container 
-                *ngIf="graph.nodes[id]" 
-                [tree]="tree" 
-                [node]="graph.nodes[id]" 
+            <app-node-container
+                *ngIf="graph.nodes[id]"
+                [tree]="tree"
+                [node]="graph.nodes[id]"
                 [previousNode]="node"
                 [topNode]="topNode"
-                [graph]="graph" 
+                [graph]="graph"
                 (expand)="expandNode($event)">
             </app-node-container>
         </ng-container>
