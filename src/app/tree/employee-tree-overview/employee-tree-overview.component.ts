@@ -246,16 +246,20 @@ export class EmployeeTreeOverviewComponent implements OnInit, OnDestroy {
 		modal.instance.description = `U staat op het punt om '${this.tree.name}'
 		te publiceren. Dit betekent dat deze boom voor iedereen zichtbaar is. Weet u het zeker?`;
 		modal.instance.confirmed.subscribe(() => {
-			const alertModal = this.modalService.createModal(
-				AlertBoxModalComponent,
-				this.modalHost
-			);
 			this.treeService.publish(this.tree.id).subscribe(
 				() => {
+					const alertModal = this.modalService.createModal(
+						AlertBoxModalComponent,
+						this.modalHost
+					);
 					alertModal.instance.title = `${this.tree.name} is gepubliceerd`;
 					alertModal.instance.body = `${this.tree.name} is nu voor iedereen zichtbaar.`;
 				},
 				(err) => {
+					const alertModal = this.modalService.createModal(
+						AlertBoxModalComponent,
+						this.modalHost
+					);
 					alertModal.instance.title = "Er is iets fout gegaan";
 					alertModal.instance.body = err.error.error.message;
 				}
