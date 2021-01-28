@@ -138,8 +138,8 @@ export class FormOverviewComponent implements OnInit, OnDestroy {
 						this.modalHost
 					);
 					alertModal.instance.title = "Er is iets fout gegaan";
-					alertModal.instance.body =
-						"Dit meldformulier wordt gebruikt in beslissingsbomen. Verwijder de koppeling voordat u dit meldformulier verwijderd.";
+					alertModal.instance.body = `Dit meldformulier wordt gebruikt in beslissingsbomen. 
+                        Verwijder de koppeling voordat u dit meldformulier verwijderd.`;
 				}
 			);
 		});
