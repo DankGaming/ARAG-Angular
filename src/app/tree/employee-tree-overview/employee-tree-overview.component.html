@@ -15,6 +15,11 @@
                 <fa-icon [icon]="icons.faAngleDoubleUp"></fa-icon>
                 Publiceer
             </button>
+
+            <button class="button" (click)="unpublish()" *ngIf="tree.published?.root">
+                <fa-icon [icon]="icons.faAngleDoubleDown"></fa-icon>
+                Onpubliceer
+            </button>
           
             <button class="button" [routerLink]="['/customers', 'trees', tree.id]">
                 <fa-icon [icon]="icons.faWalking"></fa-icon>
