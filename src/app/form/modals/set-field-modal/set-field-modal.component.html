@@ -9,6 +9,17 @@
                 <label for="description">Omschrijving</label>
                 <textarea name="description" id="description" placeholder="Omschrijving" [ngModel]="formInput?.description"></textarea>
             </div>
+            <div class="form-group">
+                <label for="type">Type invoerveld</label>
+                <app-dropdown [ngModel]="type" name="type" id="type" ngDefaultControl required [options]="types">
+                    <ng-template dropdownSelected let-selected>
+                        <p>{{ selected.name }}</p>
+                    </ng-template>
+                    <ng-template dropdownOption let-option>
+                        <p>{{ option.name }}</p>
+                    </ng-template>
+                </app-dropdown>
+            </div>
         </form>
     </ng-container>
     <ng-container footer>
