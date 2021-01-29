@@ -3,9 +3,18 @@
     <form #formForm="ngForm" (ngSubmit)="submitAnswers(formForm)">
         <ul *ngIf="form.inputs.length > 0;">
             <li class="question" *ngFor="let input of form.inputs; let i = index">
-                <p class="question-text bold">{{ input.name }}</p>
-                <p class="description">{{ input.description }}</p>
-                <input required type="text" class="textfield" ngModel [name]="input.name" placeholder="Antwoord">
+                <div [ngSwitch]="input.type.name">
+                    <div *ngSwitchCase=" 'FILE' ">
+                        <p class="question-text bold">{{ input.name }}</p>
+                        <p class="description">{{ input.description }}</p>
+                        <input required type="file" id="file" [name]="input.name" #file (change)="handleFileInput($event.target, file)">
+                    </div>
+                    <div *ngSwitchCase=" 'TEXT' ">
+                        <p class="question-text bold">{{ input.name }}</p>
+                        <p class="description">{{ input.description }}</p>
+                        <input required type="text" class="textfield" ngModel [name]="input.name" placeholder="Antwoord">
+                    </div>
+                </div>
             </li>
         </ul>
         <div class="submit-button">
