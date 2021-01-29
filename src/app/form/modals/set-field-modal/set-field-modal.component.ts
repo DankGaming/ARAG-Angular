@@ -15,7 +15,7 @@ export class SetFieldModalComponent implements OnInit, Modal {
 	@Input() form: Form;
 	@Input() formInput?: FormInput;
 	@Output() closeModal = new EventEmitter();
-	@Output() set = new EventEmitter<Partial<Form>>();
+	@Output() set = new EventEmitter<Partial<FormInput>>();
 
 	types = [
 		{ name: "Tekstveld", value: 1 },
@@ -58,22 +58,22 @@ export class SetFieldModalComponent implements OnInit, Modal {
 		const values = form.value;
 
 		this.formInputService
-	.update(this.form.id, this.formInput.id, {
-		name: values.name,
-		description: values.description,
-		type: values.type.value,
-	})
-	.subscribe((input: Partial<FormInput>) => {
-		this.set.emit(input);
-		this.close();
-		Object.assign(this.formInput, input);
-		this.formInputService.formSubject.next();
-	});
+			.update(this.form.id, this.formInput.id, {
+				name: values.name,
+				description: values.description,
+				type: values.type.value,
+		})
+			.subscribe((input: Partial<FormInput>) => {
+				this.set.emit(input);
+				this.close();
+				Object.assign(this.formInput, input);
+				this.formInputService.formSubject.next();
+		});
 	}
 
 	remove(): void {
 		this.formInputService.remove(this.form.id, this.formInput.id).subscribe(() => {
-		this.formInputService.formSubject.next();
+			this.formInputService.formSubject.next();
 		});
 		this.close();
 	}
