@@ -7,7 +7,6 @@ import { PlaceholderDirective } from "src/app/shared/placeholder.directive";
 import { ModalService } from "src/app/shared/modal.service";
 import { AuthService } from "src/app/auth/auth.service";
 import { AlertBoxModalComponent } from "src/app/shared/modals/alert-box-modal/alert-box-modal.component";
-import { HttpClient } from "@angular/common/http";
 import { FormInput } from "../../form/input/form-input.model";
 
 @Component({
@@ -47,7 +46,7 @@ export class CustomerFormViewComponent implements OnInit {
 				AlertBoxModalComponent,
 				this.modalHost
 			);
-			modal.instance.title = "Gelukt!"
+			modal.instance.title = "Gelukt!";
 			modal.instance.subtitle = "U bent ingelogd dus er wordt geen mail verzonden";
 			return;
 		}
@@ -56,7 +55,7 @@ export class CustomerFormViewComponent implements OnInit {
 				AlertBoxModalComponent,
 				this.modalHost
 			);
-			modal.instance.title = "Er mist een bestand."
+			modal.instance.title = "Er mist een bestand.";
 			modal.instance.subtitle = "Controleer of u alles juist heeft ingevoerd";
 			return;
 		}
@@ -72,17 +71,17 @@ export class CustomerFormViewComponent implements OnInit {
 			);
 			modal.instance.title = "Melding verzonden!";
 			modal.instance.subtitle = "We gaan voor u aan de slag.";
-		}, (error) => {
+		}, () => {
 			const modal = this.modalService.createModal(
 				AlertBoxModalComponent,
 				this.modalHost
 			);
-			modal.instance.title = "Er is een fout opgetreden."
+			modal.instance.title = "Er is een fout opgetreden.";
 			modal.instance.subtitle = "Wellicht heeft u een veld niet ingevoerd.";
 		});
     }
 
-	handleFileInput(target: any, input: any) {
+	handleFileInput(target: any, input: any): void{
 		this.attachments[input.name] = target.files.item(0);
 	}
 }
