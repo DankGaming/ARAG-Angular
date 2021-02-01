@@ -7,10 +7,13 @@
                     <div *ngSwitchCase=" 'FILE' ">
                         <p class="question-text bold">{{ input.name }}</p>
                         <p class="description">{{ input.description }}</p>
-                        <label for="file" class="file-input">
-                            <p>Klik <span class="bold">hier</span> om een bestand toe te voegen</p>
+                        <label class="file-input">
+                            <p *ngIf="attachments[input.name]; else noFileSubmitted">{{ attachments[input.name].name }}</p>
+                            <ng-template #noFileSubmitted>
+                                <p>Klik <span class="bold">hier</span> om een bestand toe te voegen</p>
+                            </ng-template>
                             <p class="file-input-info">Alleen pdf, png, jpeg, csv, Word, Excel en zip bestanden zijn toegestaan</p>
-                            <input required type="file" id="file" [name]="input.name" #file (change)="handleFileInput($event.target, file)">
+                            <input required type="file" [name]="input.name" (change)="handleFileInput($event.target, input.name)">
                         </label>
                     </div>
                     <div *ngSwitchCase=" 'TEXT' ">

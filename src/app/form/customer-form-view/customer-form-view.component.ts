@@ -23,6 +23,7 @@ export class CustomerFormViewComponent implements OnInit {
 	form: Form;
 	previousAnswers: { [question: number]: number };
 	attachments: { [name: string]: File } = {};
+	attachmentSubmitted: { [name: string]: boolean } = {};
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -95,6 +96,6 @@ export class CustomerFormViewComponent implements OnInit {
 	}
 
 	handleFileInput(target: any, input: any): void {
-		this.attachments[input.name] = target.files.item(0);
+		this.attachments[input] = target.files.item(0);
 	}
 }
