@@ -6,4 +6,8 @@ export interface SubmitFormDTO {
     form: {
         [key: string]: any;
     };
+
+    attachments: {
+        [name: string]: File;
+    };
 }
