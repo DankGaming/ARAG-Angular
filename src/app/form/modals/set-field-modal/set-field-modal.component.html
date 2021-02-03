@@ -1,4 +1,4 @@
-<app-modal [title]="formInput ? 'Wijzig veld' : 'Nieuw veld'" (closeModal)="close()">
+<app-modal *ngIf = "formInputTypes" [title]="formInput ? 'Wijzig veld' : 'Nieuw veld'" (closeModal)="close()">
     <ng-container body>
         <form #setFieldForm="ngForm" id="set-field-form" (ngSubmit)="formInput ? update(setFieldForm) : create(setFieldForm)" autocomplete="off">
             <div class="form-group">
@@ -8,6 +8,17 @@
             <div class="form-group">
                 <label for="description">Omschrijving</label>
                 <textarea name="description" id="description" placeholder="Omschrijving" [ngModel]="formInput?.description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="type">Type invoerveld</label>
+                <app-dropdown [ngModel]="type" name="type" id="type" ngDefaultControl required [options]="formInputTypes">
+                    <ng-template dropdownSelected let-selected>
+                        <p>{{ selected.friendlyName }}</p>
+                    </ng-template>
+                    <ng-template dropdownOption let-option>
+                        <p>{{ option.friendlyName }}</p>
+                    </ng-template>
+                </app-dropdown>
             </div>
         </form>
     </ng-container>
