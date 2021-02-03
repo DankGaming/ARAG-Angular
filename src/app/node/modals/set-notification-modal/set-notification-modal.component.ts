@@ -7,18 +7,24 @@ import { NotificationService } from "../../notification.service";
 import { ContentType } from "../../content-type.model";
 import { Node } from "../../node.model";
 import { NodeService } from "../../node.service";
+import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 @Component({
 	selector: "app-set-notification-modal",
 	templateUrl: "./set-notification-modal.component.html",
 	styleUrls: ["./set-notification-modal.component.scss"],
 })
+
+
 export class SetNotificationModalComponent implements OnInit, Modal {
 	@Input() tree: Tree;
 	@Input() notification?: Node;
 	@Input() isRoot: boolean = false;
 	@Output() closeModal = new EventEmitter();
 	@Output() set = new EventEmitter<Partial<Node>>();
+
+	editor = ClassicEditor;
+	config = {toolbar: { items: ["heading", "alignment", "bold", "italic", "link", "undo", "redo", "numberedList", "bulletedList" ]}};
 
 	constructor(
 		private notificationService: NotificationService,

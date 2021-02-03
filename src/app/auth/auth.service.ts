@@ -55,7 +55,10 @@ export class AuthService {
 	private JWTIsExpired(): boolean {
 		const jwt = this.loginInfo.getValue().jwt;
 		const decoded: DecodedJWT = jwt_decode(jwt);
-		return Math.floor(new Date().getTime() / 1000) >= decoded.exp;
+		const isExpired =
+			Math.floor(new Date().getTime() / 1000) >= decoded.exp;
+		if (isExpired) this.loginInfo.next(null);
+		return isExpired;
 	}
 
 	private handleAuthentication(loginInfo: LoginInfo): void {

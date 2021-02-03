@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { HttpFilter } from "../../shared/http-filter";
 import { HttpResult } from "../../shared/http-result";
-import { FormInput } from "./form-input.model";
+import { FormInput, FormInputType } from "./form-input.model";
 import { UpdateFormInputDTO } from "./dto/update-form-input.dto";
 import { CreateFormInputDTO } from "./dto/create-form-input.dto";
 
@@ -59,5 +59,13 @@ export class FormInputService {
 
     remove(formID: number, id: number): Observable<HttpResult<null>> {
         return this.http.delete<HttpResult<null>>(`/forms/${formID}/inputs/${id}`);
+    }
+
+    findAllFormInputTypes(): Observable<FormInputType[]> {
+        const observer: Observable<FormInputType[]> = this.http
+            .get<HttpResult<FormInputType[]>>("/form-input-types")
+            .pipe(map((response: HttpResult<FormInputType[]>) => response.result));
+
+        return observer;
     }
 }

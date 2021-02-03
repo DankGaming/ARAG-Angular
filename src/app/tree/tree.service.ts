@@ -59,4 +59,12 @@ export class TreeService {
 	remove(id: number): Observable<HttpResult<null>> {
 		return this.http.delete<HttpResult<null>>(`/trees/${id}`);
 	}
+
+	publish(id: number): Observable<HttpResult<null>> {
+		return this.http.post<HttpResult<null>>(`/trees/${id}/publish`, {});
+	}
+
+	unpublish(id: number): Observable<HttpResult<null>> {
+		return this.http.post<HttpResult<null>>(`/trees/${id}/unpublish`, {});
+	}
 }

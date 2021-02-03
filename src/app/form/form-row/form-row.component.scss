@@ -34,20 +34,6 @@
         padding-top: 20px;
         display: flex;
 
-        &:not(:last-child) {
-            padding-bottom: 20px;
-            position: relative;
-            
-            &::after {
-                border-bottom: 1px solid $color-gray-200;
-                position: absolute;
-                content: "";
-                width: 97%;
-                right: 0;
-                bottom: 0;
-            }
-        }
-
         ul {
             display: flex;
 

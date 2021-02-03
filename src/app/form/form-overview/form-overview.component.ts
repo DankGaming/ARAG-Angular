@@ -23,6 +23,7 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { skip } from "rxjs/operators";
 import { Subscription } from "rxjs";
 import { ConfirmBoxModalComponent } from "../../shared/modals/confirm-box-modal/confirm-box-modal.component";
+import { AlertBoxModalComponent } from "src/app/shared/modals/alert-box-modal/alert-box-modal.component";
 
 @Component({
 	selector: "app-form-overview",
@@ -125,11 +126,22 @@ export class FormOverviewComponent implements OnInit, OnDestroy {
 		modal.instance.description = `U staat op het punt om het formulier '${this.form.name}'
 		te verwijderen. Deze actie kan niet ongedaan worden. Weet u het zeker?`;
 		modal.instance.confirmed.subscribe(() => {
-			this.formService.remove(this.form.id).subscribe(() => {
-				this.router.navigate([".."], {
-					relativeTo: this.route,
-				});
-			});
+			this.formService.remove(this.form.id).subscribe(
+				() => {
+					this.router.navigate([".."], {
+						relativeTo: this.route,
+					});
+				},
+				() => {
+					const alertModal = this.modalService.createModal(
+						AlertBoxModalComponent,
+						this.modalHost
+					);
+					alertModal.instance.title = "Er is iets fout gegaan";
+					alertModal.instance.body = `Dit meldformulier wordt gebruikt in beslissingsbomen. 
+                        Verwijder de koppeling voordat u dit meldformulier verwijderd.`;
+				}
+			);
 		});
 	}
 

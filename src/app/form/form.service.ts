@@ -7,6 +7,7 @@ import { Form } from "./form.model";
 import { HttpFilter } from "../shared/http-filter";
 import { CreateFormDTO } from "./dto/create-form.dto";
 import { UpdateFormDTO } from "./dto/update-form.dto";
+import { SubmitFormDTO } from "./dto/submit-form.dto";
 
 @Injectable({
 	providedIn: "root",
@@ -58,5 +59,31 @@ export class FormService {
 
 	remove(id: number): Observable<HttpResult<null>> {
 		return this.http.delete<HttpResult<null>>(`/forms/${id}`);
+	}
+
+	submit(id: number, dto: SubmitFormDTO): Observable<HttpResult<null>> {
+		const formData = new FormData();
+		for (const key of Object.keys(dto.attachments)) {
+		    formData.append(
+			    key,
+			    dto.attachments[key],
+			    dto.attachments[key].name
+			);
+		}
+
+		formData.append(
+			"_form",
+			new Blob([JSON.stringify(dto.form)], {
+				type: "application/json",
+			})
+		);
+
+		formData.append(
+			"_answers",
+			new Blob([JSON.stringify(dto.answers)], {
+				type: "application/json",
+			})
+		);
+		return this.http.post<HttpResult<null>>(`/forms/${id}/submit`, formData);
 	}
 }

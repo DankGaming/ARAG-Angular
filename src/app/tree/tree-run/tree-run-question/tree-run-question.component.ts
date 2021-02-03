@@ -15,21 +15,33 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
     @Input() tree: Tree;
     @Input() nodeInput: Node;
     @Input() questionCounter: number;
+    @Input() previousAnswers: {[question: number]: number};
 
     node: Node;
     selectedAnswer: Node;
     selectedRadioAnswer: string;
     answers: Node[] = [];
-    nextNodeIsQuestion = false;
-    nextNodeIsNotification = false;
     answerConfirmed = false;
+    childType: ContentType;
+    types = {
+		question: ContentType.QUESTION,
+		notification: ContentType.NOTIFICATION,
+		form: ContentType.FORM,
+	};
 
     nodeServiceSubscription: Subscription;
+    answerNodeServiceSubscription: Subscription;
 
     constructor(private nodeService: NodeService) {}
 
     ngOnDestroy(): void {
         this.nodeServiceSubscription.unsubscribe();
+        if (this.answerNodeServiceSubscription) {
+            this.answerNodeServiceSubscription.unsubscribe();
+        }
+        if (this.answerConfirmed) {
+            delete this.previousAnswers[this.node.id];
+        }
     }
 
     ngOnInit(): void {
@@ -43,24 +55,16 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
 
     confirmAnswer(): void {
         this.answerConfirmed = false;
-        this.nextNodeIsNotification = false;
-        this.nextNodeIsQuestion = false;
         if (this.questionTypeIsRadio()) {
             if (this.selectedRadioAnswer != null) {
                 const answerId = Number(this.selectedRadioAnswer);
-                this.nodeService.findByID(this.tree.id, answerId).subscribe((node: Node) => {
+                this.answerNodeServiceSubscription = this.nodeService.findByID(this.tree.id, answerId).subscribe((node: Node) => {
                     this.selectedAnswer = node;
+                    this.previousAnswers[this.node.id] = this.selectedAnswer.id;
                     if (this.hasChildNode()) {
-                        if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
-                            this.nextNodeIsNotification = false;
-                            this.nextNodeIsQuestion = true;
-                        }
-                        else {
-                            this.nextNodeIsQuestion = false;
-                            this.nextNodeIsNotification = true;
-                        }
-                        this.answerConfirmed = true;
+                        this.childType = this.selectedAnswer.children[0].type;
                     }
+                    this.answerConfirmed = true;
                 });
             }
             else {
@@ -68,18 +72,12 @@ export class TreeRunQuestionComponent implements OnInit, OnDestroy {
             }
         }
         else {
-            this.nodeService.findByID(this.tree.id, this.selectedAnswer.id).subscribe(() => {
+            this.answerNodeServiceSubscription = this.nodeService.findByID(this.tree.id, this.selectedAnswer.id).subscribe(() => {
+                this.previousAnswers[this.node.id] = this.selectedAnswer.id;
                 if (this.hasChildNode()) {
-                    if (this.selectedAnswer.children[0].type === ContentType.QUESTION) {
-                        this.nextNodeIsNotification = false;
-                        this.nextNodeIsQuestion = true;
-                    }
-                    else {
-                        this.nextNodeIsQuestion = false;
-                        this.nextNodeIsNotification = true;
-                    }
-                    this.answerConfirmed = true;
+                    this.childType = this.selectedAnswer.children[0].type;
                 }
+                this.answerConfirmed = true;
             });
         }
     }
